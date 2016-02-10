@@ -287,9 +287,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                 if let episodeIndex = episodeIndexForDownloadTask(downloadTask), let episodeCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episodeIndex, inSection: 0)) as? EpisodeCell {
                     dispatch_async(dispatch_get_main_queue(), {
                         episodeCell.Episodeprogressbar.hidden = false
-                        episodeCell.EpisodeprogressLabel.hidden = false
+                     //   episodeCell.EpisodeprogressLabel.hidden = false
                         episodeCell.Episodeprogressbar.progress = download.progress
-                        episodeCell.EpisodeprogressLabel.text =  String(format: "%.1f%% of %@",  download.progress * 100, totalSize)
+                   //     episodeCell.EpisodeprogressLabel.text =  String(format: "%.1f%% of %@",  download.progress * 100, totalSize)
                     })
                 }
         }
@@ -334,7 +334,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             // update the cell to update it that it has the file locally and only if it's a media file and not the feed
             if let episodeIndex = episodeIndexForDownloadTask(downloadTask), let episodeCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episodeIndex, inSection: 0)) as? EpisodeCell {
                 episodeCell.Episodeprogressbar.hidden = true
-                episodeCell.EpisodeprogressLabel.hidden = true
+         //       episodeCell.EpisodeprogressLabel.hidden = true
                 dispatch_async(dispatch_get_main_queue(), {
                     self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: episodeIndex, inSection: 0)], withRowAnimation: .None)
                 })

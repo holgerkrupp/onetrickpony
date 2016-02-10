@@ -12,18 +12,18 @@ import AVFoundation
 class SingletonClass {
     
     
-    var player:AVAudioPlayer = AVAudioPlayer()
-    var avaudioplayerplaying:Bool = false
+    var player:AVAudioPlayer        = AVAudioPlayer()
+    var avaudioplayerplaying:Bool   = false
     
+    var streamer:AVPlayer           = AVPlayer()
+    var streamerplaying:Bool        = false
     
+    var playerinitialized: Bool     = false
+    var episodePlaying:Episode      = Episode()
+    var audioTimer:NSTimer          = NSTimer()
     
-    var streamer:AVPlayer = AVPlayer()
-    var streamerplaying:Bool = false
-    
-    var playerinitialized: Bool = false
-    var episodePlaying:Episode = Episode()
-    var audioTimer:NSTimer = NSTimer()
-    
+    var sleeptimerset:Bool          = false
+    var sleeptimer:Double           = 0.0
     
     class var sharedInstance: SingletonClass {
         struct Singleton {

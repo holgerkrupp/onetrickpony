@@ -12,7 +12,7 @@ import MediaPlayer
 
 
 
-class EpisodeViewController: UIViewController {
+class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDelegate {
     
     var episode = Episode()
 
@@ -56,6 +56,31 @@ class EpisodeViewController: UIViewController {
     func back(){
         navigationController?.popViewControllerAnimated(true)
     }
+    
+    
+    @IBAction func SleepTimerButtonPressed(sender: AnyObject) {
+        self.performSegueWithIdentifier("SleepTimerSegue", sender: self)
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        //segue for the popover configuration window
+        if segue.identifier == "SleepTimerSegue" {
+          var vc = segue.destinationViewController as! UIViewController
+            var controller = vc.popoverPresentationController
+            
+            if controller  != nil{
+                controller?.delegate = self
+            }
+            }
+        }
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -181,6 +206,42 @@ class EpisodeViewController: UIViewController {
     }
     
     
+    
+
+    
+    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
+        //do som stuff from the popover
+    }
+    
+    
+    func setsleeptimer(minutes: Double){
+        let seconds = minutes * 60
+        SingletonClass.sharedInstance.sleeptimer = seconds
+        SingletonClass.sharedInstance.sleeptimerset = true
+    }
+    
+    func cancelleeptimer(){
+        SingletonClass.sharedInstance.sleeptimerset = false
+    }
+    
+    func checksleeptimer(){
+        if (SingletonClass.sharedInstance.sleeptimerset == true){
+            if (SingletonClass.sharedInstance.sleeptimer <= 0.0){
+                pause()
+            }
+        }
+        
+    }
+    
+    func updateSleepTimer(){
+        // if a Sleeptimer is set, reduce the time of the sleeptimer by the Interval of the playtimer
+        if (SingletonClass.sharedInstance.sleeptimerset == true){
+            SingletonClass.sharedInstance.sleeptimer -= SingletonClass.sharedInstance.audioTimer.timeInterval
+        }
+    }
+    
+    
+    
     func loadNSURL(episode : Episode) -> NSURL{
         //
         let manager = NSFileManager.defaultManager()
@@ -257,19 +318,21 @@ class EpisodeViewController: UIViewController {
     
     func updateplayprogress(){
         if (SingletonClass.sharedInstance.playerinitialized == true){
-            
             // get time from player (Double)
             let progress = Double(SingletonClass.sharedInstance.player.currentTime)
-            // save time tu NSUserdefaults (Double) - saveplayed(episode: Episode, playtime: Double)
+            // save time to NSUserdefaults (Double) - saveplayed(episode: Episode, playtime: Double)
             saveplayed(SingletonClass.sharedInstance.episodePlaying, playtime: progress)
             
             // update slider & time labels if in focus (Double)
             updateSliderProgress(progress)
+            updateSleepTimer()
             
             
         }
     }
     
+    
+
     
     
     func updateSliderProgress(progress: Double){
@@ -277,6 +340,8 @@ class EpisodeViewController: UIViewController {
                 fillplayerView(self, episode: episode)
             }
         
+
+
     }
 
     
@@ -332,7 +397,11 @@ class EpisodeViewController: UIViewController {
         let activityViewController = UIActivityViewController(activityItems: [shareContent as NSString], applicationActivities: nil)
         presentViewController(activityViewController, animated: true, completion: {})
     }
-    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
     
 }
+
+
 

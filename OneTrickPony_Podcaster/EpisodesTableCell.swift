@@ -30,7 +30,7 @@ class EpisodeCell: UITableViewCell {
     @IBOutlet weak var EpisodeFileSizeLabel: UILabel!
     @IBOutlet weak var EpisodeImage: UIImageView!
     @IBOutlet weak var EpisodeTime: UIProgressView!
-    @IBOutlet weak var EpisodeprogressLabel: UILabel!
+   // @IBOutlet weak var EpisodeprogressLabel: UILabel!
     @IBOutlet weak var Episodeprogressbar: UIProgressView!
 
     
@@ -103,7 +103,7 @@ class EpisodeCell: UITableViewCell {
             episode.episodeLocal = true
             cell.Episodeprogressbar.progress = 1
             cell.Episodeprogressbar.hidden = true
-            cell.EpisodeprogressLabel.hidden = true
+         //   cell.EpisodeprogressLabel.hidden = true
             cell.EpisodeDownloadButton!.setTitle("Play", forState: UIControlState.Normal)
             cell.EpisodeDownloadButton!.setImage(UIImage(named: "iPhone"), forState: UIControlState.Normal)
             cell.EpisodeDownloadButton!.enabled = false
@@ -111,7 +111,7 @@ class EpisodeCell: UITableViewCell {
             // just in case - should never been used - but acctually is used and I don't know why
             cell.Episodeprogressbar.progress = 0
             cell.Episodeprogressbar.hidden = true
-            cell.EpisodeprogressLabel.hidden = true
+       //     cell.EpisodeprogressLabel.hidden = true
             cell.EpisodeDownloadButton!.setTitle("Download", forState: UIControlState.Normal)
             cell.EpisodeDownloadButton!.setImage(UIImage(named: "Download from the Cloud"), forState: UIControlState.Normal)
             cell.EpisodeDownloadButton!.enabled = true
