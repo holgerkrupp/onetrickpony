@@ -160,7 +160,6 @@ class EpisodeViewController: UIViewController {
         fillplayerView(self, episode: episode)
         starttimer()
         updateplayprogress()
-        // print(secondsToHoursMinutesSeconds(stringtodouble(episode.episodeDuration)))
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -275,10 +274,9 @@ class EpisodeViewController: UIViewController {
     
     func updateSliderProgress(progress: Double){
         if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
-            if (SingletonClass.sharedInstance.player.playing == true) {
                 fillplayerView(self, episode: episode)
             }
-        }
+        
     }
 
     

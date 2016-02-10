@@ -47,6 +47,7 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
     
     
     // Time & Slider
+    
     let starttime = readplayed(episode)
     let duration = stringtodouble(episode.episodeDuration)
     
@@ -54,7 +55,7 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
     view.progressSlider.setValue(Float(starttime), animated: false)
     view.playedtime.text = secondsToHoursMinutesSeconds(starttime)
     view.remainingTimeLabel.text = secondsToHoursMinutesSeconds(duration - starttime)
-    
+
     
     // IMage
     let existence = existslocally(episode.episodeImage)

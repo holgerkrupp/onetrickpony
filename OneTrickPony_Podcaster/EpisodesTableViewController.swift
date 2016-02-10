@@ -8,16 +8,20 @@
 import UIKit
 
 
-struct globals {
-    static var episodes: [Episode] = []
-}
 
 class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
+    
     struct SessionProperties {
         static let identifier : String! = "url_session_background_download"
     }
+    
+    let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+
+    
     var feedParser: NSXMLParser = NSXMLParser()
-    var episodes: [Episode] = globals.episodes
+    
+    var episodes  = [Episode]()
+    
     var episodeTitle: String = String()
     var episodeLink: String = String()//Link to the website
     var episodeUrl: String = String() //Link to the mediafile
@@ -29,17 +33,27 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     var episodeChapters = [Chapter]()
     var eName: String = String()
     
-    var delegate = DownloadSessionDelegate.sharedInstance
+    
     let manager = NSFileManager.defaultManager()
     var myDict: NSDictionary?
     
+    var activeDownloads = [String: Download]()
     
+    
+    lazy var downloadsSession: NSURLSession = {
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let session = NSURLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+        return session
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        _ = self.downloadsSession
+
+        
         loadfeedandparse()
-        globals.episodes = episodes
         self.refreshControl?.addTarget(self, action: "pulltorefresh:", forControlEvents: UIControlEvents.ValueChanged)
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -51,7 +65,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     func loadfeedandparse(){
         
         //preload the file in the base directory named feed.xml
-        
+        episodes.removeAll()
         let urlpath = NSBundle.mainBundle().pathForResource("feed", ofType: "xml")
         var localfileurl:NSURL = NSURL.fileURLWithPath(urlpath!)
         
@@ -108,7 +122,12 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     
-    
+    func updatetableview(){
+        
+        loadfeedandparse()
+        self.tableView.reloadData()
+        self.refreshControl?.endRefreshing()
+    }
     
     
     
@@ -121,12 +140,13 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             // Use your dict here
             let url = dict.valueForKey("feedurl") as! String
             print("pullto \(url)")
-            download(url)
+            downloadurl(url)
         }
         // Code to refresh table view
-        loadfeedandparse()
-        self.tableView.reloadData()
-        self.refreshControl?.endRefreshing()
+        
+        // THIS HAS TO BE MOVED TO A SPECIFIC CALL WHEN THE FILE HAS BEEN UPDATED updatetableview()
+        
+
         
     }
     
@@ -161,6 +181,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> EpisodeCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! EpisodeCell
         let episode: Episode = episodes[indexPath.row]
+        
+        cell.delegate = self
         cell.filltableviewcell(cell, episode: episode)
         
         return cell
@@ -217,80 +239,141 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     // these are all download functions
-   /*
-    func startConnectionAt(urlPath: String){
-        let url: NSURL = NSURL(string: urlPath)!
-        let request: NSURLRequest = NSURLRequest(URL: url)
-        print("Request: \(request)")
-        let connection: NSURLConnection = NSURLConnection(request: request, delegate: self, startImmediately: false)!
-        print("EpisodeTablesDownload of \(url)")
+    
 
-        connection.start()
-    }
-    func connection(connection: NSURLConnection!, didFailWithError error: NSError!) {
-        print("Connection failed.\(error.localizedDescription)")
-    }
-    func connection(connection: NSURLConnection, didRecieveResponse response: NSURLResponse) {
-        print("Recieved response")
-    }
-    func connection(didReceiveResponse: NSURLConnection!, didReceiveResponse response: NSURLResponse!) {
-        self.data = NSMutableData()
-    }
-    func connection(connection: NSURLConnection!, didReceiveData data: NSData!) {
-        self.data.appendData(data)
+    
+
+    func startDownloadepisode(episode: Episode) {
+        if let url =  NSURL(string: episode.episodeUrl) {
+            let download = Download(url: episode.episodeUrl)
+            download.isEpisode  = true
+            download.downloadTask = downloadsSession.downloadTaskWithURL(url)
+            download.downloadTask!.resume()
+            download.isDownloading = true
+  
+            activeDownloads[download.url] = download
+            print("started download of \(url)")
+           
+        }
     }
     
-    func connectionDidFinishLoading(connection: NSURLConnection!) {
-        var originalUrl = connection.originalRequest.URL
-        //Get the file name and create a destination URL
- 
-        if originalUrl!.pathExtension == "" {
+    
+    func downloadurl(urlstring: String) {
+        if let url =  NSURL(string: urlstring) {
+        // initialize the download of an URL (NOT AN EPISODE, BUT e.g a picture or the feed)
+        let download = Download(url: urlstring)
+            download.isEpisode = false
+        download.downloadTask = downloadsSession.downloadTaskWithURL(url)
+        download.downloadTask!.resume()
+        download.isDownloading = true
+        activeDownloads[download.url] = download
+        }
+    }
+    
+    
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        print("session \(session) download task \(downloadTask) wrote an additional \(bytesWritten) bytes (total \(totalBytesWritten) bytes) out of an expected \(totalBytesExpectedToWrite) bytes.")
+
+        print("TaskOrigRequest URL String \(downloadTask.originalRequest?.URL?.absoluteString)")
+        if let downloadUrl = downloadTask.originalRequest?.URL?.absoluteString,
+            download = activeDownloads[downloadUrl] {
+                // 2
+                download.progress = Float(totalBytesWritten)/Float(totalBytesExpectedToWrite)
+                print("Progress : \(download.progress)")
+                print("Episode Index: \(episodeIndexForDownloadTask(downloadTask))")
+                // 3
+                let totalSize = NSByteCountFormatter.stringFromByteCount(totalBytesExpectedToWrite, countStyle: NSByteCountFormatterCountStyle.Binary)
+                // 4
+                if let episodeIndex = episodeIndexForDownloadTask(downloadTask), let episodeCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episodeIndex, inSection: 0)) as? EpisodeCell {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        episodeCell.Episodeprogressbar.hidden = false
+                        episodeCell.EpisodeprogressLabel.hidden = false
+                        episodeCell.Episodeprogressbar.progress = download.progress
+                        episodeCell.EpisodeprogressLabel.text =  String(format: "%.1f%% of %@",  download.progress * 100, totalSize)
+                    })
+                }
+        }
+    }
+    
+    
+    
+    
+    
+    // the following functin is called when a download has been finished. It will write the date to the right folder (Documents Folder - hint hint) and update the tableviewcell if needed.
+    
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
+        // move the file to the final destination
+        let destinationURL = localFilePathForUrl((downloadTask.originalRequest?.URL)!)
+                
+                print("did finish download \(destinationURL)")
+                
+                // but clean the space before doing that.
+                let fileManager = NSFileManager.defaultManager()
+                do {
+                    try fileManager.removeItemAtURL(destinationURL)
+                } catch {
+                    // Non-fatal: file probably doesn't exist
+                }
+                do {
+                    try fileManager.copyItemAtURL(location, toURL: destinationURL)
+                    print("wrote new file")
+                    
+                    // IF XML start updatetableview()
+                    if (destinationURL.pathExtension!.lowercaseString == "xml"){
+                        updatetableview()
+                    }
+                    
+                    
+                } catch let error as NSError {
+                    print("Could not copy file to disk: \(error.localizedDescription)")
+                }
+        
+        // clear the download list
+        if let url = downloadTask.originalRequest?.URL?.absoluteString {
+            activeDownloads[url] = nil
+            // update the cell to update it that it has the file locally and only if it's a media file and not the feed
+            if let episodeIndex = episodeIndexForDownloadTask(downloadTask), let episodeCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episodeIndex, inSection: 0)) as? EpisodeCell {
+                episodeCell.Episodeprogressbar.hidden = true
+                episodeCell.EpisodeprogressLabel.hidden = true
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: episodeIndex, inSection: 0)], withRowAnimation: .None)
+                })
+            }
+        }
+    }
+    
+    func localFilePathForUrl(var originalUrl:NSURL)-> NSURL{
+        if originalUrl.pathExtension == "" {
             print("empty")
-            originalUrl = originalUrl?.URLByAppendingPathComponent("feed.xml")
+            originalUrl = originalUrl.URLByAppendingPathComponent("feed.xml")
         }
-        let fileName = originalUrl!.lastPathComponent!
-        let documentsDirectoryUrl = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first
+        let fileName = originalUrl.lastPathComponent!
+        let documentsDirectoryUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first
         let destinationURL = documentsDirectoryUrl!.URLByAppendingPathComponent(fileName)
-        print("the file will be moved to \(destinationURL).")
-        //Hold this file as an NSData and write it to the new location
-        if let fileData:NSData = data{
-            fileData.writeToURL(destinationURL, atomically: false) // true
-            print(destinationURL.path!)
+        return destinationURL
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // this function will get me the index for the cell of the episode containing the link used to download an episode in german I would call it something like episodedownloadcellindex (that was a strange sentence)
+    func episodeIndexForDownloadTask(downloadTask: NSURLSessionDownloadTask) -> Int? {
+        if let url = downloadTask.originalRequest?.URL?.absoluteString {
+
+            for (index, episode) in episodes.enumerate() {
+                if url == episode.episodeUrl {
+                    return index
+                }
+            }
         }
-    
-    
-    
-    
-    
-    
-        episodes.removeAll()
-        
-        loadfeedandparse()
-        tableView.reloadData()
-        refreshControl?.endRefreshing()
-        print("success")
+        return nil
     }
-    */
-    
-    func download(data: String) {
-        print("download \(data)")
-        let configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier(SessionProperties.identifier)
-        let backgroundSession = NSURLSession(configuration: configuration, delegate: self.delegate, delegateQueue: nil)
-        let url = NSURLRequest(URL: NSURL(string: data)!)
 
-        let downloadTask = backgroundSession.downloadTaskWithRequest(url)
-        
-        downloadTask.resume()
-        
-    }
-    
-    
-
-
-    
-    
-    
-    
     
     // these are the parser functions
     
@@ -315,7 +398,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             if (existence.existlocal){
                 episodeImage = existence.localURL
             } else {
-                download(episodeImage)
+                downloadurl(episodeImage)
                 print(episodeImage)
             }
             
@@ -369,6 +452,64 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             episodes.append(episode)
         }
     }
+    
+}
+
+extension EpisodesTableViewController: NSURLSessionDownloadDelegate {
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURLlocation: NSURL) {
+        print("Finished downloading.")
+    }
 }
 
 
+extension EpisodesTableViewController: EpisodeCellDelegate {
+   
+    
+    func pauseepisode(cell: EpisodeCell) {
+        if let indexPath = tableView.indexPathForCell(cell) {
+            let episode = episodes[indexPath.row]
+           // pauseDownload(episode)
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: .None)
+        }
+    }
+
+    func downloadepisode(cell: EpisodeCell){
+       
+        if let indexPath = tableView.indexPathForCell(cell) {
+        let episode = episodes[indexPath.row]
+        startDownloadepisode(episode)
+       
+        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: .None)
+        }
+    }
+    func resumeepisode(cell: EpisodeCell) {
+        if let indexPath = tableView.indexPathForCell(cell) {
+            let episode = episodes[indexPath.row]
+        //    resumeDownload(episode)
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: .None)
+        }
+    }
+    
+    func cancelepisode(cell: EpisodeCell) {
+        if let indexPath = tableView.indexPathForCell(cell) {
+            let episode = episodes[indexPath.row]
+          //  cancelDownload(episode)
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: .None)
+        }
+    }
+    
+}
+    
+extension EpisodesTableViewController: NSURLSessionDelegate {
+    
+    func URLSessionDidFinishEventsForBackgroundURLSession(session: NSURLSession) {
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            if let completionHandler = appDelegate.backgroundSessionCompletionHandler {
+                appDelegate.backgroundSessionCompletionHandler = nil
+                dispatch_async(dispatch_get_main_queue(), {
+                    completionHandler()
+                })
+            }
+        }
+    }
+}
