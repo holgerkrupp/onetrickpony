@@ -282,7 +282,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                 print("Progress : \(download.progress)")
                 print("Episode Index: \(episodeIndexForDownloadTask(downloadTask))")
                 // 3
-                let totalSize = NSByteCountFormatter.stringFromByteCount(totalBytesExpectedToWrite, countStyle: NSByteCountFormatterCountStyle.Binary)
+             //   let totalSize = NSByteCountFormatter.stringFromByteCount(totalBytesExpectedToWrite, countStyle: NSByteCountFormatterCountStyle.Binary)
                 // 4
                 if let episodeIndex = episodeIndexForDownloadTask(downloadTask), let episodeCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episodeIndex, inSection: 0)) as? EpisodeCell {
                     dispatch_async(dispatch_get_main_queue(), {
@@ -463,43 +463,43 @@ extension EpisodesTableViewController: NSURLSessionDownloadDelegate {
 
 
 extension EpisodesTableViewController: EpisodeCellDelegate {
-   
+    func downloadepisode(cell: EpisodeCell){
+        
+        if let indexPath = tableView.indexPathForCell(cell) {
+            let episode = episodes[indexPath.row]
+            startDownloadepisode(episode)
+            
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: .None)
+        }
+    }
     
     func pauseepisode(cell: EpisodeCell) {
         if let indexPath = tableView.indexPathForCell(cell) {
-            let episode = episodes[indexPath.row]
+         //   let episode = episodes[indexPath.row]
            // pauseDownload(episode)
             tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: .None)
         }
     }
 
-    func downloadepisode(cell: EpisodeCell){
-       
-        if let indexPath = tableView.indexPathForCell(cell) {
-        let episode = episodes[indexPath.row]
-        startDownloadepisode(episode)
-       
-        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: .None)
-        }
-    }
+
     func resumeepisode(cell: EpisodeCell) {
         if let indexPath = tableView.indexPathForCell(cell) {
-            let episode = episodes[indexPath.row]
-        //    resumeDownload(episode)
+       //     let episode = episodes[indexPath.row]
+         //   resumeDownload(episode)
             tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: .None)
         }
     }
     
     func cancelepisode(cell: EpisodeCell) {
         if let indexPath = tableView.indexPathForCell(cell) {
-            let episode = episodes[indexPath.row]
+           // let episode = episodes[indexPath.row]
           //  cancelDownload(episode)
             tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: .None)
         }
     }
-    
+
 }
-    
+
 extension EpisodesTableViewController: NSURLSessionDelegate {
     
     func URLSessionDidFinishEventsForBackgroundURLSession(session: NSURLSession) {

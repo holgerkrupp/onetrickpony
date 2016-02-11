@@ -66,8 +66,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         //segue for the popover configuration window
         if segue.identifier == "SleepTimerSegue" {
-          var vc = segue.destinationViewController as! UIViewController
-            var controller = vc.popoverPresentationController
+          let vc = segue.destinationViewController 
+            let controller = vc.popoverPresentationController
             
             if controller  != nil{
                 controller?.delegate = self

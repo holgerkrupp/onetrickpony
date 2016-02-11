@@ -128,7 +128,7 @@ class EpisodeCell: UITableViewCell {
 
         
         //check if the episode has been played and how far
-        let playposition = readplayed(episode)
+     //   let playposition = readplayed(episode)
         //print("Episode \(episode.episodeTitle) played at position \(playposition) max duration is \(episode.episodeDuration)")
         
 
