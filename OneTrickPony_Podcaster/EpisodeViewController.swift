@@ -59,7 +59,39 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     @IBAction func SleepTimerButtonPressed(sender: AnyObject) {
-        self.performSegueWithIdentifier("SleepTimerSegue", sender: self)
+       // self.performSegueWithIdentifier("SleepTimerSegue", sender: self)
+        
+        let alert = UIAlertController(title: "Sleeptimer", message: "The sleep timer will automatically pause the episode after the selcted time", preferredStyle: .ActionSheet)
+        
+        let disableAction = UIAlertAction(title: "Disable", style: .Default) { (alert: UIAlertAction!) -> Void in
+            self.cancelleeptimer()
+        }
+        
+        let firstAction = UIAlertAction(title: "30 Minutes", style: .Default) { (alert: UIAlertAction!) -> Void in
+            self.setsleeptimer(30)
+        }
+        
+        let secondAction = UIAlertAction(title: "15 Minutes", style: .Default) { (alert: UIAlertAction!) -> Void in
+           self.setsleeptimer(15)
+        }
+        
+        
+        let debugAction = UIAlertAction(title: "DEBUG: 0.2 Minutes", style: .Default) { (alert: UIAlertAction!) -> Void in
+            self.setsleeptimer(0.2)
+        }
+        
+        let cancelAction = UIAlertAction(title: "cancel", style: .Cancel) { (alert: UIAlertAction!) -> Void in
+            
+        }
+        alert.addAction(disableAction)
+        alert.addAction(firstAction)
+        alert.addAction(secondAction)
+        alert.addAction(debugAction)
+        alert.addAction(cancelAction)
+        presentViewController(alert, animated: true, completion:nil) // 6
+ 
+        
+        
     }
     
     
@@ -218,6 +250,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         let seconds = minutes * 60
         SingletonClass.sharedInstance.sleeptimer = seconds
         SingletonClass.sharedInstance.sleeptimerset = true
+        print("Sleeptimer set to \(minutes) that's \(seconds)")
     }
     
     func cancelleeptimer(){
@@ -228,7 +261,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         if (SingletonClass.sharedInstance.sleeptimerset == true){
             if (SingletonClass.sharedInstance.sleeptimer <= 0.0){
                 pause()
+                cancelleeptimer()
             }
+            print(SingletonClass.sharedInstance.sleeptimer)
         }
         
     }
@@ -326,6 +361,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             // update slider & time labels if in focus (Double)
             updateSliderProgress(progress)
             updateSleepTimer()
+            checksleeptimer()
             
             
         }
