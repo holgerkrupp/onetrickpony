@@ -59,88 +59,19 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     @IBAction func SleepTimerButtonPressed(sender: AnyObject) {
-       // self.performSegueWithIdentifier("SleepTimerSegue", sender: self)
-        
-        let alert = UIAlertController(title: "Sleeptimer", message: "The sleep timer will automatically pause the episode after the selcted time", preferredStyle: .ActionSheet)
-        
-        let disableAction = UIAlertAction(title: "Disable", style: .Default) { (alert: UIAlertAction!) -> Void in
-            self.cancelleeptimer()
-        }
-        
-        let firstAction = UIAlertAction(title: "30 Minutes", style: .Default) { (alert: UIAlertAction!) -> Void in
-            self.setsleeptimer(30)
-        }
-        
-        let secondAction = UIAlertAction(title: "15 Minutes", style: .Default) { (alert: UIAlertAction!) -> Void in
-           self.setsleeptimer(15)
-        }
-        
-        
-        let debugAction = UIAlertAction(title: "DEBUG: 0.2 Minutes", style: .Default) { (alert: UIAlertAction!) -> Void in
-            self.setsleeptimer(0.2)
-        }
-        
-        let cancelAction = UIAlertAction(title: "cancel", style: .Cancel) { (alert: UIAlertAction!) -> Void in
-            
-        }
-        alert.addAction(disableAction)
-        alert.addAction(firstAction)
-        alert.addAction(secondAction)
-        alert.addAction(debugAction)
-        alert.addAction(cancelAction)
-        presentViewController(alert, animated: true, completion:nil) // 6
+       showsleeptimer()
  
         
         
     }
     
+
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //segue for the popover configuration window
-        if segue.identifier == "SleepTimerSegue" {
-          let vc = segue.destinationViewController 
-            let controller = vc.popoverPresentationController
-            
-            if controller  != nil{
-                controller?.delegate = self
-            }
-            }
-        }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     @IBAction func playpause(sender: UIButton){
-        
-        if (episode.episodeTitle == SingletonClass.sharedInstance.episodePlaying.episodeTitle){
-            if SingletonClass.sharedInstance.player.playing == false {
-                play()
-            } else {
-                pause()
-            }
-        } else {
+        playpause()
 
-            pause()
-
-            do{
-                try SingletonClass.sharedInstance.player = AVAudioPlayer(contentsOfURL: url)
-
-                SingletonClass.sharedInstance.player.currentTime = readplayed(episode)
-
-                SingletonClass.sharedInstance.episodePlaying = episode
-
-                play()
-            }catch{
-                print("error")
-            }
-        }
-        setplaypausebutton()
     }
     
     @IBAction func pressspeedbutton(sender: UIButton){
@@ -171,19 +102,32 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         moveplayer(-30)
     }
     
-    func moveplayer(seconds:Double){
-        if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
-        SingletonClass.sharedInstance.player.currentTime = SingletonClass.sharedInstance.player.currentTime + seconds
-        }
-    }
+
     
+    
+    /**************************************************************************
+     
+                    ALL THE BASIC VIEW FUNCTIONS FOLLOWING
+                (loading and confuring the view controller)
+     
+     **************************************************************************/
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         disableswipeback()
+        
         //fill the view with content
         fillplayerView(self, episode: episode)
+        allowremotebuttons()
+        
+        
+        
+        // the following two lines would change the look of the thumb of the slider.
+        //let sliderimage = UIImage(named:"halfbar")
+        //progressSlider.setThumbImage(sliderimage, forState: .Normal)
+        
+        
         
         //load the url and let's decide if we stream or play locally
         url = loadNSURL(episode)
@@ -200,8 +144,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
                 // streaming soll nicht sofort losspielen um Daten zu sparen … warum ich das jetzt auf deutsch schreiben weiß ich nicht.
                 if (local == true){
                     if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
-                        allowremotebuttons()
                         
+                        updateMPMediaPlayer()
                         autoplay()
                         starttimer()
                     }
@@ -228,6 +172,20 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         self.navigationController?.navigationBarHidden = false
     }
     
+    func disableswipeback(){
+        if navigationController!.respondsToSelector(Selector("interactivePopGestureRecognizer")) {
+            navigationController!.view.removeGestureRecognizer(navigationController!.interactivePopGestureRecognizer!)
+        }
+    }
+    
+    /**************************************************************************
+     
+                    ALL THE TIMER FUNCTIONS FOLLOWING
+            (updating the view to show the correct progress)
+     
+     **************************************************************************/
+    
+    
     func starttimer(){
         SingletonClass.sharedInstance.audioTimer.invalidate()
         SingletonClass.sharedInstance.audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target:self, selector: "updateplayprogress",userInfo: nil,repeats: true)
@@ -238,14 +196,54 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     
-    
-
-    
     func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
         //do som stuff from the popover
     }
     
     
+    
+    
+    /**************************************************************************
+    
+                        ALL THE SLEEP TIMER FUNCTIONS FOLLOWING
+                    (showing and updating the sleep timer to pause audio)
+    
+    **************************************************************************/
+    
+    func showsleeptimer(){
+        // self.performSegueWithIdentifier("SleepTimerSegue", sender: self)
+        
+        let alert = UIAlertController(title: "Sleeptimer", message: "The sleep timer will automatically pause the episode after the selcted time", preferredStyle: .ActionSheet)
+        
+        let disableAction = UIAlertAction(title: "Disable", style: .Default) { (alert: UIAlertAction!) -> Void in
+            self.cancelleeptimer()
+        }
+        
+        let firstAction = UIAlertAction(title: "30 Minutes", style: .Default) { (alert: UIAlertAction!) -> Void in
+            self.setsleeptimer(30)
+        }
+        
+        let secondAction = UIAlertAction(title: "15 Minutes", style: .Default) { (alert: UIAlertAction!) -> Void in
+            self.setsleeptimer(15)
+        }
+        
+        
+        let debugAction = UIAlertAction(title: "DEBUG: 0.2 Minutes", style: .Default) { (alert: UIAlertAction!) -> Void in
+            self.setsleeptimer(0.2)
+        }
+        
+        let cancelAction = UIAlertAction(title: "cancel", style: .Cancel) { (alert: UIAlertAction!) -> Void in
+            
+        }
+        alert.addAction(disableAction)
+        alert.addAction(firstAction)
+        alert.addAction(secondAction)
+        alert.addAction(debugAction)
+        alert.addAction(cancelAction)
+        presentViewController(alert, animated: true, completion:nil) // 6
+    }
+    
+
     func setsleeptimer(minutes: Double){
         let seconds = minutes * 60
         SingletonClass.sharedInstance.sleeptimer = seconds
@@ -276,6 +274,40 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     
+    /**************************************************************************
+     
+                ALL THE CHAPTER MARK FUNCTIONS FOLLOWING
+                (showing and chosing the chapter marks)
+     
+     **************************************************************************/
+    
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        //segue for the popover configuration window
+        if segue.identifier == "SleepTimerSegue" {
+            let vc = segue.destinationViewController
+            let controller = vc.popoverPresentationController
+            
+            if controller  != nil{
+                controller?.delegate = self
+            }
+        }
+    }
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
+    
+    
+    /**************************************************************************
+     
+                ALL THE FILE LOADING FUNCTIONS FOLLOWING
+                (could be part of the basic player section)
+     
+     **************************************************************************/
+    
+    
+    
     
     func loadNSURL(episode : Episode) -> NSURL{
         //
@@ -298,28 +330,13 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         return url
     }
     
-    func autoplay(){
-        if SingletonClass.sharedInstance.player.playing == false {
-            play()
-            
-        }
-    }
     
-    
-    
-    func setplaypausebutton(){
-        playPause.setTitle("play", forState: .Normal)
-        if (SingletonClass.sharedInstance.playerinitialized == true) {
-            if (SingletonClass.sharedInstance.player.playing == true) {
-                if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
-                    playPause.setTitle("pause", forState: .Normal)
-                }
-            }
-        }
-    }
-    
-    
-    
+    /**************************************************************************
+     
+                    ALL THE PLAYER FUNCTIONS FOLLOWING
+                (Play, Pause, skip forward and backwards)
+     
+     **************************************************************************/
     
     func initplayer(episode: Episode){
         url = loadNSURL(episode)
@@ -332,6 +349,91 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             
         }catch{
             print("error in initplayer")
+        }
+    }
+    
+    
+    func autoplay(){
+        if SingletonClass.sharedInstance.player.playing == false {
+            play()
+            
+        }
+    }
+    
+    
+    func moveplayer(seconds:Double){
+        if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
+            SingletonClass.sharedInstance.player.currentTime = SingletonClass.sharedInstance.player.currentTime + seconds
+        }
+    }
+    
+    
+    
+    func playpause(){
+        MPRemoteCommandCenter.sharedCommandCenter().togglePlayPauseCommand
+        if (episode.episodeTitle == SingletonClass.sharedInstance.episodePlaying.episodeTitle){
+            if SingletonClass.sharedInstance.player.playing == false {
+                play()
+            } else {
+                pause()
+            }
+        } else {
+            
+            pause()
+            
+            do{
+                try SingletonClass.sharedInstance.player = AVAudioPlayer(contentsOfURL: url)
+                
+                SingletonClass.sharedInstance.player.currentTime = readplayed(episode)
+                
+                SingletonClass.sharedInstance.episodePlaying = episode
+                
+                play()
+            }catch{
+                print("error")
+            }
+        }
+        setplaypausebutton()
+    }
+    
+    
+
+    
+    func play(){
+        starttimer()
+        let starttime = readplayed(episode)
+        
+        SingletonClass.sharedInstance.player.currentTime = starttime
+        SingletonClass.sharedInstance.player.play()
+        playPause.setTitle("pause", forState: .Normal)
+        SingletonClass.sharedInstance.episodePlaying = episode
+        somethingplayscurrently = true
+        
+        
+        
+    }
+    func pause(){
+        stoptimer()
+        saveplayed(SingletonClass.sharedInstance.episodePlaying, playtime: SingletonClass.sharedInstance.player.currentTime)
+        SingletonClass.sharedInstance.player.pause()
+        playPause.setTitle("play", forState: .Normal)
+        somethingplayscurrently = false
+        
+        
+        
+    }
+    
+    
+    
+    
+    func setplaypausebutton(){
+        playPause.setTitle("play", forState: .Normal)
+        if (SingletonClass.sharedInstance.playerinitialized == true) {
+            if (SingletonClass.sharedInstance.player.playing == true) {
+                if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
+                    playPause.setTitle("pause", forState: .Normal)
+                }
+            }
         }
     }
     
@@ -360,6 +462,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             
             // update slider & time labels if in focus (Double)
             updateSliderProgress(progress)
+            updateMPMediaPlayer()
+            
             updateSleepTimer()
             checksleeptimer()
             
@@ -368,64 +472,79 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     
-
+    func back30(){
+        moveplayer(-30)
+    }
+    func forward30(){
+        moveplayer(30)
+    }
     
     
     func updateSliderProgress(progress: Double){
         if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
                 fillplayerView(self, episode: episode)
             }
-        
-
-
     }
 
     
-    func play(){
-        starttimer()
-        let starttime = readplayed(episode)
-        
-        SingletonClass.sharedInstance.player.currentTime = starttime
-        SingletonClass.sharedInstance.player.play()
-        playPause.setTitle("pause", forState: .Normal)
-        SingletonClass.sharedInstance.episodePlaying = episode
-        somethingplayscurrently = true
-        MPRemoteCommandCenter.sharedCommandCenter().pauseCommand.enabled = true
-        
-        
-    }
-    func pause(){
-        stoptimer()
-        saveplayed(SingletonClass.sharedInstance.episodePlaying, playtime: SingletonClass.sharedInstance.player.currentTime)
-        SingletonClass.sharedInstance.player.pause()
-        playPause.setTitle("play", forState: .Normal)
-        somethingplayscurrently = false
-        MPRemoteCommandCenter.sharedCommandCenter().playCommand.enabled = true
-        
-    }
+    
+    /**************************************************************************
+     
+                    ALL THE REMOTE PLAYER FUNCTIONS FOLLOWING
+                    (Controllcenter and Lockscreen player)
+     
+     **************************************************************************/
+
     
     func allowremotebuttons(){
         UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
         let commandCenter = MPRemoteCommandCenter.sharedCommandCenter()
-        commandCenter.nextTrackCommand.enabled = true
-        commandCenter.playCommand.addTarget(self, action: "play")
-        commandCenter.pauseCommand.addTarget(self, action: "pause")
         
-        let playcenter = MPNowPlayingInfoCenter.defaultCenter()
-        playcenter.nowPlayingInfo = [
-            MPMediaItemPropertyArtist : "Artist!",
-            MPMediaItemPropertyTitle : episode.episodeTitle,
-            MPMediaItemPropertyPlaybackDuration: SingletonClass.sharedInstance.player.duration,
-            MPNowPlayingInfoPropertyPlaybackRate: SingletonClass.sharedInstance.player.rate]
+
+        //commandCenter.nextTrackCommand.enabled = true
+        
+        commandCenter.togglePlayPauseCommand.enabled = true
+        commandCenter.playCommand.enabled = true
+        commandCenter.pauseCommand.enabled = true
+        
+        commandCenter.skipBackwardCommand.addTarget(self, action: "back30")
+        commandCenter.skipForwardCommand.addTarget(self, action: "forward30")
+        
+        commandCenter.skipBackwardCommand.preferredIntervals = [30]
+        commandCenter.skipForwardCommand.preferredIntervals = [30]
+        
+        
+        commandCenter.playCommand.addTarget(self, action: "playpause")
+        commandCenter.pauseCommand.addTarget(self, action: "playpause")
+        commandCenter.togglePlayPauseCommand.addTarget(self, action: "playpause")
+        
+        
+  
         
         
     }
     
-    func disableswipeback(){
-        if navigationController!.respondsToSelector(Selector("interactivePopGestureRecognizer")) {
-            navigationController!.view.removeGestureRecognizer(navigationController!.interactivePopGestureRecognizer!)
-        }
+    func updateMPMediaPlayer(){
+        
+        let playcenter = MPNowPlayingInfoCenter.defaultCenter()
+    
+        playcenter.nowPlayingInfo = [
+            MPMediaItemPropertyArtist : "Artist!",
+            MPMediaItemPropertyTitle : episode.episodeTitle,
+            MPMediaItemPropertyPlaybackDuration: SingletonClass.sharedInstance.player.duration,
+            MPNowPlayingInfoPropertyElapsedPlaybackTime: SingletonClass.sharedInstance.player.currentTime,
+            MPNowPlayingInfoPropertyPlaybackRate: SingletonClass.sharedInstance.player.rate]
     }
+        
+    
+    /**************************************************************************
+     
+                    ALL THE SHARE SHEET FUNCTIONS FOLLOWING
+                (allowing to share the episode with friends)
+     
+     **************************************************************************/
+    
+
     
     func displayShareSheet() {
         let shareContent:String = "Ich höre gerade \(episode.episodeTitle) - \(episode.episodeLink)"
@@ -433,9 +552,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         let activityViewController = UIActivityViewController(activityItems: [shareContent as NSString], applicationActivities: nil)
         presentViewController(activityViewController, animated: true, completion: {})
     }
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
-    }
+
     
 }
 

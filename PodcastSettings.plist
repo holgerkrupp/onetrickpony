@@ -10,5 +10,11 @@
 	<string>http://www.dirtyminutesleft.de/feed/m4a/</string>
 	<key>basecolor</key>
 	<string>3A90D3</string>
+	<key>textcolor</key>
+	<string>FFFFFF</string>
+	<key>secondarytextcolor</key>
+	<string>808080</string>
+	<key>highlightcolor</key>
+	<string>000000</string>
 </dict>
 </plist>
