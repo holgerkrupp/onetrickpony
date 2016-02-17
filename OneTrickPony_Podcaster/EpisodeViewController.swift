@@ -28,6 +28,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     let speedtext: [String] = ["1/2x","1x","1,5x","2x"]
     
     
+    
+    
+    
     @IBOutlet var titleLabel:UILabel!
     @IBOutlet var progressSlider: UISlider!
     @IBOutlet var playPause:UIButton!
@@ -310,20 +313,11 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     func loadNSURL(episode : Episode) -> NSURL{
-        //
-        let manager = NSFileManager.defaultManager()
-        let documentsDirectoryUrl = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        let fileName = episode.episodeFilename
-        print("doc directory \(documentsDirectoryUrl)")
-        let localFeedFile = documentsDirectoryUrl + "/" + fileName
-        print(episode.episodeFilename)
-        if  manager.fileExistsAtPath(localFeedFile){
-            url = NSURL(fileURLWithPath: localFeedFile)
-            
-            local = true
+        let locally = existslocally(episode.episodeFilename)
+        if  locally.existlocal{
+            url = NSURL(fileURLWithPath: locally.localURL)
         }else{
             url = NSURL(string: episode.episodeUrl)!
-            local = false
         }
 
         print("loadNSURL \(url)")
@@ -500,9 +494,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
         let commandCenter = MPRemoteCommandCenter.sharedCommandCenter()
         
-
-        //commandCenter.nextTrackCommand.enabled = true
-        
         commandCenter.togglePlayPauseCommand.enabled = true
         commandCenter.playCommand.enabled = true
         commandCenter.pauseCommand.enabled = true
@@ -527,9 +518,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     func updateMPMediaPlayer(){
         
         let playcenter = MPNowPlayingInfoCenter.defaultCenter()
-    
+
         playcenter.nowPlayingInfo = [
-            MPMediaItemPropertyArtist : "Artist!",
             MPMediaItemPropertyTitle : episode.episodeTitle,
             MPMediaItemPropertyPlaybackDuration: SingletonClass.sharedInstance.player.duration,
             MPNowPlayingInfoPropertyElapsedPlaybackTime: SingletonClass.sharedInstance.player.currentTime,
@@ -547,7 +537,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
 
     
     func displayShareSheet() {
-        let shareContent:String = "Ich höre gerade \(episode.episodeTitle) - \(episode.episodeLink)"
+        let shareContent:String = "I'm listening to \(episode.episodeTitle) - \(episode.episodeLink)"
         print(shareContent)
         let activityViewController = UIActivityViewController(activityItems: [shareContent as NSString], applicationActivities: nil)
         presentViewController(activityViewController, animated: true, completion: {})

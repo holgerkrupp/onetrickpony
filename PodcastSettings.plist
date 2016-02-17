@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Artist</key>
-	<string>Hoaxilla</string>
-	<key>User-Agent</key>
-	<string>One Trick Pony</string>
 	<key>feedurl</key>
 	<string>http://www.dirtyminutesleft.de/feed/m4a/</string>
 	<key>basecolor</key>

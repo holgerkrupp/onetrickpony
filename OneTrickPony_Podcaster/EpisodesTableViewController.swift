@@ -46,12 +46,23 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         return session
     }()
     
+    
+    
+    /**************************************************************************
+     
+                    ALL THE BASIC VIEW FUNCTIONS FOLLOWING
+                (loading and configurating the view controller)
+     
+     **************************************************************************/
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         _ = self.downloadsSession
 
         
-        loadfeedandparse()
+        loadfeedandparse { self.tableView.reloadData() }
         self.refreshControl?.addTarget(self, action: "pulltorefresh:", forControlEvents: UIControlEvents.ValueChanged)
         
     }
@@ -60,9 +71,29 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         self.navigationController?.navigationBarHidden = true
     }
     
-
     
-    func loadfeedandparse(){
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if segue.identifier == "viewEpisode" {
+            let episode: Episode = episodes[tableView.indexPathForSelectedRow!.row]
+            let viewController = segue.destinationViewController as! EpisodeViewController
+            //  self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Episode list", style:.Plain, target: self, action: nil);
+            viewController.episode = episode
+        }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    /**************************************************************************
+     
+                    ALL THE FEED FUNCTIONS FOLLOWING
+                    (loading and parsing the feed)
+     
+     **************************************************************************/
+    
+    func loadfeedandparse(completion: () -> Void){
         
         //preload the file in the base directory named feed.xml
         episodes.removeAll()
@@ -116,6 +147,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         feedParser = NSXMLParser(contentsOfURL: localfileurl)!
         feedParser.delegate = self
         feedParser.parse()
+        
+        completion()
     }
     
     
@@ -124,8 +157,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     func updatetableview(){
         
-        loadfeedandparse()
-        self.tableView.reloadData()
+        loadfeedandparse { self.tableView.reloadData() }
+        
         self.refreshControl?.endRefreshing()
     }
     
@@ -146,27 +179,91 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         
         // THIS HAS TO BE MOVED TO A SPECIFIC CALL WHEN THE FILE HAS BEEN UPDATED updatetableview()
         
-
-        
     }
     
+    var data: NSMutableData = NSMutableData()
     
-    
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if segue.identifier == "viewEpisode" {
-            let episode: Episode = episodes[tableView.indexPathForSelectedRow!.row]
-            let viewController = segue.destinationViewController as! EpisodeViewController
-          //  self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Episode list", style:.Plain, target: self, action: nil);
-            viewController.episode = episode
+    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+        eName = elementName
+        if elementName == "item" {
+            episodeTitle = String()
+            episodeLink = String()
+            
+            episodeDuration = String()
+            
+            episodeChapters = [Chapter]()
+        } else if elementName == "enclosure"{
+            episodeUrl = attributeDict["url"]!
+            episodeFilesize = Int(attributeDict["length"]!)!
+        }else if elementName == "itunes:image"{
+            episodeImage = attributeDict["href"]!
+            
+            let existence = existslocally(episodeImage)
+            if (existence.existlocal){
+                episodeImage = existence.localURL
+            } else {
+                downloadurl(episodeImage)
+                print(episodeImage)
+            }
+            
+        } else if elementName == "psc:chapter"{
+            
+            // Potlove Simple Chapters parsing
+            
+            let chapter: Chapter = Chapter()
+            if let atttitle: NSString = attributeDict["start"] {
+                chapter.chapterStart = atttitle as String
+            }
+            if let atttitle: NSString = attributeDict["title"] {
+                chapter.chapterTitle = atttitle as String
+            }
+            if let atttitle: NSString = attributeDict["href"] {
+                chapter.chapterLink = atttitle as String
+            }
+            if let atttitle: NSString = attributeDict["image"] {
+                chapter.chapterImage = atttitle as String
+            }
+            episodeChapters.append(chapter)
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func parser(parser: NSXMLParser, foundCharacters string: String) {
+        let data = string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        if (!data.isEmpty) {
+            if eName == "title" {
+                episodeTitle += data
+            } else if eName == "link" {
+                episodeLink = data
+            }else if eName == "itunes:duration" {
+                episodeDuration = data
+            }else if eName == "pubDate" {
+                episodePubDate = data
+            }
+        }
+    }
+    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+        if elementName == "item" {
+            let episode: Episode = Episode()
+            episode.episodeTitle = episodeTitle
+            episode.episodeLink = episodeLink
+            episode.episodeDuration = episodeDuration
+            episode.episodeUrl = episodeUrl
+            episode.episodePubDate = episodePubDate
+            let url: NSURL = NSURL(string: episodeUrl)!
+            episode.episodeFilename = url.lastPathComponent!
+            episode.episodeFilesize = episodeFilesize
+            episode.episodeImage = episodeImage
+            episode.episodeChapter = episodeChapters
+            episodes.append(episode)
+        }
     }
     
+
+    /**************************************************************************
+     
+                ALL THE TABLE VIEW FUNCTIONS FOLLOWING
+                    (defining the table view and cells)
+     
+     **************************************************************************/
     
     
     
@@ -187,27 +284,37 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         
         return cell
     }
+    
+    
+    
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        
+        // WHAT WOULD BE COOL IS to return only true if the episode is locally or partly locally
+        
+        
         return true
     }
+    
+    
+    
+    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         let episode: Episode = episodes[indexPath.row]
         if (editingStyle == UITableViewCellEditingStyle.Delete){
-            print("delete")
             let manager = NSFileManager.defaultManager()
-            let documentsDirectoryUrl = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-            let fileName = episode.episodeFilename
-            print("doc directory \(documentsDirectoryUrl)")
-            let localFeedFile = documentsDirectoryUrl + "/" + fileName
-            print(episode.episodeFilename)
-            do {
-                try manager.removeItemAtPath(localFeedFile)
-                print("deleted")
-                episode.episodeLocal = false
-            }catch{
-                print("no file to delete")
-                
+            let existence = existslocally(episode.episodeFilename)
+            if (existence.existlocal){
+                let localFeedFile = existence.localURL
+                do {
+                    try manager.removeItemAtPath(localFeedFile)
+                    print("deleted")
+                    episode.episodeLocal = false
+                }catch{
+                    print("no file to delete")
+                    
+                }
             }
+            
             let indexPath2 = NSIndexPath(forRow: indexPath.row, inSection: 0)
             self.tableView.reloadRowsAtIndexPaths([indexPath2], withRowAnimation: UITableViewRowAnimation.None)
             
@@ -238,7 +345,13 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     
-    // these are all download functions
+    /**************************************************************************
+    
+                    ALL THE DOWNLOAD FUNCTIONS FOLLOWING
+                (used for downloading feed, coverimages and media files)
+                    [should be taken out of the viewController one day]
+    
+    **************************************************************************/
     
 
     
@@ -287,7 +400,6 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                 if let episodeIndex = episodeIndexForDownloadTask(downloadTask), let episodeCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episodeIndex, inSection: 0)) as? EpisodeCell {
                     dispatch_async(dispatch_get_main_queue(), {
                         episodeCell.Episodeprogressbar.hidden = false
-                     //   episodeCell.EpisodeprogressLabel.hidden = false
                         episodeCell.Episodeprogressbar.progress = download.progress
                    //     episodeCell.EpisodeprogressLabel.text =  String(format: "%.1f%% of %@",  download.progress * 100, totalSize)
                     })
@@ -374,84 +486,6 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         return nil
     }
 
-    
-    // these are the parser functions
-    
-    var data: NSMutableData = NSMutableData()
-    
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-        eName = elementName
-        if elementName == "item" {
-            episodeTitle = String()
-            episodeLink = String()
-            
-            episodeDuration = String()
-            
-            episodeChapters = [Chapter]()
-        } else if elementName == "enclosure"{
-            episodeUrl = attributeDict["url"]!
-            episodeFilesize = Int(attributeDict["length"]!)!
-        }else if elementName == "itunes:image"{
-            episodeImage = attributeDict["href"]!
-            
-            let existence = existslocally(episodeImage)
-            if (existence.existlocal){
-                episodeImage = existence.localURL
-            } else {
-                downloadurl(episodeImage)
-                print(episodeImage)
-            }
-            
-        } else if elementName == "psc:chapter"{
-            
-            // Potlove Simple Chapters parsing
-            
-            let chapter: Chapter = Chapter()
-            if let atttitle: NSString = attributeDict["start"] {
-                chapter.chapterStart = atttitle as String
-            }
-            if let atttitle: NSString = attributeDict["title"] {
-                chapter.chapterTitle = atttitle as String
-            }
-            if let atttitle: NSString = attributeDict["href"] {
-                chapter.chapterLink = atttitle as String
-            }
-            if let atttitle: NSString = attributeDict["image"] {
-                chapter.chapterImage = atttitle as String
-            }
-            episodeChapters.append(chapter)
-        }
-    }
-    func parser(parser: NSXMLParser, foundCharacters string: String) {
-        let data = string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        if (!data.isEmpty) {
-            if eName == "title" {
-                episodeTitle += data
-            } else if eName == "link" {
-                episodeLink = data
-            }else if eName == "itunes:duration" {
-                episodeDuration = data
-            }else if eName == "pubDate" {
-                episodePubDate = data
-            }
-        }
-    }
-    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        if elementName == "item" {
-            let episode: Episode = Episode()
-            episode.episodeTitle = episodeTitle
-            episode.episodeLink = episodeLink
-            episode.episodeDuration = episodeDuration
-            episode.episodeUrl = episodeUrl
-            episode.episodePubDate = episodePubDate
-            let url: NSURL = NSURL(string: episodeUrl)!
-            episode.episodeFilename = url.lastPathComponent!
-            episode.episodeFilesize = episodeFilesize
-            episode.episodeImage = episodeImage
-            episode.episodeChapter = episodeChapters
-            episodes.append(episode)
-        }
-    }
     
 }
 

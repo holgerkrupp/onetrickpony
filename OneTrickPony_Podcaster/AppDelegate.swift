@@ -20,12 +20,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-       
+        // the Custom-Agent is set to identify the App within the Statistics of the podcast
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.registerDefaults(["OneTrickPony": "Custom-Agent"])
         
+        
+        // the time interval to regularly check for new content is set (once a day in Seconds)
+        UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(60*60*24)
+        
+        
         return true
     }
+    
+    
+    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        
+        if let EpisodesTableViewController = window?.rootViewController as? EpisodesTableViewController
+        {
+            EpisodesTableViewController.loadfeedandparse
+                {
+                    
+                    print("Background refresh done")
+            }
+        }
+    }
+    
     
     func application(application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: () -> Void) {
         backgroundSessionCompletionHandler = completionHandler

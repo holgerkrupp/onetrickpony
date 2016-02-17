@@ -30,7 +30,6 @@ class EpisodeCell: UITableViewCell {
     @IBOutlet weak var EpisodeFileSizeLabel: UILabel!
     @IBOutlet weak var EpisodeImage: UIImageView!
     @IBOutlet weak var EpisodeTime: UIProgressView!
-   // @IBOutlet weak var EpisodeprogressLabel: UILabel!
     @IBOutlet weak var Episodeprogressbar: UIProgressView!
 
     
