@@ -19,6 +19,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
 
     
     var feedParser: NSXMLParser = NSXMLParser()
+    var feeddate: String = String() // this element contains currently the lastBuildDate from the feed, should be managed smarter one day to reduce the full feed loading to check if the feed is new
     
     var episodes  = [Episode]()
     
@@ -61,11 +62,15 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         super.viewDidLoad()
         _ = self.downloadsSession
 
-        
-        loadfeedandparse { self.tableView.reloadData() }
-        self.refreshControl?.addTarget(self, action: "pulltorefresh:", forControlEvents: UIControlEvents.ValueChanged)
+        updatetableview {
+            
+        }
+
+        self.refreshControl?.addTarget(self, action: "refreshfeed:", forControlEvents: UIControlEvents.ValueChanged)
         
     }
+    
+    
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
@@ -151,22 +156,78 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         completion()
     }
     
+    func checkiffeedhaschanged(completion:(result: Bool) -> Void){
+        var result:Bool
+        if getvalueforkeyfrompersistentstrrage("lastfeedday") as? String != feeddate{
+            result = true
+            setvalueforkeytopersistentstorrage("lastfeedday", value: feeddate)
+        }else{
+            result = false
+            
+        }
+        completion(result: result)
+    }
     
     
-    
-    
-    func updatetableview(){
-        
-        loadfeedandparse { self.tableView.reloadData() }
-        
-        self.refreshControl?.endRefreshing()
+    func checkifepisodeisnew(completion:(result: Bool) -> Void){
+        var result:Bool
+        if getvalueforkeyfrompersistentstrrage("latestepisode") as! String != episodes[0].episodePubDate{
+            print("new episode")
+            result = true
+            setvalueforkeytopersistentstorrage("latestepisode", value: episodes[0].episodePubDate)
+        }else{
+            result = false
+            print("old episode")
+        }
+        completion(result: result)
     }
     
     
     
+    func updatetableview(completion:() -> Void ){
+        
+        
+        loadfeedandparse {
+            print("lfp 1")
+           // self.tableView.reloadData()
+            self.checkiffeedhaschanged {
+                (result: Bool) in
+                if result {
+                    print("new feed")
+
+                        self.refreshfeed(self) // I guess i need a completion handler here
+                        
+                }else{
+                    print("old feed")
+                }
+                self.checkifepisodeisnew{
+                    (result: Bool) in
+                    if result {
+                        print("new episode")
+                        //here be download start of new episode
+                    }else{
+                        print("old episode")
+                    }
+                    print("Episode check done")
+                    print("latest episode: \(self.episodes[0].episodeTitle)")
+                }
+                    
+                    
+                    
+                    
+                    
+                
+            }
+            
+        }
+        
+        
+        completion()
+    }
     
     
-    func pulltorefresh(sender:AnyObject)
+    
+    func refreshfeed(sender:AnyObject)
     {
         
         if let dict = myDict {
@@ -175,10 +236,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             print("pullto \(url)")
             downloadurl(url)
         }
-        // Code to refresh table view
-        
-        // THIS HAS TO BE MOVED TO A SPECIFIC CALL WHEN THE FILE HAS BEEN UPDATED updatetableview()
-        
+
     }
     
     var data: NSMutableData = NSMutableData()
@@ -237,6 +295,10 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                 episodeDuration = data
             }else if eName == "pubDate" {
                 episodePubDate = data
+            }else if eName == "lastBuildDate"{
+                feeddate = data
+                print("lastBuildDate \(data)")
+
             }
         }
     }
@@ -385,15 +447,15 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        print("session \(session) download task \(downloadTask) wrote an additional \(bytesWritten) bytes (total \(totalBytesWritten) bytes) out of an expected \(totalBytesExpectedToWrite) bytes.")
+      //  print("session \(session) download task \(downloadTask) wrote an additional \(bytesWritten) bytes (total \(totalBytesWritten) bytes) out of an expected \(totalBytesExpectedToWrite) bytes.")
 
-        print("TaskOrigRequest URL String \(downloadTask.originalRequest?.URL?.absoluteString)")
+    //    print("TaskOrigRequest URL String \(downloadTask.originalRequest?.URL?.absoluteString)")
         if let downloadUrl = downloadTask.originalRequest?.URL?.absoluteString,
             download = activeDownloads[downloadUrl] {
                 // 2
                 download.progress = Float(totalBytesWritten)/Float(totalBytesExpectedToWrite)
-                print("Progress : \(download.progress)")
-                print("Episode Index: \(episodeIndexForDownloadTask(downloadTask))")
+              //  print("Progress : \(download.progress)")
+               // print("Episode Index: \(episodeIndexForDownloadTask(downloadTask))")
                 // 3
              //   let totalSize = NSByteCountFormatter.stringFromByteCount(totalBytesExpectedToWrite, countStyle: NSByteCountFormatterCountStyle.Binary)
                 // 4
@@ -430,9 +492,16 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                     try fileManager.copyItemAtURL(location, toURL: destinationURL)
                     print("wrote new file")
                     
-                    // IF XML start updatetableview()
+                   
+                    
                     if (destinationURL.pathExtension!.lowercaseString == "xml"){
-                        updatetableview()
+                        loadfeedandparse {
+                            dispatch_async(dispatch_get_main_queue()) {
+                                self.tableView.reloadData()
+                            }
+                            
+                            self.refreshControl?.endRefreshing()
+                        }
                     }
                     
                     

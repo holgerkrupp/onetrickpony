@@ -69,9 +69,7 @@ class EpisodeCell: UITableViewCell {
     func filltableviewcell(cell: EpisodeCell, episode: Episode){
         
         
-        var date: NSDate = NSDate()
-        let dateFormatter: NSDateFormatter = NSDateFormatter()
-        var dateString: String = String()
+
         
         
         // handover all episode information to the cell
@@ -83,12 +81,21 @@ class EpisodeCell: UITableViewCell {
         
       //  cell.EpisodeDurationLabel!.text = episode.episodeDuration
         cell.EpisodeDurationLabel!.text = "\(secondsToHoursMinutesSeconds(remaining(episode))) remaining"
+        
+        
+        var date: NSDate = NSDate()
+        let dateFormatter: NSDateFormatter = NSDateFormatter()
+        var dateString: String = String()
+        
         dateString = episode.episodePubDate
         dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss ZZ"
         date = dateFormatter.dateFromString(dateString)!
         dateFormatter.dateFormat = "dd.MM.yy"
         dateString = dateFormatter.stringFromDate(date)
         cell.EpisodeDateLabel!.text = dateString
+        
+        
+        
         let filesize: Double = Double(episode.episodeFilesize)/1024/1024
         cell.EpisodeFileSizeLabel!.text = String(format:"%.1f", filesize) + " MB"
         let remain = Float(readplayed(episode)) / Float(stringtodouble(episode.episodeDuration))

@@ -25,8 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         defaults.registerDefaults(["OneTrickPony": "Custom-Agent"])
         
         
-        // the time interval to regularly check for new content is set (once a day in Seconds)
-        UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(60*60*24)
+        // the time interval to regularly check for new content is set (UIApplicationBackgroundFetchIntervalMinimum is about every 10 minutes. Remember that this is a MINIMUM - not a Maximum)
+        UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         
         
         return true
