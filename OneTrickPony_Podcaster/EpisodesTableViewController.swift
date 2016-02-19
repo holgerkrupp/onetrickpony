@@ -87,6 +87,29 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         }
     }
     
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        if identifier == "viewEpisode" {
+            return true
+        }
+        return true
+    }
+    /*
+    func switchtoplayerview(episode: Episode){
+        if existslocally(episode.episodeUrl).existlocal {
+            
+            let segue:UIStoryboardSegue = UIStoryboardSegue(identifier: "viewEpisode", source: self, destination: self)
+           print(self.childViewControllers)
+            if segue.identifier == "viewEpisode" {
+
+                let viewController = segue.destinationViewController as! EpisodeViewController
+                viewController.episode = episode
+            }
+        } else {
+            print("no streaming support")
+        }
+    }
+    */
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -242,7 +265,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     func createlocalnotification(episode: Episode){
-        var localNotification =  UILocalNotification()
+        let localNotification =  UILocalNotification()
         //---the message to display for the alert---
         localNotification.alertBody =
         "\(episode.episodeTitle) is available"
@@ -431,21 +454,13 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     
-    /* This shall replace the segue function to download first if not available.
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let episode: Episode = episodes[indexPath.row]
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! EpisodeCell
-        if (episode.episodeLocal){
-            print("click and local")
-            
-            performSegueWithIdentifier("viewEpisode", sender: nil)
-        }else{
-            print("click not local")
-            cell.downloadepisode(episode)
-        }
+       // switchtoplayerview(episode)
+        
     }
-    */
+    
     
     
     
@@ -531,9 +546,6 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                 do {
                     try fileManager.copyItemAtURL(location, toURL: destinationURL)
                     print("wrote new file")
-                    
-                   
-                    
                     if (destinationURL.pathExtension!.lowercaseString == "xml"){
                         loadfeedandparse {
                             dispatch_async(dispatch_get_main_queue()) {

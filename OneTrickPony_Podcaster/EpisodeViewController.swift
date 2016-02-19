@@ -145,7 +145,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
           //  updateplayprogress()
             if (SingletonClass.sharedInstance.player.playing == false){
                 // streaming soll nicht sofort losspielen um Daten zu sparen … warum ich das jetzt auf deutsch schreiben weiß ich nicht.
-                if (local == true){
+                if (existslocally(episode.episodeFilename).existlocal == true){
                     if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
                         
                         updateMPMediaPlayer()
@@ -453,6 +453,16 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             let progress = Double(SingletonClass.sharedInstance.player.currentTime)
             // save time to NSUserdefaults (Double) - saveplayed(episode: Episode, playtime: Double)
             saveplayed(SingletonClass.sharedInstance.episodePlaying, playtime: progress)
+            
+            /*
+
+            if EpisodesTableViewController.tableview.cellforrowatindexpath(indexpathforepisode)
+                update
+            
+
+            */
+            
+            print("remember to update the tableviewcell duration")
             
             // update slider & time labels if in focus (Double)
             updateSliderProgress(progress)
