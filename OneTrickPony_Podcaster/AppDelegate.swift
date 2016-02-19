@@ -28,6 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // the time interval to regularly check for new content is set (UIApplicationBackgroundFetchIntervalMinimum is about every 10 minutes. Remember that this is a MINIMUM - not a Maximum)
         UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         
+        //request for the right to send notifications
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+
+        
         
         return true
     }
@@ -37,13 +42,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let EpisodesTableViewController = window?.rootViewController as? EpisodesTableViewController
         {
-            EpisodesTableViewController.loadfeedandparse
-                {
-                    
-                    print("Background refresh done")
-            }
+            EpisodesTableViewController.refreshfeed()
+            print("Background refresh started")
+            
         }
     }
+    
+    
+    
+    //function to present the localNotification if received.
+    func application(application: UIApplication, didReceiveLocalNotification localNotification:UILocalNotification){
+        UIApplication.sharedApplication().presentLocalNotificationNow(localNotification)
+    }
+
     
     
     func application(application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: () -> Void) {

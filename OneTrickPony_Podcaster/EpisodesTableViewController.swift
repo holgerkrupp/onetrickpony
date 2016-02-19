@@ -67,7 +67,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             
         }
 
-        self.refreshControl?.addTarget(self, action: "refreshfeed:", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl?.addTarget(self, action: "refreshfeed", forControlEvents: UIControlEvents.ValueChanged)
         
     }
     
@@ -223,6 +223,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                         print("First Episode \(self.episodes[0].episodeTitle)")
                         self.downloadepisodeifnew()
 
+                        self.createlocalnotification(self.episodes[0])
+                        
                         
                     }else{
                         print("old episode")
@@ -238,7 +240,26 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         completion()
     }
     
-    func refreshfeed(sender:AnyObject)
+    
+    func createlocalnotification(episode: Episode){
+        var localNotification =  UILocalNotification()
+        //---the message to display for the alert---
+        localNotification.alertBody =
+        "\(episode.episodeTitle) is available"
+        
+        //---uses the default sound---
+        localNotification.soundName = UILocalNotificationDefaultSoundName
+        
+        //---title for the button to display---
+        localNotification.alertAction = "Details"
+        
+        //---display the notification---
+        
+        UIApplication.sharedApplication().presentLocalNotificationNow(localNotification)
+    }
+    
+    
+    func refreshfeed()
     {
         
         if let dict = myDict {
@@ -354,6 +375,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         return episodes.count
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> EpisodeCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! EpisodeCell
         let episode: Episode = episodes[indexPath.row]
         
@@ -470,11 +492,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             download = activeDownloads[downloadUrl] {
                 // 2
                 download.progress = Float(totalBytesWritten)/Float(totalBytesExpectedToWrite)
-              //  print("Progress : \(download.progress)")
-               // print("Episode Index: \(episodeIndexForDownloadTask(downloadTask))")
-                // 3
-             //   let totalSize = NSByteCountFormatter.stringFromByteCount(totalBytesExpectedToWrite, countStyle: NSByteCountFormatterCountStyle.Binary)
-                // 4
+
                 if let episodeIndex = episodeIndexForDownloadTask(downloadTask), let episodeCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episodeIndex, inSection: 0)) as? EpisodeCell {
                     dispatch_async(dispatch_get_main_queue(), {
                         episodeCell.Episodeprogressbar.hidden = false
