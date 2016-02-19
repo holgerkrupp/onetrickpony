@@ -375,14 +375,20 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         return episodes.count
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> EpisodeCell {
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! EpisodeCell
         let episode: Episode = episodes[indexPath.row]
-        
-        cell.delegate = self
-        cell.filltableviewcell(cell, episode: episode)
-        
+        dispatch_async(dispatch_get_main_queue(), {
+            
+            
+            
+            cell.delegate = self
+            cell.filltableviewcell(cell, episode: episode)
+            
+            
+        })
         return cell
+        
+        
     }
     
     
