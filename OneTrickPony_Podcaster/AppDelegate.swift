@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let EpisodesTableViewController = window?.rootViewController as? EpisodesTableViewController
         {
-            EpisodesTableViewController.loadfeedandparse
+            EpisodesTableViewController.refreshfeed
                 {
                     
                     print("Background refresh done")
