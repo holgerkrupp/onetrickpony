@@ -39,6 +39,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     var myDict: NSDictionary?
     
     var activeDownloads = [String: Download]()
+    var todownloadnew:Bool = Bool()
     
     
     lazy var downloadsSession: NSURLSession = {
@@ -158,7 +159,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     func checkiffeedhaschanged(completion:(result: Bool) -> Void){
         var result:Bool
-        if getvalueforkeyfrompersistentstrrage("lastfeedday") as? String != feeddate{
+        if getvalueforkeyfrompersistentstrrage("lastfeedday") as! String != feeddate{
+            print("feeddate: \(feeddate)")
+            print("feed from persistent \(getvalueforkeyfrompersistentstrrage("lastfeedday") as! String)")
             result = true
             setvalueforkeytopersistentstorrage("lastfeedday", value: feeddate)
         }else{
@@ -172,12 +175,12 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     func checkifepisodeisnew(completion:(result: Bool) -> Void){
         var result:Bool
         if getvalueforkeyfrompersistentstrrage("latestepisode") as! String != episodes[0].episodePubDate{
-            print("new episode")
+
             result = true
             setvalueforkeytopersistentstorrage("latestepisode", value: episodes[0].episodePubDate)
         }else{
             result = false
-            print("old episode")
+
         }
         completion(result: result)
     }
@@ -185,39 +188,10 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     func updatetableview(completion:() -> Void ){
-        
-        
         loadfeedandparse {
             print("lfp 1")
            // self.tableView.reloadData()
-            self.checkiffeedhaschanged {
-                (result: Bool) in
-                if result {
-                    print("new feed")
 
-                        self.refreshfeed(self) // I guess i need a completion handler here
-                        
-                }else{
-                    print("old feed")
-                }
-                self.checkifepisodeisnew{
-                    (result: Bool) in
-                    if result {
-                        print("new episode")
-                        //here be download start of new episode
-                    }else{
-                        print("old episode")
-                    }
-                    print("Episode check done")
-                    print("latest episode: \(self.episodes[0].episodeTitle)")
-                }
-                    
-                    
-                    
-                    
-                    
-                
-            }
             
         }
         
@@ -226,6 +200,43 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     }
     
     
+    func downloadepisodeifnew(){
+        if self.todownloadnew == true {
+            print("start download of \(self.episodes[0].episodeTitle)")
+            startDownloadepisode(self.episodes[0])
+            self.todownloadnew = false
+        }
+        
+    }
+    
+    
+    func checkfornewepisode(completion:() -> Void){
+        self.checkiffeedhaschanged {
+            (result: Bool) in
+            if result {
+                print("new feed")
+                self.checkifepisodeisnew{
+                    (result: Bool) in
+                    if result {
+                        print("new episode")
+                        self.todownloadnew = true
+                        print("First Episode \(self.episodes[0].episodeTitle)")
+                        self.downloadepisodeifnew()
+
+                        
+                    }else{
+                        print("old episode")
+                    }
+                    print("Episode check done")
+                    print("latest episode: \(self.episodes[0].episodeTitle)")
+                }
+            }else{
+                print("old feed")
+                self.todownloadnew = false
+            }
+        }
+        completion()
+    }
     
     func refreshfeed(sender:AnyObject)
     {
@@ -316,6 +327,11 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             episode.episodeImage = episodeImage
             episode.episodeChapter = episodeChapters
             episodes.append(episode)
+        }else if elementName == "channel"{
+            print("end of feed")
+            self.checkfornewepisode  {
+                
+            }
         }
     }
     
@@ -542,7 +558,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     
-    // this function will get me the index for the cell of the episode containing the link used to download an episode in german I would call it something like episodedownloadcellindex (that was a strange sentence)
+    // this function will get me the index of the array which should be the same as the index of the cell for the  episode containing the same url as the download task
+    
     func episodeIndexForDownloadTask(downloadTask: NSURLSessionDownloadTask) -> Int? {
         if let url = downloadTask.originalRequest?.URL?.absoluteString {
 
