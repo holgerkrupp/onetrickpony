@@ -392,6 +392,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> EpisodeCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! EpisodeCell
         
+        
         let episode: Episode = episodes[indexPath.row]
         cell.delegate = self
         cell.filltableviewcell(cell, episode: episode)
