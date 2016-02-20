@@ -31,8 +31,8 @@ class EpisodeCell: UITableViewCell {
     @IBOutlet weak var EpisodeDurationLabel: UILabel!
     @IBOutlet weak var EpisodeFileSizeLabel: UILabel!
     @IBOutlet weak var EpisodeImage: UIImageView!
-    @IBOutlet weak var EpisodeTime: UIProgressView!
-    @IBOutlet weak var Episodeprogressbar: UIProgressView!
+    @IBOutlet weak var EpisodeTimeProgressbar: UIProgressView!
+    @IBOutlet weak var EpisodeDownloadProgressbar: UIProgressView!
 
     
     @IBOutlet weak var EpisodeDownloadButton: UIButton!
@@ -48,7 +48,7 @@ class EpisodeCell: UITableViewCell {
     
     func downloadepisode(episode : Episode){
         EpisodeDownloadButton!.setTitle("downloading", forState: UIControlState.Normal)
-        Episodeprogressbar.hidden = false
+        EpisodeDownloadProgressbar.hidden = false
         delegate?.downloadepisode(self)
     }
     
@@ -102,23 +102,23 @@ class EpisodeCell: UITableViewCell {
         cell.EpisodeFileSizeLabel!.text = String(format:"%.1f", filesize) + " MB"
         let remain = Float(CMTimeGetSeconds(episode.remaining()))
         
-        cell.EpisodeTime.progress = remain
-        //print(cell.EpisodeTime.progress)
+        cell.EpisodeTimeProgressbar.progress = 1-remain/Float(CMTimeGetSeconds(episode.getDurationinCMTime()))
+        //print(cell.EpisodeTimeProgressbar.progress)
         
         var existence = existslocally(episode.episodeUrl)
         // modify Download button to show either 'download' or 'play'
         if (existence.existlocal){
             episode.episodeLocal = true
-            cell.Episodeprogressbar.progress = 1
-            cell.Episodeprogressbar.hidden = true
+            cell.EpisodeDownloadProgressbar.progress = 1
+            cell.EpisodeDownloadProgressbar.hidden = true
          //   cell.EpisodeprogressLabel.hidden = true
             cell.EpisodeDownloadButton!.setTitle("Play", forState: UIControlState.Normal)
             cell.EpisodeDownloadButton!.setImage(UIImage(named: "iPhone"), forState: UIControlState.Normal)
             cell.EpisodeDownloadButton!.enabled = false
         }else{
             // just in case - should never been used - but acctually is used and I don't know why
-            cell.Episodeprogressbar.progress = 0
-            cell.Episodeprogressbar.hidden = true
+            cell.EpisodeDownloadProgressbar.progress = 0
+            cell.EpisodeDownloadProgressbar.hidden = true
        //     cell.EpisodeprogressLabel.hidden = true
             cell.EpisodeDownloadButton!.setTitle("Download", forState: UIControlState.Normal)
             cell.EpisodeDownloadButton!.setImage(UIImage(named: "Download from the Cloud"), forState: UIControlState.Normal)

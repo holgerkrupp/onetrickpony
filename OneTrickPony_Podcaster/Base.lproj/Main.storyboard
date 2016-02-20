@@ -155,12 +155,12 @@
                                 <connections>
                                     <outlet property="EpisodeDateLabel" destination="15j-Ug-0Ip" id="TJo-HV-zKZ"/>
                                     <outlet property="EpisodeDownloadButton" destination="gge-f4-0Y3" id="lps-cI-ARc"/>
+                                    <outlet property="EpisodeDownloadProgressbar" destination="KGV-PS-q9Z" id="g4R-Fk-t7n"/>
                                     <outlet property="EpisodeDurationLabel" destination="USm-y5-NZg" id="oLF-ZL-ZRe"/>
                                     <outlet property="EpisodeFileSizeLabel" destination="ahl-EG-eb5" id="g8T-a0-7RN"/>
                                     <outlet property="EpisodeImage" destination="juc-WX-z97" id="bDY-YD-DbJ"/>
                                     <outlet property="EpisodeNameLabel" destination="bvJ-Ys-U60" id="W8d-Qd-tKh"/>
-                                    <outlet property="EpisodeTime" destination="2K5-AB-nx1" id="vd2-2c-aCn"/>
-                                    <outlet property="Episodeprogressbar" destination="KGV-PS-q9Z" id="etX-gB-NiY"/>
+                                    <outlet property="EpisodeTimeProgressbar" destination="2K5-AB-nx1" id="vd2-2c-aCn"/>
                                     <segue destination="uPX-Rw-QbC" kind="show" identifier="viewEpisode" id="UBt-ux-4gm">
                                         <segue key="commit" inheritsFrom="parent" id="i2o-mL-K4T"/>
                                         <segue key="preview" inheritsFrom="commit" id="Vg9-Do-w4l"/>

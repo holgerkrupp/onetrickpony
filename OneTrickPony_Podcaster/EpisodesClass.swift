@@ -28,12 +28,12 @@ class Episode {
     
     func getprogressinCMTime(progress: Double) -> CMTime {
         let seconds = progress * stringtodouble(episodeDuration)
-        let time = CMTimeMake(Int64(seconds), Int32(stringtodouble(episodeDuration)))
+        let time = CMTimeMake(Int64(seconds), 1)
         return time
     }
     
     func getDurationinCMTime() -> CMTime {
-        let time = CMTimeMake(Int64(stringtodouble(episodeDuration)), Int32(stringtodouble(episodeDuration)))
+        let time = CMTimeMake(Int64(stringtodouble(episodeDuration)), 1)
         return time
     }
     
@@ -59,6 +59,8 @@ class Episode {
         if  let episodeplayedtime = defaults.valueForKey(episodeTitle){
             
             playedtime = DoubleToCMTime(episodeplayedtime as! Double)
+        } else{
+            playedtime = CMTimeMake(0, 1)
         }
         return playedtime
     }
