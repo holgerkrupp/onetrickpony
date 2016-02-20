@@ -20,6 +20,7 @@ class Episode {
     var episodeImage:       String = String()
     var episodeChapter      = [Chapter]()
     var episodeLocal:       Bool = false
+    var episodeIndex:       Int = Int()
     
 }
 
@@ -36,6 +37,15 @@ func existslocally(checkurl: String) -> (existlocal : Bool, localURL : String) {
     } else {
         //print("\(localFeedFile) is not available")
         return (false, localFeedFile)
+    }
+}
+
+func getEpisodeImage(episode: Episode) -> UIImage{
+    let existence = existslocally(episode.episodeImage)
+    if (existence.existlocal){
+        return UIImage(named: existence.localURL)!
+    }else{
+        return UIImage(named: "StandardCover")!
     }
 }
 
@@ -57,14 +67,16 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
     view.remainingTimeLabel.text = secondsToHoursMinutesSeconds(duration - starttime)
 
     
-    // IMage
+    // Image
+    /*
     let existence = existslocally(episode.episodeImage)
     if (existence.existlocal){
         view.episodeImage.image = UIImage(named: existence.localURL)
     }else{
         view.episodeImage.image = UIImage(named: "StandardCover")
     }
-    
+    */
+    view.episodeImage.image = getEpisodeImage(episode)
     // rate Button
     if (SingletonClass.sharedInstance.playerinitialized == true) {
         SingletonClass.sharedInstance.player.enableRate = true

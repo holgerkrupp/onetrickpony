@@ -63,10 +63,6 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         super.viewDidLoad()
         _ = self.downloadsSession
 
-        updatetableview {
-            
-        }
-
         self.refreshControl?.addTarget(self, action: "refreshfeed", forControlEvents: UIControlEvents.ValueChanged)
         
     }
@@ -75,6 +71,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
+        loadfeedandparse {
+            
+        }
     }
     
     
@@ -207,21 +206,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         }
         completion(result: result)
     }
-    
-    
-    
-    func updatetableview(completion:() -> Void ){
-        loadfeedandparse {
-            print("lfp 1")
-           // self.tableView.reloadData()
 
-            
-        }
-        
-        
-        completion()
-    }
-    
     
     func downloadepisodeifnew(){
         if self.todownloadnew == true {
@@ -370,6 +355,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             episode.episodeFilesize = episodeFilesize
             episode.episodeImage = episodeImage
             episode.episodeChapter = episodeChapters
+            episode.episodeIndex = episodes.count
             episodes.append(episode)
         }else if elementName == "channel"{
             print("end of feed")
@@ -397,21 +383,17 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return episodes.count
     }
+    
+    
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> EpisodeCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! EpisodeCell
+        
         let episode: Episode = episodes[indexPath.row]
-        dispatch_async(dispatch_get_main_queue(), {
-            
-            
-            
-            cell.delegate = self
-            cell.filltableviewcell(cell, episode: episode)
-            
-            
-        })
+        cell.delegate = self
+        cell.filltableviewcell(cell, episode: episode)
+        
         return cell
-        
-        
     }
     
     
@@ -548,9 +530,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                     print("wrote new file")
                     if (destinationURL.pathExtension!.lowercaseString == "xml"){
                         loadfeedandparse {
-                            dispatch_async(dispatch_get_main_queue()) {
-                                self.tableView.reloadData()
-                            }
+                        
+                            self.tableView.reloadData()
+                       
                             
                             self.refreshControl?.endRefreshing()
                         }
@@ -590,12 +572,21 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     
+    func updateCellForEpisode(episode: Episode){
+        if super.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episode.episodeIndex, inSection: 0)) != nil {
+        super.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: episode.episodeIndex, inSection: 0)], withRowAnimation: .Left)
+        }
+        print(self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episode.episodeIndex, inSection: 0)))
+        // here the cell within the Tableview should be updated when visible. But unfortunatly the cell is always nil and I have no idea why. I tried 5 hours without any success so I'll will move to another topic and maybe come back later.
+    
+    }
     
     
     
     
-    // this function will get me the index of the array which should be the same as the index of the cell for the  episode containing the same url as the download task
+        // this function will get me the index of the array which should be the same as the index of the cell for the  episode containing the same episode as the download task
     
+
     func episodeIndexForDownloadTask(downloadTask: NSURLSessionDownloadTask) -> Int? {
         if let url = downloadTask.originalRequest?.URL?.absoluteString {
 
@@ -631,8 +622,8 @@ extension EpisodesTableViewController: EpisodeCellDelegate {
     
     func pauseepisode(cell: EpisodeCell) {
         if let indexPath = tableView.indexPathForCell(cell) {
-         //   let episode = episodes[indexPath.row]
-           // pauseDownload(episode)
+            let episode = episodes[indexPath.row]
+         //   pauseDownload(episode)
             tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: .None)
         }
     }

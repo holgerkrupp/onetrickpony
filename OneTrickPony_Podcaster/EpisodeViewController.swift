@@ -73,7 +73,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
 
     
     @IBAction func playpause(sender: UIButton){
-        playpause()
+        switchplaypause()
 
     }
     
@@ -363,8 +363,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     
-    func playpause(){
-        MPRemoteCommandCenter.sharedCommandCenter().togglePlayPauseCommand
+    func switchplaypause(){
+     //   MPRemoteCommandCenter.sharedCommandCenter().togglePlayPauseCommand
         if (episode.episodeTitle == SingletonClass.sharedInstance.episodePlaying.episodeTitle){
             if SingletonClass.sharedInstance.player.playing == false {
                 play()
@@ -451,18 +451,34 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         if (SingletonClass.sharedInstance.playerinitialized == true){
             // get time from player (Double)
             let progress = Double(SingletonClass.sharedInstance.player.currentTime)
+            let episode = SingletonClass.sharedInstance.episodePlaying
+            
+            
             // save time to NSUserdefaults (Double) - saveplayed(episode: Episode, playtime: Double)
-            saveplayed(SingletonClass.sharedInstance.episodePlaying, playtime: progress)
+            saveplayed(episode, playtime: progress)
+            
+            
+            EpisodesTableViewController().updateCellForEpisode(episode)
             
             /*
-
-            if EpisodesTableViewController.tableview.cellforrowatindexpath(indexpathforepisode)
-                update
+            print("Episodeindex: \(episode.episodeIndex) cell: \(EpisodesTableViewController().tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episode.episodeIndex, inSection: 0)) as? EpisodeCell)")
             
 
-            */
+            if let cell = EpisodesTableViewController().tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episode.episodeIndex, inSection: 0)) as? EpisodeCell {
+                dispatch_async(dispatch_get_main_queue(), {
+                    let remain = Float(progress) / Float(stringtodouble(episode.episodeDuration))
+                    
+                    cell.EpisodeTime.progress = remain
+                    
+                    cell.EpisodeDurationLabel!.text = "\(secondsToHoursMinutesSeconds(remaining(episode))) remaining"
+                    
+                    
+                    print("Remain \(remain)")
+                })
+            }
+    */
             
-            print("remember to update the tableviewcell duration")
+           // print("remember to update the tableviewcell duration")
             
             // update slider & time labels if in focus (Double)
             updateSliderProgress(progress)
@@ -475,6 +491,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         }
     }
     
+    
+
     
     func back30(){
         moveplayer(-30)
@@ -515,9 +533,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         commandCenter.skipForwardCommand.preferredIntervals = [30]
         
         
-        commandCenter.playCommand.addTarget(self, action: "playpause")
-        commandCenter.pauseCommand.addTarget(self, action: "playpause")
-        commandCenter.togglePlayPauseCommand.addTarget(self, action: "playpause")
+        commandCenter.playCommand.addTarget(self, action: "switchplaypause")
+        commandCenter.pauseCommand.addTarget(self, action: "switchplaypause")
+        commandCenter.togglePlayPauseCommand.addTarget(self, action: "switchplaypause")
         
         
   
@@ -528,14 +546,15 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     func updateMPMediaPlayer(){
         
         let playcenter = MPNowPlayingInfoCenter.defaultCenter()
-
+            let mediaArtwort = MPMediaItemArtwork(image: getEpisodeImage(episode))
         playcenter.nowPlayingInfo = [
+            MPMediaItemPropertyArtwork: mediaArtwort,
             MPMediaItemPropertyTitle : episode.episodeTitle,
             MPMediaItemPropertyPlaybackDuration: SingletonClass.sharedInstance.player.duration,
             MPNowPlayingInfoPropertyElapsedPlaybackTime: SingletonClass.sharedInstance.player.currentTime,
             MPNowPlayingInfoPropertyPlaybackRate: SingletonClass.sharedInstance.player.rate]
     }
-        
+    
     
     /**************************************************************************
      

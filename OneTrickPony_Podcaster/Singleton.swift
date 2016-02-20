@@ -25,6 +25,8 @@ class SingletonClass {
     var sleeptimerset:Bool          = false
     var sleeptimer:Double           = 0.0
     
+    var firstload:Bool              = true
+    
     class var sharedInstance: SingletonClass {
         struct Singleton {
             static let instance = SingletonClass()

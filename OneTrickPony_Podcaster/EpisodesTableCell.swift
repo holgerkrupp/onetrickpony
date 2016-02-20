@@ -68,10 +68,7 @@ class EpisodeCell: UITableViewCell {
     
     func filltableviewcell(cell: EpisodeCell, episode: Episode){
         
-        
-
-        
-        
+  
         // handover all episode information to the cell
         cell.episode = episode
         
