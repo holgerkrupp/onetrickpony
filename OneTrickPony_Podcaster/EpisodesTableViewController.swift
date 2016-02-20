@@ -62,6 +62,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         _ = self.downloadsSession
+      
+        
+     //   self.tableView.registerClass(EpisodeCell.self, forCellReuseIdentifier: "Cell")
 
         self.refreshControl?.addTarget(self, action: "refreshfeed", forControlEvents: UIControlEvents.ValueChanged)
         

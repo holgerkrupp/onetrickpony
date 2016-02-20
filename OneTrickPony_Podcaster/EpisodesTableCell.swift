@@ -74,9 +74,12 @@ class EpisodeCell: UITableViewCell {
         
         
         // fill basic fields
-        cell.EpisodeNameLabel!.text = episode.episodeTitle
+        if let label = cell.EpisodeNameLabel {
+            label.text = episode.episodeTitle
+        }
         
       //  cell.EpisodeDurationLabel!.text = episode.episodeDuration
+        
         cell.EpisodeDurationLabel!.text = "\(secondsToHoursMinutesSeconds(remaining(episode))) remaining"
         
         
@@ -128,7 +131,7 @@ class EpisodeCell: UITableViewCell {
             cell.EpisodeImage.hidden = true
         }
         
-
+        print("redraw cell \(episode.episodeTitle)")
         
         //check if the episode has been played and how far
      //   let playposition = readplayed(episode)
