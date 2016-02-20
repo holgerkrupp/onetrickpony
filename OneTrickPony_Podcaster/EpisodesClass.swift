@@ -7,6 +7,8 @@
 //
 import UIKit
 import Foundation
+import CoreMedia
+
 
 class Episode {
     
@@ -22,7 +24,56 @@ class Episode {
     var episodeLocal:       Bool = false
     var episodeIndex:       Int = Int()
     
+    
+    
+    func getprogressinCMTime(progress: Double) -> CMTime {
+        let seconds = progress * stringtodouble(episodeDuration)
+        let time = CMTimeMake(Int64(seconds), 1)
+        return time
+    }
+    
+    func getDurationinCMTime() -> CMTime {
+        let time = CMTimeMake(Int64(stringtodouble(episodeDuration)), 1)
+        return time
+    }
+    
+    func remaining() -> CMTime{
+        let played = readplayed
+        let duration = stringtodouble(episodeDuration)
+        let remainingtime = CMTimeSubtract(DoubleToCMTime(duration), played())
+        return remainingtime
+    }
+    
+    func saveplayed(playtime: Double){
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(episodeTitle, forKey: "LastEpisodePlayed")
+        defaults.setValue(playtime, forKey: episodeTitle)
+        defaults.synchronize()
+    }
+    
+    func readplayed() -> CMTime{
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        var playedtime:CMTime = CMTimeMakeWithSeconds(0,Int32(0))
+        
+        if  let episodeplayedtime = defaults.valueForKey(episodeTitle){
+            
+            playedtime = DoubleToCMTime(episodeplayedtime as! Double)
+        } else{
+            playedtime = CMTimeMake(0, 1)
+        }
+        return playedtime
+    }
+    
+    
 }
+
+func DoubleToCMTime(seconds: Double) -> CMTime{
+    let secondsInt = Int64(seconds)
+    return CMTimeMake(secondsInt ,1)
+}
+
+
 
 func existslocally(checkurl: String) -> (existlocal : Bool, localURL : String) {
     let manager = NSFileManager.defaultManager()
@@ -58,13 +109,15 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
     
     // Time & Slider
     
-    let starttime = readplayed(episode)
+    let starttime = episode.readplayed
     let duration = stringtodouble(episode.episodeDuration)
     
     view.progressSlider.maximumValue = Float(duration)
-    view.progressSlider.setValue(Float(starttime), animated: false)
-    view.playedtime.text = secondsToHoursMinutesSeconds(starttime)
-    view.remainingTimeLabel.text = secondsToHoursMinutesSeconds(duration - starttime)
+    let currentplaytime = Float(CMTimeGetSeconds(starttime()))
+    
+    view.progressSlider.setValue(currentplaytime, animated: false)
+    view.playedtime.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(starttime()))
+    view.remainingTimeLabel.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(episode.remaining()))
 
     
     // Image
@@ -79,21 +132,19 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
     view.episodeImage.image = getEpisodeImage(episode)
     // rate Button
     if (SingletonClass.sharedInstance.playerinitialized == true) {
-        SingletonClass.sharedInstance.player.enableRate = true
+       
         let currentspeed = SingletonClass.sharedInstance.player.rate
-        let indexofspeed:Int = view.speeds.indexOf(currentspeed)!
-        view.playerRateButton.setTitle(view.speedtext[indexofspeed], forState: .Normal)
+        
+        if currentspeed != 0 {
+            let indexofspeed:Int = view.speeds.indexOf(currentspeed)!
+            view.playerRateButton.setTitle(view.speedtext[indexofspeed], forState: .Normal)
+        }
     }
     
     
 }
 
-func remaining(episode:Episode) -> Double{
-    let played = readplayed(episode)
-    let douration = stringtodouble(episode.episodeDuration)
-    let remainingtime = douration - played
-    return remainingtime
-}
+
 
 func stringtodouble(input :String) -> Double{
     let timeArray = input.componentsSeparatedByString(":")
@@ -120,22 +171,7 @@ func secondsToHoursMinutesSeconds (seconds : Double) -> (String) {
     return returnstring
 }
 
-func saveplayed(episode: Episode, playtime: Double){
-    let defaults = NSUserDefaults.standardUserDefaults()
-    defaults.setObject(episode.episodeTitle, forKey: "LastEpisodePlayed")
-    defaults.setObject(playtime, forKey: episode.episodeTitle)
-    defaults.synchronize()
-}
 
-func readplayed(episode: Episode) -> Double{
-    
-    let defaults = NSUserDefaults.standardUserDefaults()
-    var playedtime:Double = 0
-    if  let episodeplayedtime = defaults.valueForKey(episode.episodeTitle){
-        playedtime = episodeplayedtime  as! Double
-    }
-    return playedtime
-}
 
 class Chapter {
     var chapterTitle: String = String()
