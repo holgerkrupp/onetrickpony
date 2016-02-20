@@ -8,6 +8,8 @@
 
 import UIKit
 import Foundation
+import CoreMedia
+
 
 
 protocol EpisodeCellDelegate {
@@ -80,7 +82,7 @@ class EpisodeCell: UITableViewCell {
         
       //  cell.EpisodeDurationLabel!.text = episode.episodeDuration
         
-        cell.EpisodeDurationLabel!.text = "\(secondsToHoursMinutesSeconds(remaining(episode))) remaining"
+        cell.EpisodeDurationLabel!.text = "\(secondsToHoursMinutesSeconds(Double(CMTimeGetSeconds(episode.remaining())))) remaining"
         
         
         var date: NSDate = NSDate()
@@ -98,7 +100,7 @@ class EpisodeCell: UITableViewCell {
         
         let filesize: Double = Double(episode.episodeFilesize)/1024/1024
         cell.EpisodeFileSizeLabel!.text = String(format:"%.1f", filesize) + " MB"
-        let remain = Float(readplayed(episode)) / Float(stringtodouble(episode.episodeDuration))
+        let remain = Float(CMTimeGetSeconds(episode.remaining()))
         
         cell.EpisodeTime.progress = remain
         //print(cell.EpisodeTime.progress)

@@ -88,8 +88,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     @IBAction func sliderchange(sender:UISlider){
         if (episode.episodeTitle == SingletonClass.sharedInstance.episodePlaying.episodeTitle){
-            
-            SingletonClass.sharedInstance.player.currentTime = Double(progressSlider.value)
+            SingletonClass.sharedInstance.player.seekToTime(SingletonClass.sharedInstance.episodePlaying.getprogressinCMTime(Double(progressSlider.value)))
+           //     SingletonClass.sharedInstance.player.seekToTime(Double(progressSlider.value))
         }
     }
     
@@ -143,7 +143,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         //first if statement can be deleted if streaming is integrated later - probably.
         if (SingletonClass.sharedInstance.playerinitialized == true) {
           //  updateplayprogress()
-            if (SingletonClass.sharedInstance.player.playing == false){
+            if (SingletonClass.sharedInstance.player.rate == 0 && SingletonClass.sharedInstance.player.error == nil){
                 // streaming soll nicht sofort losspielen um Daten zu sparen … warum ich das jetzt auf deutsch schreiben weiß ich nicht.
                 if (existslocally(episode.episodeFilename).existlocal == true){
                     if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
@@ -335,10 +335,10 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     func initplayer(episode: Episode){
         url = loadNSURL(episode)
         do{
-            try SingletonClass.sharedInstance.player = AVAudioPlayer(contentsOfURL: url)
+            try SingletonClass.sharedInstance.player = AVPlayer(URL: url)
             SingletonClass.sharedInstance.episodePlaying = episode
             SingletonClass.sharedInstance.playerinitialized = true
-            SingletonClass.sharedInstance.player.enableRate = true
+          
             SingletonClass.sharedInstance.setaudioSession()
             
         }catch{
@@ -348,7 +348,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     func autoplay(){
-        if SingletonClass.sharedInstance.player.playing == false {
+        if SingletonClass.sharedInstance.player.rate == 0 && SingletonClass.sharedInstance.player.error == nil {
             play()
             
         }
@@ -357,7 +357,11 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     func moveplayer(seconds:Double){
         if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
-            SingletonClass.sharedInstance.player.currentTime = SingletonClass.sharedInstance.player.currentTime + seconds
+            let secondsToAdd = CMTimeMakeWithSeconds(seconds,1)
+            let jumpToTime = CMTimeAdd(SingletonClass.sharedInstance.player.currentTime(), secondsToAdd)
+            
+            //maybe i have to check here if the jumpToTime is smaller 0 or bigger thant the complete duration
+            SingletonClass.sharedInstance.player.seekToTime(jumpToTime)
         }
     }
     
@@ -366,7 +370,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     func switchplaypause(){
      //   MPRemoteCommandCenter.sharedCommandCenter().togglePlayPauseCommand
         if (episode.episodeTitle == SingletonClass.sharedInstance.episodePlaying.episodeTitle){
-            if SingletonClass.sharedInstance.player.playing == false {
+            if SingletonClass.sharedInstance.player.rate == 0 && SingletonClass.sharedInstance.player.error == nil {
                 play()
             } else {
                 pause()
@@ -376,9 +380,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             pause()
             
             do{
-                try SingletonClass.sharedInstance.player = AVAudioPlayer(contentsOfURL: url)
+                try SingletonClass.sharedInstance.player = AVPlayer(URL: url)
                 
-                SingletonClass.sharedInstance.player.currentTime = readplayed(episode)
+                SingletonClass.sharedInstance.player.seekToTime(episode.readplayed())
                 
                 SingletonClass.sharedInstance.episodePlaying = episode
                 
@@ -395,9 +399,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     func play(){
         starttimer()
-        let starttime = readplayed(episode)
+        let starttime = episode.readplayed()
         
-        SingletonClass.sharedInstance.player.currentTime = starttime
+        SingletonClass.sharedInstance.player.seekToTime(starttime)
         SingletonClass.sharedInstance.player.play()
         playPause.setTitle("pause", forState: .Normal)
         SingletonClass.sharedInstance.episodePlaying = episode
@@ -408,7 +412,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     func pause(){
         stoptimer()
-        saveplayed(SingletonClass.sharedInstance.episodePlaying, playtime: SingletonClass.sharedInstance.player.currentTime)
+        SingletonClass.sharedInstance.episodePlaying.saveplayed(Double(CMTimeGetSeconds(SingletonClass.sharedInstance.player.currentTime())))
         SingletonClass.sharedInstance.player.pause()
         playPause.setTitle("play", forState: .Normal)
         somethingplayscurrently = false
@@ -423,7 +427,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     func setplaypausebutton(){
         playPause.setTitle("play", forState: .Normal)
         if (SingletonClass.sharedInstance.playerinitialized == true) {
-            if (SingletonClass.sharedInstance.player.playing == true) {
+            if (SingletonClass.sharedInstance.player.rate != 0 && SingletonClass.sharedInstance.player.error == nil) {
                 if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
                     playPause.setTitle("pause", forState: .Normal)
                 }
@@ -433,7 +437,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     func changespeed(){
         
-        SingletonClass.sharedInstance.player.enableRate = true
+      
         let currentspeed = SingletonClass.sharedInstance.player.rate
         let indexofspeed:Int = speeds.indexOf(currentspeed)!
         var newindex:Int
@@ -450,37 +454,16 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     func updateplayprogress(){
         if (SingletonClass.sharedInstance.playerinitialized == true){
             // get time from player (Double)
-            let progress = Double(SingletonClass.sharedInstance.player.currentTime)
+            let progress = Double(CMTimeGetSeconds(SingletonClass.sharedInstance.player.currentTime()))
             let episode = SingletonClass.sharedInstance.episodePlaying
             
             
             // save time to NSUserdefaults (Double) - saveplayed(episode: Episode, playtime: Double)
-            saveplayed(episode, playtime: progress)
+            episode.saveplayed(progress)
             
             
             EpisodesTableViewController().updateCellForEpisode(episode)
             
-            /*
-            print("Episodeindex: \(episode.episodeIndex) cell: \(EpisodesTableViewController().tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episode.episodeIndex, inSection: 0)) as? EpisodeCell)")
-            
-
-            if let cell = EpisodesTableViewController().tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episode.episodeIndex, inSection: 0)) as? EpisodeCell {
-                dispatch_async(dispatch_get_main_queue(), {
-                    let remain = Float(progress) / Float(stringtodouble(episode.episodeDuration))
-                    
-                    cell.EpisodeTime.progress = remain
-                    
-                    cell.EpisodeDurationLabel!.text = "\(secondsToHoursMinutesSeconds(remaining(episode))) remaining"
-                    
-                    
-                    print("Remain \(remain)")
-                })
-            }
-    */
-            
-           // print("remember to update the tableviewcell duration")
-            
-            // update slider & time labels if in focus (Double)
             updateSliderProgress(progress)
             updateMPMediaPlayer()
             
@@ -550,8 +533,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         playcenter.nowPlayingInfo = [
             MPMediaItemPropertyArtwork: mediaArtwort,
             MPMediaItemPropertyTitle : episode.episodeTitle,
-            MPMediaItemPropertyPlaybackDuration: SingletonClass.sharedInstance.player.duration,
-            MPNowPlayingInfoPropertyElapsedPlaybackTime: SingletonClass.sharedInstance.player.currentTime,
+            MPMediaItemPropertyPlaybackDuration: Double(CMTimeGetSeconds(episode.getDurationinCMTime())),
+            MPNowPlayingInfoPropertyElapsedPlaybackTime: Double(CMTimeGetSeconds(SingletonClass.sharedInstance.player.currentTime())),
             MPNowPlayingInfoPropertyPlaybackRate: SingletonClass.sharedInstance.player.rate]
     }
     

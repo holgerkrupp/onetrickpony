@@ -12,11 +12,8 @@ import AVFoundation
 class SingletonClass {
     
     
-    var player:AVAudioPlayer        = AVAudioPlayer()
-    var avaudioplayerplaying:Bool   = false
-    
-    var streamer:AVPlayer           = AVPlayer()
-    var streamerplaying:Bool        = false
+    var player:AVPlayer        = AVPlayer()
+    var AVPlayerplaying:Bool   = false
     
     var playerinitialized: Bool     = false
     var episodePlaying:Episode      = Episode()
