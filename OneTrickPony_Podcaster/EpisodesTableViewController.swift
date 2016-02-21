@@ -32,6 +32,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     var episodeFilesize: Int = Int()
     var episodeImage: String = String()
     var episodeChapters = [Chapter]()
+    var episodeDescription: String = String()
     var eName: String = String()
     
     
@@ -341,7 +342,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             }else if eName == "lastBuildDate"{
                 feeddate = data
                 print("lastBuildDate \(data)")
-
+            }else if eName == "description"{
+                episodeDescription = data
             }
         }
     }
@@ -358,6 +360,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             episode.episodeFilesize = episodeFilesize
             episode.episodeImage = episodeImage
             episode.episodeChapter = episodeChapters
+            episode.episodeDescription = episodeDescription
             episode.episodeIndex = episodes.count
             episodes.append(episode)
         }else if elementName == "channel"{

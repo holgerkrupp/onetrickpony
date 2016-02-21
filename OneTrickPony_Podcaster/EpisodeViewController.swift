@@ -35,6 +35,10 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     @IBOutlet var progressSlider: UISlider!
     @IBOutlet var playPause:UIButton!
     @IBOutlet var episodeImage:UIImageView!
+    @IBOutlet var episodeShowNotesWebView: UIWebView!
+    
+    
+    
     
     @IBOutlet weak var playedtime: UILabel!
     @IBOutlet weak var remainingTimeLabel: UILabel!
@@ -69,7 +73,14 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
 
-    
+    @IBAction func tapImage(recognizer:UITapGestureRecognizer) {
+        print("tap tap")
+        if episodeShowNotesWebView.hidden == true {
+            episodeShowNotesWebView.hidden = false
+        }else{
+            episodeShowNotesWebView.hidden = true
+        }
+    }
 
     
     @IBAction func playpause(sender: UIButton){
@@ -321,9 +332,10 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         //segue for the popover configuration window
-        if segue.identifier == "SleepTimerSegue" {
-            let vc = segue.destinationViewController
+        if segue.identifier == "showChapterMarks" {
+            let vc = segue.destinationViewController as! ChapterMarksViewController
             let controller = vc.popoverPresentationController
+            vc.Chapters = episode.episodeChapter
             
             if controller  != nil{
                 controller?.delegate = self
@@ -332,6 +344,13 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return .None
+    }
+    
+    
+    
+    func popoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        print("should dismiss")
+        return true
     }
     
     
@@ -393,6 +412,13 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             SingletonClass.sharedInstance.player.seekToTime(jumpToTime)
         }
     }
+    
+    func jumpToTimeInPlayer(seconds:Double){
+        let targetTime = CMTimeMakeWithSeconds(seconds,1)
+        SingletonClass.sharedInstance.player.seekToTime(targetTime)
+    }
+    
+    
 
     func playPausefromRemoteCenter(){
         if (SingletonClass.sharedInstance.player.rate != 0 && SingletonClass.sharedInstance.player.error == nil) {

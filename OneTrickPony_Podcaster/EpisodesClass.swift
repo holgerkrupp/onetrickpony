@@ -21,6 +21,9 @@ class Episode {
     var episodeFilesize:    Int = Int()
     var episodeImage:       String = String()
     var episodeChapter      = [Chapter]()
+    var episodeDescription: String = String()
+    
+    
     var episodeLocal:       Bool = false
     var episodeIndex:       Int = Int()
     
@@ -120,8 +123,11 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
     view.progressSlider.setValue(currentplaytime, animated: false)
     view.playedtime.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(starttime()))
     view.remainingTimeLabel.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(episode.remaining()))
-
-
+    
+    let description = episode.episodeDescription.stringByReplacingOccurrencesOfString("<CR>", withString: "\n")
+    
+    view.episodeShowNotesWebView.loadHTMLString(description, baseURL: nil)
+    view.episodeShowNotesWebView.hidden = true
     view.episodeImage.image = getEpisodeImage(episode)
     // rate Button
     if (SingletonClass.sharedInstance.playerinitialized == true) {
