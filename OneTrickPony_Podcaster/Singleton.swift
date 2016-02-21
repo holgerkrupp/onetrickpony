@@ -23,6 +23,7 @@ class SingletonClass {
     var sleeptimer:Double           = 0.0
     
     var firstload:Bool              = true
+    var numberofepisodes:Int        = Int()
     
     class var sharedInstance: SingletonClass {
         struct Singleton {
@@ -37,8 +38,19 @@ class SingletonClass {
    
     let audioSession = AVAudioSession.sharedInstance()
         
+        
     try! audioSession.setCategory(AVAudioSessionCategoryPlayback)
   
+        do
+        {
+            try audioSession.setActive(false)
+        }
+        catch let error as NSError
+        {
+            print(error.description)
+        }
+    try! audioSession.setMode(AVAudioSessionModeSpokenAudio)
+        
         do
         {
             try audioSession.setActive(false)

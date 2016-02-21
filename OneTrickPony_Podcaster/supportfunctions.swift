@@ -21,3 +21,20 @@ func getvalueforkeyfrompersistentstrrage(key:String) -> AnyObject{
 func setvalueforkeytopersistentstorrage(key:String, value:AnyObject){
     NSUserDefaults.standardUserDefaults().setObject(value, forKey: key)
 }
+
+
+func existslocally(checkurl: String) -> (existlocal : Bool, localURL : String) {
+    let manager = NSFileManager.defaultManager()
+    let url: NSURL = NSURL(string: checkurl)!
+    let documentsDirectoryUrl =  NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+    let fileName = url.lastPathComponent! as String
+    let localFeedFile = documentsDirectoryUrl + "/" + fileName
+    
+    if manager.fileExistsAtPath(localFeedFile){
+        //print("\(localFeedFile) is available")
+        return (true, localFeedFile)
+    } else {
+        //print("\(localFeedFile) is not available")
+        return (false, localFeedFile)
+    }
+}

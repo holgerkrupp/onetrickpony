@@ -1,5 +1,5 @@
 //
-//  StocksCell.swift
+//  
 //  OneTrickPony
 //
 //  Created by Holger Krupp on 17/01/16.
@@ -68,21 +68,31 @@ class EpisodeCell: UITableViewCell {
         print(fileOffset)
     }
     
-    func filltableviewcell(cell: EpisodeCell, episode: Episode){
+    func filltableviewcell(episode: Episode){
         
   
         // handover all episode information to the cell
-        cell.episode = episode
+       
         
         
         // fill basic fields
-        if let label = cell.EpisodeNameLabel {
+        /*
+        if let label = EpisodeNameLabel {
             label.text = episode.episodeTitle
         }
+        */
+      //  EpisodeDurationLabel!.text = episode.episodeDuration
+        var remain = Float(CMTimeGetSeconds(episode.remaining()))
+        if remain <= 0{
+            // the item has been played to the end
+            remain = 0
+            EpisodeDurationLabel!.text = "Done playing"
+        }else{
+            EpisodeDurationLabel!.text = "\(secondsToHoursMinutesSeconds(Double(remain))) remaining"
+        }
+        EpisodeTimeProgressbar.progress = 1-remain/Float(CMTimeGetSeconds(episode.getDurationinCMTime()))
         
-      //  cell.EpisodeDurationLabel!.text = episode.episodeDuration
         
-        cell.EpisodeDurationLabel!.text = "\(secondsToHoursMinutesSeconds(Double(CMTimeGetSeconds(episode.remaining())))) remaining"
         
         
         var date: NSDate = NSDate()
@@ -94,43 +104,41 @@ class EpisodeCell: UITableViewCell {
         date = dateFormatter.dateFromString(dateString)!
         dateFormatter.dateFormat = "dd.MM.yy"
         dateString = dateFormatter.stringFromDate(date)
-        cell.EpisodeDateLabel!.text = dateString
+        EpisodeDateLabel!.text = dateString
         
         
         
         let filesize: Double = Double(episode.episodeFilesize)/1024/1024
-        cell.EpisodeFileSizeLabel!.text = String(format:"%.1f", filesize) + " MB"
-        let remain = Float(CMTimeGetSeconds(episode.remaining()))
-        
-        cell.EpisodeTimeProgressbar.progress = 1-remain/Float(CMTimeGetSeconds(episode.getDurationinCMTime()))
-        //print(cell.EpisodeTimeProgressbar.progress)
+        EpisodeFileSizeLabel!.text = String(format:"%.1f", filesize) + " MB"
+
+        //print(EpisodeTimeProgressbar.progress)
         
         var existence = existslocally(episode.episodeUrl)
         // modify Download button to show either 'download' or 'play'
         if (existence.existlocal){
             episode.episodeLocal = true
-            cell.EpisodeDownloadProgressbar.progress = 1
-            cell.EpisodeDownloadProgressbar.hidden = true
-         //   cell.EpisodeprogressLabel.hidden = true
-            cell.EpisodeDownloadButton!.setTitle("Play", forState: UIControlState.Normal)
-            cell.EpisodeDownloadButton!.setImage(UIImage(named: "iPhone"), forState: UIControlState.Normal)
-            cell.EpisodeDownloadButton!.enabled = false
+            EpisodeDownloadProgressbar.progress = 1
+            EpisodeDownloadProgressbar.hidden = true
+         //   EpisodeprogressLabel.hidden = true
+            EpisodeDownloadButton!.setTitle("Play", forState: UIControlState.Normal)
+            EpisodeDownloadButton!.setImage(UIImage(named: "iPhone"), forState: UIControlState.Normal)
+            EpisodeDownloadButton!.enabled = false
         }else{
             // just in case - should never been used - but acctually is used and I don't know why
-            cell.EpisodeDownloadProgressbar.progress = 0
-            cell.EpisodeDownloadProgressbar.hidden = true
-       //     cell.EpisodeprogressLabel.hidden = true
-            cell.EpisodeDownloadButton!.setTitle("Download", forState: UIControlState.Normal)
-            cell.EpisodeDownloadButton!.setImage(UIImage(named: "Download from the Cloud"), forState: UIControlState.Normal)
-            cell.EpisodeDownloadButton!.enabled = true
+            EpisodeDownloadProgressbar.progress = 0
+            EpisodeDownloadProgressbar.hidden = true
+       //     EpisodeprogressLabel.hidden = true
+            EpisodeDownloadButton!.setTitle("Download", forState: UIControlState.Normal)
+            EpisodeDownloadButton!.setImage(UIImage(named: "Download from the Cloud"), forState: UIControlState.Normal)
+            EpisodeDownloadButton!.enabled = true
             episode.episodeLocal = false
         }
         // set Episode image if existing
         existence = existslocally(episode.episodeImage)
         if (existence.existlocal){
-            cell.EpisodeImage.image = UIImage(named: existence.localURL)
+            EpisodeImage.image = UIImage(named: existence.localURL)
         }else{
-            cell.EpisodeImage.hidden = true
+            EpisodeImage.hidden = true
         }
         
         print("redraw cell \(episode.episodeTitle)")

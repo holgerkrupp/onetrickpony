@@ -64,8 +64,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         _ = self.downloadsSession
       
         
-     //   self.tableView.registerClass(EpisodeCell.self, forCellReuseIdentifier: "Cell")
-
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
         self.refreshControl?.addTarget(self, action: "refreshfeed", forControlEvents: UIControlEvents.ValueChanged)
         
     }
@@ -362,6 +362,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             episodes.append(episode)
         }else if elementName == "channel"{
             print("end of feed")
+            SingletonClass.sharedInstance.numberofepisodes = episodes.count
             self.checkfornewepisode  {
                 
             }
@@ -389,14 +390,18 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> EpisodeCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! EpisodeCell
-        
-        
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("EpisodeCell", forIndexPath: indexPath) as! EpisodeCell
         let episode: Episode = episodes[indexPath.row]
-        cell.delegate = self
-        cell.filltableviewcell(cell, episode: episode)
+        if let label = cell.EpisodeNameLabel {
+            label.text = episode.episodeTitle
+        }
         
+        
+        cell.delegate = self
+        cell.filltableviewcell(episode)
+        print("IP: \(indexPath)")
+        print("ET: \(episodeTitle)")
         return cell
     }
     
@@ -416,25 +421,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         let episode: Episode = episodes[indexPath.row]
         if (editingStyle == UITableViewCellEditingStyle.Delete){
-            let manager = NSFileManager.defaultManager()
-            let existence = existslocally(episode.episodeFilename)
-            if (existence.existlocal){
-                let localFeedFile = existence.localURL
-                do {
-                    try manager.removeItemAtPath(localFeedFile)
-                    print("deleted")
-                    episode.episodeLocal = false
-                }catch{
-                    print("no file to delete")
-                    
-                }
-            }
-            
+            episode.deleteEpisodeFromDocumentsFolder()
             let indexPath2 = NSIndexPath(forRow: indexPath.row, inSection: 0)
             self.tableView.reloadRowsAtIndexPaths([indexPath2], withRowAnimation: UITableViewRowAnimation.None)
-            
-            
-            
         }
     }
     
@@ -442,7 +431,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let episode: Episode = episodes[indexPath.row]
+        // let episode: Episode = episodes[indexPath.row]
        // switchtoplayerview(episode)
         
     }
@@ -514,7 +503,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     
-    // the following functin is called when a download has been finished. It will write the date to the right folder (Documents Folder - hint hint) and update the tableviewcell if needed.
+    // the following functin is called when a download has been finished. It will write the date to the right folder (Documents Folder - hint hint) and the tableviewcell if needed.
     
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
         // move the file to the final destination
@@ -577,10 +566,10 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     func updateCellForEpisode(episode: Episode){
-        if super.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episode.episodeIndex, inSection: 0)) != nil {
-        super.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: episode.episodeIndex, inSection: 0)], withRowAnimation: .Left)
-        }
-        print(self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episode.episodeIndex, inSection: 0)))
+        let cellRowToBeUpdated = episode.episodeIndex
+        print("update Cell \(tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episode.episodeIndex, inSection: 0))) for Episode \(episode.episodeTitle)")
+        
+        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: cellRowToBeUpdated, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Left)
         // here the cell within the Tableview should be updated when visible. But unfortunatly the cell is always nil and I have no idea why. I tried 5 hours without any success so I'll will move to another topic and maybe come back later.
     
     }
@@ -626,7 +615,7 @@ extension EpisodesTableViewController: EpisodeCellDelegate {
     
     func pauseepisode(cell: EpisodeCell) {
         if let indexPath = tableView.indexPathForCell(cell) {
-            let episode = episodes[indexPath.row]
+           // let episode = episodes[indexPath.row]
          //   pauseDownload(episode)
             tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: .None)
         }

@@ -27,7 +27,7 @@ class Episode {
     
     
     func getprogressinCMTime(progress: Double) -> CMTime {
-        let seconds = progress * stringtodouble(episodeDuration)
+        let seconds = progress //* stringtodouble(episodeDuration)
         let time = CMTimeMake(Int64(seconds), 1)
         return time
     }
@@ -65,6 +65,22 @@ class Episode {
         return playedtime
     }
     
+    func deleteEpisodeFromDocumentsFolder(){
+        let manager = NSFileManager.defaultManager()
+        let existence = existslocally(episodeFilename)
+        if (existence.existlocal){
+            let localFeedFile = existence.localURL
+            do {
+                try manager.removeItemAtPath(localFeedFile)
+                print("deleted")
+                episodeLocal = false
+            }catch{
+                print("no file to delete")
+                
+            }
+        }
+    }
+    
     
 }
 
@@ -75,21 +91,7 @@ func DoubleToCMTime(seconds: Double) -> CMTime{
 
 
 
-func existslocally(checkurl: String) -> (existlocal : Bool, localURL : String) {
-    let manager = NSFileManager.defaultManager()
-    let url: NSURL = NSURL(string: checkurl)!
-    let documentsDirectoryUrl =  NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-    let fileName = url.lastPathComponent! as String
-    let localFeedFile = documentsDirectoryUrl + "/" + fileName
-    
-    if manager.fileExistsAtPath(localFeedFile){
-        //print("\(localFeedFile) is available")
-        return (true, localFeedFile)
-    } else {
-        //print("\(localFeedFile) is not available")
-        return (false, localFeedFile)
-    }
-}
+
 
 func getEpisodeImage(episode: Episode) -> UIImage{
     let existence = existslocally(episode.episodeImage)
@@ -119,16 +121,7 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
     view.playedtime.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(starttime()))
     view.remainingTimeLabel.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(episode.remaining()))
 
-    
-    // Image
-    /*
-    let existence = existslocally(episode.episodeImage)
-    if (existence.existlocal){
-        view.episodeImage.image = UIImage(named: existence.localURL)
-    }else{
-        view.episodeImage.image = UIImage(named: "StandardCover")
-    }
-    */
+
     view.episodeImage.image = getEpisodeImage(episode)
     // rate Button
     if (SingletonClass.sharedInstance.playerinitialized == true) {
