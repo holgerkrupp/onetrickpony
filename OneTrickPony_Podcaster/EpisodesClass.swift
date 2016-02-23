@@ -40,14 +40,27 @@ class Episode {
         return time
     }
     
+    
+    func getDurationInSeconds() -> Double{
+        return CMTimeGetSeconds(getDurationinCMTime())
+    }
+    
+    func setDuration(duration: CMTime) {
+    let seconds = CMTimeGetSeconds(duration)
+        episodeDuration = secondsToHoursMinutesSeconds(seconds)
+    }
+    
+
+    
     func remaining() -> CMTime{
-        let played = readplayed
+        let played = readplayed()
         let duration = stringtodouble(episodeDuration)
-        let remainingtime = CMTimeSubtract(DoubleToCMTime(duration), played())
+        let remainingtime = CMTimeSubtract(DoubleToCMTime(duration), played)
         return remainingtime
     }
     
     func saveplayed(playtime: Double){
+        //in seconds
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(episodeTitle, forKey: "LastEpisodePlayed")
         defaults.setValue(playtime, forKey: episodeTitle)
@@ -60,7 +73,6 @@ class Episode {
         var playedtime:CMTime = CMTimeMakeWithSeconds(0,Int32(0))
         
         if  let episodeplayedtime = defaults.valueForKey(episodeTitle){
-            
             playedtime = DoubleToCMTime(episodeplayedtime as! Double)
         } else{
             playedtime = CMTimeMake(0, 1)
@@ -124,10 +136,10 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
     view.playedtime.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(starttime()))
     view.remainingTimeLabel.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(episode.remaining()))
     
-    let description = episode.episodeDescription.stringByReplacingOccurrencesOfString("<CR>", withString: "\n")
+    let description = episode.episodeDescription.stringByReplacingOccurrencesOfString("\r", withString: "\n")
     
     view.episodeShowNotesWebView.loadHTMLString(description, baseURL: nil)
-    view.episodeShowNotesWebView.hidden = true
+    
     view.episodeImage.image = getEpisodeImage(episode)
     // rate Button
     if (SingletonClass.sharedInstance.playerinitialized == true) {

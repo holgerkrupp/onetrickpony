@@ -71,17 +71,8 @@ class EpisodeCell: UITableViewCell {
     func filltableviewcell(episode: Episode){
         
   
-        // handover all episode information to the cell
-       
-        
-        
-        // fill basic fields
-        /*
-        if let label = EpisodeNameLabel {
-            label.text = episode.episodeTitle
-        }
-        */
-      //  EpisodeDurationLabel!.text = episode.episodeDuration
+
+        if episode.getDurationInSeconds() != 0.0{
         var remain = Float(CMTimeGetSeconds(episode.remaining()))
         if remain <= 0{
             // the item has been played to the end
@@ -91,8 +82,10 @@ class EpisodeCell: UITableViewCell {
             EpisodeDurationLabel!.text = "\(secondsToHoursMinutesSeconds(Double(remain))) remaining"
         }
         EpisodeTimeProgressbar.progress = 1-remain/Float(CMTimeGetSeconds(episode.getDurationinCMTime()))
-        
-        
+        }else{
+            EpisodeDurationLabel!.text = "Duration unknown"
+            EpisodeTimeProgressbar.progress = 0
+        }
         
         
         var date: NSDate = NSDate()

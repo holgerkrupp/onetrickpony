@@ -37,9 +37,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     @IBOutlet var episodeImage:UIImageView!
     @IBOutlet var episodeShowNotesWebView: UIWebView!
     
-    
-    
-    
     @IBOutlet weak var playedtime: UILabel!
     @IBOutlet weak var remainingTimeLabel: UILabel!
     
@@ -67,9 +64,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     @IBAction func SleepTimerButtonPressed(sender: AnyObject) {
        showsleeptimer()
- 
-        
-        
     }
     
 
@@ -101,7 +95,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         print(progressSlider.value)
         if (episode.episodeTitle == SingletonClass.sharedInstance.episodePlaying.episodeTitle){
             SingletonClass.sharedInstance.player.seekToTime(SingletonClass.sharedInstance.episodePlaying.getprogressinCMTime(Double(progressSlider.value)))
-           //     SingletonClass.sharedInstance.player.seekToTime(Double(progressSlider.value))
+
         }
     }
     
@@ -140,6 +134,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         //fill the view with content
         fillplayerView(self, episode: episode)
+        episodeShowNotesWebView.hidden = true
+        
         enableOrDisableControllsIfNoInFocus()
         allowremotebuttons()
         
@@ -153,10 +149,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         //load the url and let's decide if we stream or play locally
         url = loadNSURL(episode)
-        
-        
-
-        
         
         if (SingletonClass.sharedInstance.playerinitialized == true) {
           //  updateplayprogress()
@@ -178,13 +170,16 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
+       // fixTheDuration()
         fillplayerView(self, episode: episode)
-        starttimer()
-        updateplayprogress()
+        
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
+        fixTheDuration()
+        updateplayprogress()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -421,7 +416,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
 
     func playPausefromRemoteCenter(){
-        if (SingletonClass.sharedInstance.player.rate != 0 && SingletonClass.sharedInstance.player.error == nil) {
+        if SingletonClass.sharedInstance.player.rate != 0{
             pause()
         }else{
             play()
@@ -432,99 +427,79 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
    
     func switchPlayPause(){
-
+        fixTheDuration()
        // enableOrDisableControllsIfNoInFocus()
         if SingletonClass.sharedInstance.player.rate != 0 {
             pause()
-          
-            if episode.episodeTitle != "" {
-                if episode.episodeTitle != SingletonClass.sharedInstance.episodePlaying.episodeTitle{
-                //replace the item loaded
-                SingletonClass.sharedInstance.player.replaceCurrentItemWithPlayerItem(AVPlayerItem(URL: url))
-                // I jump to corrent play position
-                SingletonClass.sharedInstance.player.seekToTime(episode.readplayed())
-                // switch the meta information
+            if SingletonClass.sharedInstance.episodePlaying.episodeTitle != episode.episodeTitle{
+                loadNSURL(episode)
                 SingletonClass.sharedInstance.episodePlaying = episode
-                //and start playing
-                play()
-                }
+                SingletonClass.sharedInstance.player.replaceCurrentItemWithPlayerItem(AVPlayerItem(URL: url))
+                
+                let starttime = episode.readplayed()
+                SingletonClass.sharedInstance.player.seekToTime(starttime)
             }
         }else{
+  
             play()
         }
-
-        
-        
-        
-        
-        /*
-        //if the view contains the Episode which is currently playing, run first part of if
-        if (episode.episodeTitle == SingletonClass.sharedInstance.episodePlaying.episodeTitle){
-            
-            // at this state the Episode shown on the screen is the same like the one currently loaded in the player
-            if SingletonClass.sharedInstance.player.rate == 0 && SingletonClass.sharedInstance.player.error == nil {
-                // if the episode is not playing and the player didn't create an error, we can start playing
-                play()
-            } else {
-                // otherwise we assume the player is playing and we can pause
-                pause()
-            }
-        } else {
-            // here the episode playing is a different one than the one on the screen.
-            pause()
-            //so I replace the item loaded
-            SingletonClass.sharedInstance.player.replaceCurrentItemWithPlayerItem(AVPlayerItem(URL: url))
-                // I jump to corrent play position
-                SingletonClass.sharedInstance.player.seekToTime(episode.readplayed())
-                // switch the meta information
-                SingletonClass.sharedInstance.episodePlaying = episode
-                //and start playing
-                play()
-            
-        }
-*/
         setplaypausebutton()
     }
     
-    
+    func fixTheDuration(){
+        if episode.episodeTitle == SingletonClass.sharedInstance.episodePlaying.episodeTitle {
+            let duration = SingletonClass.sharedInstance.player.currentItem?.asset.duration
+            episode.setDuration(duration!)
+            SingletonClass.sharedInstance.episodePlaying.setDuration(duration!)
+        }
+    }
 
     
     func play(){
-        starttimer()
         
-        episode = SingletonClass.sharedInstance.episodePlaying
         var starttime = episode.readplayed()
-        if starttime >= episode.getDurationinCMTime(){
+        
+        
+       // print("play with starttime \(starttime) and it's episode \(episode.episodeTitle) with duration \(episode.getDurationinCMTime())")
+        /*if episode.getDurationInSeconds() == 0.0{
+            let duration = SingletonClass.sharedInstance.player.currentItem?.asset.duration
+            episode.setDuration(duration!)
+            SingletonClass.sharedInstance.episodePlaying.setDuration(duration!)
+        }
+        */
+        
+        if starttime >= episode.getDurationinCMTime() && episode.getDurationInSeconds() != 0.0 {
             // the item has been played to the end,I'll reset the starttime to start playing from the beginning
-            
             episode.saveplayed(0.0)
+            print("read after save \(episode.getDurationinCMTime())")
             starttime = episode.readplayed()
-            
         }
         
-        
-       // let item = SingletonClass.sharedInstance.player.currentItem
-        
+        starttimer()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
 
         SingletonClass.sharedInstance.player.seekToTime(starttime)
         SingletonClass.sharedInstance.player.play()
         playPause.setTitle("pause", forState: .Normal)
-      //  SingletonClass.sharedInstance.episodePlaying = episode
         somethingplayscurrently = true
         updateMPMediaPlayer()
-        
     }
+    
+    
+    
+    
     func pause(){
         stoptimer()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-        SingletonClass.sharedInstance.episodePlaying.saveplayed(Double(CMTimeGetSeconds(SingletonClass.sharedInstance.player.currentTime())))
         SingletonClass.sharedInstance.player.pause()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+        let played = SingletonClass.sharedInstance.player.currentTime()
+        let episode = SingletonClass.sharedInstance.episodePlaying
+        episode.saveplayed(Double(CMTimeGetSeconds(played)))
+        
+        print("played: \(Double(CMTimeGetSeconds(played)))")
         playPause.setTitle("play", forState: .Normal)
         somethingplayscurrently = false
         updateMPMediaPlayer()
-        
-        
     }
     
     
@@ -571,12 +546,12 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             let progress = Double(CMTimeGetSeconds(SingletonClass.sharedInstance.player.currentTime()))
             let episode = SingletonClass.sharedInstance.episodePlaying
             
-            
+        
             // save time to NSUserdefaults (Double) - saveplayed(episode: Episode, playtime: Double)
             episode.saveplayed(progress)
             
             
-            EpisodesTableViewController().updateCellForEpisode(episode)
+            //EpisodesTableViewController().updateCellForEpisode(episode)
             
             updateSliderProgress(progress)
             updateMPMediaPlayer()

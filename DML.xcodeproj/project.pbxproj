@@ -22,6 +22,7 @@
 		4821D4CD1C764D920004DF4A /* supportfunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4821D4CC1C764D920004DF4A /* supportfunctions.swift */; };
 		489B44F51C6BB1B900CC5326 /* License in Resources */ = {isa = PBXBuildFile; fileRef = 489B44F41C6BB1B900CC5326 /* License */; };
 		48A767501C7A07D100E6B485 /* ChapterMarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A7674F1C7A07D100E6B485 /* ChapterMarksViewController.swift */; };
+		48A767561C7A2F8800E6B485 /* pushSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 48A767551C7A2F8800E6B485 /* pushSound.m4a */; };
 		48DB59841C5D51B60041F4AC /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DB59831C5D51B60041F4AC /* Singleton.swift */; };
 		48DB59871C61C6700041F4AC /* PodcastSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48DB59861C61C6700041F4AC /* PodcastSettings.plist */; };
 		48E5B3AC1C69062800D06BAC /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E5B3AB1C69062800D06BAC /* Download.swift */; };
@@ -66,6 +67,7 @@
 		4821D4CC1C764D920004DF4A /* supportfunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = supportfunctions.swift; sourceTree = "<group>"; };
 		489B44F41C6BB1B900CC5326 /* License */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License; sourceTree = "<group>"; };
 		48A7674F1C7A07D100E6B485 /* ChapterMarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterMarksViewController.swift; sourceTree = "<group>"; };
+		48A767551C7A2F8800E6B485 /* pushSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = pushSound.m4a; sourceTree = "<group>"; };
 		48DB59831C5D51B60041F4AC /* Singleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		48DB59861C61C6700041F4AC /* PodcastSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PodcastSettings.plist; path = ../PodcastSettings.plist; sourceTree = "<group>"; };
 		48E5B3AB1C69062800D06BAC /* Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
@@ -120,9 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				480FEDB51C54B3DF005594F1 /* Main.storyboard */,
-				480FEDBB1C54B3DF005594F1 /* Assets.xcassets */,
-				480FEDBD1C54B3DF005594F1 /* LaunchScreen.storyboard */,
-				480FEDF01C595D2D005594F1 /* feed.xml */,
+				48A767571C7A2FA100E6B485 /* Customization_Per_Podcast */,
 				480FEDB11C54B3DF005594F1 /* AppDelegate.swift */,
 				480FEDE81C5518A4005594F1 /* EpisodesClass.swift */,
 				480FEDE61C54C65A005594F1 /* EpisodesTableViewController.swift */,
@@ -133,7 +133,6 @@
 				48DB59831C5D51B60041F4AC /* Singleton.swift */,
 				480FEDEC1C580CCA005594F1 /* SettingsTableViewController.swift */,
 				480FEDC01C54B3DF005594F1 /* Info.plist */,
-				48DB59861C61C6700041F4AC /* PodcastSettings.plist */,
 				489B44F41C6BB1B900CC5326 /* License */,
 				4821D4CC1C764D920004DF4A /* supportfunctions.swift */,
 			);
@@ -156,6 +155,18 @@
 				480FEDD61C54B3DF005594F1 /* Info.plist */,
 			);
 			path = OneTrickPony_PodcasterUITests;
+			sourceTree = "<group>";
+		};
+		48A767571C7A2FA100E6B485 /* Customization_Per_Podcast */ = {
+			isa = PBXGroup;
+			children = (
+				480FEDBB1C54B3DF005594F1 /* Assets.xcassets */,
+				480FEDBD1C54B3DF005594F1 /* LaunchScreen.storyboard */,
+				480FEDF01C595D2D005594F1 /* feed.xml */,
+				48A767551C7A2F8800E6B485 /* pushSound.m4a */,
+				48DB59861C61C6700041F4AC /* PodcastSettings.plist */,
+			);
+			name = Customization_Per_Podcast;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,6 +284,7 @@
 				489B44F51C6BB1B900CC5326 /* License in Resources */,
 				48DB59871C61C6700041F4AC /* PodcastSettings.plist in Resources */,
 				480FEDBF1C54B3DF005594F1 /* LaunchScreen.storyboard in Resources */,
+				48A767561C7A2F8800E6B485 /* pushSound.m4a in Resources */,
 				480FEDBC1C54B3DF005594F1 /* Assets.xcassets in Resources */,
 				480FEDB71C54B3DF005594F1 /* Main.storyboard in Resources */,
 				480FEDF11C595D2D005594F1 /* feed.xml in Resources */,

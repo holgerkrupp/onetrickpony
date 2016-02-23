@@ -6,6 +6,7 @@
 // Copyright © 2016 Holger Krupp. All rights reserved.
 //
 import UIKit
+import AVFoundation
 
 
 
@@ -40,7 +41,6 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     var myDict: NSDictionary?
     
     var activeDownloads = [String: Download]()
-    var todownloadnew:Bool = Bool()
     
     
     lazy var downloadsSession: NSURLSession = {
@@ -212,14 +212,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     }
 
     
-    func downloadepisodeifnew(){
-        if self.todownloadnew == true {
-            print("start download of \(self.episodes[0].episodeTitle)")
-            startDownloadepisode(self.episodes[0])
-            self.todownloadnew = false
-        }
-        
-    }
+
     
     
     func checkfornewepisode(completion:() -> Void){
@@ -231,10 +224,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                     (result: Bool) in
                     if result {
                         print("new episode")
-                        self.todownloadnew = true
                         print("First Episode \(self.episodes[0].episodeTitle)")
-                        self.downloadepisodeifnew()
-
+                        
+                        self.startDownloadepisode(self.episodes[0])
                         self.createlocalnotification(self.episodes[0])
                         
                         
@@ -242,11 +234,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                         print("old episode")
                     }
                     print("Episode check done")
-                    print("latest episode: \(self.episodes[0].episodeTitle)")
                 }
             }else{
                 print("old feed")
-                self.todownloadnew = false
             }
         }
         completion()
@@ -260,7 +250,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         "\(episode.episodeTitle) is available"
         
         //---uses the default sound---
-        localNotification.soundName = UILocalNotificationDefaultSoundName
+        localNotification.soundName = "pushSound.m4a";
         
         //---title for the button to display---
         localNotification.alertAction = "Details"
@@ -351,9 +341,36 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         if elementName == "item" {
             let episode: Episode = Episode()
             episode.episodeTitle = episodeTitle
-            episode.episodeLink = episodeLink
-            episode.episodeDuration = episodeDuration
             episode.episodeUrl = episodeUrl
+            episode.episodeLink = episodeLink
+            
+            
+            episode.episodeDuration = episodeDuration
+            
+            
+            // BUG BUG BUG 
+            
+            //here I should take care that the duration within the feed is sometimes not correct and the duration within the feed can be 0 But the code below doesn't work, as the loading of the file, if the duration is 0, takes a while and I should wait until AVPlayerStatus is readyToPlay.
+            
+            
+            
+            /*
+            if stringtodouble(episodeDuration) == 0.0 && existslocally(episodeUrl).existlocal{
+                let tempitem = AVPlayer(URL: NSURL(string: existslocally(episodeUrl).localURL)!)
+                print("item: \(tempitem)")
+                print("CMTime \(tempitem.currentItem!.duration)")
+                print("Seconds \(CMTimeGetSeconds(tempitem.currentItem!.duration))")
+                print("Text \(secondsToHoursMinutesSeconds(CMTimeGetSeconds(tempitem.currentItem!.duration)))")
+                episode.episodeDuration = secondsToHoursMinutesSeconds(CMTimeGetSeconds(tempitem.currentItem!.duration))
+                print("episode \(episodeTitle) without duration found - new duration: \(episode.episodeDuration)")
+            }else{
+                episode.episodeDuration = episodeDuration
+            }
+            */
+            
+            
+            
+            
             episode.episodePubDate = episodePubDate
             let url: NSURL = NSURL(string: episodeUrl)!
             episode.episodeFilename = url.lastPathComponent!
@@ -365,11 +382,12 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             episodes.append(episode)
         }else if elementName == "channel"{
             print("end of feed")
-            SingletonClass.sharedInstance.numberofepisodes = episodes.count
-            self.checkfornewepisode  {
-                
-            }
+
         }
+    }
+    func parserDidEndDocument(parser: NSXMLParser) {
+        SingletonClass.sharedInstance.numberofepisodes = episodes.count
+        self.checkfornewepisode  {}
     }
     
 
@@ -620,6 +638,7 @@ extension EpisodesTableViewController: EpisodeCellDelegate {
         if let indexPath = tableView.indexPathForCell(cell) {
            // let episode = episodes[indexPath.row]
          //   pauseDownload(episode)
+            cell.EpisodeDownloadButton.setTitle("resume", forState: UIControlState.Normal)
             tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: .None)
         }
     }
@@ -629,6 +648,8 @@ extension EpisodesTableViewController: EpisodeCellDelegate {
         if let indexPath = tableView.indexPathForCell(cell) {
        //     let episode = episodes[indexPath.row]
          //   resumeDownload(episode)
+            cell.EpisodeDownloadButton.setTitle("pause", forState: UIControlState.Normal)
+
             tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: .None)
         }
     }
