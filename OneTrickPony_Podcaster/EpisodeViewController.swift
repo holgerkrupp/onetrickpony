@@ -435,12 +435,19 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
                 loadNSURL(episode)
                 SingletonClass.sharedInstance.episodePlaying = episode
                 SingletonClass.sharedInstance.player.replaceCurrentItemWithPlayerItem(AVPlayerItem(URL: url))
-                
+                fixTheDuration()
                 let starttime = episode.readplayed()
                 SingletonClass.sharedInstance.player.seekToTime(starttime)
             }
         }else{
-  
+            if SingletonClass.sharedInstance.episodePlaying.episodeTitle != episode.episodeTitle{
+                loadNSURL(episode)
+                SingletonClass.sharedInstance.episodePlaying = episode
+                SingletonClass.sharedInstance.player.replaceCurrentItemWithPlayerItem(AVPlayerItem(URL: url))
+                fixTheDuration()
+                let starttime = episode.readplayed()
+                SingletonClass.sharedInstance.player.seekToTime(starttime)
+            }
             play()
         }
         setplaypausebutton()
@@ -551,7 +558,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             episode.saveplayed(progress)
             
             
-            //EpisodesTableViewController().updateCellForEpisode(episode)
+            EpisodesTableViewController().updateCellForEpisode(episode)
             
             updateSliderProgress(progress)
             updateMPMediaPlayer()

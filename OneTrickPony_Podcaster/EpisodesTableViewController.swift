@@ -72,11 +72,15 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     }
     
     
+
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
         loadfeedandparse {
             
+        }
+        if SingletonClass.sharedInstance.playerinitialized {
+            updateCellForEpisode(SingletonClass.sharedInstance.episodePlaying)
         }
     }
     
@@ -201,7 +205,6 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     func checkifepisodeisnew(completion:(result: Bool) -> Void){
         var result:Bool
         if getvalueforkeyfrompersistentstrrage("latestepisode") as! String != episodes[0].episodePubDate{
-
             result = true
             setvalueforkeytopersistentstorrage("latestepisode", value: episodes[0].episodePubDate)
         }else{
@@ -227,11 +230,12 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                         print("First Episode \(self.episodes[0].episodeTitle)")
                         
                         self.startDownloadepisode(self.episodes[0])
-                        self.createlocalnotification(self.episodes[0])
+                        self.createLocalNotification(self.episodes[0])
                         
                         
                     }else{
                         print("old episode")
+                        self.dummyNotificationforDebugging()
                     }
                     print("Episode check done")
                 }
@@ -243,11 +247,30 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     }
     
     
-    func createlocalnotification(episode: Episode){
+    func createLocalNotification(episode: Episode){
         let localNotification =  UILocalNotification()
         //---the message to display for the alert---
         localNotification.alertBody =
         "\(episode.episodeTitle) is available"
+        
+        //---uses the default sound---
+        localNotification.soundName = "pushSound.m4a";
+        
+        //---title for the button to display---
+        localNotification.alertAction = "Details"
+        
+        //---display the notification---
+        
+        UIApplication.sharedApplication().presentLocalNotificationNow(localNotification)
+    }
+    
+    
+    
+    func dummyNotificationforDebugging(){
+        let localNotification =  UILocalNotification()
+        //---the message to display for the alert---
+        localNotification.alertBody =
+        "nothing new is available"
         
         //---uses the default sound---
         localNotification.soundName = "pushSound.m4a";
@@ -418,11 +441,22 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             label.text = episode.episodeTitle
         }
         
+        if SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle {
+            if SingletonClass.sharedInstance.player.rate == 0{
+                cell.EpisodePlayButton.setImage(UIImage(named: "Play filled"), forState: UIControlState.Normal)
+            }else{
+                cell.EpisodePlayButton.setImage(UIImage(named: "Pause filled"), forState: UIControlState.Normal)
+            }
+            cell.EpisodePlayButton.enabled = true
+            cell.EpisodePlayButton.hidden = false
+        }else{
+            cell.EpisodePlayButton.enabled = false
+            cell.EpisodePlayButton.hidden = true
+        }
         
         cell.delegate = self
         cell.filltableviewcell(episode)
-        print("IP: \(indexPath)")
-        print("ET: \(episodeTitle)")
+
         return cell
     }
     
@@ -448,7 +482,16 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         }
     }
     
-    
+    func updateCellForEpisode(episode: Episode){
+        let cellRowToBeUpdated = episode.episodeIndex
+       // print("update Cell \((NSIndexPath(forRow: episode.episodeIndex, inSection: 0))) for Episode \(episode.episodeTitle)")
+        
+        self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: cellRowToBeUpdated, inSection: 0)], withRowAnimation: .None)
+        // here the cell within the Tableview should be updated when visible. But unfortunatly the cell is always nil and I have no idea why. I tried 5 hours without any success so I'll will move to another topic and maybe come back later.
+        
+       // print(self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: cellRowToBeUpdated, inSection: 0)))
+        
+    }
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -586,14 +629,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     
-    func updateCellForEpisode(episode: Episode){
-        let cellRowToBeUpdated = episode.episodeIndex
-        print("update Cell \(tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episode.episodeIndex, inSection: 0))) for Episode \(episode.episodeTitle)")
-        
-        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: cellRowToBeUpdated, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Left)
-        // here the cell within the Tableview should be updated when visible. But unfortunatly the cell is always nil and I have no idea why. I tried 5 hours without any success so I'll will move to another topic and maybe come back later.
-    
-    }
+
     
     
     

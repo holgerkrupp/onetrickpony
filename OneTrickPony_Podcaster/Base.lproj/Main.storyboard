@@ -21,7 +21,7 @@
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EpisodeCell" rowHeight="107" id="1tu-3b-spL" customClass="EpisodeCell" customModule="OneTrickPony_Podcaster" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="107"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1tu-3b-spL" id="Q62-8E-a8R">
+                                <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000000000000004" contentMode="center" tableViewCell="1tu-3b-spL" id="Q62-8E-a8R">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="106"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -69,12 +69,6 @@
                                                 <rect key="frame" x="104" y="1" width="257" height="79"/>
                                             </variation>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="juc-WX-z97">
-                                            <rect key="frame" x="0.0" y="0.0" width="107" height="107"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="juc-WX-z97" secondAttribute="height" multiplier="1:1" id="KWq-r5-3iG"/>
-                                            </constraints>
-                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filesize" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahl-EG-eb5">
                                             <rect key="frame" x="552" y="8" width="40" height="14"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -90,6 +84,24 @@
                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KGV-PS-q9Z">
                                             <rect key="frame" x="552" y="20" width="40" height="2"/>
                                         </progressView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="juc-WX-z97">
+                                            <rect key="frame" x="0.0" y="0.0" width="107" height="107"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="juc-WX-z97" secondAttribute="height" multiplier="1:1" id="KWq-r5-3iG"/>
+                                            </constraints>
+                                        </imageView>
+                                        <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LmD-qA-hYZ">
+                                            <rect key="frame" x="28" y="29" width="50" height="50"/>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="EFt-y6-Qjn"/>
+                                                <constraint firstAttribute="height" constant="50" id="Ewd-wK-ccs"/>
+                                            </constraints>
+                                            <state key="normal" image="Play filled"/>
+                                            <connections>
+                                                <action selector="playButtonPressed" destination="1tu-3b-spL" eventType="touchDown" id="YQF-Kk-sOq"/>
+                                            </connections>
+                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gge-f4-0Y3">
                                             <rect key="frame" x="557" y="68" width="30" height="30"/>
                                             <accessibility key="accessibilityConfiguration" identifier="Download"/>
@@ -128,6 +140,7 @@
                                         <constraint firstItem="gge-f4-0Y3" firstAttribute="bottom" secondItem="2K5-AB-nx1" secondAttribute="bottom" id="EML-yg-rAs"/>
                                         <constraint firstItem="2K5-AB-nx1" firstAttribute="centerX" secondItem="USm-y5-NZg" secondAttribute="centerX" id="Elu-kO-fi1"/>
                                         <constraint firstItem="2K5-AB-nx1" firstAttribute="leading" secondItem="USm-y5-NZg" secondAttribute="leading" id="HbF-GJ-CWS"/>
+                                        <constraint firstItem="LmD-qA-hYZ" firstAttribute="centerX" secondItem="juc-WX-z97" secondAttribute="centerX" id="Qv5-tE-DqX"/>
                                         <constraint firstItem="15j-Ug-0Ip" firstAttribute="leading" secondItem="bvJ-Ys-U60" secondAttribute="leading" id="RMo-Ce-Mxi"/>
                                         <constraint firstItem="bvJ-Ys-U60" firstAttribute="top" secondItem="15j-Ug-0Ip" secondAttribute="bottom" constant="8" symbolic="YES" id="TO0-3v-881"/>
                                         <constraint firstItem="KGV-PS-q9Z" firstAttribute="leading" secondItem="ahl-EG-eb5" secondAttribute="leading" id="Udt-fl-mfX"/>
@@ -139,6 +152,7 @@
                                         <constraint firstItem="2K5-AB-nx1" firstAttribute="bottom" secondItem="Q62-8E-a8R" secondAttribute="bottomMargin" id="eBi-sy-GAf"/>
                                         <constraint firstItem="ahl-EG-eb5" firstAttribute="top" secondItem="Q62-8E-a8R" secondAttribute="topMargin" id="hOv-Tz-85B"/>
                                         <constraint firstItem="2K5-AB-nx1" firstAttribute="top" secondItem="USm-y5-NZg" secondAttribute="bottom" constant="5" id="n25-xe-SH2"/>
+                                        <constraint firstItem="LmD-qA-hYZ" firstAttribute="centerY" secondItem="juc-WX-z97" secondAttribute="centerY" id="sIM-um-nKw"/>
                                         <constraint firstItem="ahl-EG-eb5" firstAttribute="top" secondItem="gge-f4-0Y3" secondAttribute="bottom" constant="8" id="uXd-0X-COT"/>
                                         <constraint firstItem="2K5-AB-nx1" firstAttribute="trailing" secondItem="USm-y5-NZg" secondAttribute="trailing" id="vlq-Sv-5sd"/>
                                         <constraint firstItem="15j-Ug-0Ip" firstAttribute="firstBaseline" secondItem="ahl-EG-eb5" secondAttribute="baseline" id="wMv-jv-Z9n"/>
@@ -169,6 +183,7 @@
                                     <outlet property="EpisodeFileSizeLabel" destination="ahl-EG-eb5" id="g8T-a0-7RN"/>
                                     <outlet property="EpisodeImage" destination="juc-WX-z97" id="bDY-YD-DbJ"/>
                                     <outlet property="EpisodeNameLabel" destination="bvJ-Ys-U60" id="W8d-Qd-tKh"/>
+                                    <outlet property="EpisodePlayButton" destination="LmD-qA-hYZ" id="ip0-bQ-Ury"/>
                                     <outlet property="EpisodeTimeProgressbar" destination="2K5-AB-nx1" id="vd2-2c-aCn"/>
                                     <segue destination="uPX-Rw-QbC" kind="show" identifier="viewEpisode" id="UBt-ux-4gm">
                                         <segue key="commit" inheritsFrom="parent" id="i2o-mL-K4T"/>
@@ -224,7 +239,7 @@
                                     <rect key="frame" x="0.0" y="64" width="400" height="401"/>
                                 </variation>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="dTH-Xb-JIi" appends="YES" id="NRi-bq-92p"/>
+                                    <outletCollection property="gestureRecognizers" destination="mau-lN-Vxx" appends="YES" id="b1Z-W1-MIo"/>
                                 </connections>
                             </imageView>
                             <webView alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vej-Do-6zD">
@@ -544,9 +559,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0uc-a8-4Hn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="dTH-Xb-JIi">
+                <tapGestureRecognizer id="dTH-Xb-JIi" userLabel="Shownotes Tap Gesture Recognizer">
                     <connections>
                         <action selector="tapImage:" destination="uPX-Rw-QbC" id="B6w-ud-vqb"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="mau-lN-Vxx" userLabel="Image Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="tapImage:" destination="uPX-Rw-QbC" id="rOL-qo-8x3"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -835,6 +855,7 @@ onetrickpony@holgerkrupp.de</string>
         <image name="Bookmark-100" width="100" height="100"/>
         <image name="Download from the Cloud" width="100" height="100"/>
         <image name="Menu" width="100" height="100"/>
+        <image name="Play filled" width="100" height="100"/>
         <image name="Sleeping in Bed" width="100" height="100"/>
         <image name="StandardCover" width="1024" height="1024"/>
         <image name="Upload" width="100" height="100"/>

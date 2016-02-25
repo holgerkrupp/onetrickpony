@@ -33,11 +33,20 @@ class EpisodeCell: UITableViewCell {
     @IBOutlet weak var EpisodeImage: UIImageView!
     @IBOutlet weak var EpisodeTimeProgressbar: UIProgressView!
     @IBOutlet weak var EpisodeDownloadProgressbar: UIProgressView!
-
+    
+    @IBOutlet weak var EpisodePlayButton: UIButton!
     
     @IBOutlet weak var EpisodeDownloadButton: UIButton!
     
-    
+    @IBAction func playButtonPressed(){
+        if SingletonClass.sharedInstance.player.rate == 0 {
+            SingletonClass.sharedInstance.player.play()
+            EpisodePlayButton.setImage(UIImage(named: "Pause filled"), forState: UIControlState.Normal)
+        }else{
+            SingletonClass.sharedInstance.player.pause()
+            EpisodePlayButton.setImage(UIImage(named: "Play filled"), forState: UIControlState.Normal)
+    }
+    }
     var episode: Episode = Episode()
     
     @IBAction func download(){
@@ -134,7 +143,7 @@ class EpisodeCell: UITableViewCell {
             EpisodeImage.hidden = true
         }
         
-        print("redraw cell \(episode.episodeTitle)")
+        
         
         //check if the episode has been played and how far
      //   let playposition = readplayed(episode)
