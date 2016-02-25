@@ -172,6 +172,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         super.viewDidAppear(true)
        // fixTheDuration()
         fillplayerView(self, episode: episode)
+        if SingletonClass.sharedInstance.player.rate != 0 {
+            starttimer()
+        }
         
         
     }

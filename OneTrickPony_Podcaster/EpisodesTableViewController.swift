@@ -80,10 +80,13 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             
         }
         if SingletonClass.sharedInstance.playerinitialized {
-            updateCellForEpisode(SingletonClass.sharedInstance.episodePlaying)
+            SingletonClass.sharedInstance.audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target:self, selector: "updatecell",userInfo: nil,repeats: true)
         }
     }
-    
+
+    func updatecell(){
+        updateCellForEpisode(SingletonClass.sharedInstance.episodePlaying)
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "viewEpisode" {
@@ -484,27 +487,11 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     func updateCellForEpisode(episode: Episode){
         let cellRowToBeUpdated = episode.episodeIndex
-       // print("update Cell \((NSIndexPath(forRow: episode.episodeIndex, inSection: 0))) for Episode \(episode.episodeTitle)")
-        
         self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: cellRowToBeUpdated, inSection: 0)], withRowAnimation: .None)
-        // here the cell within the Tableview should be updated when visible. But unfortunatly the cell is always nil and I have no idea why. I tried 5 hours without any success so I'll will move to another topic and maybe come back later.
-        
-       // print(self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: cellRowToBeUpdated, inSection: 0)))
+
         
     }
-    
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // let episode: Episode = episodes[indexPath.row]
-       // switchtoplayerview(episode)
-        
-    }
-    
-    
-    
-    
-    
-    
+
     /**************************************************************************
     
                     ALL THE DOWNLOAD FUNCTIONS FOLLOWING

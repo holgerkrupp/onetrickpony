@@ -31,6 +31,11 @@ var Chapters      : [Chapter]!
         let chapterStartSeconds = stringtodouble(chapter.chapterStart)
         let chapterStartText = secondsToHoursMinutesSeconds(chapterStartSeconds)
         cell.detailTextLabel!.text = chapterStartText
+
+        if chapter.chapterLink != "" {
+            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            
+        }
         return cell
     }
     
