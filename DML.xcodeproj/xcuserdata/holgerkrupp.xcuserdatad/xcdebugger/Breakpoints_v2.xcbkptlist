@@ -54,7 +54,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneTrickPony_Podcaster/EpisodeViewController.swift"
@@ -70,7 +70,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneTrickPony_Podcaster/EpisodeViewController.swift"
@@ -86,7 +86,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneTrickPony_Podcaster/EpisodeViewController.swift"
@@ -102,7 +102,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneTrickPony_Podcaster/EpisodeViewController.swift"
@@ -118,7 +118,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneTrickPony_Podcaster/EpisodeViewController.swift"
@@ -134,7 +134,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneTrickPony_Podcaster/EpisodeViewController.swift"
@@ -150,7 +150,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneTrickPony_Podcaster/EpisodeViewController.swift"
@@ -166,7 +166,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneTrickPony_Podcaster/EpisodeViewController.swift"
@@ -182,7 +182,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneTrickPony_Podcaster/EpisodeViewController.swift"
@@ -202,13 +202,153 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneTrickPony_Podcaster/EpisodesTableViewController.swift"
-            timestampString = "478074669.999545"
+            timestampString = "478205348.367311"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "387"
-            endingLineNumber = "387"
+            startingLineNumber = "381"
+            endingLineNumber = "381"
             landmarkName = "parser(_:didEndElement:namespaceURI:qualifiedName:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OneTrickPony_Podcaster/EpisodesTableViewController.swift"
+            timestampString = "478205348.367311"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "269"
+            endingLineNumber = "269"
+            landmarkName = "checkFeedDateIsNew(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OneTrickPony_Podcaster.EpisodesTableViewController.data.getter : __ObjC.NSMutableData"
+                  moduleName = "OneTrickPony_Podcaster"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/holgerkrupp/Documents/Cocoa/iOS/OneTrickPony_Podcaster/OneTrickPony_Podcaster/EpisodesTableViewController.swift"
+                  timestampString = "478157820.630731"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OneTrickPony_Podcaster.EpisodesTableViewController.data.setter : __ObjC.NSMutableData"
+                  moduleName = "OneTrickPony_Podcaster"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/holgerkrupp/Documents/Cocoa/iOS/OneTrickPony_Podcaster/OneTrickPony_Podcaster/EpisodesTableViewController.swift"
+                  timestampString = "478157820.631226"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OneTrickPony_Podcaster.EpisodesTableViewController.data.materializeForSet : __ObjC.NSMutableData"
+                  moduleName = "OneTrickPony_Podcaster"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/holgerkrupp/Documents/Cocoa/iOS/OneTrickPony_Podcaster/OneTrickPony_Podcaster/EpisodesTableViewController.swift"
+                  timestampString = "478157820.631445"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OneTrickPony_Podcaster.EpisodesTableViewController.init (OneTrickPony_Podcaster.EpisodesTableViewController.Type)(style : __C.UITableViewStyle) -&gt; OneTrickPony_Podcaster.EpisodesTableViewController"
+                  moduleName = "OneTrickPony_Podcaster"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/holgerkrupp/Documents/Cocoa/iOS/OneTrickPony_Podcaster/OneTrickPony_Podcaster/EpisodesTableViewController.swift"
+                  timestampString = "478157820.631674"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "280"
+                  endingLineNumber = "280"
+                  offsetFromSymbolStart = "646">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OneTrickPony_Podcaster.EpisodesTableViewController.init (OneTrickPony_Podcaster.EpisodesTableViewController.Type)(nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.NSBundle&gt;) -&gt; OneTrickPony_Podcaster.EpisodesTableViewController"
+                  moduleName = "OneTrickPony_Podcaster"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/holgerkrupp/Documents/Cocoa/iOS/OneTrickPony_Podcaster/OneTrickPony_Podcaster/EpisodesTableViewController.swift"
+                  timestampString = "478157820.631931"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "280"
+                  endingLineNumber = "280"
+                  offsetFromSymbolStart = "733">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "OneTrickPony_Podcaster.EpisodesTableViewController.init (OneTrickPony_Podcaster.EpisodesTableViewController.Type)(coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;OneTrickPony_Podcaster.EpisodesTableViewController&gt;"
+                  moduleName = "OneTrickPony_Podcaster"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/holgerkrupp/Documents/Cocoa/iOS/OneTrickPony_Podcaster/OneTrickPony_Podcaster/EpisodesTableViewController.swift"
+                  timestampString = "478157820.632154"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "280"
+                  endingLineNumber = "280"
+                  offsetFromSymbolStart = "649">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OneTrickPony_Podcaster/supportfunctions.swift"
+            timestampString = "478211979.973851"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "getHeaderFromUrl(_:headerfield:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OneTrickPony_Podcaster/supportfunctions.swift"
+            timestampString = "478212833.776224"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "existslocally(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

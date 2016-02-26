@@ -14,7 +14,7 @@ func getvalueforkeyfrompersistentstrrage(key:String) -> AnyObject{
     if let value = NSUserDefaults.standardUserDefaults().objectForKey(key){
         return value
     }else{
-        return "no latest episode in NSUserDefaults"
+        return "_EMPTY_"
     }
 }
 
@@ -22,6 +22,34 @@ func setvalueforkeytopersistentstorrage(key:String, value:AnyObject){
     NSUserDefaults.standardUserDefaults().setObject(value, forKey: key)
 }
 
+
+func getValueForKeyFromPodcastSettings(key:String) -> String{
+    if let path = NSBundle.mainBundle().pathForResource("PodcastSettings", ofType: "plist") {
+        let myDict = NSDictionary(contentsOfFile: path)
+
+        return myDict!.valueForKey("feedurl") as! String
+    }else{
+
+        return "plist error"
+    }
+}
+
+func getHeaderFromUrl(inputurl:String,headerfield:String) -> String {
+    let url = NSURL(string: inputurl)!
+    var responseHeader = ""
+    let task = NSURLSession.sharedSession().dataTaskWithURL(url) {
+        data, response, error in
+        
+        if let httpResponse = response as? NSHTTPURLResponse {
+            if let headerfieldresponse = httpResponse.allHeaderFields[headerfield] as? String {
+                print(headerfieldresponse)
+               responseHeader = headerfieldresponse
+            }
+        }
+    }
+    task.resume()
+    return responseHeader
+}
 
 func existslocally(checkurl: String) -> (existlocal : Bool, localURL : String) {
     let manager = NSFileManager.defaultManager()
