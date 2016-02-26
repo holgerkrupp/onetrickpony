@@ -67,7 +67,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
-        self.refreshControl?.addTarget(self, action: "refreshfeed", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl?.addTarget(self, action:"refreshfeed", forControlEvents: UIControlEvents.ValueChanged)
         
     }
     
@@ -80,7 +80,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             
         }
         if SingletonClass.sharedInstance.playerinitialized {
-            SingletonClass.sharedInstance.audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target:self, selector: "updatecell",userInfo: nil,repeats: true)
+            SingletonClass.sharedInstance.audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target:self, selector:"updatecell",userInfo: nil,repeats: true)
         }
     }
 
@@ -103,22 +103,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         }
         return true
     }
-    /*
-    func switchtoplayerview(episode: Episode){
-        if existslocally(episode.episodeUrl).existlocal {
-            
-            let segue:UIStoryboardSegue = UIStoryboardSegue(identifier: "viewEpisode", source: self, destination: self)
-           print(self.childViewControllers)
-            if segue.identifier == "viewEpisode" {
 
-                let viewController = segue.destinationViewController as! EpisodeViewController
-                viewController.episode = episode
-            }
-        } else {
-            print("no streaming support")
-        }
-    }
-    */
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -138,47 +123,30 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         episodes.removeAll()
         let urlpath = NSBundle.mainBundle().pathForResource("feed", ofType: "xml")
         var localfileurl:NSURL = NSURL.fileURLWithPath(urlpath!)
-        
-        //get the file name expected from the feed (Step 1 load directory)
-        
-        if let path = NSBundle.mainBundle().pathForResource("PodcastSettings", ofType: "plist") {
-            myDict = NSDictionary(contentsOfFile: path)
-            print("myDict ok")
-        }else{
-            print("no plist")
+
+        var url = NSURL.fileURLWithPath(getValueForKeyFromPodcastSettings("feedurl") )
+        if url.pathExtension == "" {
+            
+            url = url.URLByAppendingPathComponent("feed.xml")
         }
-        if let dict = myDict {
-            //get the file name expected from the feed (Step 2 get value for key)
-            
-            var url = NSURL.fileURLWithPath(dict.valueForKey("feedurl") as! String)
-            if url.pathExtension == "" {
-                
-                url = url.URLByAppendingPathComponent("feed.xml")
-            }
-            let fileName = url.lastPathComponent!
-            
-            //find out the path of the document directory for this app
-            let documentsDirectoryUrl = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-            //merge path and filename
-            let localFeedFile = documentsDirectoryUrl + "/" + fileName
-            
-            
-            //check if the file exists in the local documents directory
-            
-            if manager.fileExistsAtPath(localFeedFile){
-                //change url to load to local file instead of the external one
-                localfileurl = NSURL.fileURLWithPath(localFeedFile)
-            }else{
-                //we might be able to download the feed here, but I'm not sure if it's reactive enough.
-                print("no file in docs folder, I'll take the one in the base directory")
-            }
-            
-            
-            
+        let fileName = url.lastPathComponent!
+        
+        //find out the path of the document directory for this app
+        let documentsDirectoryUrl = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        //merge path and filename
+        let localFeedFile = documentsDirectoryUrl + "/" + fileName
+        
+        
+        //check if the file exists in the local documents directory
+        
+        if manager.fileExistsAtPath(localFeedFile){
+            //change url to load to local file instead of the external one
+            localfileurl = NSURL.fileURLWithPath(localFeedFile)
         }else{
-            // somebody didn't put the feed in the plist
-            print("no feed in plist")
+            //we might be able to download the feed here, but I'm not sure if it's reactive enough.
+            print("no file in docs folder, I'll take the one in the base directory")
         }
+    
         
         
         //parse the file (either the one in the documents folder or if that's not there the feed.xml from the base
@@ -190,19 +158,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         completion()
     }
     
-    func checkiffeedhaschanged(completion:(result: Bool) -> Void){
-        var result:Bool
-        if getvalueforkeyfrompersistentstrrage("lastfeedday") as! String != feeddate{
-            print("feeddate: \(feeddate)")
-            print("feed from persistent \(getvalueforkeyfrompersistentstrrage("lastfeedday") as! String)")
-            result = true
-            setvalueforkeytopersistentstorrage("lastfeedday", value: feeddate)
-        }else{
-            result = false
-            
-        }
-        completion(result: result)
-    }
+
     
     
     func checkifepisodeisnew(completion:(result: Bool) -> Void){
@@ -289,15 +245,53 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     func refreshfeed()
     {
-        
-        if let dict = myDict {
-            // Use your dict here
-            let url = dict.valueForKey("feedurl") as! String
+            let url = getValueForKeyFromPodcastSettings("feedurl")
             print("pullto \(url)")
-            downloadurl(url)
-        }
-
+            checkFeedDateIsNew {
+                (result: Bool) in
+                    if result {
+                        self.downloadurl(url)
+                        print("Downloading feed")
+                    }else{
+                        print("server feed same date or older")
+                }
+            }
     }
+    
+    
+    
+    func checkFeedDateIsNew(completion:(result: Bool) -> Void){
+        var result:Bool
+        let oldfeeddate = getvalueforkeyfrompersistentstrrage("lastfeedday") as! String
+        let newfeeddate = getHeaderFromUrl(getValueForKeyFromPodcastSettings("feed"), headerfield: "Last-Modified") as! String
+       
+        if oldfeeddate == newfeeddate{
+            result = false
+            print("CFD oldfeed")
+        }else{
+            setvalueforkeytopersistentstorrage("lastfeedday", value: newfeeddate)
+            result = true
+            print("CFD new feed")
+        }
+        completion(result: result)
+    }
+    
+    
+    // old function to be replaced
+    func checkiffeedhaschanged(completion:(result: Bool) -> Void){
+        var result:Bool
+        if getvalueforkeyfrompersistentstrrage("lastfeedday") as! String != feeddate{
+            print("feeddate: \(feeddate)")
+            print("feed from persistent \(getvalueforkeyfrompersistentstrrage("lastfeedday") as! String)")
+            result = true
+            //setvalueforkeytopersistentstorrage("lastfeedday", value: feeddate)
+        }else{
+            result = false
+            
+        }
+        completion(result: result)
+    }
+    
     
     var data: NSMutableData = NSMutableData()
     
@@ -601,12 +595,14 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         }
     }
     
-    func localFilePathForUrl(var originalUrl:NSURL)-> NSURL{
+    func localFilePathForUrl(originalUrl:NSURL)-> NSURL{
+        
+        var newUrl = originalUrl
         if originalUrl.pathExtension == "" {
             print("empty")
-            originalUrl = originalUrl.URLByAppendingPathComponent("feed.xml")
+            newUrl = originalUrl.URLByAppendingPathComponent("feed.xml")
         }
-        let fileName = originalUrl.lastPathComponent!
+        let fileName = newUrl.lastPathComponent!
         let documentsDirectoryUrl =  NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first
         let destinationURL = documentsDirectoryUrl!.URLByAppendingPathComponent(fileName)
         return destinationURL

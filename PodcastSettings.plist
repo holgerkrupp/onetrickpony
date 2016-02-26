@@ -4,6 +4,8 @@
 <dict>
 	<key>feedurl</key>
 	<string>http://www.dirtyminutesleft.de/feed/m4a/</string>
+	<key>UserAgent</key>
+	<string>Dirty Minutes Left App</string>
 	<key>basecolor</key>
 	<string>3A90D3</string>
 	<key>textcolor</key>

@@ -22,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // the Custom-Agent is set to identify the App within the Statistics of the podcast
         let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.registerDefaults(["OneTrickPony": "Custom-Agent"])
+        let customUserAgent = getValueForKeyFromPodcastSettings("UserAgent")
+        defaults.registerDefaults([customUserAgent : "Custom-Agent"])
         
         
         // the time interval to regularly check for new content is set (UIApplicationBackgroundFetchIntervalMinimum is about every 10 minutes. Remember that this is a MINIMUM - not a Maximum)

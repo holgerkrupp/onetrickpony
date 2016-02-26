@@ -486,7 +486,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         }
         
         starttimer()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"playerDidFinishPlaying", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
 
         SingletonClass.sharedInstance.player.seekToTime(starttime)
         SingletonClass.sharedInstance.player.play()
@@ -618,11 +618,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         commandCenter.playCommand.addTarget(self, action: "playPausefromRemoteCenter")
         commandCenter.pauseCommand.addTarget(self, action: "playPausefromRemoteCenter")
         commandCenter.togglePlayPauseCommand.addTarget(self, action: "playPausefromRemoteCenter")
-        
-        
-  
-        
-        
+       
     }
     
     func updateMPMediaPlayer(){
