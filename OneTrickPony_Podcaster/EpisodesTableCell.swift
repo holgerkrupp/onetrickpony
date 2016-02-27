@@ -95,6 +95,10 @@ class EpisodeCell: UITableViewCell {
             EpisodeDurationLabel!.text = "Duration unknown"
             EpisodeTimeProgressbar.progress = 0
         }
+        EpisodeTimeProgressbar.backgroundColor = getColorFromPodcastSettings("progressBackgroundColor")
+        EpisodeTimeProgressbar.progressTintColor = getColorFromPodcastSettings("highlightColor")
+        
+        EpisodeDurationLabel!.textColor = getColorFromPodcastSettings("secondarytextcolor")
         
         
         var date: NSDate = NSDate()
@@ -108,15 +112,21 @@ class EpisodeCell: UITableViewCell {
         dateString = dateFormatter.stringFromDate(date)
         EpisodeDateLabel!.text = dateString
         
+        EpisodeDateLabel!.textColor = getColorFromPodcastSettings("secondarytextcolor")
         
         
         let filesize: Double = Double(episode.episodeFilesize)/1024/1024
         EpisodeFileSizeLabel!.text = String(format:"%.1f", filesize) + " MB"
+        EpisodeFileSizeLabel!.textColor = getColorFromPodcastSettings("secondarytextcolor")
 
         //print(EpisodeTimeProgressbar.progress)
         
         var existence = existslocally(episode.episodeUrl)
         // modify Download button to show either 'download' or 'play'
+        
+        EpisodeDownloadProgressbar.backgroundColor = getColorFromPodcastSettings("progressBackgroundColor")
+        EpisodeDownloadProgressbar.progressTintColor = getColorFromPodcastSettings("highlightColor")
+        
         if (existence.existlocal){
             episode.episodeLocal = true
             EpisodeDownloadProgressbar.progress = 1
@@ -139,8 +149,6 @@ class EpisodeCell: UITableViewCell {
         existence = existslocally(episode.episodeImage)
         if (existence.existlocal){
             EpisodeImage.image = UIImage(named: existence.localURL)
-        }else{
-            EpisodeImage.hidden = true
         }
         
         

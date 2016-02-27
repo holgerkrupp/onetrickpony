@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // the Custom-Agent is set to identify the App within the Statistics of the podcast
         let defaults = NSUserDefaults.standardUserDefaults()
-        let customUserAgent = getValueForKeyFromPodcastSettings("UserAgent")
+        let customUserAgent = getValueForKeyFromPodcastSettings("UserAgent") as! String
         defaults.registerDefaults([customUserAgent : "Custom-Agent"])
         
         

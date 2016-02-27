@@ -23,15 +23,26 @@ func setvalueforkeytopersistentstorrage(key:String, value:AnyObject){
 }
 
 
-func getValueForKeyFromPodcastSettings(key:String) -> String{
+func getValueForKeyFromPodcastSettings(key:String) -> AnyObject{
     if let path = NSBundle.mainBundle().pathForResource("PodcastSettings", ofType: "plist") {
         let myDict = NSDictionary(contentsOfFile: path)
 
-        return myDict!.valueForKey("feedurl") as! String
+        return myDict!.objectForKey(key)!
     }else{
 
         return "plist error"
     }
+}
+
+
+func getColorFromPodcastSettings(key: String) -> UIColor {
+    let colorComponents = getValueForKeyFromPodcastSettings(key) as! NSDictionary
+    let color = UIColor(
+        red: colorComponents.objectForKey("red") as! CGFloat,
+        green: colorComponents.objectForKey("green") as! CGFloat,
+        blue: colorComponents.objectForKey("blue") as! CGFloat,
+        alpha: colorComponents.objectForKey("alpha") as! CGFloat)
+    return color
 }
 
 

@@ -42,13 +42,18 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     @IBOutlet weak var forward30Button: UIButton!
     @IBOutlet weak var back30Button: UIButton!
-    
-    @IBOutlet weak var sleeptimerButton: UIButton!
-    @IBOutlet weak var chapterButton: UIButton!
     @IBOutlet weak var playerRateButton: UIButton!
+
+    @IBOutlet weak var subView: UIView!
+
     
-    @IBOutlet weak var shareButton: UIButton!
-    @IBAction func sharebuttonpressed(sender: UIButton){
+    @IBOutlet weak var sleeptimerBarButton: UIBarButtonItem!
+    @IBOutlet weak var chapterBarButton: UIBarButtonItem!
+    @IBOutlet weak var shareBarButton: UIBarButtonItem!
+
+    
+    
+    @IBAction func sharebuttonpressed(sender: UIBarButtonItem){
         displayShareSheet()
     }
     
@@ -62,7 +67,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     
-    @IBAction func SleepTimerButtonPressed(sender: AnyObject) {
+    @IBAction func SleepTimerButtonPressed(sender: UIBarButtonItem) {
        showsleeptimer()
     }
     
@@ -128,9 +133,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         super.viewDidLoad()
         disableswipeback()
         
-        if (SingletonClass.sharedInstance.playerinitialized == false) {
-            initplayer(episode)
-        }
+
         
         //fill the view with content
         fillplayerView(self, episode: episode)
@@ -139,8 +142,18 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         enableOrDisableControllsIfNoInFocus()
         allowremotebuttons()
         
+        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.toolbarHidden = false
+        
+        sleeptimerBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
+        chapterBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
+        shareBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
+        self.navigationController?.toolbar.barTintColor = getColorFromPodcastSettings("backgroundColor")
+        self.navigationController?.toolbar.clipsToBounds = true
         
         
+        self.view.backgroundColor = getColorFromPodcastSettings("backgroundColor")
+        subView.backgroundColor = getColorFromPodcastSettings("backgroundColor")
         // the following two lines would change the look of the thumb of the slider.
         //let sliderimage = UIImage(named:"halfbar")
         //progressSlider.setThumbImage(sliderimage, forState: .Normal)
@@ -148,8 +161,11 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         
         //load the url and let's decide if we stream or play locally
+        //
         url = loadNSURL(episode)
-        
+        if (SingletonClass.sharedInstance.playerinitialized == false) {
+            initplayer(episode)
+        }
         if (SingletonClass.sharedInstance.playerinitialized == true) {
           //  updateplayprogress()
             if (SingletonClass.sharedInstance.player.rate == 0 && SingletonClass.sharedInstance.player.error == nil){
@@ -168,10 +184,11 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
     }
     
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
        // fixTheDuration()
-        fillplayerView(self, episode: episode)
+        //fillplayerView(self, episode: episode)
         if SingletonClass.sharedInstance.player.rate != 0 {
             starttimer()
         }
@@ -211,8 +228,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             back30Button.hidden = true
             playerRateButton.enabled = false
             playerRateButton.hidden = true
-            sleeptimerButton.enabled = false
-            sleeptimerButton.hidden = true
         }else{
             forward30Button.enabled = true
             forward30Button.hidden = false
@@ -220,8 +235,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             back30Button.hidden = false
             playerRateButton.enabled = true
             playerRateButton.hidden = false
-            sleeptimerButton.enabled = true
-            sleeptimerButton.hidden = false
         }
     }
     
@@ -369,8 +382,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         }else{
             url = NSURL(string: episode.episodeUrl)!
         }
-
-        print("loadNSURL \(url)")
         return url
     }
     
@@ -495,7 +506,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         updateMPMediaPlayer()
     }
     
-    
+    func updatePlayPosition(){
+        
+    }
     
     
     func pause(){

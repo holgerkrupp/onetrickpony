@@ -66,8 +66,15 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
       
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.separatorColor = getColorFromPodcastSettings("highlightColor")
+        self.tableView.separatorInset = UIEdgeInsetsZero
+        self.tableView.layoutMargins = UIEdgeInsetsZero
+
+        
         
         self.refreshControl?.addTarget(self, action:"refreshfeed", forControlEvents: UIControlEvents.ValueChanged)
+        
+        
         
     }
     
@@ -76,6 +83,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
+        self.navigationController?.toolbarHidden = true
+
+        self.tableView.backgroundColor = getColorFromPodcastSettings("backgroundColor")
         loadfeedandparse {
             
         }
@@ -92,7 +102,6 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         if segue.identifier == "viewEpisode" {
             let episode: Episode = episodes[tableView.indexPathForSelectedRow!.row]
             let viewController = segue.destinationViewController as! EpisodeViewController
-            //  self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Episode list", style:.Plain, target: self, action: nil);
             viewController.episode = episode
         }
     }
@@ -124,7 +133,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         let urlpath = NSBundle.mainBundle().pathForResource("feed", ofType: "xml")
         var localfileurl:NSURL = NSURL.fileURLWithPath(urlpath!)
 
-        var url = NSURL.fileURLWithPath(getValueForKeyFromPodcastSettings("feedurl") )
+        var url = NSURL.fileURLWithPath(getValueForKeyFromPodcastSettings("feedurl") as! String) 
         if url.pathExtension == "" {
             
             url = url.URLByAppendingPathComponent("feed.xml")
@@ -245,7 +254,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     func refreshfeed()
     {
-            let url = getValueForKeyFromPodcastSettings("feedurl")
+            let url = getValueForKeyFromPodcastSettings("feedurl")  as! String
             print("pullto \(url)")
             checkFeedDateIsNew {
                 (result: Bool) in
@@ -263,7 +272,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     func checkFeedDateIsNew(completion:(result: Bool) -> Void){
         var result:Bool
         let oldfeeddate = getvalueforkeyfrompersistentstrrage("lastfeedday") as! String
-        let newfeeddate = getHeaderFromUrl(getValueForKeyFromPodcastSettings("feed"), headerfield: "Last-Modified") as! String
+        let newfeeddate = getHeaderFromUrl(getValueForKeyFromPodcastSettings("feed") as! String, headerfield: "Last-Modified") 
        
         if oldfeeddate == newfeeddate{
             result = false
@@ -434,8 +443,10 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("EpisodeCell", forIndexPath: indexPath) as! EpisodeCell
         let episode: Episode = episodes[indexPath.row]
+        cell.layoutMargins = UIEdgeInsetsZero
         if let label = cell.EpisodeNameLabel {
             label.text = episode.episodeTitle
+            label.textColor = getColorFromPodcastSettings("textcolor")
         }
         
         if SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle {
@@ -481,8 +492,10 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     func updateCellForEpisode(episode: Episode){
         let cellRowToBeUpdated = episode.episodeIndex
-        self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: cellRowToBeUpdated, inSection: 0)], withRowAnimation: .None)
-
+        let indexPath = NSIndexPath(forRow: cellRowToBeUpdated, inSection: 0)
+        if self.tableView.cellForRowAtIndexPath(indexPath) != nil {
+            self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+        }
         
     }
 

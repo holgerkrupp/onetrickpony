@@ -122,6 +122,7 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
     let episode = view.episode
     // Text
     view.titleLabel.text = episode.episodeTitle
+    view.titleLabel.textColor = getColorFromPodcastSettings("textcolor")
     
     
     // Time & Slider
@@ -133,8 +134,18 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
     let currentplaytime = Float(CMTimeGetSeconds(starttime()))
     
     view.progressSlider.setValue(currentplaytime, animated: false)
+  //  view.progressSlider.backgroundColor = getColorFromPodcastSettings("progressBackgroundColor")
+    view.progressSlider.minimumTrackTintColor = getColorFromPodcastSettings("highlightColor")
+    view.progressSlider.maximumTrackTintColor = getColorFromPodcastSettings("progressBackgroundColor")
+    
+    view.progressSlider.setThumbImage(getImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(2, 30)), forState: .Normal)
+    
+    
     view.playedtime.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(starttime()))
+    view.playedtime.textColor = getColorFromPodcastSettings("secondarytextcolor")
+    
     view.remainingTimeLabel.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(episode.remaining()))
+    view.remainingTimeLabel.textColor = getColorFromPodcastSettings("secondarytextcolor")
     
     let description = episode.episodeDescription.stringByReplacingOccurrencesOfString("\r", withString: "\n")
     
@@ -143,19 +154,27 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
     view.episodeImage.image = getEpisodeImage(episode)
     // rate Button
     if (SingletonClass.sharedInstance.playerinitialized == true) {
-       
         let currentspeed = SingletonClass.sharedInstance.player.rate
-        
         if currentspeed != 0 {
             let indexofspeed:Int = view.speeds.indexOf(currentspeed)!
             view.playerRateButton.setTitle(view.speedtext[indexofspeed], forState: .Normal)
         }
     }
-    
-    
+    view.playerRateButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
+    view.forward30Button.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
+    view.back30Button.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
+    view.playPause.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
 }
 
-
+func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
+    let rect = CGRectMake(0, 0, size.width, size.height)
+    UIGraphicsBeginImageContextWithOptions(size, false, 0)
+    color.setFill()
+    UIRectFill(rect)
+    let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return image
+}
 
 func stringtodouble(input :String) -> Double{
     let timeArray = input.componentsSeparatedByString(":")

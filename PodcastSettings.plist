@@ -6,13 +6,71 @@
 	<string>http://www.dirtyminutesleft.de/feed/m4a/</string>
 	<key>UserAgent</key>
 	<string>Dirty Minutes Left App</string>
-	<key>basecolor</key>
-	<string>3A90D3</string>
+	<key>backgroundColor</key>
+	<dict>
+		<key>red</key>
+		<integer>1</integer>
+		<key>green</key>
+		<integer>1</integer>
+		<key>blue</key>
+		<integer>1</integer>
+		<key>alpha</key>
+		<integer>1</integer>
+	</dict>
 	<key>textcolor</key>
-	<string>FFFFFF</string>
+	<dict>
+		<key>red</key>
+		<integer>0</integer>
+		<key>green</key>
+		<integer>0</integer>
+		<key>blue</key>
+		<integer>1</integer>
+		<key>alpha</key>
+		<integer>1</integer>
+	</dict>
 	<key>secondarytextcolor</key>
-	<string>808080</string>
-	<key>highlightcolor</key>
-	<string>000000</string>
+	<dict>
+		<key>red</key>
+		<real>0.5</real>
+		<key>green</key>
+		<real>0.5</real>
+		<key>blue</key>
+		<real>0.5</real>
+		<key>alpha</key>
+		<integer>1</integer>
+	</dict>
+	<key>highlightColor</key>
+	<dict>
+		<key>red</key>
+		<integer>1</integer>
+		<key>green</key>
+		<integer>0</integer>
+		<key>blue</key>
+		<integer>0</integer>
+		<key>alpha</key>
+		<integer>1</integer>
+	</dict>
+	<key>progressBackgroundColor</key>
+	<dict>
+		<key>red</key>
+		<real>0.5</real>
+		<key>green</key>
+		<real>0.5</real>
+		<key>blue</key>
+		<real>0.5</real>
+		<key>alpha</key>
+		<integer>1</integer>
+	</dict>
+	<key>playControlColor</key>
+	<dict>
+		<key>red</key>
+		<integer>1</integer>
+		<key>green</key>
+		<integer>0</integer>
+		<key>blue</key>
+		<integer>0</integer>
+		<key>alpha</key>
+		<integer>1</integer>
+	</dict>
 </dict>
 </plist>
