@@ -163,7 +163,9 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
     view.playerRateButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
     view.forward30Button.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
     view.back30Button.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
-    view.playPause.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
+    view.playButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
+    view.pauseButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
+
 }
 
 func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {

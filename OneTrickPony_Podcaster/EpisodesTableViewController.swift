@@ -272,13 +272,13 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     func checkFeedDateIsNew(completion:(result: Bool) -> Void){
         var result:Bool
         let oldfeeddate = getvalueforkeyfrompersistentstrrage("lastfeedday") as! String
-        let newfeeddate = getHeaderFromUrl(getValueForKeyFromPodcastSettings("feed") as! String, headerfield: "Last-Modified") 
+        let newfeeddate = getHeaderFromUrl(getValueForKeyFromPodcastSettings("feedurl") as! String, headerfield: "Last-Modified")
        
         if oldfeeddate == newfeeddate{
             result = false
             print("CFD oldfeed")
         }else{
-            setvalueforkeytopersistentstorrage("lastfeedday", value: newfeeddate)
+            setvalueforkeytopersistentstorrage("lastfeedday" as String, value: newfeeddate)
             result = true
             print("CFD new feed")
         }

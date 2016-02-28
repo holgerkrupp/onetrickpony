@@ -266,7 +266,7 @@
                                 <rect key="frame" x="20" y="620" width="560" height="236"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ewp-Lq-RHf">
-                                        <rect key="frame" x="346" y="172" width="30" height="34"/>
+                                        <rect key="frame" x="326" y="117" width="30" height="89"/>
                                         <state key="normal" title="+30">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -311,7 +311,7 @@
                                         </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M7H-0g-obe">
-                                        <rect key="frame" x="185" y="172" width="30" height="34"/>
+                                        <rect key="frame" x="206" y="117" width="30" height="89"/>
                                         <state key="normal" title="-30">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -329,12 +329,13 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jJp-32-8fw">
-                                        <rect key="frame" x="245" y="172" width="71" height="34"/>
+                                        <rect key="frame" x="266" y="117" width="30" height="89"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="0E4-jg-SNU"/>
+                                            <constraint firstAttribute="width" constant="45" id="Icm-uT-pVk"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                        <state key="normal" title="PlayPause">
+                                        <state key="normal" title="Play">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <variation key="default">
@@ -349,11 +350,48 @@
                                             <rect key="frame" x="164" y="96" width="72" height="30"/>
                                         </variation>
                                         <connections>
-                                            <action selector="playpause:" destination="uPX-Rw-QbC" eventType="touchUpInside" id="Xhy-jN-UcK"/>
+                                            <action selector="playButtonPressed:" destination="uPX-Rw-QbC" eventType="touchUpInside" id="ZJ9-a8-SvK"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHA-16-3y0">
-                                        <rect key="frame" x="8" y="172" width="30" height="34"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZb-Cy-Dkg">
+                                        <rect key="frame" x="260" y="117" width="42" height="89"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="34" id="8o8-0K-3Px"/>
+                                            <constraint firstAttribute="width" constant="45" id="OtC-6h-oZq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                        <state key="normal" title="Pause">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="8o8-0K-3Px"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular" fixedFrame="YES">
+                                            <rect key="frame" x="263" y="127" width="72" height="30"/>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="164" y="96" width="72" height="30"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="pauseButtonPressed:" destination="uPX-Rw-QbC" eventType="touchUpInside" id="dzy-wA-yus"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episode Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="JDQ-N1-4Uq">
+                                        <rect key="frame" x="8" y="56" width="544" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular" fixedFrame="YES">
+                                            <rect key="frame" x="38" y="78" width="524" height="22"/>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="0.0" y="51" width="400" height="22"/>
+                                        </variation>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHA-16-3y0">
+                                        <rect key="frame" x="8" y="117" width="30" height="89"/>
                                         <state key="normal" title="1x">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -385,18 +423,6 @@
                                             <action selector="slidermoving:" destination="uPX-Rw-QbC" eventType="touchDown" id="qJL-uH-B3B"/>
                                         </connections>
                                     </slider>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Episode Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="JDQ-N1-4Uq">
-                                        <rect key="frame" x="8" y="102" width="544" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="heightClass=regular" fixedFrame="YES">
-                                            <rect key="frame" x="38" y="78" width="524" height="22"/>
-                                        </variation>
-                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="0.0" y="51" width="400" height="22"/>
-                                        </variation>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -410,6 +436,7 @@
                                     <constraint firstItem="jJp-32-8fw" firstAttribute="leading" secondItem="M7H-0g-obe" secondAttribute="trailing" constant="30" id="Ei9-au-1mj"/>
                                     <constraint firstItem="M7H-0g-obe" firstAttribute="top" secondItem="WHA-16-3y0" secondAttribute="top" id="Ii9-Jp-REz"/>
                                     <constraint firstAttribute="trailing" secondItem="j3K-Yd-npR" secondAttribute="trailing" constant="8" id="Jey-HQ-I0i"/>
+                                    <constraint firstItem="jJp-32-8fw" firstAttribute="top" secondItem="VZb-Cy-Dkg" secondAttribute="top" id="QHt-9m-mnV"/>
                                     <constraint firstItem="hiS-mU-g4Q" firstAttribute="top" secondItem="lX9-c5-gUO" secondAttribute="top" constant="5" id="QmV-4C-EEx"/>
                                     <constraint firstItem="j3K-Yd-npR" firstAttribute="top" secondItem="llg-c0-qcE" secondAttribute="top" id="Re2-2P-nXI"/>
                                     <constraint firstItem="WHA-16-3y0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="JDQ-N1-4Uq" secondAttribute="bottom" constant="10" id="SqC-cf-gH5"/>
@@ -423,6 +450,9 @@
                                     <constraint firstAttribute="trailing" secondItem="JDQ-N1-4Uq" secondAttribute="trailing" constant="8" id="ip5-8i-9Q8"/>
                                     <constraint firstItem="JDQ-N1-4Uq" firstAttribute="top" secondItem="j3K-Yd-npR" secondAttribute="bottom" constant="5" id="jJC-eU-s0B"/>
                                     <constraint firstItem="WHA-16-3y0" firstAttribute="top" secondItem="JDQ-N1-4Uq" secondAttribute="bottom" constant="40" id="kUz-SO-Lil"/>
+                                    <constraint firstItem="jJp-32-8fw" firstAttribute="bottom" secondItem="VZb-Cy-Dkg" secondAttribute="bottom" id="mAk-Sy-OcD"/>
+                                    <constraint firstItem="jJp-32-8fw" firstAttribute="centerX" secondItem="VZb-Cy-Dkg" secondAttribute="centerX" id="oQE-si-E0c"/>
+                                    <constraint firstItem="jJp-32-8fw" firstAttribute="centerY" secondItem="VZb-Cy-Dkg" secondAttribute="centerY" id="wLn-4L-kU5"/>
                                     <constraint firstItem="ewp-Lq-RHf" firstAttribute="centerY" secondItem="WHA-16-3y0" secondAttribute="centerY" id="x4M-B7-DZU"/>
                                     <constraint firstItem="jJp-32-8fw" firstAttribute="top" secondItem="WHA-16-3y0" secondAttribute="top" id="yOt-8M-eVM"/>
                                     <constraint firstItem="j3K-Yd-npR" firstAttribute="bottom" secondItem="llg-c0-qcE" secondAttribute="bottom" id="zeV-nj-oJh"/>
@@ -509,7 +539,8 @@
                         <outlet property="episodeShowNotesWebView" destination="vej-Do-6zD" id="Rgy-c5-crF"/>
                         <outlet property="forward30Button" destination="ewp-Lq-RHf" id="Amt-4y-MI7"/>
                         <outlet property="listButton" destination="Vxd-62-DdV" id="BDX-UU-Bz4"/>
-                        <outlet property="playPause" destination="jJp-32-8fw" id="Z8H-85-nFH"/>
+                        <outlet property="pauseButton" destination="VZb-Cy-Dkg" id="VzU-Pe-Wq1"/>
+                        <outlet property="playButton" destination="jJp-32-8fw" id="l92-wq-hjR"/>
                         <outlet property="playedtime" destination="llg-c0-qcE" id="38h-PE-VyG"/>
                         <outlet property="playerRateButton" destination="WHA-16-3y0" id="kd5-PR-tHf"/>
                         <outlet property="progressSlider" destination="hiS-mU-g4Q" id="5V1-TC-Wpn"/>

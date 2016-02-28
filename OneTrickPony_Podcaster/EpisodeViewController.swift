@@ -33,7 +33,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     @IBOutlet var titleLabel:UILabel!
     @IBOutlet var progressSlider: UISlider!
-    @IBOutlet var playPause:UIButton!
+    @IBOutlet var playButton:UIButton!
+    @IBOutlet var pauseButton:UIButton!
     @IBOutlet var episodeImage:UIImageView!
     @IBOutlet var episodeShowNotesWebView: UIWebView!
     
@@ -82,9 +83,13 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
 
     
-    @IBAction func playpause(sender: UIButton){
+    @IBAction func playButtonPressed(sender: UIButton){
         switchPlayPause()
 
+    }
+    @IBAction func pauseButtonPressed(sender: UIButton){
+        pause()
+        
     }
     
     @IBAction func pressspeedbutton(sender: UIButton){
@@ -133,15 +138,37 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         super.viewDidLoad()
         disableswipeback()
         
-
-        
         //fill the view with content
         fillplayerView(self, episode: episode)
+        adjustColors()
         episodeShowNotesWebView.hidden = true
         
         enableOrDisableControllsIfNoInFocus()
         allowremotebuttons()
+
+        /*
+        if (SingletonClass.sharedInstance.playerinitialized == false) {
+            initplayer(episode)
+        }
+        if (SingletonClass.sharedInstance.playerinitialized == true) {
+          //  updateplayprogress()
+            if (SingletonClass.sharedInstance.player.rate == 0 && SingletonClass.sharedInstance.player.error == nil){
+                // streaming soll nicht sofort losspielen um Daten zu sparen … warum ich das jetzt auf deutsch schreiben weiß ich nicht.
+                if (existslocally(episode.episodeFilename).existlocal == true){
+                    if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
+                        
+                        autoplay()
+                        starttimer()
+                    }
+                }
+            }
+        }*/
+        setplaypausebutton()
         
+    }
+    
+    
+    func adjustColors(){
         self.navigationController?.navigationBarHidden = true
         self.navigationController?.toolbarHidden = false
         
@@ -154,36 +181,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         self.view.backgroundColor = getColorFromPodcastSettings("backgroundColor")
         subView.backgroundColor = getColorFromPodcastSettings("backgroundColor")
-        // the following two lines would change the look of the thumb of the slider.
-        //let sliderimage = UIImage(named:"halfbar")
-        //progressSlider.setThumbImage(sliderimage, forState: .Normal)
-        
-        
-        
-        //load the url and let's decide if we stream or play locally
-        //
-        url = loadNSURL(episode)
-        if (SingletonClass.sharedInstance.playerinitialized == false) {
-            initplayer(episode)
-        }
-        if (SingletonClass.sharedInstance.playerinitialized == true) {
-          //  updateplayprogress()
-            if (SingletonClass.sharedInstance.player.rate == 0 && SingletonClass.sharedInstance.player.error == nil){
-                // streaming soll nicht sofort losspielen um Daten zu sparen … warum ich das jetzt auf deutsch schreiben weiß ich nicht.
-                if (existslocally(episode.episodeFilename).existlocal == true){
-                    if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
-                        
-                        updateMPMediaPlayer()
-                        autoplay()
-                        starttimer()
-                    }
-                }
-            }
-        }
-        setplaypausebutton()
-        
     }
-    
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
@@ -398,9 +396,12 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         SingletonClass.sharedInstance.player = AVPlayer(URL: url)
             SingletonClass.sharedInstance.episodePlaying = episode
             SingletonClass.sharedInstance.playerinitialized = true
-          
-            SingletonClass.sharedInstance.setaudioSession()
         
+        
+            SingletonClass.sharedInstance.setaudioSession()
+        fixTheDuration()
+        updateMPMediaPlayer()
+
     }
     
     
@@ -441,9 +442,51 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
    
     func switchPlayPause(){
-        fixTheDuration()
-       // enableOrDisableControllsIfNoInFocus()
+        
+        
+        if SingletonClass.sharedInstance.playerinitialized == false {
+            initplayer(episode)
+            play()
+        }else{
+            if SingletonClass.sharedInstance.episodePlaying.episodeTitle != episode.episodeTitle {
+                SingletonClass.sharedInstance.episodePlaying = episode
+                url = loadNSURL(episode)
+                SingletonClass.sharedInstance.player.replaceCurrentItemWithPlayerItem(AVPlayerItem(URL: url))
+                fixTheDuration()
+                let starttime = episode.readplayed()
+                SingletonClass.sharedInstance.player.seekToTime(starttime)
+                play()
+            }else{
+                play()
+            }
+        }
+        
+        
+        
+        
+        /*
         if SingletonClass.sharedInstance.player.rate != 0 {
+            pause()
+        
+        }else if SingletonClass.sharedInstance.playerinitialized{
+            if SingletonClass.sharedInstance.episodePlaying.episodeTitle != episode.episodeTitle {
+                SingletonClass.sharedInstance.episodePlaying = episode
+                url = loadNSURL(episode)
+                SingletonClass.sharedInstance.player.replaceCurrentItemWithPlayerItem(AVPlayerItem(URL: url))
+                fixTheDuration()
+                let starttime = episode.readplayed()
+                SingletonClass.sharedInstance.player.seekToTime(starttime)
+                play()
+            }else{
+                play()
+            }
+        }else{
+            initplayer(episode)
+            play()
+            
+        }*/
+       // enableOrDisableControllsIfNoInFocus()
+        /*if SingletonClass.sharedInstance.player.rate != 0 {
             pause()
             if SingletonClass.sharedInstance.episodePlaying.episodeTitle != episode.episodeTitle{
                 loadNSURL(episode)
@@ -463,7 +506,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
                 SingletonClass.sharedInstance.player.seekToTime(starttime)
             }
             play()
-        }
+        }*/
+       // fixTheDuration()
         setplaypausebutton()
     }
     
@@ -479,7 +523,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     func play(){
         
         var starttime = episode.readplayed()
-        
+        if (SingletonClass.sharedInstance.playerinitialized == false) {
+            initplayer(episode)
+        }
         
        // print("play with starttime \(starttime) and it's episode \(episode.episodeTitle) with duration \(episode.getDurationinCMTime())")
         /*if episode.getDurationInSeconds() == 0.0{
@@ -501,8 +547,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
 
         SingletonClass.sharedInstance.player.seekToTime(starttime)
         SingletonClass.sharedInstance.player.play()
-        playPause.setTitle("pause", forState: .Normal)
         somethingplayscurrently = true
+        setplaypausebutton()
         updateMPMediaPlayer()
     }
     
@@ -518,10 +564,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         let played = SingletonClass.sharedInstance.player.currentTime()
         let episode = SingletonClass.sharedInstance.episodePlaying
         episode.saveplayed(Double(CMTimeGetSeconds(played)))
-        
         print("played: \(Double(CMTimeGetSeconds(played)))")
-        playPause.setTitle("play", forState: .Normal)
         somethingplayscurrently = false
+        setplaypausebutton()
         updateMPMediaPlayer()
     }
     
@@ -537,11 +582,16 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     func setplaypausebutton(){
         enableOrDisableControllsIfNoInFocus()
-        playPause.setTitle("play", forState: .Normal)
+    
+        playButton.setTitle("play", forState: .Normal)
+        pauseButton.hidden = true
+        playButton.hidden = false
         if (SingletonClass.sharedInstance.playerinitialized == true) {
             if (SingletonClass.sharedInstance.player.rate != 0 && SingletonClass.sharedInstance.player.error == nil) {
                 if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
-                    playPause.setTitle("pause", forState: .Normal)
+                    pauseButton.setTitle("pause", forState: .Normal)
+                    playButton.hidden = true
+                    pauseButton.hidden = false
                 }
             }
         }
