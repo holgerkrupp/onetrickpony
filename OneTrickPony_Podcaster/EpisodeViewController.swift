@@ -155,18 +155,27 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         self.navigationController?.navigationBarHidden = true
         self.navigationController?.toolbarHidden = false
         
+
+        
         sleeptimerBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
-        chapterBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
+        
         shareBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
         playButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
         pauseButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
-        
         self.navigationController?.toolbar.barTintColor = getColorFromPodcastSettings("backgroundColor")
+        self.navigationController?.toolbar.translucent = false
         self.navigationController?.toolbar.clipsToBounds = true
-        
-        
         self.view.backgroundColor = getColorFromPodcastSettings("backgroundColor")
         subView.backgroundColor = getColorFromPodcastSettings("backgroundColor")
+        
+        chapterBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
+        if episode.episodeChapter.count == 0
+        {
+            chapterBarButton.enabled = false
+            chapterBarButton.tintColor = getColorFromPodcastSettings("backgroundColor")
+            
+        }
+        
         
     }
     
