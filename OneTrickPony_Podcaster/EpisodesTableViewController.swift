@@ -203,7 +203,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                         
                     }else{
                         print("old episode")
-                        self.dummyNotificationforDebugging()
+                      //  self.dummyNotificationforDebugging()
                     }
                     print("Episode check done")
                 }
@@ -444,6 +444,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier("EpisodeCell", forIndexPath: indexPath) as! EpisodeCell
         let episode: Episode = episodes[indexPath.row]
         cell.layoutMargins = UIEdgeInsetsZero
+        
+        cell.backgroundColor = getColorFromPodcastSettings("backgroundColor")
+        
         if let label = cell.EpisodeNameLabel {
             label.text = episode.episodeTitle
             label.textColor = getColorFromPodcastSettings("textcolor")
@@ -463,6 +466,27 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         }
         
         cell.delegate = self
+        
+        if let download = activeDownloads[episode.episodeUrl] {
+            let title = (download.isDownloading) ? "Pause" : "Resume"
+            cell.EpisodePauseButton.setTitle(title, forState: UIControlState.Normal)
+        }
+        
+        
+        var showDownloadControls = false
+        if let download = activeDownloads[episode.episodeUrl] {
+            showDownloadControls = true
+            
+            cell.EpisodeDownloadProgressbar.progress = download.progress
+        }
+        cell.EpisodeDownloadProgressbar.hidden = !showDownloadControls
+        
+        
+        cell.EpisodePauseButton.hidden = !showDownloadControls
+        cell.EpisodeCancelButton.hidden = !showDownloadControls
+        cell.EpisodeDownloadButton.hidden = showDownloadControls
+        
+        
         cell.filltableviewcell(episode)
 
         return cell
@@ -525,6 +549,45 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     }
     
     
+    func pauseDownloadepisode(episode: Episode) {
+        let urlString = episode.episodeUrl
+        let download = activeDownloads[urlString]
+        
+        if(download!.isDownloading) {
+            download!.downloadTask?.cancelByProducingResumeData { data in
+                if data != nil {
+                    download!.resumeData = data
+                }
+            }
+            download!.isDownloading = false
+        }
+    }
+    
+    
+    func resumeDownloadepisode(episode: Episode) {
+        let urlString = episode.episodeUrl
+        let download = activeDownloads[urlString]
+                if let resumeData = download!.resumeData {
+                    download!.downloadTask = downloadsSession.downloadTaskWithResumeData(resumeData)
+                    download!.downloadTask!.resume()
+                    download!.isDownloading = true
+                } else if let url = NSURL(string: download!.url) {
+                    download!.downloadTask = downloadsSession.downloadTaskWithURL(url)
+                    download!.downloadTask!.resume()
+                    download!.isDownloading = true
+                }
+        
+    }
+    
+    func cancelDownloadepisode(episode: Episode) {
+        let urlString = episode.episodeUrl
+        let download = activeDownloads[urlString]
+                download!.downloadTask?.cancel()
+                activeDownloads[urlString] = nil
+        
+    }
+    
+    
     func downloadurl(urlstring: String) {
         if let url =  NSURL(string: urlstring) {
         // initialize the download of an URL (NOT AN EPISODE, BUT e.g a picture or the feed)
@@ -551,6 +614,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                     dispatch_async(dispatch_get_main_queue(), {
                         episodeCell.EpisodeDownloadProgressbar.hidden = false
                         episodeCell.EpisodeDownloadProgressbar.progress = download.progress
+                        episodeCell.EpisodeDownloadButton!.setTitle("Pause", forState: UIControlState.Normal)
+                        
                    //     episodeCell.EpisodeprogressLabel.text =  String(format: "%.1f%% of %@",  download.progress * 100, totalSize)
                     })
                 }
@@ -668,9 +733,8 @@ extension EpisodesTableViewController: EpisodeCellDelegate {
     
     func pauseepisode(cell: EpisodeCell) {
         if let indexPath = tableView.indexPathForCell(cell) {
-           // let episode = episodes[indexPath.row]
-         //   pauseDownload(episode)
-            cell.EpisodeDownloadButton.setTitle("resume", forState: UIControlState.Normal)
+           let episode = episodes[indexPath.row]
+            pauseDownloadepisode(episode)
             tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: .None)
         }
     }
@@ -678,18 +742,16 @@ extension EpisodesTableViewController: EpisodeCellDelegate {
 
     func resumeepisode(cell: EpisodeCell) {
         if let indexPath = tableView.indexPathForCell(cell) {
-       //     let episode = episodes[indexPath.row]
-         //   resumeDownload(episode)
-            cell.EpisodeDownloadButton.setTitle("pause", forState: UIControlState.Normal)
-
+            let episode = episodes[indexPath.row]
+            resumeDownloadepisode(episode)
             tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: .None)
         }
     }
     
     func cancelepisode(cell: EpisodeCell) {
         if let indexPath = tableView.indexPathForCell(cell) {
-           // let episode = episodes[indexPath.row]
-          //  cancelDownload(episode)
+            let episode = episodes[indexPath.row]
+            cancelDownloadepisode(episode)
             tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: .None)
         }
     }

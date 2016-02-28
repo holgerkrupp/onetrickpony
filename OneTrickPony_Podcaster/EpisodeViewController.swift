@@ -146,23 +146,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         enableOrDisableControllsIfNoInFocus()
         allowremotebuttons()
 
-        /*
-        if (SingletonClass.sharedInstance.playerinitialized == false) {
-            initplayer(episode)
-        }
-        if (SingletonClass.sharedInstance.playerinitialized == true) {
-          //  updateplayprogress()
-            if (SingletonClass.sharedInstance.player.rate == 0 && SingletonClass.sharedInstance.player.error == nil){
-                // streaming soll nicht sofort losspielen um Daten zu sparen … warum ich das jetzt auf deutsch schreiben weiß ich nicht.
-                if (existslocally(episode.episodeFilename).existlocal == true){
-                    if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
-                        
-                        autoplay()
-                        starttimer()
-                    }
-                }
-            }
-        }*/
         setplaypausebutton()
         
     }
@@ -175,18 +158,21 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         sleeptimerBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
         chapterBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
         shareBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
+        playButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
+        pauseButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
+        
         self.navigationController?.toolbar.barTintColor = getColorFromPodcastSettings("backgroundColor")
         self.navigationController?.toolbar.clipsToBounds = true
         
         
         self.view.backgroundColor = getColorFromPodcastSettings("backgroundColor")
         subView.backgroundColor = getColorFromPodcastSettings("backgroundColor")
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
-       // fixTheDuration()
-        //fillplayerView(self, episode: episode)
+
         if SingletonClass.sharedInstance.player.rate != 0 {
             starttimer()
         }
@@ -461,53 +447,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             }
         }
         
-        
-        
-        
-        /*
-        if SingletonClass.sharedInstance.player.rate != 0 {
-            pause()
-        
-        }else if SingletonClass.sharedInstance.playerinitialized{
-            if SingletonClass.sharedInstance.episodePlaying.episodeTitle != episode.episodeTitle {
-                SingletonClass.sharedInstance.episodePlaying = episode
-                url = loadNSURL(episode)
-                SingletonClass.sharedInstance.player.replaceCurrentItemWithPlayerItem(AVPlayerItem(URL: url))
-                fixTheDuration()
-                let starttime = episode.readplayed()
-                SingletonClass.sharedInstance.player.seekToTime(starttime)
-                play()
-            }else{
-                play()
-            }
-        }else{
-            initplayer(episode)
-            play()
-            
-        }*/
-       // enableOrDisableControllsIfNoInFocus()
-        /*if SingletonClass.sharedInstance.player.rate != 0 {
-            pause()
-            if SingletonClass.sharedInstance.episodePlaying.episodeTitle != episode.episodeTitle{
-                loadNSURL(episode)
-                SingletonClass.sharedInstance.episodePlaying = episode
-                SingletonClass.sharedInstance.player.replaceCurrentItemWithPlayerItem(AVPlayerItem(URL: url))
-                fixTheDuration()
-                let starttime = episode.readplayed()
-                SingletonClass.sharedInstance.player.seekToTime(starttime)
-            }
-        }else{
-            if SingletonClass.sharedInstance.episodePlaying.episodeTitle != episode.episodeTitle{
-                loadNSURL(episode)
-                SingletonClass.sharedInstance.episodePlaying = episode
-                SingletonClass.sharedInstance.player.replaceCurrentItemWithPlayerItem(AVPlayerItem(URL: url))
-                fixTheDuration()
-                let starttime = episode.readplayed()
-                SingletonClass.sharedInstance.player.seekToTime(starttime)
-            }
-            play()
-        }*/
-       // fixTheDuration()
         setplaypausebutton()
     }
     
@@ -526,14 +465,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         if (SingletonClass.sharedInstance.playerinitialized == false) {
             initplayer(episode)
         }
-        
-       // print("play with starttime \(starttime) and it's episode \(episode.episodeTitle) with duration \(episode.getDurationinCMTime())")
-        /*if episode.getDurationInSeconds() == 0.0{
-            let duration = SingletonClass.sharedInstance.player.currentItem?.asset.duration
-            episode.setDuration(duration!)
-            SingletonClass.sharedInstance.episodePlaying.setDuration(duration!)
-        }
-        */
         
         if starttime >= episode.getDurationinCMTime() && episode.getDurationInSeconds() != 0.0 {
             // the item has been played to the end,I'll reset the starttime to start playing from the beginning

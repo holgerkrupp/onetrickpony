@@ -37,6 +37,8 @@ class EpisodeCell: UITableViewCell {
     @IBOutlet weak var EpisodePlayButton: UIButton!
     
     @IBOutlet weak var EpisodeDownloadButton: UIButton!
+    @IBOutlet weak var EpisodePauseButton: UIButton!
+    @IBOutlet weak var EpisodeCancelButton: UIButton!
     
     @IBAction func playButtonPressed(){
         if SingletonClass.sharedInstance.player.rate == 0 {
@@ -49,19 +51,19 @@ class EpisodeCell: UITableViewCell {
     }
     var episode: Episode = Episode()
     
-    @IBAction func download(){
-        print("download button pressed")
-        delegate?.downloadepisode(self)
-       
-    }
-    
-    func downloadepisode(episode : Episode){
-        EpisodeDownloadButton!.setTitle("downloading", forState: UIControlState.Normal)
-        EpisodeDownloadProgressbar.hidden = false
+    @IBAction func downloadPressed(){
         delegate?.downloadepisode(self)
     }
-    
-    
+    @IBAction func pauseOrResumePressed(){
+        if (EpisodePauseButton.titleLabel!.text == "Pause") {
+                delegate?.pauseepisode(self)
+        } else {
+                delegate?.resumeepisode(self)
+        }
+    }
+    @IBAction func cancelPressed(){
+        delegate?.cancelepisode(self)
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -126,14 +128,17 @@ class EpisodeCell: UITableViewCell {
         
         EpisodeDownloadProgressbar.backgroundColor = getColorFromPodcastSettings("progressBackgroundColor")
         EpisodeDownloadProgressbar.progressTintColor = getColorFromPodcastSettings("highlightColor")
-        
+        EpisodeDownloadButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
+        EpisodePauseButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
+        EpisodeCancelButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
+
         if (existence.existlocal){
             episode.episodeLocal = true
             EpisodeDownloadProgressbar.progress = 1
             EpisodeDownloadProgressbar.hidden = true
          //   EpisodeprogressLabel.hidden = true
             EpisodeDownloadButton!.setTitle("Play", forState: UIControlState.Normal)
-            EpisodeDownloadButton!.setImage(UIImage(named: "iPhone"), forState: UIControlState.Normal)
+           // EpisodeDownloadButton!.setImage(UIImage(named: "iPhone"), forState: UIControlState.Normal)
             EpisodeDownloadButton!.enabled = false
         }else{
             // just in case - should never been used - but acctually is used and I don't know why
@@ -141,7 +146,7 @@ class EpisodeCell: UITableViewCell {
             EpisodeDownloadProgressbar.hidden = true
        //     EpisodeprogressLabel.hidden = true
             EpisodeDownloadButton!.setTitle("Download", forState: UIControlState.Normal)
-            EpisodeDownloadButton!.setImage(UIImage(named: "Download from the Cloud"), forState: UIControlState.Normal)
+            //EpisodeDownloadButton!.setImage(UIImage(named: "Download from the Cloud"), forState: UIControlState.Normal)
             EpisodeDownloadButton!.enabled = true
             episode.episodeLocal = false
         }

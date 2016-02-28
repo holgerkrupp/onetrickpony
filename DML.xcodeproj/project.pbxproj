@@ -17,9 +17,9 @@
 		480FEDE91C5518A4005594F1 /* EpisodesClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480FEDE81C5518A4005594F1 /* EpisodesClass.swift */; };
 		480FEDEB1C5540B7005594F1 /* EpisodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480FEDEA1C5540B7005594F1 /* EpisodeViewController.swift */; };
 		480FEDED1C580CCA005594F1 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480FEDEC1C580CCA005594F1 /* SettingsTableViewController.swift */; };
-		480FEDF11C595D2D005594F1 /* feed.xml in Resources */ = {isa = PBXBuildFile; fileRef = 480FEDF01C595D2D005594F1 /* feed.xml */; };
 		480FEDF31C5A7E8A005594F1 /* EpisodesTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480FEDF21C5A7E8A005594F1 /* EpisodesTableCell.swift */; };
 		4821D4CD1C764D920004DF4A /* supportfunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4821D4CC1C764D920004DF4A /* supportfunctions.swift */; };
+		484F93DF1C8361FD009DC869 /* feed.xml in Resources */ = {isa = PBXBuildFile; fileRef = 484F93DE1C8361FD009DC869 /* feed.xml */; };
 		489B44F51C6BB1B900CC5326 /* License in Resources */ = {isa = PBXBuildFile; fileRef = 489B44F41C6BB1B900CC5326 /* License */; };
 		48A767501C7A07D100E6B485 /* ChapterMarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A7674F1C7A07D100E6B485 /* ChapterMarksViewController.swift */; };
 		48A767561C7A2F8800E6B485 /* pushSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 48A767551C7A2F8800E6B485 /* pushSound.m4a */; };
@@ -62,9 +62,9 @@
 		480FEDE81C5518A4005594F1 /* EpisodesClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpisodesClass.swift; sourceTree = "<group>"; };
 		480FEDEA1C5540B7005594F1 /* EpisodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpisodeViewController.swift; sourceTree = "<group>"; };
 		480FEDEC1C580CCA005594F1 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
-		480FEDF01C595D2D005594F1 /* feed.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = feed.xml; sourceTree = "<group>"; };
 		480FEDF21C5A7E8A005594F1 /* EpisodesTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpisodesTableCell.swift; sourceTree = "<group>"; };
 		4821D4CC1C764D920004DF4A /* supportfunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = supportfunctions.swift; sourceTree = "<group>"; };
+		484F93DE1C8361FD009DC869 /* feed.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = feed.xml; sourceTree = "<group>"; };
 		489B44F41C6BB1B900CC5326 /* License */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License; sourceTree = "<group>"; };
 		48A7674F1C7A07D100E6B485 /* ChapterMarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterMarksViewController.swift; sourceTree = "<group>"; };
 		48A767551C7A2F8800E6B485 /* pushSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = pushSound.m4a; sourceTree = "<group>"; };
@@ -162,8 +162,8 @@
 			children = (
 				480FEDBB1C54B3DF005594F1 /* Assets.xcassets */,
 				480FEDBD1C54B3DF005594F1 /* LaunchScreen.storyboard */,
-				480FEDF01C595D2D005594F1 /* feed.xml */,
 				48A767551C7A2F8800E6B485 /* pushSound.m4a */,
+				484F93DE1C8361FD009DC869 /* feed.xml */,
 				48DB59861C61C6700041F4AC /* PodcastSettings.plist */,
 			);
 			name = Customization_Per_Podcast;
@@ -283,11 +283,11 @@
 			files = (
 				489B44F51C6BB1B900CC5326 /* License in Resources */,
 				48DB59871C61C6700041F4AC /* PodcastSettings.plist in Resources */,
+				484F93DF1C8361FD009DC869 /* feed.xml in Resources */,
 				480FEDBF1C54B3DF005594F1 /* LaunchScreen.storyboard in Resources */,
 				48A767561C7A2F8800E6B485 /* pushSound.m4a in Resources */,
 				480FEDBC1C54B3DF005594F1 /* Assets.xcassets in Resources */,
 				480FEDB71C54B3DF005594F1 /* Main.storyboard in Resources */,
-				480FEDF11C595D2D005594F1 /* feed.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
