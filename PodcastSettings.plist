@@ -3,26 +3,26 @@
 <plist version="1.0">
 <dict>
 	<key>feedurl</key>
-	<string>http://www.hoaxilla.de/podcast/hoaxilla.xml</string>
+	<string>http://www.dirtyminutesleft.de/feed/m4a/</string>
 	<key>UserAgent</key>
-	<string>Hoaxilla App</string>
+	<string>Dirty Minutes Left App</string>
 	<key>backgroundColor</key>
 	<dict>
 		<key>red</key>
-		<integer>0</integer>
+		<integer>1</integer>
 		<key>green</key>
-		<integer>0</integer>
+		<integer>1</integer>
 		<key>blue</key>
-		<integer>0</integer>
+		<integer>1</integer>
 		<key>alpha</key>
 		<integer>1</integer>
 	</dict>
 	<key>textcolor</key>
 	<dict>
 		<key>red</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>green</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>blue</key>
 		<integer>1</integer>
 		<key>alpha</key>
@@ -44,9 +44,9 @@
 		<key>red</key>
 		<integer>1</integer>
 		<key>green</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>blue</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>alpha</key>
 		<integer>1</integer>
 	</dict>
@@ -66,9 +66,9 @@
 		<key>red</key>
 		<integer>1</integer>
 		<key>green</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>blue</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>alpha</key>
 		<integer>1</integer>
 	</dict>

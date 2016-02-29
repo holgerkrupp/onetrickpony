@@ -36,7 +36,6 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     var episodeDescription: String = String()
     var eName: String = String()
     
-    
     let manager = NSFileManager.defaultManager()
     var myDict: NSDictionary?
     
@@ -323,7 +322,11 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             if (existence.existlocal){
                 episodeImage = existence.localURL
             } else {
-                downloadurl(episodeImage)
+                if let url = activeDownloads[episodeImage] {
+                    print("\(url) already downloading")
+                }else{
+                    downloadurl(episodeImage)
+                }
                 print(episodeImage)
             }
             

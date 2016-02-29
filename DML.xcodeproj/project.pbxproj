@@ -46,7 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		480FEDAE1C54B3DF005594F1 /* Hoaxilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hoaxilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		480FEDAE1C54B3DF005594F1 /* DML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DML.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		480FEDB11C54B3DF005594F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		480FEDB61C54B3DF005594F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		480FEDBB1C54B3DF005594F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 		480FEDAF1C54B3DF005594F1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				480FEDAE1C54B3DF005594F1 /* Hoaxilla.app */,
+				480FEDAE1C54B3DF005594F1 /* DML.app */,
 				480FEDC51C54B3DF005594F1 /* OneTrickPony_PodcasterTests.xctest */,
 				480FEDD01C54B3DF005594F1 /* OneTrickPony_PodcasterUITests.xctest */,
 			);
@@ -186,7 +186,7 @@
 			);
 			name = OneTrickPony_Podcaster;
 			productName = OneTrickPony_Podcaster;
-			productReference = 480FEDAE1C54B3DF005594F1 /* Hoaxilla.app */;
+			productReference = 480FEDAE1C54B3DF005594F1 /* DML.app */;
 			productType = "com.apple.product-type.application";
 		};
 		480FEDC41C54B3DF005594F1 /* OneTrickPony_PodcasterTests */ = {
@@ -464,8 +464,8 @@
 				INFOPLIST_FILE = OneTrickPony_Podcaster/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "-6D3VYP253.de.holgerkrupp.Hoaxilla";
-				PRODUCT_NAME = Hoaxilla;
+				PRODUCT_BUNDLE_IDENTIFIER = de.holgerkrupp.DML;
+				PRODUCT_NAME = DML;
 			};
 			name = Debug;
 		};
@@ -476,8 +476,8 @@
 				INFOPLIST_FILE = OneTrickPony_Podcaster/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "-6D3VYP253.de.holgerkrupp.Hoaxilla";
-				PRODUCT_NAME = Hoaxilla;
+				PRODUCT_BUNDLE_IDENTIFIER = de.holgerkrupp.DML;
+				PRODUCT_NAME = DML;
 			};
 			name = Release;
 		};
