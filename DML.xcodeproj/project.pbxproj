@@ -46,7 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		480FEDAE1C54B3DF005594F1 /* OneTrickPony_Podcaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OneTrickPony_Podcaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		480FEDAE1C54B3DF005594F1 /* Hoaxilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hoaxilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		480FEDB11C54B3DF005594F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		480FEDB61C54B3DF005594F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		480FEDBB1C54B3DF005594F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 		480FEDAF1C54B3DF005594F1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				480FEDAE1C54B3DF005594F1 /* OneTrickPony_Podcaster.app */,
+				480FEDAE1C54B3DF005594F1 /* Hoaxilla.app */,
 				480FEDC51C54B3DF005594F1 /* OneTrickPony_PodcasterTests.xctest */,
 				480FEDD01C54B3DF005594F1 /* OneTrickPony_PodcasterUITests.xctest */,
 			);
@@ -132,7 +132,6 @@
 				48A7674F1C7A07D100E6B485 /* ChapterMarksViewController.swift */,
 				48DB59831C5D51B60041F4AC /* Singleton.swift */,
 				480FEDEC1C580CCA005594F1 /* SettingsTableViewController.swift */,
-				480FEDC01C54B3DF005594F1 /* Info.plist */,
 				489B44F41C6BB1B900CC5326 /* License */,
 				4821D4CC1C764D920004DF4A /* supportfunctions.swift */,
 			);
@@ -160,6 +159,7 @@
 		48A767571C7A2FA100E6B485 /* Customization_Per_Podcast */ = {
 			isa = PBXGroup;
 			children = (
+				480FEDC01C54B3DF005594F1 /* Info.plist */,
 				480FEDBB1C54B3DF005594F1 /* Assets.xcassets */,
 				480FEDBD1C54B3DF005594F1 /* LaunchScreen.storyboard */,
 				48A767551C7A2F8800E6B485 /* pushSound.m4a */,
@@ -186,7 +186,7 @@
 			);
 			name = OneTrickPony_Podcaster;
 			productName = OneTrickPony_Podcaster;
-			productReference = 480FEDAE1C54B3DF005594F1 /* OneTrickPony_Podcaster.app */;
+			productReference = 480FEDAE1C54B3DF005594F1 /* Hoaxilla.app */;
 			productType = "com.apple.product-type.application";
 		};
 		480FEDC41C54B3DF005594F1 /* OneTrickPony_PodcasterTests */ = {
@@ -412,7 +412,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -450,7 +450,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -462,10 +462,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = OneTrickPony_Podcaster/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "de.holgerkrupp.OneTrickPony-Podcaster";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "-6D3VYP253.de.holgerkrupp.Hoaxilla";
+				PRODUCT_NAME = Hoaxilla;
 			};
 			name = Debug;
 		};
@@ -474,10 +474,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = OneTrickPony_Podcaster/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "de.holgerkrupp.OneTrickPony-Podcaster";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "-6D3VYP253.de.holgerkrupp.Hoaxilla";
+				PRODUCT_NAME = Hoaxilla;
 			};
 			name = Release;
 		};

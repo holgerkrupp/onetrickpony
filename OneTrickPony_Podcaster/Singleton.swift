@@ -49,7 +49,11 @@ class SingletonClass {
         {
             print(error.description)
         }
-    try! audioSession.setMode(AVAudioSessionModeSpokenAudio)
+    if #available(iOS 9.0, *) {
+        try! audioSession.setMode(AVAudioSessionModeSpokenAudio)
+    } else {
+        // Fallback on earlier versions
+    }
         
         do
         {
