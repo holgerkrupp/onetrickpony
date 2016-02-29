@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "480FEDAD1C54B3DF005594F1"
-               BuildableName = "OneTrickPony_Podcaster.app"
+               BuildableName = "Hoaxilla.app"
                BlueprintName = "OneTrickPony_Podcaster"
                ReferencedContainer = "container:DML.xcodeproj">
             </BuildableReference>
@@ -53,7 +53,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "480FEDAD1C54B3DF005594F1"
-            BuildableName = "OneTrickPony_Podcaster.app"
+            BuildableName = "Hoaxilla.app"
             BlueprintName = "OneTrickPony_Podcaster"
             ReferencedContainer = "container:DML.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "480FEDAD1C54B3DF005594F1"
-            BuildableName = "OneTrickPony_Podcaster.app"
+            BuildableName = "Hoaxilla.app"
             BlueprintName = "OneTrickPony_Podcaster"
             ReferencedContainer = "container:DML.xcodeproj">
          </BuildableReference>
@@ -95,7 +95,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "480FEDAD1C54B3DF005594F1"
-            BuildableName = "OneTrickPony_Podcaster.app"
+            BuildableName = "Hoaxilla.app"
             BlueprintName = "OneTrickPony_Podcaster"
             ReferencedContainer = "container:DML.xcodeproj">
          </BuildableReference>
