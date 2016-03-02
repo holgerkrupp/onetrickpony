@@ -421,6 +421,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     func jumpToTimeInPlayer(seconds:Double){
         let targetTime = CMTimeMakeWithSeconds(seconds,1)
         SingletonClass.sharedInstance.player.seekToTime(targetTime)
+        play()
     }
     
     

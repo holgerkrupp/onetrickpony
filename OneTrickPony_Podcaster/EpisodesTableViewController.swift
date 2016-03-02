@@ -193,8 +193,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             setvalueforkeytopersistentstorrage("latestepisode", value: episodes[0].episodePubDate)
         }else{
             result = false
-          //  dummyNotificationforDebugging()
+         //   dummyNotificationforDebugging()
         }
+        print("episode check done")
         completion(result: result)
     }
 
