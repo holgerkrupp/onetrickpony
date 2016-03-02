@@ -14,7 +14,7 @@ func getvalueforkeyfrompersistentstrrage(key:String) -> AnyObject{
     if let value = NSUserDefaults.standardUserDefaults().objectForKey(key){
         return value
     }else{
-        return "_EMPTY_"
+        return "EMPTY"
     }
 }
 
@@ -22,6 +22,10 @@ func setvalueforkeytopersistentstorrage(key:String, value:AnyObject){
     NSUserDefaults.standardUserDefaults().setObject(value, forKey: key)
 }
 
+func removePersistentStorrage(){
+    let appdomain = NSBundle.mainBundle().bundleIdentifier
+    NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appdomain!)
+}
 
 func getValueForKeyFromPodcastSettings(key:String) -> AnyObject{
     if let path = NSBundle.mainBundle().pathForResource("PodcastSettings", ofType: "plist") {
@@ -46,27 +50,32 @@ func getColorFromPodcastSettings(key: String) -> UIColor {
 }
 
 
-func getHeaderFromUrl(inputurl:String,headerfield:String) -> String {
+func getHeaderFromUrl(inputurl:String,headerfield:String) -> AnyObject {
     let url = NSURL(string: inputurl)!
-    var responseHeader = ""
     let request = NSMutableURLRequest(URL: url)
     request.HTTPMethod = "HEAD"
-    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-    request.addValue("application/json", forHTTPHeaderField: "Accept")
-    let config: NSURLSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
-    let session: NSURLSession = NSURLSession(configuration: config)
-    
-    let dataTask: NSURLSessionDataTask = session.dataTaskWithRequest(request,completionHandler:{(data: NSData?, response: NSURLResponse?,error: NSError?) -> Void in
-        
-        if let httpResponse = response as? NSHTTPURLResponse {
-            if let headerfieldresponse = httpResponse.allHeaderFields[headerfield] as? String {
-                print("Header resp\(headerfieldresponse)")
-                responseHeader = headerfieldresponse
+    var serverDate = NSDate()
+    var response : NSURLResponse?
+    do{
+        try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
+      //  print(response)
+        if let httpResp: NSHTTPURLResponse = response as? NSHTTPURLResponse {
+            if let date = httpResp.allHeaderFields["Last-Modified"] { //EXAMPLE:  "Mon, 19 Oct 2015 05:57:12 GMT"
+                let dateFormatter = NSDateFormatter()
+              //  print(date)
+                dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss z"
+                serverDate = (dateFormatter.dateFromString(date as! String) as NSDate?)!
+                
+                //serverDate is now: 2015-10-19 05:57:12 UTC
+              //  print("ServerDate: \(serverDate)")
+                return serverDate
             }
         }
-    })
-    dataTask.resume()
-    return responseHeader
+        } catch {
+          //  print("catch")
+
+        }
+    return serverDate
 }
 
 

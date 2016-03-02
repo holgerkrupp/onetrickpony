@@ -13,13 +13,13 @@
         <!--EpisodesTableView-->
         <scene sceneID="MHV-76-kL5">
             <objects>
-                <tableViewController title="EpisodesTableView" id="bwv-IB-7IY" customClass="EpisodesTableViewController" customModule="Hoaxilla" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="EpisodesTableView" id="bwv-IB-7IY" customClass="EpisodesTableViewController" customModule="DML" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="107" sectionHeaderHeight="28" sectionFooterHeight="28" id="buq-XS-7y1">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EpisodeCell" rowHeight="107" id="1tu-3b-spL" customClass="EpisodeCell" customModule="Hoaxilla" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EpisodeCell" rowHeight="107" id="1tu-3b-spL" customClass="EpisodeCell" customModule="DML" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="107"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000000000000004" contentMode="center" tableViewCell="1tu-3b-spL" id="Q62-8E-a8R">
@@ -276,6 +276,7 @@
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="JV3-fn-SDu">
                         <autoresizingMask key="autoresizingMask"/>
+                        <attributedString key="attributedTitle"/>
                     </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mEf-qR-3w2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -285,7 +286,7 @@
         <!--Episode View Controller-->
         <scene sceneID="1Je-Q1-pEH">
             <objects>
-                <viewController id="uPX-Rw-QbC" customClass="EpisodeViewController" customModule="Hoaxilla" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="uPX-Rw-QbC" customClass="EpisodeViewController" customModule="DML" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zA3-W1-knL"/>
                         <viewControllerLayoutGuide type="bottom" id="Ykn-eh-pJB"/>
@@ -642,7 +643,7 @@
         <!--Chapter Marks View Controller-->
         <scene sceneID="NmL-wd-68D">
             <objects>
-                <tableViewController id="IkL-di-4W8" customClass="ChapterMarksViewController" customModule="Hoaxilla" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="IkL-di-4W8" customClass="ChapterMarksViewController" customModule="DML" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="rjX-FP-jKt">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -686,7 +687,7 @@
         <!--Settings Table View Controller-->
         <scene sceneID="PzW-Zr-97e">
             <objects>
-                <tableViewController id="MO5-XI-4IU" customClass="SettingsTableViewController" customModule="Hoaxilla" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="MO5-XI-4IU" customClass="SettingsTableViewController" customModule="DML" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Zbe-sY-SoD">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
