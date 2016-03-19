@@ -107,9 +107,8 @@ class EpisodeCell: UITableViewCell {
         let dateFormatter: NSDateFormatter = NSDateFormatter()
         var dateString: String = String()
         
-        dateString = episode.episodePubDate
-        dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss ZZ"
-        date = dateFormatter.dateFromString(dateString)!
+        date = episode.episodePubDate
+     
         dateFormatter.dateFormat = "dd.MM.yy"
         dateString = dateFormatter.stringFromDate(date)
         EpisodeDateLabel!.text = dateString

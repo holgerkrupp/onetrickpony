@@ -16,7 +16,7 @@ class Episode {
     var episodeLink:        String = String()
     var episodeUrl:         String = String()
     var episodeDuration:    String = String()
-    var episodePubDate:     String = String()
+    var episodePubDate:     NSDate = NSDate()
     var episodeFilename:    String = String()
     var episodeFilesize:    Int = Int()
     var episodeImage:       String = String()

@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //function to present the localNotification if received.
     func application(application: UIApplication, didReceiveLocalNotification localNotification:UILocalNotification){
-        UIApplication.sharedApplication().presentLocalNotificationNow(localNotification)
+       // UIApplication.sharedApplication().presentLocalNotificationNow(localNotification)
     }
 
     

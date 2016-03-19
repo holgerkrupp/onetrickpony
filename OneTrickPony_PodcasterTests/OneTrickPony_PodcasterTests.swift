@@ -5,7 +5,7 @@
 //  Created by Holger Krupp on 24/01/16.
 //  Copyright © 2016 Holger Krupp. All rights reserved.
 //
-
+/*
 import XCTest
 @testable import OneTrickPony_Podcaster
 
@@ -34,3 +34,4 @@ class OneTrickPony_PodcasterTests: XCTestCase {
     }
     
 }
+*/

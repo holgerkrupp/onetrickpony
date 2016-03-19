@@ -9,12 +9,12 @@
 import Foundation
 import UIKit
 
-func getvalueforkeyfrompersistentstrrage(key:String) -> AnyObject{
+func getvalueforkeyfrompersistentstorrage(key:String) -> AnyObject?{
 
     if let value = NSUserDefaults.standardUserDefaults().objectForKey(key){
         return value
     }else{
-        return "EMPTY"
+        return nil
     }
 }
 
@@ -50,34 +50,44 @@ func getColorFromPodcastSettings(key: String) -> UIColor {
 }
 
 
-func getHeaderFromUrl(inputurl:String,headerfield:String) -> AnyObject {
+func showErrorMessage(title: String, message: String, viewController : UIViewController){
+    var refreshAlert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+    
+    refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+       // print("Handle Ok logic here")
+    }))
+    viewController.presentViewController(refreshAlert, animated: true, completion: nil)
+}
+
+
+
+func getHeaderFromUrl(inputurl:String,headerfield:String) -> String {
     let url = NSURL(string: inputurl)!
     let request = NSMutableURLRequest(URL: url)
     request.HTTPMethod = "HEAD"
-    var serverDate = NSDate()
+    var header = String()
     var response : NSURLResponse?
     do{
         try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
-      //  print(response)
         if let httpResp: NSHTTPURLResponse = response as? NSHTTPURLResponse {
-            if let date = httpResp.allHeaderFields["Last-Modified"] { //EXAMPLE:  "Mon, 19 Oct 2015 05:57:12 GMT"
-                let dateFormatter = NSDateFormatter()
-              //  print(date)
-                dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss z"
-                serverDate = (dateFormatter.dateFromString(date as! String) as NSDate?)!
+            if let headercontent = httpResp.allHeaderFields[headerfield]{
                 
-                //serverDate is now: 2015-10-19 05:57:12 UTC
-              //  print("ServerDate: \(serverDate)")
-                return serverDate
+                header = headercontent as! String
+                return header
             }
         }
         } catch {
-          //  print("catch")
-
         }
-    return serverDate
+    return header
 }
 
+func dateStringToNSDate(date:String,format:String="EEE, dd MMM yyyy HH:mm:ss z") -> NSDate{
+    
+    let dateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = format
+    let formatedDate = (dateFormatter.dateFromString(date) as NSDate?)!
+    return formatedDate
+}
 
 /*func getHeaderFromUrl(inputurl:String,headerfield:String) -> String {
     let url = NSURL(string: inputurl)!

@@ -22,6 +22,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     var feedParser: NSXMLParser = NSXMLParser()
    // var feeddate: NSDate = NSDate()// this element contains currently the lastBuildDate from the feed, should be managed smarter one day to reduce the full feed loading to check if the feed is new
     
+    var lastfeeddate: String = String()
+    
     var episodes  = [Episode]()
     
     var episodeTitle: String = String()
@@ -63,6 +65,13 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         super.viewDidLoad()
         _ = self.downloadsSession
       //  removePersistentStorrage()
+        
+        
+        
+        print("last Episode: \(getvalueforkeyfrompersistentstorrage("latestepisode"))")
+        print("last FeedDay: \(getvalueforkeyfrompersistentstorrage("lastfeedday"))")
+        
+        
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.tableView.separatorColor = getColorFromPodcastSettings("highlightColor")
@@ -187,13 +196,26 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     func checkifepisodeisnew(completion:(result: Bool) -> Void){
+        print("Check if Episode is new started")
         var result:Bool
-        if getvalueforkeyfrompersistentstrrage("latestepisode") as! String != episodes[0].episodePubDate{
-            result = true
-            setvalueforkeytopersistentstorrage("latestepisode", value: episodes[0].episodePubDate)
+        result = false
+        if let date1 = getvalueforkeyfrompersistentstorrage("latestepisode"){
+            let Date1 = date1 as! NSDate
+            let Date2 = episodes[0].episodePubDate
+            if Date1.earlierDate(Date2).isEqualToDate(Date1){
+                result = true
+              //  setvalueforkeytopersistentstorrage("latestepisode", value: episodes[0].episodePubDate)
+                print("set new Episode to persistent storrage")
+
+            }else{
+                print("no new episode found")
+                //   dummyNotificationforDebugging()
+            }
         }else{
-            result = false
-         //   dummyNotificationforDebugging()
+            print("no episode downloaded yet")
+            result = true
+
+          //  setvalueforkeytopersistentstorrage("latestepisode", value: episodes[0].episodePubDate)
         }
         print("episode check done")
         completion(result: result)
@@ -203,17 +225,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     func createLocalNotification(episode: Episode){
         let localNotification =  UILocalNotification()
-        //---the message to display for the alert---
-        localNotification.alertBody =
-        "\(episode.episodeTitle) is available"
-        
-        //---uses the default sound---
-        localNotification.soundName = "pushSound.m4a";
-        
-        //---title for the button to display---
+        localNotification.alertBody = "\(episode.episodeTitle) is available"
+        localNotification.soundName = "pushSound.m4a"
         localNotification.alertAction = "Details"
-        
-        //---display the notification---
         
         UIApplication.sharedApplication().presentLocalNotificationNow(localNotification)
     }
@@ -245,6 +259,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             checkFeedDateIsNew {
                 (result: Bool) in
                     if result {
+                        // the file on the server has been update, start downloading a new feed file
                         self.downloadurl(url)
                         print("Downloading feed")
                     }else{
@@ -257,46 +272,45 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     func checkFeedDateIsNew(completion:(result: Bool) -> Void){
         var result:Bool
-        let savedfeeddate = getvalueforkeyfrompersistentstrrage("lastfeedday")
+        let savedfeeddate = getvalueforkeyfrompersistentstorrage("lastfeedday")
         print("oldfeed: \(savedfeeddate) (from Persistent Storrage)")
-        if let date = savedfeeddate as? [NSDate] {
-            let newfeeddate = getHeaderFromUrl(getValueForKeyFromPodcastSettings("feedurl") as! String, headerfield: "Last-Modified") as! NSDate
+
+        
+            
+            // get the last modified date from the file on the server
+            let date = getHeaderFromUrl(getValueForKeyFromPodcastSettings("feedurl") as! String, headerfield: "Last-Modified")
+        if date != "" {
+            let newfeeddate = dateStringToNSDate(date)
             print("oldfeed: \(newfeeddate) (Header from Server)")
             
-            let compareResult = savedfeeddate.compare(newfeeddate)
+            
+            // compare it with the last saved date
+            let compareResult = savedfeeddate!.compare(newfeeddate)
             print(compareResult)
             
             if compareResult == NSComparisonResult.OrderedDescending {
+                // usually the date on the server should never be younger than the date saved
                 result = false
-                print("\(savedfeeddate) is later than \(newfeeddate)")
+                print("\(savedfeeddate) (saved date) is younger than \(newfeeddate) - nothing to do but strange")
                 self.refreshControl!.endRefreshing()
             }else if compareResult == NSComparisonResult.OrderedAscending{
+                // this is the normal behaviour when the feed has been updated
                 result = true
-                print("\(savedfeeddate) is older than \(newfeeddate)")
+                print("\(savedfeeddate) (saved date) is older than \(newfeeddate) - to refresh feed")
             }else{
+                // this is the part when there has been no change on the feed since last check
                 result = false
                 print("same date")
                 self.refreshControl!.endRefreshing()
             }
-        }
-        else {
-            result = true
+        }else{
+            result = false
+            print("ERROR NO DATE")
+            showErrorMessage("Error", message: "Server not reachable", viewController: self)
+            self.refreshControl!.endRefreshing()
         }
         
 
-        
-        
-        /*
-        if oldfeeddate as! NSObject == newfeeddate{
-            result = false
-            print("CFD oldfeed")
-            self.refreshControl!.endRefreshing()
-        }else{
-            setvalueforkeytopersistentstorrage("lastfeedday" as String, value: newfeeddate)
-            result = true
-            print("CFD new feed")
-        }
-        */
         completion(result: result)
     }
     
@@ -308,7 +322,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         eName = elementName
-        if elementName == "item" {
+        if elementName == "lastBuildDate" {
+            lastfeeddate = String()
+        } else if elementName == "item" {
             episodeTitle = String()
             episodeLink = String()
             
@@ -353,23 +369,25 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         let data = string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         if (!data.isEmpty) {
             if eName == "title" {
-                episodeTitle += data
+                episodeTitle = data
             } else if eName == "link" {
                 episodeLink = data
             }else if eName == "itunes:duration" {
                 episodeDuration = data
             }else if eName == "pubDate" {
                 episodePubDate = data
-           /* }else if eName == "lastBuildDate"{
-                feeddate = data
-                print("lastBuildDate \(data)")*/
+            }else if eName == "lastBuildDate"{
+                lastfeeddate = data
             }else if eName == "description"{
                 episodeDescription = data
             }
         }
     }
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        if elementName == "item" {
+        if elementName == "lastBuildDate"{
+            let lastBuildDate = dateStringToNSDate(lastfeeddate)
+            setvalueforkeytopersistentstorrage("lastfeedday" as String, value: lastBuildDate)
+        } else if elementName == "item" {
             let episode: Episode = Episode()
             episode.episodeTitle = episodeTitle
             episode.episodeUrl = episodeUrl
@@ -401,8 +419,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             
             
             
-            
-            episode.episodePubDate = episodePubDate
+            episode.episodePubDate = dateStringToNSDate(episodePubDate)
             let url: NSURL = NSURL(string: episodeUrl)!
             episode.episodeFilename = url.lastPathComponent!
             episode.episodeFilesize = episodeFilesize
@@ -418,13 +435,21 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     }
     func parserDidEndDocument(parser: NSXMLParser) {
         SingletonClass.sharedInstance.numberofepisodes = episodes.count
+        print("Parser DID End Document")
+        var NotificationFired = false
         self.checkifepisodeisnew{
             (result: Bool) in
             if result == true{
-            self.startDownloadepisode(self.episodes[0])
-            self.createLocalNotification(self.episodes[0])
+                setvalueforkeytopersistentstorrage("latestepisode", value: self.episodes[0].episodePubDate)
+                if NotificationFired == false {
+                    print("checking if episode new should be done")
+                  //  self.startDownloadepisode(self.episodes[0])
+                    self.createLocalNotification(self.episodes[0])
+                    NotificationFired = true
+                }
             }
         }
+        
     }
     
 
@@ -655,7 +680,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                 do {
                     try fileManager.copyItemAtURL(location, toURL: destinationURL)
                     print("wrote new file")
-                    setvalueforkeytopersistentstorrage("lastfeedday" as String, value: NSDate())
+                  //  setvalueforkeytopersistentstorrage("lastfeedday" as String, value: NSDate())
 
                     if (destinationURL.pathExtension!.lowercaseString == "xml"){
                         loadfeedandparse {
