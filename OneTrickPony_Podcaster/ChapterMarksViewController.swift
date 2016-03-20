@@ -47,6 +47,7 @@ var Chapters      : [Chapter]!
         var chapter: Chapter = Chapter()
         chapter = Chapters[indexPath.row]
         let chapterStartSeconds = stringtodouble(chapter.chapterStart)
+        print("jump to  \(chapterStartSeconds)")
         EpisodeViewController().jumpToTimeInPlayer(chapterStartSeconds)
         self.dismissViewControllerAnimated(true, completion: nil)
         
