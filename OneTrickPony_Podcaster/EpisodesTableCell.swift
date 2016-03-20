@@ -76,7 +76,7 @@ class EpisodeCell: UITableViewCell {
     }
     
     func updateprogressbar(fileOffset: Int64){
-        print(fileOffset)
+       // NSLog(fileOffset)
     }
     
     func filltableviewcell(episode: Episode){
@@ -120,7 +120,7 @@ class EpisodeCell: UITableViewCell {
         EpisodeFileSizeLabel!.text = String(format:"%.1f", filesize) + " MB"
         EpisodeFileSizeLabel!.textColor = getColorFromPodcastSettings("secondarytextcolor")
 
-        //print(EpisodeTimeProgressbar.progress)
+        //NSLog(EpisodeTimeProgressbar.progress)
         
 
         
@@ -160,7 +160,7 @@ class EpisodeCell: UITableViewCell {
         
         //check if the episode has been played and how far
      //   let playposition = readplayed(episode)
-        //print("Episode \(episode.episodeTitle) played at position \(playposition) max duration is \(episode.episodeDuration)")
+        //NSLog("Episode \(episode.episodeTitle) played at position \(playposition) max duration is \(episode.episodeDuration)")
         
 
         

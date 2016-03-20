@@ -74,7 +74,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
 
     @IBAction func tapImage(recognizer:UITapGestureRecognizer) {
-        print("tap tap")
+        NSLog("tap tap")
         if episodeShowNotesWebView.hidden == true {
             episodeShowNotesWebView.hidden = false
         }else{
@@ -102,7 +102,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     @IBAction func sliderchange(sender:UISlider){
-        print(progressSlider.value)
+      //  NSLog(progressSlider.value)
         if (episode.episodeTitle == SingletonClass.sharedInstance.episodePlaying.episodeTitle){
             SingletonClass.sharedInstance.player.seekToTime(SingletonClass.sharedInstance.episodePlaying.getprogressinCMTime(Double(progressSlider.value)))
 
@@ -145,7 +145,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         enableOrDisableControllsIfNoInFocus()
         allowremotebuttons()
-
+        if existslocally(episode.episodeUrl).existlocal{
+            autoplay()
+        }
         setplaypausebutton()
         
     }
@@ -299,7 +301,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         let seconds = minutes * 60
         SingletonClass.sharedInstance.sleeptimer = seconds
         SingletonClass.sharedInstance.sleeptimerset = true
-        print("Sleeptimer set to \(minutes) that's \(seconds)")
+        NSLog("Sleeptimer set to \(minutes) that's \(seconds)")
     }
     
     func cancelleeptimer(){
@@ -312,7 +314,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
                 pause()
                 cancelleeptimer()
             }
-            print(SingletonClass.sharedInstance.sleeptimer)
+        //    NSLog(SingletonClass.sharedInstance.sleeptimer)
         }
         
     }
@@ -353,7 +355,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     func popoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        print("should dismiss")
+        NSLog("should dismiss")
         return true
     }
     
@@ -479,7 +481,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         if starttime >= episode.getDurationinCMTime() && episode.getDurationInSeconds() != 0.0 {
             // the item has been played to the end,I'll reset the starttime to start playing from the beginning
             episode.saveplayed(0.0)
-            print("read after save \(episode.getDurationinCMTime())")
+            NSLog("read after save \(episode.getDurationinCMTime())")
             starttime = episode.readplayed()
         }
         
@@ -505,7 +507,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         let played = SingletonClass.sharedInstance.player.currentTime()
         let episode = SingletonClass.sharedInstance.episodePlaying
         episode.saveplayed(Double(CMTimeGetSeconds(played)))
-        print("played: \(Double(CMTimeGetSeconds(played)))")
+        NSLog("played: \(Double(CMTimeGetSeconds(played)))")
         somethingplayscurrently = false
         setplaypausebutton()
         updateMPMediaPlayer()
@@ -514,7 +516,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     func playerDidFinishPlaying(){
         let episode = SingletonClass.sharedInstance.episodePlaying
-        print("Did finish Playing \(episode.episodeTitle)")
+        NSLog("Did finish Playing \(episode.episodeTitle)")
         episode.deleteEpisodeFromDocumentsFolder()
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
@@ -650,7 +652,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     func displayShareSheet() {
         let shareContent:String = "I'm listening to \(episode.episodeTitle) - \(episode.episodeLink)"
-        print(shareContent)
+        NSLog(shareContent)
         let activityViewController = UIActivityViewController(activityItems: [shareContent as NSString], applicationActivities: nil)
         presentViewController(activityViewController, animated: true, completion: {})
     }

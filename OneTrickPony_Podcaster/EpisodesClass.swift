@@ -87,10 +87,10 @@ class Episode {
             let localFeedFile = existence.localURL
             do {
                 try manager.removeItemAtPath(localFeedFile)
-                print("deleted")
+                NSLog("deleted")
                 episodeLocal = false
             }catch{
-                print("no file to delete")
+                NSLog("no file to delete")
                 
             }
         }
@@ -147,7 +147,7 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
     view.remainingTimeLabel.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(episode.remaining()))
     view.remainingTimeLabel.textColor = getColorFromPodcastSettings("secondarytextcolor")
     
-    let description = episode.episodeDescription.stringByReplacingOccurrencesOfString("\r", withString: "\n")
+    let description = episode.episodeDescription.stringByReplacingOccurrencesOfString("\n", withString: "</br>")
     
     view.episodeShowNotesWebView.loadHTMLString(description, baseURL: nil)
     

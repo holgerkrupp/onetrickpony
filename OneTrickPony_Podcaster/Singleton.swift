@@ -47,7 +47,7 @@ class SingletonClass {
         }
         catch let error as NSError
         {
-            print(error.description)
+            NSLog(error.description)
         }
     if #available(iOS 9.0, *) {
         try! audioSession.setMode(AVAudioSessionModeSpokenAudio)
@@ -61,7 +61,7 @@ class SingletonClass {
         }
         catch let error as NSError
         {
-            print(error.description)
+            NSLog(error.description)
         }
     }
 }

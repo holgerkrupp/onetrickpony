@@ -54,7 +54,7 @@ func showErrorMessage(title: String, message: String, viewController : UIViewCon
     let refreshAlert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
     
     refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
-       // print("Handle Ok logic here")
+       // NSLog("Handle Ok logic here")
     }))
     viewController.presentViewController(refreshAlert, animated: true, completion: nil)
 }
@@ -97,7 +97,7 @@ func dateStringToNSDate(date:String,format:String="EEE, dd MMM yyyy HH:mm:ss z")
         
         if let httpResponse = response as? NSHTTPURLResponse {
             if let headerfieldresponse = httpResponse.allHeaderFields[headerfield] as? String {
-                print(headerfieldresponse)
+                NSLog(headerfieldresponse)
                responseHeader = headerfieldresponse
             }
         }
@@ -114,10 +114,10 @@ func existslocally(checkurl: String) -> (existlocal : Bool, localURL : String) {
     let localFeedFile = documentsDirectoryUrl + "/" + fileName
     
     if manager.fileExistsAtPath(localFeedFile){
-        //print("\(localFeedFile) is available")
+        //NSLog("\(localFeedFile) is available")
         return (true, localFeedFile)
     } else {
-        //print("\(localFeedFile) is not available")
+        //NSLog("\(localFeedFile) is not available")
         return (false, localFeedFile)
     }
 }

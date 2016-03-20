@@ -12,11 +12,8 @@ import AVFoundation
 
 class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
-    struct SessionProperties {
-        static let identifier : String! = "url_session_background_download"
-    }
+
     
-    let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
 
     
     var feedParser: NSXMLParser = NSXMLParser()
@@ -41,11 +38,15 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     let manager = NSFileManager.defaultManager()
     var myDict: NSDictionary?
     
+    
+    
+    // parameters for background downloads
     var activeDownloads = [String: Download]()
-    
-    
+    struct SessionProperties {
+        static let identifier : String! = "url_session_background_download"
+    }
     lazy var downloadsSession: NSURLSession = {
-        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier(SessionProperties.identifier)
         let session = NSURLSession(configuration: configuration, delegate: self, delegateQueue: nil)
         return session
     }()
@@ -65,12 +66,12 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         super.viewDidLoad()
         _ = self.downloadsSession
       //  removePersistentStorrage()
+       
         
-        
-        
+        /*
         print("last Episode: \(getvalueforkeyfrompersistentstorrage("latestepisode"))")
         print("last FeedDay: \(getvalueforkeyfrompersistentstorrage("lastfeedday"))")
-        
+        */
         
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -640,7 +641,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-      //  print("session \(session) download task \(downloadTask) wrote an additional \(bytesWritten) bytes (total \(totalBytesWritten) bytes) out of an expected \(totalBytesExpectedToWrite) bytes.")
+        //print("session \(session) download task \(downloadTask) wrote an additional \(bytesWritten) bytes (total \(totalBytesWritten) bytes) out of an expected \(totalBytesExpectedToWrite) bytes.")
 
     //    print("TaskOrigRequest URL String \(downloadTask.originalRequest?.URL?.absoluteString)")
         if let downloadUrl = downloadTask.originalRequest?.URL?.absoluteString,
