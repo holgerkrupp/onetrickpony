@@ -135,9 +135,10 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
     
     view.progressSlider.setValue(currentplaytime, animated: false)
   //  view.progressSlider.backgroundColor = getColorFromPodcastSettings("progressBackgroundColor")
-    view.progressSlider.minimumTrackTintColor = getColorFromPodcastSettings("highlightColor")
-    view.progressSlider.maximumTrackTintColor = getColorFromPodcastSettings("progressBackgroundColor")
-    
+  //  view.progressSlider.minimumTrackTintColor = getColorFromPodcastSettings("highlightColor")
+  //  view.progressSlider.maximumTrackTintColor = getColorFromPodcastSettings("progressBackgroundColor")
+    view.progressSlider.setMinimumTrackImage(getImageWithColor(getColorFromPodcastSettings("highlightColor"),size: CGSizeMake(2, 30)), forState: .Normal)
+    view.progressSlider.setMaximumTrackImage(getImageWithColor(getColorFromPodcastSettings("progressBackgroundColor"),size: CGSizeMake(2, 30)), forState: .Normal)
     view.progressSlider.setThumbImage(getImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(2, 30)), forState: .Normal)
     
     
@@ -167,6 +168,15 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
     view.pauseButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
 
 }
+
+func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    if navigationType == UIWebViewNavigationType.LinkClicked {
+        UIApplication.sharedApplication().openURL(request.URL!)
+        return false
+    }
+    return true
+}
+
 
 func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
     let rect = CGRectMake(0, 0, size.width, size.height)
