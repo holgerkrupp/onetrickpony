@@ -431,7 +431,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         if episode.episodeTitle == ""{
             episode = SingletonClass.sharedInstance.episodePlaying
         }
-        play()
+       // play()
     }
     
     
