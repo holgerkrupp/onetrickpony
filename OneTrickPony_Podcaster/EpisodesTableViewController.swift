@@ -443,7 +443,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                 setvalueforkeytopersistentstorrage("latestepisode", value: self.episodes[0].episodePubDate)
                 if NotificationFired == false {
                     print("checking if episode new should be done")
-                  //  self.startDownloadepisode(self.episodes[0])
+                    self.startDownloadepisode(self.episodes[0])
                     self.createLocalNotification(self.episodes[0])
                     NotificationFired = true
                 }
