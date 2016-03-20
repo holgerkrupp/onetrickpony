@@ -122,21 +122,22 @@ class EpisodeCell: UITableViewCell {
 
         //print(EpisodeTimeProgressbar.progress)
         
-        var existence = existslocally(episode.episodeUrl)
-        // modify Download button to show either 'download' or 'play'
+
         
         EpisodeDownloadProgressbar.backgroundColor = getColorFromPodcastSettings("progressBackgroundColor")
         EpisodeDownloadProgressbar.progressTintColor = getColorFromPodcastSettings("highlightColor")
         EpisodeDownloadButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
         EpisodePauseButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
         EpisodeCancelButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
-
+        var existence = existslocally(episode.episodeUrl)
+        // modify Download button to show either 'download' or 'play'
         if (existence.existlocal){
             episode.episodeLocal = true
             EpisodeDownloadProgressbar.progress = 1
             EpisodeDownloadProgressbar.hidden = true
          //   EpisodeprogressLabel.hidden = true
             EpisodeDownloadButton!.setTitle("Play", forState: UIControlState.Normal)
+            EpisodeDownloadButton.hidden = true
            // EpisodeDownloadButton!.setImage(UIImage(named: "iPhone"), forState: UIControlState.Normal)
             EpisodeDownloadButton!.enabled = false
         }else{

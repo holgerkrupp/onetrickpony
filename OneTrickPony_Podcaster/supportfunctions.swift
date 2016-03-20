@@ -51,7 +51,7 @@ func getColorFromPodcastSettings(key: String) -> UIColor {
 
 
 func showErrorMessage(title: String, message: String, viewController : UIViewController){
-    var refreshAlert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+    let refreshAlert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
     
     refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
        // print("Handle Ok logic here")

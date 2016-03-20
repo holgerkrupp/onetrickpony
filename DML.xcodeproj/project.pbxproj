@@ -473,6 +473,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "de.holgerkrupp.OneTrickPony-Podcaster";
 				PRODUCT_NAME = DML;
 				PROVISIONING_PROFILE = "";
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = debugging;
 			};
 			name = Debug;
 		};
@@ -489,6 +491,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "de.holgerkrupp.OneTrickPony-Podcaster";
 				PRODUCT_NAME = DML;
 				PROVISIONING_PROFILE = "";
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = debugging;
 			};
 			name = Release;
 		};

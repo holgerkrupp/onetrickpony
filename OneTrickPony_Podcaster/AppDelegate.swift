@@ -33,7 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
 
-
         
         return true
     }
@@ -44,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let EpisodesTableViewController = window?.rootViewController as? EpisodesTableViewController
         {
             EpisodesTableViewController.refreshfeed()
-            print("Background refresh started")
+            NSLog("Background refresh started")
             
         }
     }
@@ -78,6 +77,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        
+        // when the App is coming back (from background mode for example), the appIcon badge shall be cleared
+        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+
+        
     }
 
     func applicationWillTerminate(application: UIApplication) {

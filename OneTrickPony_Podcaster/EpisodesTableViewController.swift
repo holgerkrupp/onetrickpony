@@ -228,10 +228,10 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         localNotification.alertBody = "\(episode.episodeTitle) is available"
         localNotification.soundName = "pushSound.m4a"
         localNotification.alertAction = "Details"
-        
+        UIApplication.sharedApplication().applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
         UIApplication.sharedApplication().presentLocalNotificationNow(localNotification)
     }
-    
+
     
     
     func dummyNotificationforDebugging(){
@@ -369,7 +369,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         let data = string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         if (!data.isEmpty) {
             if eName == "title" {
-                episodeTitle = data
+                episodeTitle += data
             } else if eName == "link" {
                 episodeLink = data
             }else if eName == "itunes:duration" {
@@ -379,7 +379,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             }else if eName == "lastBuildDate"{
                 lastfeeddate = data
             }else if eName == "description"{
-                episodeDescription = data
+                episodeDescription = string // here I don't want the new line characters not to be delted
             }
         }
     }
@@ -443,9 +443,11 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                 setvalueforkeytopersistentstorrage("latestepisode", value: self.episodes[0].episodePubDate)
                 if NotificationFired == false {
                     print("checking if episode new should be done")
-                    self.startDownloadepisode(self.episodes[0])
-                    self.createLocalNotification(self.episodes[0])
-                    NotificationFired = true
+                    if existslocally(self.episodes[0].episodeUrl).existlocal == false {
+                        self.startDownloadepisode(self.episodes[0])
+                        self.createLocalNotification(self.episodes[0])
+                        NotificationFired = true
+                    }
                 }
             }
         }
