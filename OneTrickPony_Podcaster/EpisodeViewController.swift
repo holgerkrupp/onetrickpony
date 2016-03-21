@@ -428,10 +428,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         let targetTime = CMTimeMakeWithSeconds(seconds,1)
         print("targettime \(targetTime)")
         SingletonClass.sharedInstance.player.seekToTime(targetTime)
-        if episode.episodeTitle == ""{
-            episode = SingletonClass.sharedInstance.episodePlaying
-        }
-       // play()
+        
+       // play() // this was a bad idea. UI Elements are nil. Letting the app crash. I'm leaving this in as a warning.
     }
     
     
@@ -502,10 +500,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         setplaypausebutton()
         updateMPMediaPlayer()
     }
-    
-    func updatePlayPosition(){
-        
-    }
+
     
     
     func pause(){
@@ -579,7 +574,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             
             updateSliderProgress(progress)
             updateMPMediaPlayer()
-            
+            setplaypausebutton()
             updateSleepTimer()
             checksleeptimer()
             
