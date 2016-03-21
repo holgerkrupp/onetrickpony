@@ -43,7 +43,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     // parameters for background downloads
     var activeDownloads = [String: Download]()
     struct SessionProperties {
-        static let identifier : String! = "url_session_background_download_otp"
+        static let identifier : String! = "url_session_background_download"
     }
     lazy var downloadsSession: NSURLSession = {
         let configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier(SessionProperties.identifier)

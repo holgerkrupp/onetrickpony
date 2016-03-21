@@ -135,10 +135,9 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
     
     view.progressSlider.setValue(currentplaytime, animated: false)
   //  view.progressSlider.backgroundColor = getColorFromPodcastSettings("progressBackgroundColor")
-  //  view.progressSlider.minimumTrackTintColor = getColorFromPodcastSettings("highlightColor")
-  //  view.progressSlider.maximumTrackTintColor = getColorFromPodcastSettings("progressBackgroundColor")
-    view.progressSlider.setMinimumTrackImage(getImageWithColor(getColorFromPodcastSettings("highlightColor"),size: CGSizeMake(2, 30)), forState: .Normal)
-    view.progressSlider.setMaximumTrackImage(getImageWithColor(getColorFromPodcastSettings("progressBackgroundColor"),size: CGSizeMake(2, 30)), forState: .Normal)
+    view.progressSlider.minimumTrackTintColor = getColorFromPodcastSettings("highlightColor")
+    view.progressSlider.maximumTrackTintColor = getColorFromPodcastSettings("progressBackgroundColor")
+    
     view.progressSlider.setThumbImage(getImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(2, 30)), forState: .Normal)
     
     
@@ -169,15 +168,6 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
 
 }
 
-func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-    if navigationType == UIWebViewNavigationType.LinkClicked {
-        UIApplication.sharedApplication().openURL(request.URL!)
-        return false
-    }
-    return true
-}
-
-
 func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
     let rect = CGRectMake(0, 0, size.width, size.height)
     UIGraphicsBeginImageContextWithOptions(size, false, 0)
@@ -190,19 +180,15 @@ func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
 
 func stringtodouble(input :String) -> Double{
     let timeArray = input.componentsSeparatedByString(":")
-    var seconds  = 0.0
+    var seconds = 0.0
     // I'm going through the array (which should have max 3 elements) to add up hours, minutes and seconds.
     // to do that I'll add the smaller element to the existing one and multiply by 60
     // because I'm also doing that for the seconds, I have to devide by 60 again. Not nice but it works.
     
     for element in timeArray{
-        print(element)
-        if element != ""{
-            seconds = (seconds + round(Double(element)!)) * 60
-        }
+        seconds = (seconds + Double(element)!) * 60
     }
     seconds = seconds / 60
-    
     return seconds
 }
 

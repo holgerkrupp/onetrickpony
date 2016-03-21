@@ -12,7 +12,7 @@ import MediaPlayer
 
 
 
-class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDelegate, ChapterMarksViewControllerDelegate {
     
     var episode = Episode()
 
@@ -344,8 +344,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         //segue for the popover configuration window
         if segue.identifier == "showChapterMarks" {
             let vc = segue.destinationViewController as! ChapterMarksViewController
+            vc.EpisodeViewController = self
             let controller = vc.popoverPresentationController
-            vc.Chapters = episode.episodeChapter
+             vc.Chapters = episode.episodeChapter
             
             if controller  != nil{
                 controller?.delegate = self
@@ -421,6 +422,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             
             //maybe i have to check here if the jumpToTime is smaller 0 or bigger thant the complete duration
             SingletonClass.sharedInstance.player.seekToTime(jumpToTime)
+            updatePlayPosition()
         }
     }
     
@@ -428,8 +430,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         let targetTime = CMTimeMakeWithSeconds(seconds,1)
         print("targettime \(targetTime)")
         SingletonClass.sharedInstance.player.seekToTime(targetTime)
-        
-       // play() // this was a bad idea. UI Elements are nil. Letting the app crash. I'm leaving this in as a warning.
+        updatePlayPosition()
+        play()
     }
     
     
@@ -502,6 +504,13 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
 
     
+    func updatePlayPosition(){
+        let played = SingletonClass.sharedInstance.player.currentTime()
+        episode.saveplayed(Double(CMTimeGetSeconds(played)))
+        NSLog("played: \(Double(CMTimeGetSeconds(played)))")
+        updateplayprogress()
+    }
+
     
     func pause(){
         stoptimer()
