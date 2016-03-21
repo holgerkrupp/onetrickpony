@@ -12,7 +12,7 @@ import MediaPlayer
 
 
 
-class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDelegate, ChapterMarksViewControllerDelegate {
     
     var episode = Episode()
 
@@ -340,8 +340,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         //segue for the popover configuration window
         if segue.identifier == "showChapterMarks" {
             let vc = segue.destinationViewController as! ChapterMarksViewController
+            vc.delegate = self
             let controller = vc.popoverPresentationController
-            vc.Chapters = episode.episodeChapter
             
             if controller  != nil{
                 controller?.delegate = self
