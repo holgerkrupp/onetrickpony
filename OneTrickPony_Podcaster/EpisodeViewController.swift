@@ -137,6 +137,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         disableswipeback()
+
         
         //fill the view with content
         fillplayerView(self, episode: episode)
@@ -216,6 +217,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     func enableOrDisableControllsIfNoInFocus(){
+        if episode.episodeTitle == ""{
+            episode = SingletonClass.sharedInstance.episodePlaying
+        }
         if (SingletonClass.sharedInstance.episodePlaying.episodeTitle != episode.episodeTitle){
             forward30Button.enabled = false
             forward30Button.hidden = true
@@ -424,6 +428,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     func jumpToTimeInPlayer(seconds:Double){
         let targetTime = CMTimeMakeWithSeconds(seconds,1)
+        print("targettime \(targetTime)")
         SingletonClass.sharedInstance.player.seekToTime(targetTime)
         updatePlayPosition()
         play()
@@ -497,6 +502,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         setplaypausebutton()
         updateMPMediaPlayer()
     }
+
     
     func updatePlayPosition(){
         let played = SingletonClass.sharedInstance.player.currentTime()
@@ -504,7 +510,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         NSLog("played: \(Double(CMTimeGetSeconds(played)))")
         updateplayprogress()
     }
-    
+
     
     func pause(){
         stoptimer()
@@ -577,7 +583,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             
             updateSliderProgress(progress)
             updateMPMediaPlayer()
-            
+            setplaypausebutton()
             updateSleepTimer()
             checksleeptimer()
             
