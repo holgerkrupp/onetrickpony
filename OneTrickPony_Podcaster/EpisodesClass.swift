@@ -137,7 +137,8 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
   //  view.progressSlider.backgroundColor = getColorFromPodcastSettings("progressBackgroundColor")
     view.progressSlider.minimumTrackTintColor = getColorFromPodcastSettings("highlightColor")
     view.progressSlider.maximumTrackTintColor = getColorFromPodcastSettings("progressBackgroundColor")
-    
+    view.progressSlider.setMaximumTrackImage(getImageWithColor(getColorFromPodcastSettings("progressBackgroundColor"),size: CGSizeMake(2, 10)), forState: .Normal)
+    view.progressSlider.setMinimumTrackImage(getImageWithColor(getColorFromPodcastSettings("highlightColor"),size: CGSizeMake(2, 10)), forState: .Normal)
     view.progressSlider.setThumbImage(getImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(2, 30)), forState: .Normal)
     
     
