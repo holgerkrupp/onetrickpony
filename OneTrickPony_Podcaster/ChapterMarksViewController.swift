@@ -16,7 +16,7 @@ protocol ChapterMarksViewControllerDelegate {
 
 class ChapterMarksViewController: UITableViewController {
 var Chapters      : [Chapter]!
-var delegate: ChapterMarksViewControllerDelegate?
+var EpisodeViewController: ChapterMarksViewControllerDelegate?
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -51,7 +51,7 @@ var delegate: ChapterMarksViewControllerDelegate?
         var chapter: Chapter = Chapter()
         chapter = Chapters[indexPath.row]
         let chapterStartSeconds = stringtodouble(chapter.chapterStart)
-        delegate?.jumpToTimeInPlayer(chapterStartSeconds)
+        EpisodeViewController?.jumpToTimeInPlayer(chapterStartSeconds)
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }

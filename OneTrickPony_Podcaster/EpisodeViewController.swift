@@ -340,8 +340,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         //segue for the popover configuration window
         if segue.identifier == "showChapterMarks" {
             let vc = segue.destinationViewController as! ChapterMarksViewController
-            vc.delegate = self
+            vc.EpisodeViewController = self
             let controller = vc.popoverPresentationController
+             vc.Chapters = episode.episodeChapter
             
             if controller  != nil{
                 controller?.delegate = self
@@ -417,12 +418,14 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             
             //maybe i have to check here if the jumpToTime is smaller 0 or bigger thant the complete duration
             SingletonClass.sharedInstance.player.seekToTime(jumpToTime)
+            updatePlayPosition()
         }
     }
     
     func jumpToTimeInPlayer(seconds:Double){
         let targetTime = CMTimeMakeWithSeconds(seconds,1)
         SingletonClass.sharedInstance.player.seekToTime(targetTime)
+        updatePlayPosition()
         play()
     }
     
@@ -496,7 +499,10 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     func updatePlayPosition(){
-        
+        let played = SingletonClass.sharedInstance.player.currentTime()
+        episode.saveplayed(Double(CMTimeGetSeconds(played)))
+        NSLog("played: \(Double(CMTimeGetSeconds(played)))")
+        updateplayprogress()
     }
     
     
