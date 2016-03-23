@@ -146,7 +146,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         enableOrDisableControllsIfNoInFocus()
         allowremotebuttons()
-        if existslocally(episode.episodeUrl).existlocal{
+        if existsLocally(episode.episodeUrl).existlocal{
             autoplay()
         }
         setplaypausebutton()
@@ -376,7 +376,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     func loadNSURL(episode : Episode) -> NSURL{
-        let locally = existslocally(episode.episodeFilename)
+        let locally = existsLocally(episode.episodeFilename)
         if  locally.existlocal{
             url = NSURL(fileURLWithPath: locally.localURL)
         }else{

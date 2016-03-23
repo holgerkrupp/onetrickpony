@@ -82,7 +82,7 @@ class Episode {
     
     func deleteEpisodeFromDocumentsFolder(){
         let manager = NSFileManager.defaultManager()
-        let existence = existslocally(episodeFilename)
+        let existence = existsLocally(episodeFilename)
         if (existence.existlocal){
             let localFeedFile = existence.localURL
             do {
@@ -109,7 +109,7 @@ func DoubleToCMTime(seconds: Double) -> CMTime{
 
 
 func getEpisodeImage(episode: Episode) -> UIImage{
-    let existence = existslocally(episode.episodeImage)
+    let existence = existsLocally(episode.episodeImage)
     if (existence.existlocal){
         return UIImage(named: existence.localURL)!
     }else{

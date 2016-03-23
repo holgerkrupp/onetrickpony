@@ -129,7 +129,7 @@ class EpisodeCell: UITableViewCell {
         EpisodeDownloadButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
         EpisodePauseButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
         EpisodeCancelButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
-        var existence = existslocally(episode.episodeUrl)
+        var existence = existsLocally(episode.episodeUrl)
         // modify Download button to show either 'download' or 'play'
         if (existence.existlocal){
             episode.episodeLocal = true
@@ -151,7 +151,7 @@ class EpisodeCell: UITableViewCell {
             episode.episodeLocal = false
         }
         // set Episode image if existing
-        existence = existslocally(episode.episodeImage)
+        existence = existsLocally(episode.episodeImage)
         if (existence.existlocal){
             EpisodeImage.image = UIImage(named: existence.localURL)
         }

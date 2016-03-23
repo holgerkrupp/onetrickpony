@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-func getvalueforkeyfrompersistentstorrage(key:String) -> AnyObject?{
+func getObjectForKeyFromPersistentStorrage(key:String) -> AnyObject?{
 
     if let value = NSUserDefaults.standardUserDefaults().objectForKey(key){
         return value
@@ -18,7 +18,7 @@ func getvalueforkeyfrompersistentstorrage(key:String) -> AnyObject?{
     }
 }
 
-func setvalueforkeytopersistentstorrage(key:String, value:AnyObject){
+func setObjectForKeyToPersistentStorrage(key:String, value:AnyObject){
     NSUserDefaults.standardUserDefaults().setObject(value, forKey: key)
 }
 
@@ -106,7 +106,7 @@ func dateStringToNSDate(date:String,format:String="EEE, dd MMM yyyy HH:mm:ss z")
     return responseHeader
 }*/
 
-func existslocally(checkurl: String) -> (existlocal : Bool, localURL : String) {
+func existsLocally(checkurl: String) -> (existlocal : Bool, localURL : String) {
     let manager = NSFileManager.defaultManager()
     let url: NSURL = NSURL(string: checkurl)!
     let documentsDirectoryUrl =  NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
