@@ -83,7 +83,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
 
         
         
-        self.refreshControl?.addTarget(self, action:"refreshfeed", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl?.addTarget(self, action:#selector(EpisodesTableViewController.refreshfeed), forControlEvents: UIControlEvents.ValueChanged)
      //   self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
 
         
@@ -102,7 +102,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             
         }
         if SingletonClass.sharedInstance.playerinitialized {
-            SingletonClass.sharedInstance.audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target:self, selector:"updatecell",userInfo: nil,repeats: true)
+            SingletonClass.sharedInstance.audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target:self, selector:#selector(EpisodesTableViewController.updatecell),userInfo: nil,repeats: true)
         }
     }
 

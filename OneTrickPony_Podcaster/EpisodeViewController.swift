@@ -247,7 +247,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     func starttimer(){
         SingletonClass.sharedInstance.audioTimer.invalidate()
-        SingletonClass.sharedInstance.audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target:self, selector: "updateplayprogress",userInfo: nil,repeats: true)
+        SingletonClass.sharedInstance.audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target:self, selector: #selector(EpisodeViewController.updateplayprogress),userInfo: nil,repeats: true)
     }
     
     func stoptimer(){
@@ -495,7 +495,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         }
         
         starttimer()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"playerDidFinishPlaying", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(EpisodeViewController.playerDidFinishPlaying), name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
 
         SingletonClass.sharedInstance.player.seekToTime(starttime)
         SingletonClass.sharedInstance.player.play()
@@ -627,16 +627,16 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         commandCenter.playCommand.enabled = true
         commandCenter.pauseCommand.enabled = true
         
-        commandCenter.skipBackwardCommand.addTarget(self, action: "back30")
-        commandCenter.skipForwardCommand.addTarget(self, action: "forward30")
+        commandCenter.skipBackwardCommand.addTarget(self, action: #selector(EpisodeViewController.back30))
+        commandCenter.skipForwardCommand.addTarget(self, action: #selector(EpisodeViewController.forward30))
         
         commandCenter.skipBackwardCommand.preferredIntervals = [30]
         commandCenter.skipForwardCommand.preferredIntervals = [30]
         
         
-        commandCenter.playCommand.addTarget(self, action: "playPausefromRemoteCenter")
-        commandCenter.pauseCommand.addTarget(self, action: "playPausefromRemoteCenter")
-        commandCenter.togglePlayPauseCommand.addTarget(self, action: "playPausefromRemoteCenter")
+        commandCenter.playCommand.addTarget(self, action: #selector(EpisodeViewController.playPausefromRemoteCenter))
+        commandCenter.pauseCommand.addTarget(self, action: #selector(EpisodeViewController.playPausefromRemoteCenter))
+        commandCenter.togglePlayPauseCommand.addTarget(self, action: #selector(EpisodeViewController.playPausefromRemoteCenter))
        
     }
     
