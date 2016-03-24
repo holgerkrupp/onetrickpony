@@ -23,6 +23,7 @@
 		489B44F51C6BB1B900CC5326 /* License in Resources */ = {isa = PBXBuildFile; fileRef = 489B44F41C6BB1B900CC5326 /* License */; };
 		48A767501C7A07D100E6B485 /* ChapterMarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A7674F1C7A07D100E6B485 /* ChapterMarksViewController.swift */; };
 		48A767561C7A2F8800E6B485 /* pushSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 48A767551C7A2F8800E6B485 /* pushSound.m4a */; };
+		48D2205D1CA485B7005BA209 /* InterfaceGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D2205C1CA485B7005BA209 /* InterfaceGenerator.swift */; };
 		48DB59841C5D51B60041F4AC /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DB59831C5D51B60041F4AC /* Singleton.swift */; };
 		48DB59871C61C6700041F4AC /* PodcastSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48DB59861C61C6700041F4AC /* PodcastSettings.plist */; };
 		48E5B3AC1C69062800D06BAC /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E5B3AB1C69062800D06BAC /* Download.swift */; };
@@ -68,6 +69,7 @@
 		489B44F41C6BB1B900CC5326 /* License */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License; sourceTree = "<group>"; };
 		48A7674F1C7A07D100E6B485 /* ChapterMarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterMarksViewController.swift; sourceTree = "<group>"; };
 		48A767551C7A2F8800E6B485 /* pushSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = pushSound.m4a; sourceTree = "<group>"; };
+		48D2205C1CA485B7005BA209 /* InterfaceGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceGenerator.swift; sourceTree = "<group>"; };
 		48DB59831C5D51B60041F4AC /* Singleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		48DB59861C61C6700041F4AC /* PodcastSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PodcastSettings.plist; path = ../PodcastSettings.plist; sourceTree = "<group>"; };
 		48E5B3AB1C69062800D06BAC /* Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				480FEDEC1C580CCA005594F1 /* SettingsTableViewController.swift */,
 				489B44F41C6BB1B900CC5326 /* License */,
 				4821D4CC1C764D920004DF4A /* supportfunctions.swift */,
+				48D2205C1CA485B7005BA209 /* InterfaceGenerator.swift */,
 			);
 			path = OneTrickPony_Podcaster;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				48E5B3AC1C69062800D06BAC /* Download.swift in Sources */,
 				480FEDE91C5518A4005594F1 /* EpisodesClass.swift in Sources */,
 				48DB59841C5D51B60041F4AC /* Singleton.swift in Sources */,
+				48D2205D1CA485B7005BA209 /* InterfaceGenerator.swift in Sources */,
 				480FEDE71C54C65A005594F1 /* EpisodesTableViewController.swift in Sources */,
 				48A767501C7A07D100E6B485 /* ChapterMarksViewController.swift in Sources */,
 				480FEDED1C580CCA005594F1 /* SettingsTableViewController.swift in Sources */,

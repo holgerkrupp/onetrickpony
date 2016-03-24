@@ -163,8 +163,10 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         sleeptimerBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
         
         shareBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
-        playButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
-        pauseButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
+      //  playButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
+       // pauseButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
+        playButton.tintColor = getColorFromPodcastSettings("playControlColor")
+        pauseButton.tintColor = getColorFromPodcastSettings("playControlColor")
         self.navigationController?.toolbar.barTintColor = getColorFromPodcastSettings("backgroundColor")
         self.navigationController?.toolbar.translucent = false
         self.navigationController?.toolbar.clipsToBounds = true
@@ -422,8 +424,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             
             //maybe i have to check here if the jumpToTime is smaller 0 or bigger thant the complete duration
             SingletonClass.sharedInstance.player.seekToTime(jumpToTime)
-            play()
             updatePlayPosition()
+            play()
+
         }
     }
     
@@ -510,6 +513,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         episode.saveplayed(Double(CMTimeGetSeconds(played)))
         NSLog("played: \(Double(CMTimeGetSeconds(played)))")
         updateplayprogress()
+       
     }
 
     
@@ -539,13 +543,20 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     func setplaypausebutton(){
         enableOrDisableControllsIfNoInFocus()
     
-        playButton.setTitle("play", forState: .Normal)
+        playButton.setTitle(nil, forState: .Normal)
+      //  playButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(20, 20), filled: true), forState: .Normal)
+        
+        
+        playButton.setImage(createPlayImageWithColor(UIColor.redColor(),size: CGSizeMake(20, 20), filled: true), forState: .Normal)
+        
+        
         pauseButton.hidden = true
         playButton.hidden = false
         if (SingletonClass.sharedInstance.playerinitialized == true) {
             if (SingletonClass.sharedInstance.player.rate != 0 && SingletonClass.sharedInstance.player.error == nil) {
                 if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
-                    pauseButton.setTitle("pause", forState: .Normal)
+                    pauseButton.setTitle(nil, forState: .Normal)
+                    pauseButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(20, 20), filled: true), forState: .Normal)
                     playButton.hidden = true
                     pauseButton.hidden = false
                 }
