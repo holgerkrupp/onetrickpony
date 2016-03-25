@@ -425,7 +425,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             //maybe i have to check here if the jumpToTime is smaller 0 or bigger thant the complete duration
             SingletonClass.sharedInstance.player.seekToTime(jumpToTime)
             updatePlayPosition()
-            play()
+            
 
         }
     }
@@ -435,7 +435,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         print("targettime \(targetTime)")
         SingletonClass.sharedInstance.player.seekToTime(targetTime)
         updatePlayPosition()
-        play()
+        
     }
     
     

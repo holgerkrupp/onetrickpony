@@ -12,9 +12,6 @@ import UIKit
     
     func createPlayImageWithColor(color: UIColor, size: CGSize, filled: Bool) -> UIImage {
         // Setup our context
-        
-        print("le color:\(color)")
-        
         let bounds = CGRect(origin: CGPoint.zero, size: size)
         let opaque = false
         let scale: CGFloat = 0
