@@ -163,10 +163,11 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         sleeptimerBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
         
         shareBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
-      //  playButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
-       // pauseButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
         playButton.tintColor = getColorFromPodcastSettings("playControlColor")
         pauseButton.tintColor = getColorFromPodcastSettings("playControlColor")
+        back30Button.tintColor = getColorFromPodcastSettings("playControlColor")
+        forward30Button.tintColor = getColorFromPodcastSettings("playControlColor")
+
         self.navigationController?.toolbar.barTintColor = getColorFromPodcastSettings("backgroundColor")
         self.navigationController?.toolbar.translucent = false
         self.navigationController?.toolbar.clipsToBounds = true
@@ -287,8 +288,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         }
         
         
-        let debugAction = UIAlertAction(title: "DEBUG: 0.2 Minutes", style: .Default) { (alert: UIAlertAction!) -> Void in
-            self.setsleeptimer(0.2)
+        let debugAction = UIAlertAction(title: "5 Minutes", style: .Default) { (alert: UIAlertAction!) -> Void in
+            self.setsleeptimer(5)
         }
         
         let cancelAction = UIAlertAction(title: "cancel", style: .Cancel) { (alert: UIAlertAction!) -> Void in
@@ -544,10 +545,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         enableOrDisableControllsIfNoInFocus()
     
         playButton.setTitle(nil, forState: .Normal)
-      //  playButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(20, 20), filled: true), forState: .Normal)
+        playButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(44, 44), filled: true), forState: .Normal)
         
-        
-        playButton.setImage(createPlayImageWithColor(UIColor.redColor(),size: CGSizeMake(20, 20), filled: true), forState: .Normal)
         
         
         pauseButton.hidden = true
@@ -556,7 +555,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             if (SingletonClass.sharedInstance.player.rate != 0 && SingletonClass.sharedInstance.player.error == nil) {
                 if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
                     pauseButton.setTitle(nil, forState: .Normal)
-                    pauseButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(20, 20), filled: true), forState: .Normal)
+                    pauseButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(44,44), filled: true), forState: .Normal)
                     playButton.hidden = true
                     pauseButton.hidden = false
                 }

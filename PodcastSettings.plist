@@ -22,9 +22,9 @@
 		<key>red</key>
 		<integer>0</integer>
 		<key>green</key>
-		<integer>0</integer>
+		<real>0.55</real>
 		<key>blue</key>
-		<integer>1</integer>
+		<real>0.84</real>
 		<key>alpha</key>
 		<integer>1</integer>
 	</dict>

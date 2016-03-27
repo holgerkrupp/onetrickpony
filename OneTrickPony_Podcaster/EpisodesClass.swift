@@ -166,7 +166,17 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
     view.back30Button.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
     view.playButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
     view.pauseButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
+    
+    
+    
+    view.forward30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:2, size: CGSizeMake(44, 44), filled: true, forward: true, label: "30"), forState: .Normal)
+    view.forward30Button.setTitle(nil, forState: .Normal)
+    
+    view.back30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:2, size: CGSizeMake(44, 44), filled: true, forward: false, label: "30"), forState: .Normal)
+    view.back30Button.setTitle(nil, forState: .Normal)
 
+    
+    
 }
 
 func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
