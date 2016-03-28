@@ -567,15 +567,17 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
       
         let currentspeed = SingletonClass.sharedInstance.player.rate
-        let indexofspeed:Int = speeds.indexOf(currentspeed)!
-        var newindex:Int
-        if (indexofspeed+1 < speeds.count){
-            newindex = indexofspeed+1
-        }else{
-            newindex = 0
+        if currentspeed != 0 { // stupid quick fix to avoid a crash when the player is paused
+            let indexofspeed:Int = speeds.indexOf(currentspeed)!
+            var newindex:Int
+            if (indexofspeed+1 < speeds.count){
+                newindex = indexofspeed+1
+            }else{
+                newindex = 0
+            }
+            SingletonClass.sharedInstance.player.rate = speeds[newindex]
+            playerRateButton.setTitle(speedtext[newindex], forState: .Normal)
         }
-        SingletonClass.sharedInstance.player.rate = speeds[newindex]
-        playerRateButton.setTitle(speedtext[newindex], forState: .Normal)
     }
     
     
