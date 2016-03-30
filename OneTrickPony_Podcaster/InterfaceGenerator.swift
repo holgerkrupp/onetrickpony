@@ -180,7 +180,7 @@ func createSkipWithColor(color: UIColor, width:CGFloat, size: CGSize, filled: Bo
     let Linebounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.UseOpticalBounds)
     
     let xn = circleCenterX - Linebounds.width/2
-    let yn = circleCenterY - Linebounds.midY+width/2
+    let yn = circleCenterY - Linebounds.height/2+width
     CGContextSetTextPosition(context, xn, yn)
     
     

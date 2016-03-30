@@ -37,6 +37,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     @IBOutlet var pauseButton:UIButton!
     @IBOutlet var episodeImage:UIImageView!
     @IBOutlet var episodeShowNotesWebView: UIWebView!
+    @IBOutlet var infoButton:UIButton!
     
     @IBOutlet weak var playedtime: UILabel!
     @IBOutlet weak var remainingTimeLabel: UILabel!
@@ -72,9 +73,18 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
        showsleeptimer()
     }
     
+    @IBAction func infoButtonPressed(sender: UIButton){
+        if episodeShowNotesWebView.hidden == true {
+            episodeShowNotesWebView.hidden = false
+            infoButton.selected = true
+        }else{
+            episodeShowNotesWebView.hidden = true
+            infoButton.selected = false
+        }
+    }
 
     @IBAction func tapImage(recognizer:UITapGestureRecognizer) {
-        NSLog("tap tap")
+    
         if episodeShowNotesWebView.hidden == true {
             episodeShowNotesWebView.hidden = false
         }else{
@@ -136,7 +146,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        disableswipeback()
+    //    disableswipeback()
 
         
         //fill the view with content
@@ -160,9 +170,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
 
         
-        sleeptimerBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
-        
-        shareBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
+
         playButton.tintColor = getColorFromPodcastSettings("playControlColor")
         pauseButton.tintColor = getColorFromPodcastSettings("playControlColor")
         back30Button.tintColor = getColorFromPodcastSettings("playControlColor")
@@ -171,10 +179,15 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         self.navigationController?.toolbar.barTintColor = getColorFromPodcastSettings("backgroundColor")
         self.navigationController?.toolbar.translucent = false
         self.navigationController?.toolbar.clipsToBounds = true
+        
+        
         self.view.backgroundColor = getColorFromPodcastSettings("backgroundColor")
         subView.backgroundColor = getColorFromPodcastSettings("backgroundColor")
-        
+        sleeptimerBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
+        shareBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
         chapterBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
+        infoButton.tintColor = getColorFromPodcastSettings("playControlColor")
+        
         if episode.episodeChapter.count == 0
         {
             chapterBarButton.enabled = false
@@ -545,7 +558,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         enableOrDisableControllsIfNoInFocus()
     
         playButton.setTitle(nil, forState: .Normal)
-        playButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(44, 44), filled: true), forState: .Normal)
+        playButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(30, 30), filled: true), forState: .Normal)
         
         
         
@@ -555,7 +568,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             if (SingletonClass.sharedInstance.player.rate != 0 && SingletonClass.sharedInstance.player.error == nil) {
                 if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
                     pauseButton.setTitle(nil, forState: .Normal)
-                    pauseButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(44,44), filled: true), forState: .Normal)
+                    pauseButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(30,30), filled: true), forState: .Normal)
                     playButton.hidden = true
                     pauseButton.hidden = false
                 }

@@ -169,10 +169,10 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
     
     
     
-    view.forward30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:2, size: CGSizeMake(44, 44), filled: true, forward: true, label: "30"), forState: .Normal)
+    view.forward30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true, forward: true, label: "30"), forState: .Normal)
     view.forward30Button.setTitle(nil, forState: .Normal)
     
-    view.back30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:2, size: CGSizeMake(44, 44), filled: true, forward: false, label: "30"), forState: .Normal)
+    view.back30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true, forward: false, label: "30"), forState: .Normal)
     view.back30Button.setTitle(nil, forState: .Normal)
 
     

@@ -492,9 +492,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         
         if SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle {
             if SingletonClass.sharedInstance.player.rate == 0{
-                cell.EpisodePlayButton.setImage(UIImage(named: "Play filled"), forState: UIControlState.Normal)
+               cell.EpisodePlayButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(30, 30), filled: true), forState: .Normal)
             }else{
-                cell.EpisodePlayButton.setImage(UIImage(named: "Pause filled"), forState: UIControlState.Normal)
+                cell.EpisodePlayButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(30, 30), filled: true), forState: .Normal)
             }
             cell.EpisodePlayButton.enabled = true
             cell.EpisodePlayButton.hidden = false

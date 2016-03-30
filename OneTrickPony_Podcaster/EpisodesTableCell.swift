@@ -43,10 +43,14 @@ class EpisodeCell: UITableViewCell {
     @IBAction func playButtonPressed(){
         if SingletonClass.sharedInstance.player.rate == 0 {
             SingletonClass.sharedInstance.player.play()
-            EpisodePlayButton.setImage(UIImage(named: "Pause filled"), forState: UIControlState.Normal)
+            EpisodePlayButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(30, 30), filled: true), forState: .Normal)
+            EpisodePlayButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
+
         }else{
             SingletonClass.sharedInstance.player.pause()
-            EpisodePlayButton.setImage(UIImage(named: "Play filled"), forState: UIControlState.Normal)
+            EpisodePlayButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(30, 30), filled: true), forState: .Normal)
+            EpisodePlayButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
+
     }
     }
     var episode: Episode = Episode()
