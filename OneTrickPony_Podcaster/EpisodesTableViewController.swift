@@ -506,11 +506,15 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         cell.delegate = self
         
         if let download = activeDownloads[episode.episodeUrl] {
-            let title = (download.isDownloading) ? "Pause" : "Resume"
-            cell.EpisodePauseButton.setTitle(title, forState: UIControlState.Normal)
+            if (download.isDownloading) {
+                cell.EpisodePauseButton.titleLabel?.text = ""
+                cell.EpisodePauseButton.setImage(createCircleWithPause(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true), forState: .Normal)
+            }else{
+                cell.EpisodePauseButton.titleLabel?.text = ""
+              cell.EpisodePauseButton.setImage(createCircleWithArrow(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: false), forState: .Normal)
+            }
         }
-        
-        
+        cell.EpisodeCancelButton.setImage(createCircleWithCross(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: false), forState: .Normal)
         var showDownloadControls = false
         if let download = activeDownloads[episode.episodeUrl] {
             showDownloadControls = true
@@ -655,8 +659,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                     dispatch_async(dispatch_get_main_queue(), {
                         episodeCell.EpisodeDownloadProgressbar.hidden = false
                         episodeCell.EpisodeDownloadProgressbar.progress = download.progress
-                        episodeCell.EpisodeDownloadButton!.setTitle("Pause", forState: UIControlState.Normal)
-                        
+                        //episodeCell.EpisodeDownloadButton!.setTitle("Pause", forState: UIControlState.Normal)
+                    episodeCell.EpisodePauseButton.setImage(createCircleWithPause(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true), forState: .Normal)
                    //     episodeCell.EpisodeprogressLabel.text =  String(format: "%.1f%% of %@",  download.progress * 100, totalSize)
                     })
                 }
@@ -783,7 +787,19 @@ extension EpisodesTableViewController: EpisodeCellDelegate {
         }
     }
 
-
+    func isdownloading(cell: EpisodeCell) -> Bool{
+        var ret = false
+        if let indexPath = tableView.indexPathForCell(cell) {
+            let episode = episodes[indexPath.row]
+            let download = activeDownloads[episode.episodeUrl]
+            ret = download!.isDownloading
+        }else{
+            ret = false
+        }
+       print(ret)
+        return ret
+    }
+    
     func resumeepisode(cell: EpisodeCell) {
         if let indexPath = tableView.indexPathForCell(cell) {
             let episode = episodes[indexPath.row]

@@ -17,6 +17,7 @@ protocol EpisodeCellDelegate {
     func resumeepisode(cell: EpisodeCell)
     func cancelepisode(cell: EpisodeCell)
     func downloadepisode(cell: EpisodeCell)
+    func isdownloading(cell: EpisodeCell) -> Bool
 }
 
 
@@ -59,7 +60,7 @@ class EpisodeCell: UITableViewCell {
         delegate?.downloadepisode(self)
     }
     @IBAction func pauseOrResumePressed(){
-        if (EpisodePauseButton.titleLabel!.text == "Pause") {
+        if (delegate?.isdownloading(self) == true) {
                 delegate?.pauseepisode(self)
         } else {
                 delegate?.resumeepisode(self)
@@ -149,7 +150,8 @@ class EpisodeCell: UITableViewCell {
             EpisodeDownloadProgressbar.progress = 0
             EpisodeDownloadProgressbar.hidden = true
        //     EpisodeprogressLabel.hidden = true
-            EpisodeDownloadButton!.setTitle("Download", forState: UIControlState.Normal)
+            EpisodeDownloadButton!.setTitle("", forState: UIControlState.Normal)
+            EpisodeDownloadButton!.setImage(createCircleWithArrow(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true), forState: .Normal)
             //EpisodeDownloadButton!.setImage(UIImage(named: "Download from the Cloud"), forState: UIControlState.Normal)
             EpisodeDownloadButton!.enabled = true
             episode.episodeLocal = false

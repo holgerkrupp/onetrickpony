@@ -192,4 +192,145 @@ func createSkipWithColor(color: UIColor, width:CGFloat, size: CGSize, filled: Bo
     return image
 }
 
+func createCircleWithCross(color: UIColor, width:CGFloat, size: CGSize, filled: Bool) -> UIImage {
+    // Setup our context
+    let bounds = CGRect(origin: CGPoint.zero, size: size)
+    let opaque = false
+    let scale: CGFloat = 0
+    UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
+    let context = UIGraphicsGetCurrentContext()
+    
+    // Setup sizes to draw
+    let pictureHeight = bounds.height
+    let pictureWidth = bounds.width
+    
+    let circleCenterY = floor(pictureHeight/2)
+    let circleCenterX = floor(pictureWidth/2)
+    
+    let radius = floor(pictureWidth/2 - width)
+    
+    let x = sqrt(2*radius) + width //+radius
+    let Xheight = pictureHeight - 2*x - pictureHeight/4
+    let Xwidth = Xheight
+    
+    let crossY = (pictureHeight - Xheight)/2
+    let crossX = (pictureWidth - Xwidth)/2
+    
+    CGContextSetLineWidth(context, width)
+    CGContextSetStrokeColorWithColor(context, color.CGColor)
+    CGContextSetFillColorWithColor(context, color.CGColor)
+    
+    
+    CGContextBeginPath(context)
+    CGContextAddArc(context, circleCenterX, circleCenterY, radius, 0.degreesToRadians, 360.degreesToRadians, 1)
+    
+    CGContextMoveToPoint(context, crossX, crossY)
+    CGContextAddLineToPoint(context, crossX+Xwidth, crossY+Xheight)
+    
+    CGContextMoveToPoint(context, crossX+Xwidth, crossY)
+    CGContextAddLineToPoint(context, crossX, crossY+Xheight)
+    
+    
+    if filled {
+        CGContextFillPath(context)
+    }
+    CGContextStrokePath(context)
+    
+    
+    let image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return image
+    
+}
 
+func createCircleWithPause(color: UIColor, width:CGFloat, size: CGSize, filled: Bool) -> UIImage {
+    // Setup our context
+    let bounds = CGRect(origin: CGPoint.zero, size: size)
+    let opaque = false
+    let scale: CGFloat = 0
+    UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
+    let context = UIGraphicsGetCurrentContext()
+    
+    // Setup sizes to draw
+    let pictureHeight = bounds.height
+    let pictureWidth = bounds.width
+    
+    let circleCenterY = floor(pictureHeight/2)
+    let circleCenterX = floor(pictureWidth/2)
+    
+    let radius = floor(pictureWidth/2 - width)
+    
+    let x = sqrt(2*radius) + width //+radius
+    
+    CGContextSetLineWidth(context, width)
+    CGContextSetStrokeColorWithColor(context, color.CGColor)
+    CGContextSetFillColorWithColor(context, color.CGColor)
+    
+    
+    CGContextBeginPath(context)
+    CGContextAddArc(context, circleCenterX, circleCenterY, radius, 0.degreesToRadians, 360.degreesToRadians, 1)
+    
+    let pause = createPauseImageWithColor(color, size: size, filled: filled).CGImage
+    let pauseWidth = pictureWidth - 2*x - pictureWidth/4
+    let pauseHeight = pictureHeight - 2*x - pictureHeight/4
+    let pauseX = (pictureHeight - pauseHeight)/2
+    let pauseY = (pictureWidth - pauseWidth)/2
+    
+    CGContextDrawImage(context, CGRect(origin: CGPoint(x: pauseX, y: pauseY), size: CGSizeMake(pauseWidth, pauseHeight)), pause)
+    
+    
+    CGContextStrokePath(context)
+    
+    
+    let image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return image
+    
+}
+
+func createCircleWithArrow(color: UIColor, width:CGFloat, size: CGSize, filled: Bool) -> UIImage {
+    // Setup our context
+    let bounds = CGRect(origin: CGPoint.zero, size: size)
+    let opaque = false
+    let scale: CGFloat = 0
+    UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
+    let context = UIGraphicsGetCurrentContext()
+    
+    // Setup sizes to draw
+    let pictureHeight = bounds.height
+    let pictureWidth = bounds.width
+    
+    let circleCenterY = floor(pictureHeight/2)
+    let circleCenterX = floor(pictureWidth/2)
+    
+    let radius = floor(pictureWidth/2 - width)
+    
+    let x = sqrt(2*radius) + width //+radius
+    
+    CGContextSetLineWidth(context, width)
+    CGContextSetStrokeColorWithColor(context, color.CGColor)
+    CGContextSetFillColorWithColor(context, color.CGColor)
+    
+    
+    CGContextBeginPath(context)
+    CGContextAddArc(context, circleCenterX, circleCenterY, radius, 0.degreesToRadians, 360.degreesToRadians, 1)
+    
+    let arrowHeight = pictureHeight - 2*x - pictureHeight/4
+    let arrowWidth:CGFloat = 1/3*arrowHeight
+    let arrowX = pictureWidth/2
+    let arrowY = (pictureHeight - arrowHeight)/2
+    
+    CGContextMoveToPoint(context, arrowX, arrowY)
+    CGContextAddLineToPoint(context, arrowX, arrowY+arrowHeight)
+    CGContextAddLineToPoint(context, arrowX-arrowWidth, arrowY+arrowHeight-arrowWidth)
+    CGContextMoveToPoint(context, arrowX, arrowY+arrowHeight)
+    CGContextAddLineToPoint(context, arrowX+arrowWidth, arrowY+arrowHeight-arrowWidth)
+    
+    CGContextStrokePath(context)
+    
+    
+    let image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return image
+    
+}

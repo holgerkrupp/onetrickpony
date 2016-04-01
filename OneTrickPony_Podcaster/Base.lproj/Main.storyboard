@@ -100,7 +100,6 @@
                                                 <constraint firstAttribute="width" constant="50" id="EFt-y6-Qjn"/>
                                                 <constraint firstAttribute="height" constant="50" id="Ewd-wK-ccs"/>
                                             </constraints>
-                                            <state key="normal" image="Play Filled"/>
                                             <connections>
                                                 <action selector="playButtonPressed" destination="1tu-3b-spL" eventType="touchDown" id="YQF-Kk-sOq"/>
                                             </connections>
@@ -131,14 +130,14 @@
                                                 <action selector="downloadPressed" destination="1tu-3b-spL" eventType="touchDown" id="Oa0-OU-S1Z"/>
                                             </connections>
                                         </button>
-                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rwj-Nv-AAn">
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rwj-Nv-AAn">
                                             <rect key="frame" x="536" y="68" width="56" height="30"/>
                                             <accessibility key="accessibilityConfiguration" identifier="Download"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="9Br-bE-Vlb"/>
                                                 <constraint firstAttribute="width" constant="30" id="hc6-AR-jMy"/>
                                             </constraints>
-                                            <state key="normal" title="Cancel">
+                                            <state key="normal">
                                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <variation key="default">
@@ -168,14 +167,14 @@
                                                 <rect key="frame" x="16" y="82" width="80" height="2"/>
                                             </variation>
                                         </progressView>
-                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xkb-Ee-nYU">
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xkb-Ee-nYU">
                                             <rect key="frame" x="476" y="68" width="50" height="30"/>
                                             <accessibility key="accessibilityConfiguration" identifier="Download"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="30" id="dop-Mp-6st"/>
                                                 <constraint firstAttribute="height" constant="30" id="fpX-aQ-KEy"/>
                                             </constraints>
-                                            <state key="normal" title="Pause">
+                                            <state key="normal">
                                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <variation key="default">
@@ -702,7 +701,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Play Filled" width="100" height="100"/>
         <image name="StandardCover" width="1024" height="1024"/>
         <image name="moon" width="30" height="30"/>
     </resources>
