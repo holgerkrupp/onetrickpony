@@ -15,7 +15,7 @@ class Episode {
     var episodeTitle:       String = String()
     var episodeLink:        String = String()
     var episodeUrl:         String = String()
-    var episodeDuration:    String = String()
+    var episodeDuration:    String? = String()
     var episodePubDate:     NSDate = NSDate()
     var episodeFilename:    String = String()
     var episodeFilesize:    Int = Int()
@@ -35,8 +35,17 @@ class Episode {
         return time
     }
     
+    func getDurationFromEpisode() -> String{
+        if episodeDuration != "", let Duration = episodeDuration {
+            return Duration
+        }else{
+            NSLog("no duration")
+            return "0000"
+        }
+    }
+    
     func getDurationinCMTime() -> CMTime {
-        let time = CMTimeMake(Int64(stringtodouble(episodeDuration)), 1)
+        let time = CMTimeMake(Int64(stringtodouble(getDurationFromEpisode())), 1)
         return time
     }
     
@@ -54,7 +63,7 @@ class Episode {
     
     func remaining() -> CMTime{
         let played = readplayed()
-        let duration = stringtodouble(episodeDuration)
+        let duration = stringtodouble(getDurationFromEpisode())
         let remainingtime = CMTimeSubtract(DoubleToCMTime(duration), played)
         return remainingtime
     }
@@ -128,7 +137,7 @@ func fillplayerView(view : EpisodeViewController, episode : Episode){
     // Time & Slider
     
     let starttime = episode.readplayed
-    let duration = stringtodouble(episode.episodeDuration)
+    let duration = stringtodouble(episode.getDurationFromEpisode())
     
     view.progressSlider.maximumValue = Float(duration)
     let currentplaytime = Float(CMTimeGetSeconds(starttime()))

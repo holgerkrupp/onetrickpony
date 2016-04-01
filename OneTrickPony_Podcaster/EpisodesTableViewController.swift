@@ -397,7 +397,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             episode.episodeLink = episodeLink
             
             
-            episode.episodeDuration = episodeDuration
+            episode.episodeDuration = episodeDuration 
             
             
             // BUG BUG BUG 
