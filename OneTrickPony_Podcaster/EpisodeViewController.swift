@@ -150,7 +150,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
 
         
         //fill the view with content
-        fillplayerView(self, episode: episode)
+        fillPlayerView(episode)
         adjustColors()
         episodeShowNotesWebView.hidden = true
         
@@ -160,6 +160,69 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             autoplay()
         }
         setplaypausebutton()
+        
+    }
+    
+    
+    func fillPlayerView(episode: Episode){
+        
+            // Text
+           titleLabel.text = episode.episodeTitle
+           titleLabel.textColor = getColorFromPodcastSettings("textcolor")
+            
+            
+            // Time & Slider
+            
+            let starttime = episode.readplayed
+            let duration = stringtodouble(episode.getDurationFromEpisode())
+            
+           progressSlider.maximumValue = Float(duration)
+            let currentplaytime = Float(CMTimeGetSeconds(starttime()))
+            
+           progressSlider.setValue(currentplaytime, animated: false)
+            // progressSlider.backgroundColor = getColorFromPodcastSettings("progressBackgroundColor")
+           progressSlider.minimumTrackTintColor = getColorFromPodcastSettings("highlightColor")
+           progressSlider.maximumTrackTintColor = getColorFromPodcastSettings("progressBackgroundColor")
+           progressSlider.setMaximumTrackImage(getImageWithColor(getColorFromPodcastSettings("progressBackgroundColor"),size: CGSizeMake(2, 10)), forState: .Normal)
+           progressSlider.setMinimumTrackImage(getImageWithColor(getColorFromPodcastSettings("highlightColor"),size: CGSizeMake(2, 10)), forState: .Normal)
+           progressSlider.setThumbImage(getImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(2, 30)), forState: .Normal)
+            
+            
+           playedtime.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(starttime()))
+           playedtime.textColor = getColorFromPodcastSettings("secondarytextcolor")
+            
+           remainingTimeLabel.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(episode.remaining()))
+           remainingTimeLabel.textColor = getColorFromPodcastSettings("secondarytextcolor")
+            
+            let description = episode.episodeDescription.stringByReplacingOccurrencesOfString("\n", withString: "</br>")
+            
+           episodeShowNotesWebView.loadHTMLString(description, baseURL: nil)
+            
+           episodeImage.image = getEpisodeImage(episode)
+            // rate Button
+            if (SingletonClass.sharedInstance.playerinitialized == true) {
+                let currentspeed = SingletonClass.sharedInstance.player.rate
+                if currentspeed != 0 {
+                    let indexofspeed:Int = speeds.indexOf(currentspeed)!
+                   playerRateButton.setTitle(speedtext[indexofspeed], forState: .Normal)
+                }
+            }
+           playerRateButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
+           forward30Button.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
+           back30Button.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
+           playButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
+           pauseButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
+            
+            
+            
+           forward30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true, forward: true, label: "30"), forState: .Normal)
+           forward30Button.setTitle(nil, forState: .Normal)
+            
+           back30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true, forward: false, label: "30"), forState: .Normal)
+           back30Button.setTitle(nil, forState: .Normal)
+            
+            
+            
         
     }
     
@@ -630,7 +693,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     func updateSliderProgress(progress: Double){
         if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
-                fillplayerView(self, episode: episode)
+                fillPlayerView(episode)
             }
     }
 

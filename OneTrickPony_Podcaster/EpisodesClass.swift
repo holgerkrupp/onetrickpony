@@ -127,67 +127,6 @@ func getEpisodeImage(episode: Episode) -> UIImage{
 }
 
 
-func fillplayerView(view : EpisodeViewController, episode : Episode){
-    let episode = view.episode
-    // Text
-    view.titleLabel.text = episode.episodeTitle
-    view.titleLabel.textColor = getColorFromPodcastSettings("textcolor")
-    
-    
-    // Time & Slider
-    
-    let starttime = episode.readplayed
-    let duration = stringtodouble(episode.getDurationFromEpisode())
-    
-    view.progressSlider.maximumValue = Float(duration)
-    let currentplaytime = Float(CMTimeGetSeconds(starttime()))
-    
-    view.progressSlider.setValue(currentplaytime, animated: false)
-  //  view.progressSlider.backgroundColor = getColorFromPodcastSettings("progressBackgroundColor")
-    view.progressSlider.minimumTrackTintColor = getColorFromPodcastSettings("highlightColor")
-    view.progressSlider.maximumTrackTintColor = getColorFromPodcastSettings("progressBackgroundColor")
-    view.progressSlider.setMaximumTrackImage(getImageWithColor(getColorFromPodcastSettings("progressBackgroundColor"),size: CGSizeMake(2, 10)), forState: .Normal)
-    view.progressSlider.setMinimumTrackImage(getImageWithColor(getColorFromPodcastSettings("highlightColor"),size: CGSizeMake(2, 10)), forState: .Normal)
-    view.progressSlider.setThumbImage(getImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(2, 30)), forState: .Normal)
-    
-    
-    view.playedtime.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(starttime()))
-    view.playedtime.textColor = getColorFromPodcastSettings("secondarytextcolor")
-    
-    view.remainingTimeLabel.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(episode.remaining()))
-    view.remainingTimeLabel.textColor = getColorFromPodcastSettings("secondarytextcolor")
-    
-    let description = episode.episodeDescription.stringByReplacingOccurrencesOfString("\n", withString: "</br>")
-    
-    view.episodeShowNotesWebView.loadHTMLString(description, baseURL: nil)
-    
-    view.episodeImage.image = getEpisodeImage(episode)
-    // rate Button
-    if (SingletonClass.sharedInstance.playerinitialized == true) {
-        let currentspeed = SingletonClass.sharedInstance.player.rate
-        if currentspeed != 0 {
-            let indexofspeed:Int = view.speeds.indexOf(currentspeed)!
-            view.playerRateButton.setTitle(view.speedtext[indexofspeed], forState: .Normal)
-        }
-    }
-    view.playerRateButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
-    view.forward30Button.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
-    view.back30Button.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
-    view.playButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
-    view.pauseButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
-    
-    
-    
-    view.forward30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true, forward: true, label: "30"), forState: .Normal)
-    view.forward30Button.setTitle(nil, forState: .Normal)
-    
-    view.back30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true, forward: false, label: "30"), forState: .Normal)
-    view.back30Button.setTitle(nil, forState: .Normal)
-
-    
-    
-}
-
 func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
     let rect = CGRectMake(0, 0, size.width, size.height)
     UIGraphicsBeginImageContextWithOptions(size, false, 0)
