@@ -605,7 +605,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             episode.saveplayed(progress)
             
             
-            EpisodesTableViewController().updateCellForEpisode(episode)
+           // EpisodesTableViewController().updateCellForEpisode(episode)
             
             updateSliderProgress(progress)
             updateMPMediaPlayer()

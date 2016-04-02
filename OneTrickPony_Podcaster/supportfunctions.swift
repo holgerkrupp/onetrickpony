@@ -10,16 +10,15 @@ import Foundation
 import UIKit
 
 func getObjectForKeyFromPersistentStorrage(key:String) -> AnyObject?{
-
-    if let value = NSUserDefaults.standardUserDefaults().objectForKey(key){
-        return value
+    if let object = NSUserDefaults.standardUserDefaults().objectForKey(key){
+        return object
     }else{
         return nil
     }
 }
 
-func setObjectForKeyToPersistentStorrage(key:String, value:AnyObject){
-    NSUserDefaults.standardUserDefaults().setObject(value, forKey: key)
+func setObjectForKeyToPersistentStorrage(key:String, object:AnyObject){
+    NSUserDefaults.standardUserDefaults().setObject(object, forKey: key)
 }
 
 func removePersistentStorrage(){
@@ -27,7 +26,7 @@ func removePersistentStorrage(){
     NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appdomain!)
 }
 
-func getValueForKeyFromPodcastSettings(key:String) -> AnyObject{
+func getObjectForKeyFromPodcastSettings(key:String) -> AnyObject{
     if let path = NSBundle.mainBundle().pathForResource("PodcastSettings", ofType: "plist") {
         let myDict = NSDictionary(contentsOfFile: path)
 
@@ -40,7 +39,7 @@ func getValueForKeyFromPodcastSettings(key:String) -> AnyObject{
 
 
 func getColorFromPodcastSettings(key: String) -> UIColor {
-    let colorComponents = getValueForKeyFromPodcastSettings(key) as! NSDictionary
+    let colorComponents = getObjectForKeyFromPodcastSettings(key) as! NSDictionary
     let color = UIColor(
         red: colorComponents.objectForKey("red") as! CGFloat,
         green: colorComponents.objectForKey("green") as! CGFloat,
