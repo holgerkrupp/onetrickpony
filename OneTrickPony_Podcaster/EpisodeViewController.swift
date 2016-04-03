@@ -349,32 +349,34 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     func showsleeptimer(){
         // self.performSegueWithIdentifier("SleepTimerSegue", sender: self)
         
-        let alert = UIAlertController(title: "Sleeptimer", message: "The sleep timer will automatically pause the episode after the selcted time", preferredStyle: .ActionSheet)
         
-        let disableAction = UIAlertAction(title: "Disable", style: .Default) { (alert: UIAlertAction!) -> Void in
+        
+        let alert = UIAlertController(title: NSLocalizedString("sleep.timer.title", value: "Sleep timer", comment: "shown in Episode Player"), message: NSLocalizedString("The sleep timer will automatically pause the episode after the selcted time", comment: "shown in Episode Player"), preferredStyle: .ActionSheet)
+        
+        let disableAction = UIAlertAction(title: NSLocalizedString("sleep.timer.deactivate", value: "Disable", comment: "shown in Episode Player"), style: .Default) { (alert: UIAlertAction!) -> Void in
             self.cancelleeptimer()
         }
         
-        let firstAction = UIAlertAction(title: "30 Minutes", style: .Default) { (alert: UIAlertAction!) -> Void in
+        let firstAction = UIAlertAction(title: NSLocalizedString("sleep.timer.30", value: "30 Minutes", comment: "shown in Episode Player"), style: .Default) { (alert: UIAlertAction!) -> Void in
             self.setsleeptimer(30)
         }
         
-        let secondAction = UIAlertAction(title: "15 Minutes", style: .Default) { (alert: UIAlertAction!) -> Void in
+        let secondAction = UIAlertAction(title: NSLocalizedString("sleep.timer.15", value: "15 Minutes", comment: "shown in Episode Player"), style: .Default) { (alert: UIAlertAction!) -> Void in
             self.setsleeptimer(15)
         }
         
         
-        let debugAction = UIAlertAction(title: "5 Minutes", style: .Default) { (alert: UIAlertAction!) -> Void in
+        let thirdAction = UIAlertAction(title: NSLocalizedString("sleep.timer.5", value: "5 Minutes", comment: "shown in Episode Player"), style: .Default) { (alert: UIAlertAction!) -> Void in
             self.setsleeptimer(5)
         }
         
-        let cancelAction = UIAlertAction(title: "cancel", style: .Cancel) { (alert: UIAlertAction!) -> Void in
+        let cancelAction = UIAlertAction(title: NSLocalizedString("sleep.timer.cancel", value: "cancel", comment: "shown in Episode Player"), style: .Cancel) { (alert: UIAlertAction!) -> Void in
             
         }
         alert.addAction(disableAction)
         alert.addAction(firstAction)
         alert.addAction(secondAction)
-        alert.addAction(debugAction)
+        alert.addAction(thirdAction)
         alert.addAction(cancelAction)
         presentViewController(alert, animated: true, completion:nil) // 6
     }
@@ -574,11 +576,18 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             starttime = episode.readplayed()
         }
         
+
+
+        
         starttimer()
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(EpisodeViewController.playerDidFinishPlaying), name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
 
         SingletonClass.sharedInstance.player.seekToTime(starttime)
         SingletonClass.sharedInstance.player.play()
+        if let newindex = getObjectForKeyFromPersistentStorrage("player.rate"){
+            NSLog("rateindex: \(newindex)")
+            updateRate(newindex as! Int)
+        }
         somethingplayscurrently = true
         setplaypausebutton()
         updateMPMediaPlayer()
@@ -651,11 +660,23 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             }else{
                 newindex = 0
             }
+            updateRate(newindex)
+            /*
             SingletonClass.sharedInstance.player.rate = speeds[newindex]
             playerRateButton.setTitle(speedtext[newindex], forState: .Normal)
+            playerRateButton.tintColor = getColorFromPodcastSettings("playControlColor")
+
+            setObjectForKeyToPersistentStorrage("player.rate", object: newindex)
+             */
         }
     }
     
+    func updateRate(rateindex: Int){
+        SingletonClass.sharedInstance.player.rate = speeds[rateindex]
+        playerRateButton.setTitle(speedtext[rateindex], forState: .Normal)
+        playerRateButton.tintColor = getColorFromPodcastSettings("playControlColor")
+        setObjectForKeyToPersistentStorrage("player.rate", object: rateindex)
+    }
     
     func updateplayprogress(){
         if (SingletonClass.sharedInstance.playerinitialized == true){
@@ -752,7 +773,10 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
 
     
     func displayShareSheet() {
-        let shareContent:String = "I'm listening to \(episode.episodeTitle) - \(episode.episodeLink)"
+        
+        let shareContent:String = String.localizedStringWithFormat(NSLocalizedString("share.sheet", value:"I'm listening to %@ - %@",comment: "used for tweets and stuff"), episode.episodeTitle, episode.episodeLink)
+        
+     //   let shareContent:String = "I'm listening to \(episode.episodeTitle) - \(episode.episodeLink)"
         NSLog(shareContent)
         let activityViewController = UIActivityViewController(activityItems: [shareContent as NSString], applicationActivities: nil)
         presentViewController(activityViewController, animated: true, completion: {})

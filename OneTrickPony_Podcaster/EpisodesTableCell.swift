@@ -93,13 +93,17 @@ class EpisodeCell: UITableViewCell {
         if remain <= 0{
             // the item has been played to the end
             remain = 0
-            EpisodeDurationLabel!.text = "Done playing"
+            EpisodeDurationLabel!.text = NSLocalizedString("episode.finished",value: "Done playing", comment: "shown in TableView")
         }else{
-            EpisodeDurationLabel!.text = "\(secondsToHoursMinutesSeconds(Double(remain))) remaining"
+          //  EpisodeDurationLabel!.text = "\(secondsToHoursMinutesSeconds(Double(remain))) remaining"
+            EpisodeDurationLabel!.text = String.localizedStringWithFormat(
+                NSLocalizedString("string.for.time.remaining", value:"%@ remaining",
+                    comment: "shown in TableView"),
+                secondsToHoursMinutesSeconds(Double(remain)))
         }
         EpisodeTimeProgressbar.progress = 1-remain/Float(CMTimeGetSeconds(episode.getDurationinCMTime()))
         }else{
-            EpisodeDurationLabel!.text = "Duration unknown"
+            EpisodeDurationLabel!.text = NSLocalizedString("episode.noduration",value: "Duration unknown", comment: "shown in TableView")
             EpisodeTimeProgressbar.progress = 0
         }
         EpisodeTimeProgressbar.backgroundColor = getColorFromPodcastSettings("progressBackgroundColor")
@@ -114,7 +118,10 @@ class EpisodeCell: UITableViewCell {
         
         date = episode.episodePubDate
      
-        dateFormatter.dateFormat = "dd.MM.yy"
+        //dateFormatter.dateFormat = "dd.MM.yy"
+        dateFormatter.dateStyle = .ShortStyle
+        dateFormatter.timeStyle = .NoStyle
+        
         dateString = dateFormatter.stringFromDate(date)
         EpisodeDateLabel!.text = dateString
         
@@ -122,7 +129,11 @@ class EpisodeCell: UITableViewCell {
         
         
         let filesize: Double = Double(episode.episodeFilesize)/1024/1024
-        EpisodeFileSizeLabel!.text = String(format:"%.1f", filesize) + " MB"
+       // EpisodeFileSizeLabel!.text = String(format:"%.1f", filesize) + " MB"
+        EpisodeFileSizeLabel!.text = String.localizedStringWithFormat(
+            NSLocalizedString("string.for.file.size", value:"%.1f MB",
+                comment: "shown in TableView"),
+            filesize)
         EpisodeFileSizeLabel!.textColor = getColorFromPodcastSettings("secondarytextcolor")
 
         //NSLog(EpisodeTimeProgressbar.progress)

@@ -101,21 +101,15 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gge-f4-0Y3">
-                                            <rect key="frame" x="502" y="68" width="90" height="30"/>
+                                            <rect key="frame" x="502" y="54" width="90" height="44"/>
                                             <accessibility key="accessibilityConfiguration" identifier="Download"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="RAS-FD-63p"/>
+                                                <constraint firstAttribute="height" constant="44" id="RAS-FD-63p"/>
                                                 <constraint firstAttribute="width" constant="90" id="YDK-bg-nAN"/>
-                                                <constraint firstAttribute="width" constant="30" id="rKa-a7-eb8"/>
                                             </constraints>
                                             <state key="normal" title="Download">
                                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="rKa-a7-eb8"/>
-                                                </mask>
-                                            </variation>
                                             <variation key="heightClass=regular" ambiguous="YES" misplaced="YES">
                                                 <rect key="frame" x="503" y="27" width="69" height="53"/>
                                             </variation>
@@ -126,12 +120,11 @@
                                                 <action selector="downloadPressed" destination="1tu-3b-spL" eventType="touchDown" id="Oa0-OU-S1Z"/>
                                             </connections>
                                         </button>
-                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rwj-Nv-AAn">
-                                            <rect key="frame" x="536" y="68" width="56" height="30"/>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rwj-Nv-AAn">
+                                            <rect key="frame" x="562" y="54" width="30" height="44"/>
                                             <accessibility key="accessibilityConfiguration" identifier="Download"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="9Br-bE-Vlb"/>
-                                                <constraint firstAttribute="width" constant="30" id="hc6-AR-jMy"/>
+                                                <constraint firstAttribute="width" constant="44" id="hc6-AR-jMy"/>
                                             </constraints>
                                             <state key="normal">
                                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -163,21 +156,12 @@
                                                 <rect key="frame" x="16" y="82" width="80" height="2"/>
                                             </variation>
                                         </progressView>
-                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xkb-Ee-nYU">
-                                            <rect key="frame" x="476" y="68" width="50" height="30"/>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xkb-Ee-nYU">
+                                            <rect key="frame" x="522" y="54" width="30" height="44"/>
                                             <accessibility key="accessibilityConfiguration" identifier="Download"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="30" id="dop-Mp-6st"/>
-                                                <constraint firstAttribute="height" constant="30" id="fpX-aQ-KEy"/>
-                                            </constraints>
                                             <state key="normal">
                                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="dop-Mp-6st"/>
-                                                </mask>
-                                            </variation>
                                             <variation key="heightClass=regular" ambiguous="YES" misplaced="YES">
                                                 <rect key="frame" x="503" y="27" width="69" height="53"/>
                                             </variation>
@@ -203,6 +187,7 @@
                                         <constraint firstItem="Rwj-Nv-AAn" firstAttribute="bottom" secondItem="gge-f4-0Y3" secondAttribute="bottom" id="KhR-jG-sOm"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="bvJ-Ys-U60" secondAttribute="trailing" constant="5" id="Ocz-Uz-tDK"/>
                                         <constraint firstItem="LmD-qA-hYZ" firstAttribute="centerX" secondItem="juc-WX-z97" secondAttribute="centerX" id="Qv5-tE-DqX"/>
+                                        <constraint firstItem="Rwj-Nv-AAn" firstAttribute="top" secondItem="gge-f4-0Y3" secondAttribute="top" id="R4T-BJ-z9i"/>
                                         <constraint firstItem="15j-Ug-0Ip" firstAttribute="leading" secondItem="bvJ-Ys-U60" secondAttribute="leading" id="RMo-Ce-Mxi"/>
                                         <constraint firstItem="Rwj-Nv-AAn" firstAttribute="bottom" secondItem="xkb-Ee-nYU" secondAttribute="bottom" id="SP6-4S-6Th"/>
                                         <constraint firstItem="bvJ-Ys-U60" firstAttribute="top" secondItem="15j-Ug-0Ip" secondAttribute="bottom" constant="8" symbolic="YES" id="TO0-3v-881"/>
@@ -212,6 +197,8 @@
                                         <constraint firstItem="2K5-AB-nx1" firstAttribute="trailing" secondItem="USm-y5-NZg" secondAttribute="trailing" id="ahI-u9-fds"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="gge-f4-0Y3" secondAttribute="bottom" id="bF1-uJ-hsq"/>
                                         <constraint firstItem="KGV-PS-q9Z" firstAttribute="top" secondItem="Q62-8E-a8R" secondAttribute="topMargin" constant="12" id="be3-Eh-65l"/>
+                                        <constraint firstItem="Rwj-Nv-AAn" firstAttribute="top" secondItem="xkb-Ee-nYU" secondAttribute="top" id="cSo-VR-rxy"/>
+                                        <constraint firstItem="Rwj-Nv-AAn" firstAttribute="bottom" secondItem="xkb-Ee-nYU" secondAttribute="bottom" id="eB5-AS-v7S"/>
                                         <constraint firstItem="2K5-AB-nx1" firstAttribute="bottom" secondItem="Q62-8E-a8R" secondAttribute="bottomMargin" id="eBi-sy-GAf"/>
                                         <constraint firstItem="ahl-EG-eb5" firstAttribute="top" secondItem="Q62-8E-a8R" secondAttribute="topMargin" id="hOv-Tz-85B"/>
                                         <constraint firstItem="Rwj-Nv-AAn" firstAttribute="trailing" secondItem="gge-f4-0Y3" secondAttribute="trailing" id="hvo-Y7-X74"/>
@@ -224,6 +211,7 @@
                                         <constraint firstItem="2K5-AB-nx1" firstAttribute="trailing" secondItem="USm-y5-NZg" secondAttribute="trailing" id="vlq-Sv-5sd"/>
                                         <constraint firstItem="Rwj-Nv-AAn" firstAttribute="leading" secondItem="xkb-Ee-nYU" secondAttribute="trailing" constant="10" id="vqf-3l-BUc"/>
                                         <constraint firstItem="15j-Ug-0Ip" firstAttribute="firstBaseline" secondItem="ahl-EG-eb5" secondAttribute="baseline" id="wMv-jv-Z9n"/>
+                                        <constraint firstItem="Rwj-Nv-AAn" firstAttribute="bottom" secondItem="gge-f4-0Y3" secondAttribute="bottom" id="y71-kt-q2v"/>
                                         <constraint firstItem="15j-Ug-0Ip" firstAttribute="leading" secondItem="USm-y5-NZg" secondAttribute="leading" id="yx8-88-bjv"/>
                                     </constraints>
                                     <variation key="default">

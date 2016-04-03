@@ -229,9 +229,21 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     func createLocalNotification(episode: Episode){
         let localNotification =  UILocalNotification()
-        localNotification.alertBody = "\(episode.episodeTitle) is available"
+        
+        // localNotification.alertBody = "\(episode.episodeTitle) is available"
+        localNotification.alertBody = String.localizedStringWithFormat(
+            NSLocalizedString("notification.alert", value: "%@ is available", comment: "for local notification"),
+            episode.episodeTitle)
+        
+        // localNotification.alertAction = "Details"
+        localNotification.alertAction = NSLocalizedString("notification.action", value: "Details", comment: "for local notification")
+        
+       
         localNotification.soundName = "pushSound.m4a"
-        localNotification.alertAction = "Details"
+       
+        
+        
+        
         UIApplication.sharedApplication().applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
         UIApplication.sharedApplication().presentLocalNotificationNow(localNotification)
     }
@@ -265,9 +277,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                     if result {
                         // the file on the server has been update, start downloading a new feed file
                         self.downloadurl(url)
-                        print("Downloading feed")
+                        NSLog("Downloading feed")
                     }else{
-                        print("server feed same date or older")
+                        NSLog("server feed same date or older")
                 }
             }
     }
@@ -309,8 +321,10 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             }
         }else{
             result = false
-            print("ERROR NO DATE")
-            showErrorMessage("Error", message: "Server not reachable", viewController: self)
+            NSLog("ERROR NO DATE")
+            showErrorMessage(NSLocalizedString("title.server.not.reachable", value:"Error",
+                comment: "shown when refreshing feed"), message: NSLocalizedString("message.server.not.reachable", value:"Server not reachable",
+                comment: "shown when refreshing feed"), viewController: self)
             self.refreshControl!.endRefreshing()
         }
         
@@ -484,9 +498,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         
         if SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle {
             if SingletonClass.sharedInstance.player.rate == 0{
-               cell.EpisodePlayButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(30, 30), filled: true), forState: .Normal)
+               cell.EpisodePlayButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(44, 44), filled: true), forState: .Normal)
             }else{
-                cell.EpisodePlayButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(30, 30), filled: true), forState: .Normal)
+                cell.EpisodePlayButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(44, 44), filled: true), forState: .Normal)
             }
             cell.EpisodePlayButton.enabled = true
             cell.EpisodePlayButton.hidden = false
@@ -569,6 +583,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
 
     func startDownloadepisode(episode: Episode) {
+        if let url = activeDownloads[episode.episodeUrl] {
+            print("\(url) already downloading")
+        }else{
         if let url =  NSURL(string: episode.episodeUrl) {
             let download = Download(url: episode.episodeUrl)
             download.isEpisode  = true
@@ -578,7 +595,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
   
             activeDownloads[download.url] = download
             print("started download of \(url)")
-           
+            }
         }
     }
     
