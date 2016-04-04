@@ -672,10 +672,11 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     func updateRate(rateindex: Int){
-        SingletonClass.sharedInstance.player.rate = speeds[rateindex]
+        
         playerRateButton.setTitle(speedtext[rateindex], forState: .Normal)
         playerRateButton.tintColor = getColorFromPodcastSettings("playControlColor")
         setObjectForKeyToPersistentStorrage("player.rate", object: rateindex)
+        SingletonClass.sharedInstance.player.rate = speeds[rateindex]
     }
     
     func updateplayprogress(){

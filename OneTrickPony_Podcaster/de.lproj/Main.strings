@@ -1,0 +1,72 @@
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "15j-Ug-0Ip"; */
+"15j-Ug-0Ip.text" = "Date";
+
+/* Class = "UITableViewCell"; accessibilityIdentifier = "Cell"; ObjectID = "1tu-3b-spL"; */
+"1tu-3b-spL.accessibilityIdentifier" = "Cell";
+
+/* Class = "UILabel"; text = "Episode Title"; ObjectID = "JDQ-N1-4Uq"; */
+"JDQ-N1-4Uq.text" = "Episode Title";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "JU6-OF-di2"; */
+"JU6-OF-di2.text" = "Title";
+
+/* Class = "UINavigationController"; title = "Episodes"; ObjectID = "LyZ-kn-wbS"; */
+"LyZ-kn-wbS.title" = "Episodes";
+
+/* Class = "UIButton"; normalTitle = "-30"; ObjectID = "M7H-0g-obe"; */
+"M7H-0g-obe.normalTitle" = "-30";
+
+/* Class = "UIButton"; accessibilityIdentifier = "Download"; ObjectID = "Rwj-Nv-AAn"; */
+"Rwj-Nv-AAn.accessibilityIdentifier" = "Download";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "TEp-PV-hcW"; */
+"TEp-PV-hcW.text" = "Detail";
+
+/* Class = "UILabel"; accessibilityIdentifier = "Subtitle"; ObjectID = "USm-y5-NZg"; */
+"USm-y5-NZg.accessibilityIdentifier" = "Subtitle";
+
+/* Class = "UILabel"; text = "Duration"; ObjectID = "USm-y5-NZg"; */
+"USm-y5-NZg.text" = "Duration";
+
+/* Class = "UIButton"; normalTitle = "Pause"; ObjectID = "VZb-Cy-Dkg"; */
+"VZb-Cy-Dkg.normalTitle" = "Pause";
+
+/* Class = "UIButton"; normalTitle = "<"; ObjectID = "Vxd-62-DdV"; */
+"Vxd-62-DdV.normalTitle" = "<";
+
+/* Class = "UIButton"; normalTitle = "1x"; ObjectID = "WHA-16-3y0"; */
+"WHA-16-3y0.normalTitle" = "1x";
+
+/* Class = "UILabel"; text = "Filesize"; ObjectID = "ahl-EG-eb5"; */
+"ahl-EG-eb5.text" = "Filesize";
+
+/* Class = "UILabel"; accessibilityIdentifier = "Title"; ObjectID = "bvJ-Ys-U60"; */
+"bvJ-Ys-U60.accessibilityIdentifier" = "Title";
+
+/* Class = "UILabel"; text = "Title\n- second line"; ObjectID = "bvJ-Ys-U60"; */
+"bvJ-Ys-U60.text" = "Title\n- second line";
+
+/* Class = "UITableViewController"; title = "EpisodesTableView"; ObjectID = "bwv-IB-7IY"; */
+"bwv-IB-7IY.title" = "EpisodesTableView";
+
+/* Class = "UIButton"; normalTitle = "+30"; ObjectID = "ewp-Lq-RHf"; */
+"ewp-Lq-RHf.normalTitle" = "+30";
+
+/* Class = "UIButton"; accessibilityIdentifier = "Download"; ObjectID = "gge-f4-0Y3"; */
+"gge-f4-0Y3.accessibilityIdentifier" = "Download";
+
+/* Class = "UIButton"; normalTitle = "Download"; ObjectID = "gge-f4-0Y3"; */
+"gge-f4-0Y3.normalTitle" = "Download";
+
+/* Class = "UILabel"; text = "Remaining"; ObjectID = "j3K-Yd-npR"; */
+"j3K-Yd-npR.text" = "Remaining";
+
+/* Class = "UIButton"; normalTitle = "Play"; ObjectID = "jJp-32-8fw"; */
+"jJp-32-8fw.normalTitle" = "Play";
+
+/* Class = "UILabel"; text = "Played"; ObjectID = "llg-c0-qcE"; */
+"llg-c0-qcE.text" = "Played";
+
+/* Class = "UIButton"; accessibilityIdentifier = "Download"; ObjectID = "xkb-Ee-nYU"; */
+"xkb-Ee-nYU.accessibilityIdentifier" = "Download";
