@@ -11,9 +11,8 @@ import AVFoundation
 import MediaPlayer
 
 
-
 class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDelegate, ChapterMarksViewControllerDelegate {
-    
+
     var episode = Episode()
 
     var local = false
@@ -538,12 +537,15 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             play()
         }else{
             if SingletonClass.sharedInstance.episodePlaying.episodeTitle != episode.episodeTitle {
+                // a new episode is loaded
+                let oldEpisode = SingletonClass.sharedInstance.episodePlaying
                 SingletonClass.sharedInstance.episodePlaying = episode
                 url = loadNSURL(episode)
                 SingletonClass.sharedInstance.player.replaceCurrentItemWithPlayerItem(AVPlayerItem(URL: url))
                 fixTheDuration()
                 let starttime = episode.readplayed()
                 SingletonClass.sharedInstance.player.seekToTime(starttime)
+
                 play()
             }else{
                 play()
@@ -686,11 +688,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             let episode = SingletonClass.sharedInstance.episodePlaying
             
         
-            // save time to NSUserdefaults (Double) - saveplayed(episode: Episode, playtime: Double)
             episode.saveplayed(progress)
             
             
-           // EpisodesTableViewController().updateCellForEpisode(episode)
             
             updateSliderProgress(progress)
             updateMPMediaPlayer()

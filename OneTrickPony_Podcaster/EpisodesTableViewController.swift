@@ -82,7 +82,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         self.tableView.layoutMargins = UIEdgeInsetsZero
 
         
-        
+        self.refreshfeed()
         self.refreshControl?.addTarget(self, action:#selector(EpisodesTableViewController.refreshfeed), forControlEvents: UIControlEvents.ValueChanged)
      //   self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
 
@@ -102,8 +102,10 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             
         }
         if SingletonClass.sharedInstance.playerinitialized {
+            self.tableView.reloadData()
             SingletonClass.sharedInstance.audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target:self, selector:#selector(EpisodesTableViewController.updatecell),userInfo: nil,repeats: true)
         }
+        
     }
 
     func updatecell(){

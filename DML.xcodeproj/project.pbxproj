@@ -140,6 +140,7 @@
 				489B44F41C6BB1B900CC5326 /* License */,
 				4821D4CC1C764D920004DF4A /* supportfunctions.swift */,
 				48D2205C1CA485B7005BA209 /* InterfaceGenerator.swift */,
+				480FEDC01C54B3DF005594F1 /* Info.plist */,
 			);
 			path = OneTrickPony_Podcaster;
 			sourceTree = "<group>";
@@ -166,12 +167,11 @@
 		48A767571C7A2FA100E6B485 /* Customization_Per_Podcast */ = {
 			isa = PBXGroup;
 			children = (
-				480FEDC01C54B3DF005594F1 /* Info.plist */,
+				48DB59861C61C6700041F4AC /* PodcastSettings.plist */,
 				480FEDBB1C54B3DF005594F1 /* Assets.xcassets */,
 				480FEDBD1C54B3DF005594F1 /* LaunchScreen.storyboard */,
 				48A767551C7A2F8800E6B485 /* pushSound.m4a */,
 				484F93DE1C8361FD009DC869 /* feed.xml */,
-				48DB59861C61C6700041F4AC /* PodcastSettings.plist */,
 			);
 			name = Customization_Per_Podcast;
 			sourceTree = "<group>";
@@ -332,7 +332,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "CUSTOMVERPLIST=\"${PROJECT_DIR}/PodcastSettings.plist\"\nfeedurl=$(/usr/libexec/PlistBuddy -c \"Print feedurl\" ${CUSTOMVERPLIST})\necho $feedurl\necho ${TARGET_NAME}\ncurl -s $feedurl > ${PROJECT_DIR}/${TARGET_NAME}/feed.xml\n";
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\nCUSTOMVERPLIST=\"${PROJECT_DIR}/PodcastSettings.plist\"\nfeedurl=$(/usr/libexec/PlistBuddy -c \"Print feedurl\" ${CUSTOMVERPLIST})\necho $feedurl\necho ${TARGET_NAME}\ncurl -s $feedurl > ${PROJECT_DIR}/${TARGET_NAME}/feed.xml\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
