@@ -149,7 +149,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         var fileURLtoLoad = localfileurl
         
         var url = NSURL.fileURLWithPath(getObjectForKeyFromPodcastSettings("feedurl") as! String) 
-        NSLog("url: \(url)")
+       // NSLog("url: \(url)")
         if url.pathExtension == "" {
             
             url = url.URLByAppendingPathComponent("feed.xml")
@@ -299,11 +299,13 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             let date = getHeaderFromUrl(getObjectForKeyFromPodcastSettings("feedurl") as! String, headerfield: "Last-Modified")
         if date != "" {
             let newfeeddate = dateStringToNSDate(date)
-            NSLog("oldfeed: \(newfeeddate) (Header from Server)")
+            NSLog("newfeed: \(newfeeddate) (Header from Server)")
             
             
             // compare it with the last saved date
+            if savedfeeddate != nil {
             let compareResult = savedfeeddate!.compare(newfeeddate)
+           
             print(compareResult)
             
             if compareResult == NSComparisonResult.OrderedDescending {
@@ -320,6 +322,10 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                 result = false
                 print("same date")
                 self.refreshControl!.endRefreshing()
+            }
+            }else{
+                result = true
+                NSLog("no saved feed date - to refresh feed")
             }
         }else{
             result = false
@@ -658,7 +664,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        NSLog("session \(session) download task \(downloadTask) wrote an additional \(bytesWritten) bytes (total \(totalBytesWritten) bytes) out of an expected \(totalBytesExpectedToWrite) bytes.")
+     //   NSLog("session \(session) download task \(downloadTask) wrote an additional \(bytesWritten) bytes (total \(totalBytesWritten) bytes) out of an expected \(totalBytesExpectedToWrite) bytes.")
 
     //    print("TaskOrigRequest URL String \(downloadTask.originalRequest?.URL?.absoluteString)")
         if let downloadUrl = downloadTask.originalRequest?.URL?.absoluteString,
