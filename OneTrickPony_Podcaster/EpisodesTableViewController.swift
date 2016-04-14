@@ -10,14 +10,15 @@ import AVFoundation
 
 
 
+
 class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
-
     
-
+    
+    
     
     var feedParser: NSXMLParser = NSXMLParser()
-   // var feeddate: NSDate = NSDate()// this element contains currently the lastBuildDate from the feed, should be managed smarter one day to reduce the full feed loading to check if the feed is new
+    // var feeddate: NSDate = NSDate()// this element contains currently the lastBuildDate from the feed, should be managed smarter one day to reduce the full feed loading to check if the feed is new
     
     var lastfeeddate: String = String()
     
@@ -55,8 +56,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     /**************************************************************************
      
-                    ALL THE BASIC VIEW FUNCTIONS FOLLOWING
-                (loading and configurating the view controller)
+     ALL THE BASIC VIEW FUNCTIONS FOLLOWING
+     (loading and configurating the view controller)
      
      **************************************************************************/
     
@@ -64,41 +65,41 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         _ = self.downloadsSession
         
-      //  removePersistentStorrage()
-       
+        //  removePersistentStorrage()
+        
         
         /*
-        print("last Episode: \(getObjectForKeyFromPersistentStorrage("latestepisode"))")
-        print("last FeedDay: \(getObjectForKeyFromPersistentStorrage("lastfeedday"))")
-        */
-        
+         print("last Episode: \(getObjectForKeyFromPersistentStorrage("latestepisode"))")
+         print("last FeedDay: \(getObjectForKeyFromPersistentStorrage("lastfeedday"))")
+         */
+
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.tableView.separatorColor = getColorFromPodcastSettings("highlightColor")
         self.tableView.separatorInset = UIEdgeInsetsZero
         self.tableView.layoutMargins = UIEdgeInsetsZero
-
+        
         
         self.refreshfeed()
         self.refreshControl?.addTarget(self, action:#selector(EpisodesTableViewController.refreshfeed), forControlEvents: UIControlEvents.ValueChanged)
-     //   self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
-
+        //   self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        
         
         
     }
     
     
-
+    
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
         self.navigationController?.toolbarHidden = true
-
+        
         self.tableView.backgroundColor = getColorFromPodcastSettings("backgroundColor")
-           loadfeedandparse {
+        loadfeedandparse {
             
         }
         if SingletonClass.sharedInstance.playerinitialized {
@@ -107,7 +108,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         }
         
     }
-
+    
     func updatecell(){
         updateCellForEpisode(SingletonClass.sharedInstance.episodePlaying)
     }
@@ -126,7 +127,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         }
         return true
     }
-
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -135,8 +136,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     /**************************************************************************
      
-                    ALL THE FEED FUNCTIONS FOLLOWING
-                    (loading and parsing the feed)
+     ALL THE FEED FUNCTIONS FOLLOWING
+     (loading and parsing the feed)
      
      **************************************************************************/
     
@@ -148,8 +149,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         let localfileurl:NSURL = NSURL.fileURLWithPath(urlpath!)
         var fileURLtoLoad = localfileurl
         
-        var url = NSURL.fileURLWithPath(getObjectForKeyFromPodcastSettings("feedurl") as! String) 
-       // NSLog("url: \(url)")
+        var url = NSURL.fileURLWithPath(getObjectForKeyFromPodcastSettings("feedurl") as! String)
+        // NSLog("url: \(url)")
         if url.pathExtension == "" {
             
             url = url.URLByAppendingPathComponent("feed.xml")
@@ -166,11 +167,11 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         
         if manager.fileExistsAtPath(localFeedFile){
             //change url to load to local file instead of the external one
-
+            
             do {
                 let attr : NSDictionary? = try NSFileManager.defaultManager().attributesOfItemAtPath(localFeedFile)
                 if let _attr = attr {
-                   let fileSize = _attr.fileSize();
+                    let fileSize = _attr.fileSize();
                     if fileSize > 1000 {
                         //the check for the fileSize is done in case a broken xml file has been downloaded (e.g. html file with 'error on database connection' message - should be one day removed by smarter way)
                         fileURLtoLoad = NSURL.fileURLWithPath(localFeedFile)
@@ -186,7 +187,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             //we might be able to download the feed here, but I'm not sure if it's reactive enough.
             NSLog("no file in docs folder or file to small, I'll take the one in the base directory")
         }
-    
+        
         
         
         //parse the file (either the one in the documents folder or if that's not there the feed.xml from the base
@@ -198,7 +199,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         completion()
     }
     
-
+    
     
     
     func checkifepisodeisnew(completion:(result: Bool) -> Void){
@@ -210,9 +211,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             let Date2 = episodes[0].episodePubDate
             if Date1.earlierDate(Date2).isEqualToDate(Date1){
                 result = true
-              //  setObjectForKeyToPersistentStorrage("latestepisode", value: episodes[0].episodePubDate)
+                //  setObjectForKeyToPersistentStorrage("latestepisode", value: episodes[0].episodePubDate)
                 NSLog("set new Episode to persistent storrage")
-
+                
             }else{
                 NSLog("no new episode found")
                 //   dummyNotificationforDebugging()
@@ -220,13 +221,13 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         }else{
             NSLog("no episode downloaded yet")
             result = true
-
-          //  setObjectForKeyToPersistentStorrage("latestepisode", value: episodes[0].episodePubDate)
+            
+            //  setObjectForKeyToPersistentStorrage("latestepisode", value: episodes[0].episodePubDate)
         }
         NSLog("episode check done")
         completion(result: result)
     }
-
+    
     
     
     func createLocalNotification(episode: Episode){
@@ -240,16 +241,16 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         // localNotification.alertAction = "Details"
         localNotification.alertAction = NSLocalizedString("notification.action", value: "Details", comment: "for local notification")
         
-       
+        
         localNotification.soundName = "pushSound.m4a"
-       
+        
         
         
         
         UIApplication.sharedApplication().applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
         UIApplication.sharedApplication().presentLocalNotificationNow(localNotification)
     }
-
+    
     
     
     func dummyNotificationforDebugging(){
@@ -272,18 +273,18 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     func refreshfeed()
     {
-            let url = getObjectForKeyFromPodcastSettings("feedurl")  as! String
-            NSLog("pullto \(url)")
-            checkFeedDateIsNew {
-                (result: Bool) in
-                    if result {
-                        // the file on the server has been update, start downloading a new feed file
-                        self.downloadurl(url)
-                        NSLog("Downloading feed")
-                    }else{
-                        NSLog("server feed same date or older")
-                }
+        let url = getObjectForKeyFromPodcastSettings("feedurl")  as! String
+        NSLog("pullto \(url)")
+        checkFeedDateIsNew {
+            (result: Bool) in
+            if result {
+                // the file on the server has been update, start downloading a new feed file
+                self.downloadurl(url)
+                NSLog("Downloading feed")
+            }else{
+                NSLog("server feed same date or older")
             }
+        }
     }
     
     
@@ -292,11 +293,11 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         var result:Bool
         let savedfeeddate = getObjectForKeyFromPersistentStorrage("lastfeedday")
         NSLog("oldfeed: \(savedfeeddate) (from Persistent Storrage)")
-
         
-            
-            // get the last modified date from the file on the server
-            let date = getHeaderFromUrl(getObjectForKeyFromPodcastSettings("feedurl") as! String, headerfield: "Last-Modified")
+        
+        
+        // get the last modified date from the file on the server
+        let date = getHeaderFromUrl(getObjectForKeyFromPodcastSettings("feedurl") as! String, headerfield: "Last-Modified")
         if date != "" {
             let newfeeddate = dateStringToNSDate(date)
             NSLog("newfeed: \(newfeeddate) (Header from Server)")
@@ -304,25 +305,25 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             
             // compare it with the last saved date
             if savedfeeddate != nil {
-            let compareResult = savedfeeddate!.compare(newfeeddate)
-           
-            print(compareResult)
-            
-            if compareResult == NSComparisonResult.OrderedDescending {
-                // usually the date on the server should never be younger than the date saved
-                result = false
-                NSLog("\(savedfeeddate) (saved date) is younger than \(newfeeddate) - nothing to do but strange")
-                self.refreshControl!.endRefreshing()
-            }else if compareResult == NSComparisonResult.OrderedAscending{
-                // this is the normal behaviour when the feed has been updated
-                result = true
-                NSLog("\(savedfeeddate) (saved date) is older than \(newfeeddate) - to refresh feed")
-            }else{
-                // this is the part when there has been no change on the feed since last check
-                result = false
-                print("same date")
-                self.refreshControl!.endRefreshing()
-            }
+                let compareResult = savedfeeddate!.compare(newfeeddate)
+                
+                print(compareResult)
+                
+                if compareResult == NSComparisonResult.OrderedDescending {
+                    // usually the date on the server should never be younger than the date saved
+                    result = false
+                    NSLog("\(savedfeeddate) (saved date) is younger than \(newfeeddate) - nothing to do but strange")
+                    self.refreshControl!.endRefreshing()
+                }else if compareResult == NSComparisonResult.OrderedAscending{
+                    // this is the normal behaviour when the feed has been updated
+                    result = true
+                    NSLog("\(savedfeeddate) (saved date) is older than \(newfeeddate) - to refresh feed")
+                }else{
+                    // this is the part when there has been no change on the feed since last check
+                    result = false
+                    print("same date")
+                    self.refreshControl!.endRefreshing()
+                }
             }else{
                 result = true
                 NSLog("no saved feed date - to refresh feed")
@@ -332,24 +333,24 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             NSLog("ERROR NO DATE")
             showErrorMessage(NSLocalizedString("title.server.not.reachable", value:"Error",
                 comment: "shown when refreshing feed"), message: NSLocalizedString("message.server.not.reachable", value:"Server not reachable",
-                comment: "shown when refreshing feed"), viewController: self)
+                    comment: "shown when refreshing feed"), viewController: self)
             self.refreshControl!.endRefreshing()
         }
         
-
+        
         completion(result: result)
     }
     
     
-
+    
     
     
     var data: NSMutableData = NSMutableData()
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         eName = elementName
-       // print("DidStartElement \(eName)")
-
+        // print("DidStartElement \(eName)")
+        
         if elementName == "lastBuildDate" {
             lastfeeddate = String()
             
@@ -399,7 +400,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     }
     func parser(parser: NSXMLParser, foundCharacters string: String) {
         let data = string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-     //    print("foundCharacters \(eName) data: \(data)")
+        //    print("foundCharacters \(eName) data: \(data)")
         if (!data.isEmpty) {
             if eName == "title" {
                 episodeTitle = data
@@ -417,13 +418,13 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         }
     }
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-      //  print("didEndElement \(elementName)")
+        //  print("didEndElement \(elementName)")
         if elementName == "lastBuildDate"{
             let lastBuildDate = dateStringToNSDate(lastfeeddate)
             setObjectForKeyToPersistentStorrage("lastfeedday" as String, object: lastBuildDate)
         } else if elementName == "item" {
-           
-
+            
+            
             let episode: Episode = Episode()
             episode.episodeTitle = episodeTitle
             episode.episodeUrl = episodeUrl
@@ -432,7 +433,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             
             
             
-            // BUG BUG BUG 
+            // BUG BUG BUG
             episode.episodeDuration = episodeDuration
             //here I should take care that the duration within the feed is sometimes not correct and the duration within the feed can be 0 or even not existing at all
             
@@ -447,7 +448,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             episodes.append(episode)
         }else if elementName == "channel"{
             print("end of feed")
-
+            
         }
     }
     func parserDidEndDocument(parser: NSXMLParser) {
@@ -461,9 +462,10 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                 if NotificationFired == false {
                     NSLog("checking if episode new should be done")
                     if existsLocally(self.episodes[0].episodeUrl).existlocal == false {
-                        self.startDownloadepisode(self.episodes[0])
+                        
                         self.createLocalNotification(self.episodes[0])
                         NotificationFired = true
+                        self.autodownload(self.episodes[0])
                     }
                 }
             }
@@ -471,11 +473,28 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         
     }
     
-
+    
+    func autodownload(episode: Episode){
+ 
+        let status = Reach().connectionStatus()
+        switch status {
+        case .Unknown, .Offline:
+            print("Not connected")
+        case .Online(.WWAN):
+            print("Connected via WWAN")
+        case .Online(.WiFi):
+            print("Connected via WiFi")
+            self.startDownloadepisode(episode)
+        }
+       
+       //self.startDownloadepisode(episode)
+        
+    }
+    
     /**************************************************************************
      
-                ALL THE TABLE VIEW FUNCTIONS FOLLOWING
-                    (defining the table view and cells)
+     ALL THE TABLE VIEW FUNCTIONS FOLLOWING
+     (defining the table view and cells)
      
      **************************************************************************/
     
@@ -506,7 +525,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         
         if SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle {
             if SingletonClass.sharedInstance.player.rate == 0{
-               cell.EpisodePlayButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(44, 44), filled: true), forState: .Normal)
+                cell.EpisodePlayButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(44, 44), filled: true), forState: .Normal)
             }else{
                 cell.EpisodePlayButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(44, 44), filled: true), forState: .Normal)
             }
@@ -525,7 +544,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                 cell.EpisodePauseButton.setImage(createCircleWithPause(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true), forState: .Normal)
             }else{
                 cell.EpisodePauseButton.titleLabel?.text = ""
-              cell.EpisodePauseButton.setImage(createCircleWithArrow(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: false), forState: .Normal)
+                cell.EpisodePauseButton.setImage(createCircleWithArrow(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: false), forState: .Normal)
             }
         }
         cell.EpisodeCancelButton.setImage(createCircleWithCross(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: false), forState: .Normal)
@@ -544,7 +563,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         
         
         cell.filltableviewcell(episode)
-
+        
         return cell
     }
     
@@ -578,31 +597,31 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         }
         
     }
-
+    
     /**************************************************************************
+     
+     ALL THE DOWNLOAD FUNCTIONS FOLLOWING
+     (used for downloading feed, coverimages and media files)
+     [should be taken out of the viewController one day]
+     
+     **************************************************************************/
     
-                    ALL THE DOWNLOAD FUNCTIONS FOLLOWING
-                (used for downloading feed, coverimages and media files)
-                    [should be taken out of the viewController one day]
     
-    **************************************************************************/
     
-
     
-
     func startDownloadepisode(episode: Episode) {
         if let url = activeDownloads[episode.episodeUrl] {
             print("\(url) already downloading")
         }else{
-        if let url =  NSURL(string: episode.episodeUrl) {
-            let download = Download(url: episode.episodeUrl)
-            download.isEpisode  = true
-            download.downloadTask = downloadsSession.downloadTaskWithURL(url)
-            download.downloadTask!.resume()
-            download.isDownloading = true
-  
-            activeDownloads[download.url] = download
-            print("started download of \(url)")
+            if let url =  NSURL(string: episode.episodeUrl) {
+                let download = Download(url: episode.episodeUrl)
+                download.isEpisode  = true
+                download.downloadTask = downloadsSession.downloadTaskWithURL(url)
+                download.downloadTask!.resume()
+                download.isDownloading = true
+                
+                activeDownloads[download.url] = download
+                print("started download of \(url)")
             }
         }
     }
@@ -626,61 +645,61 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     func resumeDownloadepisode(episode: Episode) {
         let urlString = episode.episodeUrl
         let download = activeDownloads[urlString]
-                if let resumeData = download!.resumeData {
-                    download!.downloadTask = downloadsSession.downloadTaskWithResumeData(resumeData)
-                    download!.downloadTask!.resume()
-                    download!.isDownloading = true
-                } else if let url = NSURL(string: download!.url) {
-                    download!.downloadTask = downloadsSession.downloadTaskWithURL(url)
-                    download!.downloadTask!.resume()
-                    download!.isDownloading = true
-                }
+        if let resumeData = download!.resumeData {
+            download!.downloadTask = downloadsSession.downloadTaskWithResumeData(resumeData)
+            download!.downloadTask!.resume()
+            download!.isDownloading = true
+        } else if let url = NSURL(string: download!.url) {
+            download!.downloadTask = downloadsSession.downloadTaskWithURL(url)
+            download!.downloadTask!.resume()
+            download!.isDownloading = true
+        }
         
     }
     
     func cancelDownloadepisode(episode: Episode) {
         let urlString = episode.episodeUrl
         let download = activeDownloads[urlString]
-                download!.downloadTask?.cancel()
-                activeDownloads[urlString] = nil
+        download!.downloadTask?.cancel()
+        activeDownloads[urlString] = nil
         
     }
     
     
     func downloadurl(urlstring: String) {
         if let url = activeDownloads[urlstring] {
-        print("\(url) already downloading")
-            }else{
-        if let url =  NSURL(string: urlstring) {
-        let download = Download(url: urlstring)
-         download.isEpisode = false
-        download.downloadTask = downloadsSession.downloadTaskWithURL(url)
-        download.downloadTask!.resume()
-        download.isDownloading = true
-        activeDownloads[download.url] = download
-        }
+            print("\(url) already downloading")
+        }else{
+            if let url =  NSURL(string: urlstring) {
+                let download = Download(url: urlstring)
+                download.isEpisode = false
+                download.downloadTask = downloadsSession.downloadTaskWithURL(url)
+                download.downloadTask!.resume()
+                download.isDownloading = true
+                activeDownloads[download.url] = download
+            }
         }
     }
     
     
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-     //   NSLog("session \(session) download task \(downloadTask) wrote an additional \(bytesWritten) bytes (total \(totalBytesWritten) bytes) out of an expected \(totalBytesExpectedToWrite) bytes.")
-
-    //    print("TaskOrigRequest URL String \(downloadTask.originalRequest?.URL?.absoluteString)")
+        //   NSLog("session \(session) download task \(downloadTask) wrote an additional \(bytesWritten) bytes (total \(totalBytesWritten) bytes) out of an expected \(totalBytesExpectedToWrite) bytes.")
+        
+        //    print("TaskOrigRequest URL String \(downloadTask.originalRequest?.URL?.absoluteString)")
         if let downloadUrl = downloadTask.originalRequest?.URL?.absoluteString,
             download = activeDownloads[downloadUrl] {
-                // 2
-                download.progress = Float(totalBytesWritten)/Float(totalBytesExpectedToWrite)
-
-                if let episodeIndex = episodeIndexForDownloadTask(downloadTask), let episodeCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episodeIndex, inSection: 0)) as? EpisodeCell {
-                    dispatch_async(dispatch_get_main_queue(), {
-                        episodeCell.EpisodeDownloadProgressbar.hidden = false
-                        episodeCell.EpisodeDownloadProgressbar.progress = download.progress
-                        //episodeCell.EpisodeDownloadButton!.setTitle("Pause", forState: UIControlState.Normal)
+            // 2
+            download.progress = Float(totalBytesWritten)/Float(totalBytesExpectedToWrite)
+            
+            if let episodeIndex = episodeIndexForDownloadTask(downloadTask), let episodeCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episodeIndex, inSection: 0)) as? EpisodeCell {
+                dispatch_async(dispatch_get_main_queue(), {
+                    episodeCell.EpisodeDownloadProgressbar.hidden = false
+                    episodeCell.EpisodeDownloadProgressbar.progress = download.progress
+                    //episodeCell.EpisodeDownloadButton!.setTitle("Pause", forState: UIControlState.Normal)
                     episodeCell.EpisodePauseButton.setImage(createCircleWithPause(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true), forState: .Normal)
-                   //     episodeCell.EpisodeprogressLabel.text =  String(format: "%.1f%% of %@",  download.progress * 100, totalSize)
-                    })
-                }
+                    //     episodeCell.EpisodeprogressLabel.text =  String(format: "%.1f%% of %@",  download.progress * 100, totalSize)
+                })
+            }
         }
     }
     
@@ -693,35 +712,35 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
         // move the file to the final destination
         let destinationURL = localFilePathForUrl((downloadTask.originalRequest?.URL)!)
-                
-                print("did finish download \(destinationURL)")
-                
-                // but clean the space before doing that.
-                let fileManager = NSFileManager.defaultManager()
-                do {
-                    try fileManager.removeItemAtURL(destinationURL)
-                } catch {
-                    // Non-fatal: file probably doesn't exist
-                }
-                do {
-                    try fileManager.copyItemAtURL(location, toURL: destinationURL)
-                    print("wrote new file")
-                  //  setObjectForKeyToPersistentStorrage("lastfeedday" as String, value: NSDate())
-
-                    if (destinationURL.pathExtension!.lowercaseString == "xml"){
-                        loadfeedandparse {
-                        
-                            self.tableView.reloadData()
-                       
-                            
-                            self.refreshControl?.endRefreshing()
-                        }
-                    }
+        
+        print("did finish download \(destinationURL)")
+        
+        // but clean the space before doing that.
+        let fileManager = NSFileManager.defaultManager()
+        do {
+            try fileManager.removeItemAtURL(destinationURL)
+        } catch {
+            // Non-fatal: file probably doesn't exist
+        }
+        do {
+            try fileManager.copyItemAtURL(location, toURL: destinationURL)
+            print("wrote new file")
+            //  setObjectForKeyToPersistentStorrage("lastfeedday" as String, value: NSDate())
+            
+            if (destinationURL.pathExtension!.lowercaseString == "xml"){
+                loadfeedandparse {
+                    
+                    self.tableView.reloadData()
                     
                     
-                } catch let error as NSError {
-                    print("Could not copy file to disk: \(error.localizedDescription)")
+                    self.refreshControl?.endRefreshing()
                 }
+            }
+            
+            
+        } catch let error as NSError {
+            print("Could not copy file to disk: \(error.localizedDescription)")
+        }
         
         // clear the download list
         if let url = downloadTask.originalRequest?.URL?.absoluteString {
@@ -730,7 +749,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             // update the cell to update it that it has the file locally and only if it's a media file and not the feed
             if let episodeIndex = episodeIndexForDownloadTask(downloadTask), let episodeCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episodeIndex, inSection: 0)) as? EpisodeCell {
                 episodeCell.EpisodeDownloadProgressbar.hidden = false
-        
+                
                 dispatch_async(dispatch_get_main_queue(), {
                     self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: episodeIndex, inSection: 0)], withRowAnimation: .None)
                 })
@@ -755,17 +774,17 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     
-
     
     
     
     
-        // this function will get me the index of the array which should be the same as the index of the cell for the  episode containing the same episode as the download task
     
-
+    // this function will get me the index of the array which should be the same as the index of the cell for the  episode containing the same episode as the download task
+    
+    
     func episodeIndexForDownloadTask(downloadTask: NSURLSessionDownloadTask) -> Int? {
         if let url = downloadTask.originalRequest?.URL?.absoluteString {
-
+            
             for (index, episode) in episodes.enumerate() {
                 if url == episode.episodeUrl {
                     return index
@@ -774,7 +793,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         }
         return nil
     }
-
+    
     
 }
 
@@ -798,12 +817,12 @@ extension EpisodesTableViewController: EpisodeCellDelegate {
     
     func pauseepisode(cell: EpisodeCell) {
         if let indexPath = tableView.indexPathForCell(cell) {
-           let episode = episodes[indexPath.row]
+            let episode = episodes[indexPath.row]
             pauseDownloadepisode(episode)
             tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: .None)
         }
     }
-
+    
     func isdownloading(cell: EpisodeCell) -> Bool{
         var ret = false
         if let indexPath = tableView.indexPathForCell(cell) {
@@ -813,7 +832,7 @@ extension EpisodesTableViewController: EpisodeCellDelegate {
         }else{
             ret = false
         }
-       print(ret)
+        print(ret)
         return ret
     }
     
@@ -832,7 +851,7 @@ extension EpisodesTableViewController: EpisodeCellDelegate {
             tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: .None)
         }
     }
-
+    
 }
 
 extension EpisodesTableViewController: NSURLSessionDelegate {
