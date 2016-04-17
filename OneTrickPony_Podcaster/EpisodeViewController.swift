@@ -539,7 +539,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         }else{
             if SingletonClass.sharedInstance.episodePlaying.episodeTitle != episode.episodeTitle {
                 // a new episode is loaded
-                let oldEpisode = SingletonClass.sharedInstance.episodePlaying
+            
                 SingletonClass.sharedInstance.episodePlaying = episode
                 url = loadNSURL(episode)
                 SingletonClass.sharedInstance.player.replaceCurrentItemWithPlayerItem(AVPlayerItem(URL: url))

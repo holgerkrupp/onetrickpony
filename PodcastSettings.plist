@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>feedurl</key>
-	<string>http://einschlafen-podcast.de/feed/mp3/</string>
+	<string>http://einschlafen-podcast.de/feed/aac</string>
 	<key>UserAgent</key>
-	<string>Einschlafen Podcast App</string>
+	<string>Einschlafen Podcast iOS App</string>
 	<key>backgroundColor</key>
 	<dict>
 		<key>red</key>

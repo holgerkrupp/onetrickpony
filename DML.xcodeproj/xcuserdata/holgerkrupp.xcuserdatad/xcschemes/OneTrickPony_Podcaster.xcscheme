@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "480FEDAD1C54B3DF005594F1"
-               BuildableName = "DML.app"
+               BuildableName = "Einschlafen.app"
                BlueprintName = "OneTrickPony_Podcaster"
-               ReferencedContainer = "container:Einschlafen.xcodeproj">
+               ReferencedContainer = "container:DML.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "480FEDC41C54B3DF005594F1"
                BuildableName = "OneTrickPony_PodcasterTests.xctest"
                BlueprintName = "OneTrickPony_PodcasterTests"
-               ReferencedContainer = "container:Einschlafen.xcodeproj">
+               ReferencedContainer = "container:DML.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "480FEDCF1C54B3DF005594F1"
                BuildableName = "OneTrickPony_PodcasterUITests.xctest"
                BlueprintName = "OneTrickPony_PodcasterUITests"
-               ReferencedContainer = "container:Einschlafen.xcodeproj">
+               ReferencedContainer = "container:DML.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "480FEDAD1C54B3DF005594F1"
-            BuildableName = "DML.app"
+            BuildableName = "Einschlafen.app"
             BlueprintName = "OneTrickPony_Podcaster"
-            ReferencedContainer = "container:Einschlafen.xcodeproj">
+            ReferencedContainer = "container:DML.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -70,15 +70,17 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES">
+      allowLocationSimulation = "YES"
+      language = "de"
+      region = "DE">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "480FEDAD1C54B3DF005594F1"
-            BuildableName = "DML.app"
+            BuildableName = "Einschlafen.app"
             BlueprintName = "OneTrickPony_Podcaster"
-            ReferencedContainer = "container:Einschlafen.xcodeproj">
+            ReferencedContainer = "container:DML.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +97,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "480FEDAD1C54B3DF005594F1"
-            BuildableName = "DML.app"
+            BuildableName = "Einschlafen.app"
             BlueprintName = "OneTrickPony_Podcaster"
-            ReferencedContainer = "container:Einschlafen.xcodeproj">
+            ReferencedContainer = "container:DML.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -126,15 +126,16 @@ func DoubleToCMTime(seconds: Double) -> CMTime{
 
 
 func getEpisodeImage(episode: Episode) -> UIImage{
+    
     if (episode.episodeImage != ""){
-    let existence = existsLocally(episode.episodeImage)
-    if (existence.existlocal){
-        return UIImage(named: existence.localURL)!
-    }else{
-        return UIImage(named: "StandardCover")!
-    }
+        let existence = existsLocally(episode.episodeImage)
+        if (existence.existlocal){
+            return UIImage(named: existence.localURL)!
+        }else{
+            return UIImage(named: "StandardCover")!
+        }
     }else {
-       return UIImage(named: "StandardCover")! 
+        return UIImage(named: "StandardCover")!
     }
 }
 

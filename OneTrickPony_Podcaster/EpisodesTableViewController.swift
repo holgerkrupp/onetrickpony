@@ -75,13 +75,15 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
          print("last Episode: \(getObjectForKeyFromPersistentStorrage("latestepisode"))")
          print("last FeedDay: \(getObjectForKeyFromPersistentStorrage("lastfeedday"))")
          */
-        
+        loadfeedandparse {
+            
+        }
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.tableView.separatorColor = getColorFromPodcastSettings("highlightColor")
         self.tableView.separatorInset = UIEdgeInsetsZero
         self.tableView.layoutMargins = UIEdgeInsetsZero
-        
+
         
         self.refreshfeed()
         self.refreshControl?.addTarget(self, action:#selector(EpisodesTableViewController.refreshfeed), forControlEvents: UIControlEvents.ValueChanged)
@@ -99,9 +101,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         self.navigationController?.toolbarHidden = true
         
         self.tableView.backgroundColor = getColorFromPodcastSettings("backgroundColor")
-        loadfeedandparse {
-            
-        }
+
         if SingletonClass.sharedInstance.playerinitialized {
             self.tableView.reloadData()
             SingletonClass.sharedInstance.audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target:self, selector:#selector(EpisodesTableViewController.updatecell),userInfo: nil,repeats: true)
@@ -313,7 +313,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             
             // compare it with the last saved date
             if savedfeeddate != nil {
-                let compareResult = savedfeeddate!.compare(newfeeddate)
+                let compareResult = savedfeeddate!.compare(newfeeddate!)
                 
                 print(compareResult)
                 
@@ -367,8 +367,12 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             episodeTitle = String()
             episodeLink = String()
             episodeDuration = String()
-            episodeChapters = [Chapter]()
+            episodePubDate = String()
+            episodeDescription = String()
+            lastfeeddate = String()
             
+            episodeChapters = [Chapter]()
+
             
         } else if elementName == "enclosure"{
             episodeUrl = attributeDict["url"]!
@@ -379,17 +383,17 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             episodeImage = attributeDict["href"]!
             NSLog("EpImage: \(episodeImage)")
             if episodeImage != "" {
-            let existence = existsLocally(episodeImage)
-            if (existence.existlocal){
-                episodeImage = existence.localURL
-            } else {
-                downloadurl(episodeImage)
-                episodeImage = existence.localURL
-            }
+                let existence = existsLocally(episodeImage)
+                if (existence.existlocal){
+                    episodeImage = existence.localURL
+                } else {
+                    downloadurl(episodeImage)
+                    episodeImage = existence.localURL
+                }
             }
         } else if elementName == "psc:chapter"{
             
-            // Potlove Simple Chapters parsing
+            // Podlove Simple Chapters parsing
             
             let chapter: Chapter = Chapter()
             if let atttitle: NSString = attributeDict["start"] {
@@ -415,15 +419,15 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             if eName == "title" {
                 episodeTitle += data
             } else if eName == "link" {
-                episodeLink = data
+                episodeLink += data
             }else if eName == "itunes:duration" {
-                episodeDuration = data
+                episodeDuration += data
             }else if eName == "pubDate" {
                 episodePubDate = data
             }else if eName == "lastBuildDate"{
-                lastfeeddate = data
+                lastfeeddate += data
             }else if eName == "description"{
-                episodeDescription = string // here I don't want the new line characters not to be delted
+                episodeDescription += string // here I don't want the new line characters to be delted
             }
         }
     }
@@ -431,7 +435,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         //  print("didEndElement \(elementName)")
         if elementName == "lastBuildDate"{
             let lastBuildDate = dateStringToNSDate(lastfeeddate)
-            setObjectForKeyToPersistentStorrage("lastfeedday" as String, object: lastBuildDate)
+            setObjectForKeyToPersistentStorrage("lastfeedday" as String, object: lastBuildDate!)
         } else if elementName == "item" {
             
             
@@ -447,7 +451,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             episode.episodeDuration = episodeDuration
             //here I should take care that the duration within the feed is sometimes not correct and the duration within the feed can be 0 or even not existing at all
             
-            episode.episodePubDate = dateStringToNSDate(episodePubDate)
+            episode.episodePubDate = dateStringToNSDate(episodePubDate)!
             let url: NSURL = NSURL(string: episodeUrl)!
             episode.episodeFilename = url.lastPathComponent!
             episode.episodeFilesize = episodeFilesize
@@ -722,16 +726,19 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         if let downloadUrl = downloadTask.originalRequest?.URL?.absoluteString,
             download = activeDownloads[downloadUrl] {
             // 2
+            
             download.progress = Float(totalBytesWritten)/Float(totalBytesExpectedToWrite)
             
             if let episodeIndex = episodeIndexForDownloadTask(downloadTask), let episodeCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episodeIndex, inSection: 0)) as? EpisodeCell {
-                dispatch_async(dispatch_get_main_queue(), {
+                
+                    dispatch_async(dispatch_get_main_queue(), {
                     episodeCell.EpisodeDownloadProgressbar.hidden = false
                     episodeCell.EpisodeDownloadProgressbar.progress = download.progress
                     //episodeCell.EpisodeDownloadButton!.setTitle("Pause", forState: UIControlState.Normal)
                     episodeCell.EpisodePauseButton.setImage(createCircleWithPause(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true), forState: .Normal)
                     //     episodeCell.EpisodeprogressLabel.text =  String(format: "%.1f%% of %@",  download.progress * 100, totalSize)
                 })
+                
             }
         }
     }
@@ -762,9 +769,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             
             if (destinationURL.pathExtension!.lowercaseString == "xml"){
                 loadfeedandparse {
-                    
+                    dispatch_async(dispatch_get_main_queue(), {
                     self.tableView.reloadData()
-                    
+                        })
                     
                     self.refreshControl?.endRefreshing()
                 }
