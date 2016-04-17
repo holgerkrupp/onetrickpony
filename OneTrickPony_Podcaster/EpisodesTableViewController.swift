@@ -410,11 +410,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     func parser(parser: NSXMLParser, foundCharacters string: String) {
         
         let data = string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-<<<<<<< HEAD
-           // NSLog("foundCharacters \(eName) data: \(data) string: \(string)")
-=======
-        // NSLog("foundCharacters \(eName) data: \(data) string: \(string)")
->>>>>>> downloadRewrite
+
         if (!data.isEmpty) {
             if eName == "title" {
                 episodeTitle += data
