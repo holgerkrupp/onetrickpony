@@ -384,11 +384,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             NSLog("EpImage: \(episodeImage)")
             if episodeImage != "" {
                 let existence = existsLocally(episodeImage)
-                if (existence.existlocal){
-                    episodeImage = existence.localURL
-                } else {
+                if !(existence.existlocal){
                     downloadurl(episodeImage)
-                    episodeImage = existence.localURL
                 }
             }
         } else if elementName == "psc:chapter"{
