@@ -377,7 +377,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             
         }else if elementName == "itunes:image"{
             episodeImage = attributeDict["href"]!
-            
+            NSLog("EpImage: \(episodeImage)")
+            if episodeImage != "" {
             let existence = existsLocally(episodeImage)
             if (existence.existlocal){
                 episodeImage = existence.localURL
@@ -385,7 +386,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                 downloadurl(episodeImage)
                 episodeImage = existence.localURL
             }
-            
+            }
         } else if elementName == "psc:chapter"{
             
             // Potlove Simple Chapters parsing
@@ -450,11 +451,24 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             let url: NSURL = NSURL(string: episodeUrl)!
             episode.episodeFilename = url.lastPathComponent!
             episode.episodeFilesize = episodeFilesize
-            episode.episodeImage = episodeImage
+            
             episode.episodeChapter = episodeChapters
             episode.episodeDescription = episodeDescription
+            if episodeImage != "" {
+             episode.episodeImage = episodeImage
+            }
+            
+            
             episode.episodeIndex = episodes.count
             episodes.append(episode)
+            
+            episodeImage = ""
+            
+            
+            
+            
+            
+            
         }else if elementName == "channel"{
             print("end of feed")
             

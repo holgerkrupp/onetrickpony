@@ -50,7 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		480FEDAE1C54B3DF005594F1 /* DML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DML.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		480FEDAE1C54B3DF005594F1 /* Einschlafen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Einschlafen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		480FEDB11C54B3DF005594F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		480FEDB61C54B3DF005594F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		480FEDBB1C54B3DF005594F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -120,7 +120,7 @@
 		480FEDAF1C54B3DF005594F1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				480FEDAE1C54B3DF005594F1 /* DML.app */,
+				480FEDAE1C54B3DF005594F1 /* Einschlafen.app */,
 				480FEDC51C54B3DF005594F1 /* OneTrickPony_PodcasterTests.xctest */,
 				480FEDD01C54B3DF005594F1 /* OneTrickPony_PodcasterUITests.xctest */,
 			);
@@ -200,7 +200,7 @@
 			);
 			name = OneTrickPony_Podcaster;
 			productName = OneTrickPony_Podcaster;
-			productReference = 480FEDAE1C54B3DF005594F1 /* DML.app */;
+			productReference = 480FEDAE1C54B3DF005594F1 /* Einschlafen.app */;
 			productType = "com.apple.product-type.application";
 		};
 		480FEDC41C54B3DF005594F1 /* OneTrickPony_PodcasterTests */ = {
@@ -528,7 +528,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = de.holgerkrupp.Einschlafen;
-				PRODUCT_NAME = DML;
+				PRODUCT_NAME = Einschlafen;
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = debugging;
@@ -547,7 +547,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = de.holgerkrupp.Einschlafen;
-				PRODUCT_NAME = DML;
+				PRODUCT_NAME = Einschlafen;
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = debugging;

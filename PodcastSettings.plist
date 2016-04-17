@@ -42,9 +42,9 @@
 	<key>highlightColor</key>
 	<dict>
 		<key>red</key>
-		<real>0.95</real>
+		<real>0.99</real>
 		<key>green</key>
-		<real>0.42</real>
+		<real>0.5600000000000001</real>
 		<key>blue</key>
 		<integer>0</integer>
 		<key>alpha</key>
@@ -53,20 +53,20 @@
 	<key>progressBackgroundColor</key>
 	<dict>
 		<key>red</key>
-		<real>0.5</real>
+		<integer>1</integer>
 		<key>green</key>
-		<real>0.5</real>
+		<integer>1</integer>
 		<key>blue</key>
-		<real>0.5</real>
+		<integer>1</integer>
 		<key>alpha</key>
 		<integer>1</integer>
 	</dict>
 	<key>playControlColor</key>
 	<dict>
 		<key>red</key>
-		<real>0.95</real>
+		<real>0.99</real>
 		<key>green</key>
-		<real>0.42</real>
+		<real>0.5600000000000001</real>
 		<key>blue</key>
 		<integer>0</integer>
 		<key>alpha</key>

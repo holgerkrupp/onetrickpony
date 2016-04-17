@@ -168,11 +168,12 @@ class EpisodeCell: UITableViewCell {
             episode.episodeLocal = false
         }
         // set Episode image if existing
+        if (episode.episodeImage != ""){
         existence = existsLocally(episode.episodeImage)
         if (existence.existlocal){
             EpisodeImage.image = UIImage(named: existence.localURL)
         }
-        
+        }
         
         
         //check if the episode has been played and how far
