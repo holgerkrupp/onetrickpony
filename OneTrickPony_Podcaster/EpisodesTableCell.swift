@@ -95,7 +95,6 @@ class EpisodeCell: UITableViewCell {
             remain = 0
             EpisodeDurationLabel!.text = NSLocalizedString("episode.finished",value: "Done playing", comment: "shown in TableView")
         }else{
-          //  EpisodeDurationLabel!.text = "\(secondsToHoursMinutesSeconds(Double(remain))) remaining"
             EpisodeDurationLabel!.text = String.localizedStringWithFormat(
                 NSLocalizedString("string.for.time.remaining", value:"%@ remaining",
                     comment: "shown in TableView"),
@@ -118,7 +117,6 @@ class EpisodeCell: UITableViewCell {
         
         date = episode.episodePubDate
      
-        //dateFormatter.dateFormat = "dd.MM.yy"
         dateFormatter.dateStyle = .ShortStyle
         dateFormatter.timeStyle = .NoStyle
         
@@ -129,17 +127,11 @@ class EpisodeCell: UITableViewCell {
         
         
         let filesize: Double = Double(episode.episodeFilesize)/1024/1024
-       // EpisodeFileSizeLabel!.text = String(format:"%.1f", filesize) + " MB"
         EpisodeFileSizeLabel!.text = String.localizedStringWithFormat(
             NSLocalizedString("string.for.file.size", value:"%.1f MB",
                 comment: "shown in TableView"),
             filesize)
         EpisodeFileSizeLabel!.textColor = getColorFromPodcastSettings("secondarytextcolor")
-
-        //NSLog(EpisodeTimeProgressbar.progress)
-        
-
-        
         EpisodeDownloadProgressbar.backgroundColor = getColorFromPodcastSettings("progressBackgroundColor")
         EpisodeDownloadProgressbar.progressTintColor = getColorFromPodcastSettings("highlightColor")
         EpisodeDownloadButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
@@ -151,35 +143,23 @@ class EpisodeCell: UITableViewCell {
             episode.episodeLocal = true
             EpisodeDownloadProgressbar.progress = 1
             EpisodeDownloadProgressbar.hidden = true
-         //   EpisodeprogressLabel.hidden = true
             EpisodeDownloadButton!.setTitle("Play", forState: UIControlState.Normal)
             EpisodeDownloadButton.hidden = true
-           // EpisodeDownloadButton!.setImage(UIImage(named: "iPhone"), forState: UIControlState.Normal)
             EpisodeDownloadButton!.enabled = false
         }else{
             // just in case - should never been used - but acctually is used and I don't know why
             EpisodeDownloadProgressbar.progress = 0
             EpisodeDownloadProgressbar.hidden = true
-       //     EpisodeprogressLabel.hidden = true
+
             EpisodeDownloadButton!.setTitle("", forState: UIControlState.Normal)
             EpisodeDownloadButton!.setImage(createCircleWithArrow(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true), forState: .Normal)
-            //EpisodeDownloadButton!.setImage(UIImage(named: "Download from the Cloud"), forState: UIControlState.Normal)
+
             EpisodeDownloadButton!.enabled = true
             episode.episodeLocal = false
         }
         // set Episode image if existing
-        if (episode.episodeImage != ""){
-        existence = existsLocally(episode.episodeImage)
-        if (existence.existlocal){
-            EpisodeImage.image = UIImage(named: existence.localURL)
-        }
-        }
-        
-        
-        //check if the episode has been played and how far
-     //   let playposition = readplayed(episode)
-        //NSLog("Episode \(episode.episodeTitle) played at position \(playposition) max duration is \(episode.episodeDuration)")
-        
+        EpisodeImage.image = getEpisodeImage(episode)
+
 
         
         

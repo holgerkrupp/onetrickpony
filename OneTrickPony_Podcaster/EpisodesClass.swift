@@ -132,6 +132,9 @@ func getEpisodeImage(episode: Episode) -> UIImage{
         if (existence.existlocal){
             return UIImage(named: existence.localURL)!
         }else{
+ 
+            EpisodesTableViewController().downloadurl(episode.episodeImage)
+            
             return UIImage(named: "StandardCover")!
         }
     }else {
