@@ -136,7 +136,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     /**************************************************************************
      
                     ALL THE BASIC VIEW FUNCTIONS FOLLOWING
-                (loading and confuring the view controller)
+                (loading and the view controller)
      
      **************************************************************************/
     
@@ -179,7 +179,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             let currentplaytime = Float(CMTimeGetSeconds(starttime()))
             
            progressSlider.setValue(currentplaytime, animated: false)
-            // progressSlider.backgroundColor = getColorFromPodcastSettings("progressBackgroundColor")
            progressSlider.minimumTrackTintColor = getColorFromPodcastSettings("highlightColor")
            progressSlider.maximumTrackTintColor = getColorFromPodcastSettings("progressBackgroundColor")
            progressSlider.setMaximumTrackImage(getImageWithColor(getColorFromPodcastSettings("progressBackgroundColor"),size: CGSizeMake(2, 10)), forState: .Normal)
@@ -230,7 +229,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         self.navigationController?.navigationBarHidden = true
         self.navigationController?.toolbarHidden = false
         
-       // listButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
         listButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
         
 
@@ -284,7 +282,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
-        //do som stuff from the popover
+        //do some stuff from the popover
     }
     
     func disableswipeback(){
@@ -347,9 +345,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     **************************************************************************/
     
     func showsleeptimer(){
-        // self.performSegueWithIdentifier("SleepTimerSegue", sender: self)
-        
-        
         
         let alert = UIAlertController(title: NSLocalizedString("sleep.timer.title", value: "Sleep timer", comment: "shown in Episode Player"), message: NSLocalizedString("sleep.timer.description", value: "The sleep timer will automatically pause the episode after the selcted time", comment: "shown in Episode Player"), preferredStyle: .ActionSheet)
         
@@ -399,7 +394,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
                 pause()
                 cancelleeptimer()
             }
-        //    NSLog(SingletonClass.sharedInstance.sleeptimer)
         }
         
     }
@@ -500,8 +494,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
             let secondsToAdd = CMTimeMakeWithSeconds(seconds,1)
             let jumpToTime = CMTimeAdd(SingletonClass.sharedInstance.player.currentTime(), secondsToAdd)
-            
-            //maybe i have to check here if the jumpToTime is smaller 0 or bigger thant the complete duration
             SingletonClass.sharedInstance.player.seekToTime(jumpToTime)
             updatePlayPosition()
             
@@ -538,8 +530,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             play()
         }else{
             if SingletonClass.sharedInstance.episodePlaying.episodeTitle != episode.episodeTitle {
-                // a new episode is loaded
-            
                 SingletonClass.sharedInstance.episodePlaying = episode
                 url = loadNSURL(episode)
                 SingletonClass.sharedInstance.player.replaceCurrentItemWithPlayerItem(AVPlayerItem(URL: url))
@@ -573,7 +563,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         }
         
         if starttime >= episode.getDurationinCMTime() && episode.getDurationInSeconds() != 0.0 {
-            // the item has been played to the end,I'll reset the starttime to start playing from the beginning
             episode.saveplayed(0.0)
             NSLog("read after save \(episode.getDurationinCMTime())")
             starttime = episode.readplayed()
@@ -664,13 +653,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
                 newindex = 0
             }
             updateRate(newindex)
-            /*
-            SingletonClass.sharedInstance.player.rate = speeds[newindex]
-            playerRateButton.setTitle(speedtext[newindex], forState: .Normal)
-            playerRateButton.tintColor = getColorFromPodcastSettings("playControlColor")
-
-            setObjectForKeyToPersistentStorrage("player.rate", object: newindex)
-             */
         }
     }
     
@@ -684,7 +666,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     func updateplayprogress(){
         if (SingletonClass.sharedInstance.playerinitialized == true){
-            // get time from player (Double)
             let progress = Double(CMTimeGetSeconds(SingletonClass.sharedInstance.player.currentTime()))
             let episode = SingletonClass.sharedInstance.episodePlaying
             
@@ -775,11 +756,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
 
     
     func displayShareSheet() {
-        
         let shareContent:String = String.localizedStringWithFormat(NSLocalizedString("share.sheet", value:"I'm listening to %@ - %@",comment: "used for tweets and stuff"), episode.episodeTitle, episode.episodeLink)
-        
-     //   let shareContent:String = "I'm listening to \(episode.episodeTitle) - \(episode.episodeLink)"
-        NSLog(shareContent)
         let activityViewController = UIActivityViewController(activityItems: [shareContent as NSString], applicationActivities: nil)
         presentViewController(activityViewController, animated: true, completion: {})
     }
