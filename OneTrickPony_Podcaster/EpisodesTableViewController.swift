@@ -475,7 +475,15 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     func autodownload(episode: Episode){
- 
+        
+        // this function shall decided if the eposide will be downloaded automatically based on the Intenet connection (WiFi only) and if it has been already been played
+        if episode.getDurationInSeconds() != 0.0{
+            let remain = Float(CMTimeGetSeconds(episode.remaining()))
+            if remain > 0{
+                
+                
+                
+                
         let status = Reach().connectionStatus()
         switch status {
         case .Unknown, .Offline:
@@ -486,7 +494,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             print("Connected via WiFi")
             self.startDownloadepisode(episode)
         }
-       
+        }
+        }
+        
        //self.startDownloadepisode(episode)
         
     }

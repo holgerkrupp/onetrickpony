@@ -1,0 +1,33 @@
+/* 
+  Localizable.strings
+  DML
+
+  Created by Holger Krupp on 17/04/16.
+  Copyright © 2016 Holger Krupp. All rights reserved.
+*/
+"episode.finished" = "Zuende gespielt";
+"episode.noduration" = "Dauer unbekannt";
+
+"string.for.file.size" = "%.1f MB";
+"string.for.time.remaining" = "noch %@";
+
+"notification.action" = "Details";
+"notification.alert" = "%@ ist verfügbar";
+
+
+"share.sheet" = "Ich höre %1$@ - %2$@";
+
+"title.server.not.reachable" = "Fehler";
+"message.server.not.reachable" = "Server nicht erreichbar";
+
+
+
+"sleep.timer.title" = "Einschlaffunktion";
+"sleep.timer.description" = "Die Einschlaffunktion beendet die gespielte Folge nach der ausgewählten Zeit";
+"sleep.timer.5" = "5 Minuten";
+"sleep.timer.15" = "15 Minuten";
+"sleep.timer.30" = "30 Minuten";
+"sleep.timer.cancel" = "Abbrechen";
+"sleep.timer.deactivate" = "Deaktivieren";
+
+

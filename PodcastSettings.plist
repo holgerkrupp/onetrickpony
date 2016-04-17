@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>feedurl</key>
-	<string>http://www.dirtyminutesleft.de/feed/m4a/</string>
+	<string>http://compendion.net/dirtyminutesleft/feed/m4a</string>
 	<key>UserAgent</key>
 	<string>Dirty Minutes Left App</string>
 	<key>backgroundColor</key>

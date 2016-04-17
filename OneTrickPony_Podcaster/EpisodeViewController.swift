@@ -350,7 +350,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         
         
-        let alert = UIAlertController(title: NSLocalizedString("sleep.timer.title", value: "Sleep timer", comment: "shown in Episode Player"), message: NSLocalizedString("The sleep timer will automatically pause the episode after the selcted time", comment: "shown in Episode Player"), preferredStyle: .ActionSheet)
+        let alert = UIAlertController(title: NSLocalizedString("sleep.timer.title", value: "Sleep timer", comment: "shown in Episode Player"), message: NSLocalizedString("sleep.timer.description", value: "The sleep timer will automatically pause the episode after the selcted time", comment: "shown in Episode Player"), preferredStyle: .ActionSheet)
         
         let disableAction = UIAlertAction(title: NSLocalizedString("sleep.timer.deactivate", value: "Disable", comment: "shown in Episode Player"), style: .Default) { (alert: UIAlertAction!) -> Void in
             self.cancelleeptimer()
