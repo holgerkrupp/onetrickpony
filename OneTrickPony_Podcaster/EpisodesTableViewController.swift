@@ -297,7 +297,15 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         
         
         // get the last modified date from the file on the server
-        let date = getHeaderFromUrl(getObjectForKeyFromPodcastSettings("feedurl") as! String, headerfield: "Last-Modified")
+        var date = getHeaderFromUrl(getObjectForKeyFromPodcastSettings("feedurl") as! String, headerfield: "Last-Modified")
+        
+        if date == "" {
+            
+            // if the server does not contain a Last-Modified header for the feed, the Date fiedl will be used. This might lead to double download of the feed as the Date is more often updated than the Last-Modified. Only if even the Date fields is empthy, it is assumed that the server not reachable
+            date = getHeaderFromUrl(getObjectForKeyFromPodcastSettings("feedurl") as! String, headerfield: "Date")
+        }
+        
+        
         if date != "" {
             let newfeeddate = dateStringToNSDate(date)
             NSLog("newfeed: \(newfeeddate) (Header from Server)")
@@ -399,11 +407,12 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         }
     }
     func parser(parser: NSXMLParser, foundCharacters string: String) {
+        
         let data = string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        //    print("foundCharacters \(eName) data: \(data)")
+           // NSLog("foundCharacters \(eName) data: \(data) string: \(string)")
         if (!data.isEmpty) {
             if eName == "title" {
-                episodeTitle = data
+                episodeTitle += data
             } else if eName == "link" {
                 episodeLink = data
             }else if eName == "itunes:duration" {

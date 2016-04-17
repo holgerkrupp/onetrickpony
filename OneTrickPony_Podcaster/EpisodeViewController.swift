@@ -211,7 +211,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
            back30Button.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
            playButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
            pauseButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
-            
+            listButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
             
             
            forward30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true, forward: true, label: "30"), forState: .Normal)

@@ -273,7 +273,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 480FEDA91C54B3DF005594F1 /* Build configuration list for PBXProject "DML" */;
+			buildConfigurationList = 480FEDA91C54B3DF005594F1 /* Build configuration list for PBXProject "Einschlafen" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -340,7 +340,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\nCUSTOMVERPLIST=\"${PROJECT_DIR}/PodcastSettings.plist\"\nfeedurl=$(/usr/libexec/PlistBuddy -c \"Print feedurl\" ${CUSTOMVERPLIST})\necho $feedurl\necho ${TARGET_NAME}\ncurl -s $feedurl > ${PROJECT_DIR}/${TARGET_NAME}/feed.xml\nfi";
+			shellScript = "\nCUSTOMVERPLIST=\"${PROJECT_DIR}/PodcastSettings.plist\"\nfeedurl=$(/usr/libexec/PlistBuddy -c \"Print feedurl\" ${CUSTOMVERPLIST})\necho $feedurl\necho ${TARGET_NAME}\ncurl -s $feedurl > ${PROJECT_DIR}/${TARGET_NAME}/feed.xml\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -527,7 +527,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = de.holgerkrupp.DML;
+				PRODUCT_BUNDLE_IDENTIFIER = de.holgerkrupp.Einschlafen;
 				PRODUCT_NAME = DML;
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -546,7 +546,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = de.holgerkrupp.DML;
+				PRODUCT_BUNDLE_IDENTIFIER = de.holgerkrupp.Einschlafen;
 				PRODUCT_NAME = DML;
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -606,7 +606,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		480FEDA91C54B3DF005594F1 /* Build configuration list for PBXProject "DML" */ = {
+		480FEDA91C54B3DF005594F1 /* Build configuration list for PBXProject "Einschlafen" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				480FEDD71C54B3DF005594F1 /* Debug */,

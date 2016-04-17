@@ -17,7 +17,7 @@
                BlueprintIdentifier = "480FEDAD1C54B3DF005594F1"
                BuildableName = "DML.app"
                BlueprintName = "OneTrickPony_Podcaster"
-               ReferencedContainer = "container:DML.xcodeproj">
+               ReferencedContainer = "container:Einschlafen.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "480FEDC41C54B3DF005594F1"
                BuildableName = "OneTrickPony_PodcasterTests.xctest"
                BlueprintName = "OneTrickPony_PodcasterTests"
-               ReferencedContainer = "container:DML.xcodeproj">
+               ReferencedContainer = "container:Einschlafen.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "480FEDCF1C54B3DF005594F1"
                BuildableName = "OneTrickPony_PodcasterUITests.xctest"
                BlueprintName = "OneTrickPony_PodcasterUITests"
-               ReferencedContainer = "container:DML.xcodeproj">
+               ReferencedContainer = "container:Einschlafen.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,7 +55,7 @@
             BlueprintIdentifier = "480FEDAD1C54B3DF005594F1"
             BuildableName = "DML.app"
             BlueprintName = "OneTrickPony_Podcaster"
-            ReferencedContainer = "container:DML.xcodeproj">
+            ReferencedContainer = "container:Einschlafen.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -78,7 +78,7 @@
             BlueprintIdentifier = "480FEDAD1C54B3DF005594F1"
             BuildableName = "DML.app"
             BlueprintName = "OneTrickPony_Podcaster"
-            ReferencedContainer = "container:DML.xcodeproj">
+            ReferencedContainer = "container:Einschlafen.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -97,7 +97,7 @@
             BlueprintIdentifier = "480FEDAD1C54B3DF005594F1"
             BuildableName = "DML.app"
             BlueprintName = "OneTrickPony_Podcaster"
-            ReferencedContainer = "container:DML.xcodeproj">
+            ReferencedContainer = "container:Einschlafen.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
