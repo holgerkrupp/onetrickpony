@@ -75,7 +75,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
          print("last Episode: \(getObjectForKeyFromPersistentStorrage("latestepisode"))")
          print("last FeedDay: \(getObjectForKeyFromPersistentStorrage("lastfeedday"))")
          */
-
+        
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.tableView.separatorColor = getColorFromPodcastSettings("highlightColor")
@@ -410,7 +410,11 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     func parser(parser: NSXMLParser, foundCharacters string: String) {
         
         let data = string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+<<<<<<< HEAD
            // NSLog("foundCharacters \(eName) data: \(data) string: \(string)")
+=======
+        // NSLog("foundCharacters \(eName) data: \(data) string: \(string)")
+>>>>>>> downloadRewrite
         if (!data.isEmpty) {
             if eName == "title" {
                 episodeTitle += data
@@ -507,20 +511,20 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                 
                 
                 
-        let status = Reach().connectionStatus()
-        switch status {
-        case .Unknown, .Offline:
-            print("Not connected")
-        case .Online(.WWAN):
-            print("Connected via WWAN")
-        case .Online(.WiFi):
-            print("Connected via WiFi")
-            self.startDownloadepisode(episode)
-        }
-        }
+                let status = Reach().connectionStatus()
+                switch status {
+                case .Unknown, .Offline:
+                    print("Not connected")
+                case .Online(.WWAN):
+                    print("Connected via WWAN")
+                case .Online(.WiFi):
+                    print("Connected via WiFi")
+                    self.startDownloadepisode(episode)
+                }
+            }
         }
         
-       //self.startDownloadepisode(episode)
+        //self.startDownloadepisode(episode)
         
     }
     
