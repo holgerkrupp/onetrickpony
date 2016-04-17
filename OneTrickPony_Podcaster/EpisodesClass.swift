@@ -27,6 +27,14 @@ class Episode {
     var episodeLocal:       Bool = false
     var episodeIndex:       Int = Int()
     
+    /*
+     
+     Further implementation to be done: To mark the current chapter playing and showing the chapter title within the player
+     
+     
+     func getChapterForSeconds(progress: Double) -> Chapter {
+        
+    }*/
     
     
     func getprogressinCMTime(progress: Double) -> CMTime {
