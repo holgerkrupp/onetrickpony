@@ -30,6 +30,7 @@
 		48DB59841C5D51B60041F4AC /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DB59831C5D51B60041F4AC /* Singleton.swift */; };
 		48DB59871C61C6700041F4AC /* PodcastSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48DB59861C61C6700041F4AC /* PodcastSettings.plist */; };
 		48E5B3AC1C69062800D06BAC /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E5B3AB1C69062800D06BAC /* Download.swift */; };
+		48E8AC1B1CC4257100865834 /* PlayerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E8AC1A1CC4257100865834 /* PlayerClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		48DB59831C5D51B60041F4AC /* Singleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		48DB59861C61C6700041F4AC /* PodcastSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PodcastSettings.plist; path = ../PodcastSettings.plist; sourceTree = "<group>"; };
 		48E5B3AB1C69062800D06BAC /* Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
+		48E8AC1A1CC4257100865834 /* PlayerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 				4821D4CC1C764D920004DF4A /* supportfunctions.swift */,
 				48D2205C1CA485B7005BA209 /* InterfaceGenerator.swift */,
 				480FEDC01C54B3DF005594F1 /* Info.plist */,
+				48E8AC1A1CC4257100865834 /* PlayerClass.swift */,
 			);
 			path = OneTrickPony_Podcaster;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 			files = (
 				48E5B3AC1C69062800D06BAC /* Download.swift in Sources */,
 				480FEDE91C5518A4005594F1 /* EpisodesClass.swift in Sources */,
+				48E8AC1B1CC4257100865834 /* PlayerClass.swift in Sources */,
 				48D677171CC0009B0053D64E /* Reachability.swift in Sources */,
 				48DB59841C5D51B60041F4AC /* Singleton.swift in Sources */,
 				48D2205D1CA485B7005BA209 /* InterfaceGenerator.swift in Sources */,

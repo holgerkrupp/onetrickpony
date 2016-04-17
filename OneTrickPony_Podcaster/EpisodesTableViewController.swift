@@ -370,7 +370,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             episodePubDate = String()
             episodeDescription = String()
             lastfeeddate = String()
-            
+            episodeImage = String()
             episodeChapters = [Chapter]()
 
             
@@ -462,13 +462,6 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             
             episode.episodeIndex = episodes.count
             episodes.append(episode)
-            
-            episodeImage = ""
-            
-            
-            
-            
-            
             
         }else if elementName == "channel"{
             print("end of feed")

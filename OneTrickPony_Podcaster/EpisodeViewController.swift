@@ -155,7 +155,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         enableOrDisableControllsIfNoInFocus()
         allowremotebuttons()
-        if existsLocally(episode.episodeUrl).existlocal{
+        if existsLocally(episode.episodeUrl).existlocal && SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle{
             autoplay()
         }
         setplaypausebutton()

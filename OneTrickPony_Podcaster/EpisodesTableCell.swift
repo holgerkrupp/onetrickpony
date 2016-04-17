@@ -137,7 +137,7 @@ class EpisodeCell: UITableViewCell {
         EpisodeDownloadButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
         EpisodePauseButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
         EpisodeCancelButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
-        var existence = existsLocally(episode.episodeUrl)
+        let existence = existsLocally(episode.episodeUrl)
         // modify Download button to show either 'download' or 'play'
         if (existence.existlocal){
             episode.episodeLocal = true
