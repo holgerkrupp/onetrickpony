@@ -27,6 +27,7 @@
 "sleep.timer.5" = "5 Minuten";
 "sleep.timer.15" = "15 Minuten";
 "sleep.timer.30" = "30 Minuten";
+"sleep.timer.debug" = "0.1 Minuten DEBUG";
 "sleep.timer.cancel" = "Abbrechen";
 "sleep.timer.deactivate" = "Deaktivieren";
 

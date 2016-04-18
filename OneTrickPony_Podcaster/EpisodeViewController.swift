@@ -380,6 +380,10 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             self.setsleeptimer(5)
         }
         
+        let debugAction = UIAlertAction(title: NSLocalizedString("sleep.timer.debug", value: "0.1 Minutes", comment: "shown in Episode Player"), style: .Default) { (alert: UIAlertAction!) -> Void in
+            self.setsleeptimer(0.1)
+        }
+        
         let cancelAction = UIAlertAction(title: NSLocalizedString("sleep.timer.cancel", value: "cancel", comment: "shown in Episode Player"), style: .Cancel) { (alert: UIAlertAction!) -> Void in
             
         }
@@ -387,6 +391,13 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         alert.addAction(firstAction)
         alert.addAction(secondAction)
         alert.addAction(thirdAction)
+        
+        
+        #if (arch(i386) || arch(x86_64)) && os(iOS)
+            alert.addAction(debugAction)
+        #endif
+        
+        
         alert.addAction(cancelAction)
         alert.view.tintColor = getColorFromPodcastSettings("playControlColor")
         presentViewController(alert, animated: true, completion:nil) // 6
@@ -410,20 +421,18 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     func checksleeptimer(){
-        if (readSleepTimer().set == true){
             if (readSleepTimer().remaining <= 0.0){
                 pause()
                 cancelleeptimer()
             }
-        }
+        
         
     }
     
     func updateSleepTimer(){
         // if a Sleeptimer is set, reduce the time of the sleeptimer by the Interval of the playtimer
-        if (readSleepTimer().set == true){
             SingletonClass.sharedInstance.sleeptimer -= SingletonClass.sharedInstance.audioTimer.timeInterval
-        }
+        
     }
     
     
@@ -698,9 +707,10 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             updateSliderProgress(progress)
             updateMPMediaPlayer()
             setplaypausebutton()
-            updateSleepTimer()
-            checksleeptimer()
-            
+            if (readSleepTimer().set == true){
+                updateSleepTimer()
+                checksleeptimer()
+            }
             
         }
     }
