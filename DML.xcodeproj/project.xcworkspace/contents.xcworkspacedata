@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/holgerkrupp/Documents/Cocoa/iOS/OneTrickPony_Podcaster/DML.xcodeproj">
+      location = "self:">
    </FileRef>
 </Workspace>
