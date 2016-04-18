@@ -20,11 +20,12 @@ class Episode {
     var episodeFilename:    String = String()
     var episodeFilesize:    Int = Int()
     var episodeImage:       String = String()
+    var episodePicture:     UIImage?
     var episodeChapter      = [Chapter]()
     var episodeDescription: String = String()
     
     
-    var episodeLocal:       Bool = false
+    //var episodeLocal:       Bool = false
     var episodeIndex:       Int = Int()
     
     /*
@@ -105,7 +106,6 @@ class Episode {
             do {
                 try manager.removeItemAtPath(localFeedFile)
                 NSLog("deleted")
-                episodeLocal = false
             }catch{
                 NSLog("no file to delete")
                 
@@ -126,20 +126,40 @@ func DoubleToCMTime(seconds: Double) -> CMTime{
 
 
 func getEpisodeImage(episode: Episode) -> UIImage{
-    
+    var episodePicture : UIImage
     if (episode.episodeImage != ""){
         let existence = existsLocally(episode.episodeImage)
+        
+        
         if (existence.existlocal){
-            return UIImage(named: existence.localURL)!
+            do {
+                let attr : NSDictionary? = try NSFileManager.defaultManager().attributesOfItemAtPath(existence.localURL)
+                if let _attr = attr {
+                    let fileSize = _attr.fileSize();
+                    if fileSize > 10 {
+                        episodePicture = UIImage(named: existence.localURL)!
+                    }else{
+                        episodePicture = UIImage(named: "StandardCover")!
+                        
+                    }
+                } else {
+                    episodePicture = UIImage(named: "StandardCover")!
+
+                }
+            }catch{
+                episodePicture =  UIImage(named: "StandardCover")!
+                
+            }
         }else{
- 
+            
             EpisodesTableViewController().downloadurl(episode.episodeImage)
             
-            return UIImage(named: "StandardCover")!
+            episodePicture = UIImage(named: "StandardCover")!
         }
     }else {
-        return UIImage(named: "StandardCover")!
+        episodePicture = UIImage(named: "StandardCover")!
     }
+    return episodePicture
 }
 
 

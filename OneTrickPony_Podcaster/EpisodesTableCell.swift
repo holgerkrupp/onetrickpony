@@ -137,32 +137,7 @@ class EpisodeCell: UITableViewCell {
         EpisodeDownloadButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
         EpisodePauseButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
         EpisodeCancelButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
-        
-        
-        
-        let existence = existsLocally(episode.episodeUrl)
-        if (existence.existlocal){
-            episode.episodeLocal = true
-            EpisodeDownloadProgressbar.progress = 1
-            EpisodeDownloadProgressbar.hidden = true
-            EpisodeDownloadButton!.setTitle("Play", forState: UIControlState.Normal)
-            EpisodeDownloadButton.hidden = true
-            EpisodeDownloadButton!.enabled = false
-        
-        }else{
-
-            EpisodeDownloadProgressbar.progress = 0
-            EpisodeDownloadProgressbar.hidden = true
-            EpisodeDownloadButton!.setTitle("", forState: UIControlState.Normal)
-            EpisodeDownloadButton!.setImage(createCircleWithArrow(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true), forState: .Normal)
-
-            EpisodeDownloadButton!.enabled = true
-            episode.episodeLocal = false
-        }
-        // set Episode image if existing
-        
-
-
+   
         
         
     }
