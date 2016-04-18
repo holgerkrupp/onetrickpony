@@ -156,10 +156,7 @@ func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
 func stringtodouble(input :String) -> Double{
     let timeArray = input.componentsSeparatedByString(":")
     var seconds = 0.0
-    // I'm going through the array (which should have max 3 elements) to add up hours, minutes and seconds.
-    // to do that I'll add the smaller element to the existing one and multiply by 60
-    // because I'm also doing that for the seconds, I have to devide by 60 again. Not nice but it works.
-    
+
     for element in timeArray{
         seconds = (seconds + Double(element)!) * 60
     }

@@ -99,6 +99,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
         self.navigationController?.toolbarHidden = true
+
         
         self.tableView.backgroundColor = getColorFromPodcastSettings("backgroundColor")
 
@@ -540,6 +541,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("EpisodeCell", forIndexPath: indexPath) as! EpisodeCell
+
         let episode: Episode = episodes[indexPath.row]
         cell.layoutMargins = UIEdgeInsetsZero
         
@@ -590,7 +592,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         
         
         cell.filltableviewcell(episode)
-        
+        cell.EpisodeImage.image = getEpisodeImage(episode)
         return cell
     }
     

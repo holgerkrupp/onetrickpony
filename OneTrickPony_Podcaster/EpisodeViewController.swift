@@ -248,7 +248,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         shareBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
         chapterBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
         infoButton.tintColor = getColorFromPodcastSettings("playControlColor")
-        
+        playerRateButton.tintColor = getColorFromPodcastSettings("playControlColor")
+        playerRateButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
+
         if episode.episodeChapter.count == 0
         {
             chapterBarButton.enabled = false
@@ -373,6 +375,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         alert.addAction(secondAction)
         alert.addAction(thirdAction)
         alert.addAction(cancelAction)
+        alert.view.tintColor = getColorFromPodcastSettings("playControlColor")
         presentViewController(alert, animated: true, completion:nil) // 6
     }
     
@@ -657,9 +660,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     func updateRate(rateindex: Int){
-        
+        playerRateButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
         playerRateButton.setTitle(speedtext[rateindex], forState: .Normal)
-        playerRateButton.tintColor = getColorFromPodcastSettings("playControlColor")
+
         setObjectForKeyToPersistentStorrage("player.rate", object: rateindex)
         SingletonClass.sharedInstance.player.rate = speeds[rateindex]
     }

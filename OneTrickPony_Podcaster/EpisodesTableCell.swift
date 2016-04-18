@@ -137,8 +137,10 @@ class EpisodeCell: UITableViewCell {
         EpisodeDownloadButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
         EpisodePauseButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
         EpisodeCancelButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
+        
+        
+        
         let existence = existsLocally(episode.episodeUrl)
-        // modify Download button to show either 'download' or 'play'
         if (existence.existlocal){
             episode.episodeLocal = true
             EpisodeDownloadProgressbar.progress = 1
@@ -146,11 +148,11 @@ class EpisodeCell: UITableViewCell {
             EpisodeDownloadButton!.setTitle("Play", forState: UIControlState.Normal)
             EpisodeDownloadButton.hidden = true
             EpisodeDownloadButton!.enabled = false
+        
         }else{
-            // just in case - should never been used - but acctually is used and I don't know why
+
             EpisodeDownloadProgressbar.progress = 0
             EpisodeDownloadProgressbar.hidden = true
-
             EpisodeDownloadButton!.setTitle("", forState: UIControlState.Normal)
             EpisodeDownloadButton!.setImage(createCircleWithArrow(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true), forState: .Normal)
 
@@ -158,7 +160,7 @@ class EpisodeCell: UITableViewCell {
             episode.episodeLocal = false
         }
         // set Episode image if existing
-        EpisodeImage.image = getEpisodeImage(episode)
+        
 
 
         
