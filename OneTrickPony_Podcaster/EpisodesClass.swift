@@ -171,7 +171,13 @@ func secondsToHoursMinutesSeconds (seconds : Double) -> (String) {
     let rm = min
     let rs = 60 * secf
     
-    let returnstring = NSString(format: "%02.0f:%02.0f:%02.0f", rh,rm,rs) as String
+    
+    var returnstring = String()
+    if rh != 0 {
+     returnstring = NSString(format: "%02.0f:%02.0f:%02.0f", rh,rm,rs) as String
+    }else {
+     returnstring = NSString(format: "%02.0f:%02.0f", rm,rs) as String
+    }
     return returnstring
 }
 

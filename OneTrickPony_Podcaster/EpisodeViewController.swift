@@ -348,7 +348,20 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     func showsleeptimer(){
         
-        let alert = UIAlertController(title: NSLocalizedString("sleep.timer.title", value: "Sleep timer", comment: "shown in Episode Player"), message: NSLocalizedString("sleep.timer.description", value: "The sleep timer will automatically pause the episode after the selcted time", comment: "shown in Episode Player"), preferredStyle: .ActionSheet)
+        var description = NSLocalizedString("sleep.timer.description", value: "The sleep timer will automatically pause the episode after the selcted time", comment: "shown in Episode Player")
+        
+        if let remainingTime = readSleepTimer().remaining {
+            if readSleepTimer().set == true {
+                let timeInfo = String.localizedStringWithFormat(
+                    NSLocalizedString("string.for.time.remaining", value:"%@ remaining",
+                        comment: "shown in TableView"),
+                    secondsToHoursMinutesSeconds(Double(remainingTime)))
+                description = description + "\n\n" + timeInfo
+            }
+        }
+        
+        
+        let alert = UIAlertController(title: NSLocalizedString("sleep.timer.title", value: "Sleep timer", comment: "shown in Episode Player"), message: description , preferredStyle: .ActionSheet)
         
         let disableAction = UIAlertAction(title: NSLocalizedString("sleep.timer.deactivate", value: "Disable", comment: "shown in Episode Player"), style: .Default) { (alert: UIAlertAction!) -> Void in
             self.cancelleeptimer()
@@ -377,6 +390,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         alert.addAction(cancelAction)
         alert.view.tintColor = getColorFromPodcastSettings("playControlColor")
         presentViewController(alert, animated: true, completion:nil) // 6
+        NSLog("\(readSleepTimer())")
     }
     
 
@@ -391,9 +405,13 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         SingletonClass.sharedInstance.sleeptimerset = false
     }
     
+    func readSleepTimer() -> (set : Bool, remaining : Double?) {
+     return (SingletonClass.sharedInstance.sleeptimerset, SingletonClass.sharedInstance.sleeptimer)
+    }
+    
     func checksleeptimer(){
-        if (SingletonClass.sharedInstance.sleeptimerset == true){
-            if (SingletonClass.sharedInstance.sleeptimer <= 0.0){
+        if (readSleepTimer().set == true){
+            if (readSleepTimer().remaining <= 0.0){
                 pause()
                 cancelleeptimer()
             }
@@ -403,7 +421,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     func updateSleepTimer(){
         // if a Sleeptimer is set, reduce the time of the sleeptimer by the Interval of the playtimer
-        if (SingletonClass.sharedInstance.sleeptimerset == true){
+        if (readSleepTimer().set == true){
             SingletonClass.sharedInstance.sleeptimer -= SingletonClass.sharedInstance.audioTimer.timeInterval
         }
     }
