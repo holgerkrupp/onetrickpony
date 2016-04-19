@@ -45,6 +45,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
      let downloadCancel: UIImage? = createCircleWithCross(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: false)
     
+     let status = Reach().connectionStatus()
     
     
     
@@ -91,8 +92,17 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         self.tableView.separatorInset = UIEdgeInsetsZero
         self.tableView.layoutMargins = UIEdgeInsetsZero
 
-        
-        self.refreshfeed()
+        switch status {
+        case .Unknown, .Offline:
+            print("Not connected")
+        case .Online(.WWAN):
+            print("Connected via WWAN")
+        case .Online(.WiFi):
+            print("Connected via WiFi")
+            self.refreshfeed()
+        }
+
+
         self.refreshControl?.addTarget(self, action:#selector(EpisodesTableViewController.refreshfeed), forControlEvents: UIControlEvents.ValueChanged)
         //   self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
         
@@ -505,11 +515,6 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         if episode.getDurationInSeconds() != 0.0{
             let remain = Float(CMTimeGetSeconds(episode.remaining()))
             if remain > 0{
-                
-                
-                
-                
-                let status = Reach().connectionStatus()
                 switch status {
                 case .Unknown, .Offline:
                     print("Not connected")
@@ -609,18 +614,6 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         
 
         // hide and show the Download controlls
-        var showDownloadControls = false
-        if let download = activeDownloads[episode.episodeUrl] {
-            showDownloadControls = true
-            
-            cell.EpisodeDownloadProgressbar.progress = download.progress
-        }
-        cell.EpisodeDownloadProgressbar.hidden = !showDownloadControls
-        
-        
-        cell.EpisodePauseButton.hidden = !showDownloadControls
-        cell.EpisodeCancelButton.hidden = !showDownloadControls
-                
         let existence = existsLocally(episode.episodeUrl)
         
         if (existence.existlocal){
@@ -632,12 +625,28 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             
             
         }else{
-            cell.EpisodeDownloadProgressbar.progress = 0
-            cell.EpisodeDownloadProgressbar.hidden = true
-            cell.EpisodeDownloadButton!.hidden = showDownloadControls
+            var showDownloadControls = false
+            if let download = activeDownloads[episode.episodeUrl] {
+                showDownloadControls = true
+                cell.EpisodeDownloadProgressbar.progress = download.progress
+            }else{
+                cell.EpisodeDownloadProgressbar.progress = 0
+            }
+
+            cell.EpisodeDownloadProgressbar.hidden = !showDownloadControls
             cell.EpisodeDownloadButton!.setTitle("", forState: UIControlState.Normal)
-            cell.EpisodeDownloadButton!.enabled = true
+            
+            switch status {
+            case .Offline:
+                cell.EpisodeDownloadButton!.enabled = false
+            default:
+                cell.EpisodeDownloadButton!.enabled = !showDownloadControls
+            }
+            
             cell.EpisodeDownloadButton!.setImage(downloadImage, forState: .Normal)
+            cell.EpisodeDownloadButton!.hidden = showDownloadControls
+            cell.EpisodePauseButton.hidden = !showDownloadControls
+            cell.EpisodeCancelButton.hidden = !showDownloadControls
         }
         
 
