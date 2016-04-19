@@ -34,8 +34,8 @@ class Episode {
      
      
      func getChapterForSeconds(progress: Double) -> Chapter {
-        
-    }*/
+     
+     }*/
     
     
     func getprogressinCMTime(progress: Double) -> CMTime {
@@ -64,11 +64,11 @@ class Episode {
     }
     
     func setDuration(duration: CMTime) {
-    let seconds = CMTimeGetSeconds(duration)
+        let seconds = CMTimeGetSeconds(duration)
         episodeDuration = secondsToHoursMinutesSeconds(seconds)
     }
     
-
+    
     
     func remaining() -> CMTime{
         let played = readplayed()
@@ -125,7 +125,7 @@ func DoubleToCMTime(seconds: Double) -> CMTime{
 
 
 
-func getEpisodeImage(episode: Episode) -> UIImage{
+func getEpisodeImage(episode: Episode, size:CGSize?=nil) -> UIImage{
     
     var episodePicture : UIImage
     episodePicture = UIImage(named: "StandardCover")!
@@ -146,6 +146,19 @@ func getEpisodeImage(episode: Episode) -> UIImage{
             EpisodesTableViewController().downloadurl(episode.episodeImage)
         }
     }
+    
+    if (size != nil){
+        let hasAlpha = false
+        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+        
+        UIGraphicsBeginImageContextWithOptions(size!, !hasAlpha, scale)
+        episodePicture.drawInRect(CGRect(origin: CGPointZero, size: size!))
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        episodePicture = scaledImage
+    }
+    
     return episodePicture
 }
 
@@ -163,7 +176,7 @@ func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
 func stringtodouble(input :String) -> Double{
     let timeArray = input.componentsSeparatedByString(":")
     var seconds = 0.0
-
+    
     for element in timeArray{
         seconds = (seconds + Double(element)!) * 60
     }
@@ -181,9 +194,9 @@ func secondsToHoursMinutesSeconds (seconds : Double) -> (String) {
     
     var returnstring = String()
     if rh != 0 {
-     returnstring = NSString(format: "%02.0f:%02.0f:%02.0f", rh,rm,rs) as String
+        returnstring = NSString(format: "%02.0f:%02.0f:%02.0f", rh,rm,rs) as String
     }else {
-     returnstring = NSString(format: "%02.0f:%02.0f", rm,rs) as String
+        returnstring = NSString(format: "%02.0f:%02.0f", rm,rs) as String
     }
     return returnstring
 }
