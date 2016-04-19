@@ -193,8 +193,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             let description = episode.episodeDescription.stringByReplacingOccurrencesOfString("\n", withString: "</br>")
             
            episodeShowNotesWebView.loadHTMLString(description, baseURL: nil)
-            
-           episodeImage.image = getEpisodeImage(episode)
+        
+           episodeImage.image = getEpisodeImage(episode, size: CGSizeMake(episodeImage.frame.size.height, episodeImage.frame.size.width))
             // rate Button
             if (SingletonClass.sharedInstance.playerinitialized == true) {
                 let currentspeed = SingletonClass.sharedInstance.player.rate

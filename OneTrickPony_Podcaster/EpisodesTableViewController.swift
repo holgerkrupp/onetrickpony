@@ -603,7 +603,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         // moving the image creating to another thread to make the scolling more smooth
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            episode.episodePicture = getEpisodeImage(episode, size: CGSizeMake(cell.EpisodeImage.image!.size.height, cell.EpisodeImage.image!.size.width))
+            episode.episodePicture = getEpisodeImage(episode, size: CGSizeMake(cell.EpisodeImage.frame.size.height, cell.EpisodeImage.frame.size.width))
             if (episode.episodePicture) != nil {
                 dispatch_async(dispatch_get_main_queue(), {
                     cell.EpisodeImage.image = episode.episodePicture
