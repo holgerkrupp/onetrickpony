@@ -22,16 +22,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneTrickPony_Podcaster/EpisodesTableViewController.swift"
-            timestampString = "482749022.47417"
+            timestampString = "482794825.239184"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "viewWillAppear(_:)"
+            startingLineNumber = "647"
+            endingLineNumber = "647"
+            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,13 +42,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneTrickPony_Podcaster/EpisodesTableViewController.swift"
-            timestampString = "482749298.140813"
+            timestampString = "482794825.239184"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "646"
-            endingLineNumber = "646"
+            startingLineNumber = "608"
+            endingLineNumber = "608"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Einschlafen.EpisodesTableViewController.(tableView (__ObjC.UITableView, cellForRowAtIndexPath : __ObjC.NSIndexPath) -&gt; __ObjC.UITableViewCell).(closure #1)"
+                  moduleName = "Einschlafen"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/holgerkrupp/Documents/Cocoa/iOS/onetrickpony/OneTrickPony_Podcaster/EpisodesTableViewController.swift"
+                  timestampString = "482794022.593596"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "608"
+                  endingLineNumber = "608"
+                  offsetFromSymbolStart = "672">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Einschlafen.EpisodesTableViewController.(tableView (__ObjC.UITableView, cellForRowAtIndexPath : __ObjC.NSIndexPath) -&gt; __ObjC.UITableViewCell).(closure #1).(closure #1)"
+                  moduleName = "Einschlafen"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/holgerkrupp/Documents/Cocoa/iOS/onetrickpony/OneTrickPony_Podcaster/EpisodesTableViewController.swift"
+                  timestampString = "482794022.593908"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "609"
+                  endingLineNumber = "609"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

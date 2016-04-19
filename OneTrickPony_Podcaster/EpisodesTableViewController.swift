@@ -122,10 +122,10 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
 
         if SingletonClass.sharedInstance.playerinitialized {
             self.tableView.reloadData()
-            SingletonClass.sharedInstance.audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target:self, selector:#selector(EpisodesTableViewController.updatecell),userInfo: nil,repeats: true)
+       //     SingletonClass.sharedInstance.audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target:self, selector:#selector(EpisodesTableViewController.updatecell),userInfo: nil,repeats: true)
         }
-        
     }
+
     
     func updatecell(){
         updateCellForEpisode(SingletonClass.sharedInstance.episodePlaying)
@@ -603,11 +603,12 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         // moving the image creating to another thread to make the scolling more smooth
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            episode.episodePicture = getEpisodeImage(episode, size: CGSizeMake(cell.EpisodeImage.frame.size.height, cell.EpisodeImage.frame.size.width))
-            if (episode.episodePicture) != nil {
+            
+            let episodePicture: UIImage? = getEpisodeImage(episode, size: CGSizeMake(cell.EpisodeImage.frame.size.height, cell.EpisodeImage.frame.size.width))
+            if (episodePicture) != nil {
                 dispatch_async(dispatch_get_main_queue(), {
-                    cell.EpisodeImage.image = episode.episodePicture
-                    episode.episodePicture = nil
+                    cell.EpisodeImage.image = episodePicture
+                
                 })
             }
         })
@@ -661,7 +662,10 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         return cell
     }
     
-    
+    override func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.dequeueReusableCellWithIdentifier("EpisodeCell", forIndexPath: indexPath) as! EpisodeCell
+        cell.EpisodeImage.image = nil
+    }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         

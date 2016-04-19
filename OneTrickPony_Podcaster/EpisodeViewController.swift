@@ -145,7 +145,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     //    disableswipeback()
+    
 
         fillPlayerView(episode)
         adjustColors()
