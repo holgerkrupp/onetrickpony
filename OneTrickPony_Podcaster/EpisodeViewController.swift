@@ -147,15 +147,13 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         super.viewDidLoad()
     //    disableswipeback()
 
-        
-        //fill the view with content
         fillPlayerView(episode)
         adjustColors()
         episodeShowNotesWebView.hidden = true
         
         enableOrDisableControllsIfNoInFocus()
         allowremotebuttons()
-        if existsLocally(episode.episodeUrl).existlocal && SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle{
+        if existsLocally(episode.episodeUrl).existlocal && (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle) {
             autoplay()
         }
         setplaypausebutton()

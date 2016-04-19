@@ -39,6 +39,13 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     let manager = NSFileManager.defaultManager()
     var myDict: NSDictionary?
     
+    let downloadImage: UIImage? = createCircleWithArrow(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true)
+    
+    let downloadPause: UIImage? = createCircleWithPause(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true)
+    
+     let downloadCancel: UIImage? = createCircleWithCross(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: false)
+    
+    
     
     
     // parameters for background downloads
@@ -567,44 +574,28 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         
         cell.delegate = self
         
+
+        
+        cell.EpisodePauseButton.titleLabel?.text = ""
+        
+        if let download = self.activeDownloads[episode.episodeUrl] {
+
+        if (download.isDownloading) {
+            cell.EpisodePauseButton.titleLabel?.text = ""
+            
+            cell.EpisodePauseButton.setImage(downloadPause, forState: .Normal)
+            
+        }else{
+            cell.EpisodePauseButton.setImage(downloadImage, forState: .Normal)
+        }
+        }
+        
+        cell.EpisodeCancelButton.setImage(downloadCancel, forState: .Normal)
         
         
         
         
         // moving the image creating to another thread to make the scolling more smooth
-        
-        cell.EpisodePauseButton.titleLabel?.text = ""
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            
-            var downloadControll : UIImage?
-            
-            if let download = self.activeDownloads[episode.episodeUrl] {
-                if (download.isDownloading) {
-                    cell.EpisodePauseButton.titleLabel?.text = ""
-                    
-                     downloadControll = createCircleWithPause(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true)
-                    
-                }else{
-                    downloadControll = createCircleWithArrow(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true)
-                }
-            }
-            if (downloadControll != nil) {
-                dispatch_async(dispatch_get_main_queue(), {
-                    cell.EpisodePauseButton.setImage(downloadControll, forState: .Normal)
-                })
-            }
-        })
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            let cancelImage: UIImage? = createCircleWithCross(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: false)
-            if (cancelImage) != nil {
-                dispatch_async(dispatch_get_main_queue(), {
-                    cell.EpisodeCancelButton.setImage(cancelImage, forState: .Normal)
-                })
-            }
-        })
-        
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             episode.episodePicture = getEpisodeImage(episode)
@@ -617,35 +608,6 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         })
         
 
-        let existence = existsLocally(episode.episodeUrl)
-        
-        if (existence.existlocal){
-            cell.EpisodeDownloadProgressbar.progress = 1
-            cell.EpisodeDownloadProgressbar.hidden = true
-           cell.EpisodeDownloadButton!.setTitle("", forState: UIControlState.Normal)
-            cell.EpisodeDownloadButton.hidden = true
-            cell.EpisodeDownloadButton!.enabled = false
-            
-        }else{
-            cell.EpisodeDownloadProgressbar.progress = 0
-            cell.EpisodeDownloadProgressbar.hidden = true
-            cell.EpisodeDownloadButton!.hidden = false
-            cell.EpisodeDownloadButton!.setTitle("", forState: UIControlState.Normal)
-            cell.EpisodeDownloadButton!.enabled = true
-
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                let downloadImage: UIImage? = createCircleWithArrow(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true)
-                if (downloadImage) != nil {
-                    dispatch_async(dispatch_get_main_queue(), {
-                        cell.EpisodeDownloadButton!.setImage(downloadImage, forState: .Normal)
-                    })
-                }
-            })
-        }
-        
-
-        
-        
         // hide and show the Download controlls
         var showDownloadControls = false
         if let download = activeDownloads[episode.episodeUrl] {
@@ -658,7 +620,31 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         
         cell.EpisodePauseButton.hidden = !showDownloadControls
         cell.EpisodeCancelButton.hidden = !showDownloadControls
-        cell.EpisodeDownloadButton.hidden = showDownloadControls
+                
+        let existence = existsLocally(episode.episodeUrl)
+        
+        if (existence.existlocal){
+            cell.EpisodeDownloadProgressbar.progress = 1
+            cell.EpisodeDownloadProgressbar.hidden = true
+            cell.EpisodeDownloadButton!.setTitle("", forState: UIControlState.Normal)
+            cell.EpisodeDownloadButton!.hidden = true
+            cell.EpisodeDownloadButton!.enabled = false
+            
+            
+        }else{
+            cell.EpisodeDownloadProgressbar.progress = 0
+            cell.EpisodeDownloadProgressbar.hidden = true
+            cell.EpisodeDownloadButton!.hidden = showDownloadControls
+            cell.EpisodeDownloadButton!.setTitle("", forState: UIControlState.Normal)
+            cell.EpisodeDownloadButton!.enabled = true
+            cell.EpisodeDownloadButton!.setImage(downloadImage, forState: .Normal)
+        }
+        
+
+        
+        
+
+        
         cell.filltableviewcell(episode)
 
         
