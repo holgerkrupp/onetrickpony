@@ -126,38 +126,25 @@ func DoubleToCMTime(seconds: Double) -> CMTime{
 
 
 func getEpisodeImage(episode: Episode) -> UIImage{
+    
     var episodePicture : UIImage
+    episodePicture = UIImage(named: "StandardCover")!
     if (episode.episodeImage != ""){
         let existence = existsLocally(episode.episodeImage)
-        
-        
         if (existence.existlocal){
             do {
                 let attr : NSDictionary? = try NSFileManager.defaultManager().attributesOfItemAtPath(existence.localURL)
                 if let _attr = attr {
                     let fileSize = _attr.fileSize();
                     if fileSize > 10 {
-                        episodePicture = UIImage(named: existence.localURL)!
-                    }else{
-                        episodePicture = UIImage(named: "StandardCover")!
-                        
+                        episodePicture = UIImage(contentsOfFile: existence.localURL)!
                     }
-                } else {
-                    episodePicture = UIImage(named: "StandardCover")!
-
                 }
             }catch{
-                episodePicture =  UIImage(named: "StandardCover")!
-                
             }
         }else{
-            
             EpisodesTableViewController().downloadurl(episode.episodeImage)
-            
-            episodePicture = UIImage(named: "StandardCover")!
         }
-    }else {
-        episodePicture = UIImage(named: "StandardCover")!
     }
     return episodePicture
 }

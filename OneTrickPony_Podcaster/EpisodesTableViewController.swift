@@ -611,7 +611,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             if (episode.episodePicture) != nil {
                 dispatch_async(dispatch_get_main_queue(), {
                     cell.EpisodeImage.image = episode.episodePicture
-                    
+                    episode.episodePicture = nil
                 })
             }
         })

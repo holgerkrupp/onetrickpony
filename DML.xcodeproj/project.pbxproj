@@ -343,7 +343,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\nCUSTOMVERPLIST=\"${PROJECT_DIR}/PodcastSettings.plist\"\nfeedurl=$(/usr/libexec/PlistBuddy -c \"Print feedurl\" ${CUSTOMVERPLIST})\necho $feedurl\necho ${TARGET_NAME}\ncurl -s $feedurl > ${PROJECT_DIR}/${TARGET_NAME}/feed.xml\n";
+			shellScript = "\n#CUSTOMVERPLIST=\"${PROJECT_DIR}/PodcastSettings.plist\"\n#feedurl=$(/usr/libexec/PlistBuddy -c \"Print feedurl\" ${CUSTOMVERPLIST})\n#echo $feedurl\n#echo ${TARGET_NAME}\n#curl -s $feedurl > ${PROJECT_DIR}/${TARGET_NAME}/feed.xml\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -544,7 +544,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				INFOPLIST_FILE = OneTrickPony_Podcaster/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
