@@ -8,14 +8,18 @@
 
 
 import UIKit
+import AVFoundation
 
 
 protocol ChapterMarksViewControllerDelegate {
+    var episode: Episode { get }
     func jumpToTimeInPlayer(seconds:Double)
+    
 }
 
 class ChapterMarksViewController: UITableViewController {
 var Chapters      : [Chapter]!
+    
 var EpisodeViewController: ChapterMarksViewControllerDelegate?
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -35,6 +39,16 @@ var EpisodeViewController: ChapterMarksViewControllerDelegate?
         let chapterStartSeconds = stringtodouble(chapter.chapterStart)
         let chapterStartText = secondsToHoursMinutesSeconds(chapterStartSeconds)
         cell.detailTextLabel!.text = chapterStartText
+        cell.accessoryType = UITableViewCellAccessoryType.None
+        
+        let episode = EpisodeViewController?.episode
+        
+        let currentplaytime = Float(CMTimeGetSeconds(episode!.readplayed()))
+        
+            if chapter.chapterTitle == (episode!.getChapterForSeconds(Double(currentplaytime))!.chapterTitle){
+                cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            }
+          
         
         
         // prepare the future: Links for Chapters can be implemented here, but I just don't want to work on the WebView and stuff at the moment.

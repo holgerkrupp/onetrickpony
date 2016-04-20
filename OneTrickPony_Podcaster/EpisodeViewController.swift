@@ -31,6 +31,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     @IBOutlet var titleLabel:UILabel!
+    @IBOutlet var chapterTitleLabel:UILabel!
     @IBOutlet var progressSlider: UISlider!
     @IBOutlet var playButton:UIButton!
     @IBOutlet var pauseButton:UIButton!
@@ -168,8 +169,11 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             // Text
            titleLabel.text = episode.episodeTitle
            titleLabel.textColor = getColorFromPodcastSettings("textcolor")
-            
-            
+        
+        
+
+        
+        
             // Time & Slider
             
             let starttime = episode.readplayed
@@ -181,8 +185,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
            progressSlider.setValue(currentplaytime, animated: false)
            progressSlider.minimumTrackTintColor = getColorFromPodcastSettings("highlightColor")
            progressSlider.maximumTrackTintColor = getColorFromPodcastSettings("progressBackgroundColor")
-           progressSlider.setMaximumTrackImage(getImageWithColor(getColorFromPodcastSettings("progressBackgroundColor"),size: CGSizeMake(2, 10)), forState: .Normal)
-           progressSlider.setMinimumTrackImage(getImageWithColor(getColorFromPodcastSettings("highlightColor"),size: CGSizeMake(2, 10)), forState: .Normal)
+           progressSlider.setMaximumTrackImage(getImageWithColor(getColorFromPodcastSettings("progressBackgroundColor"),size: CGSizeMake(2, 20)), forState: .Normal)
+           progressSlider.setMinimumTrackImage(getImageWithColor(getColorFromPodcastSettings("highlightColor"),size: CGSizeMake(2, 20)), forState: .Normal)
            progressSlider.setThumbImage(getImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(2, 30)), forState: .Normal)
             
             
@@ -191,7 +195,18 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             
            remainingTimeLabel.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(episode.remaining()))
            remainingTimeLabel.textColor = getColorFromPodcastSettings("secondarytextcolor")
-            
+        
+        
+        if (episode.episodeChapter.count != 0 && currentplaytime > 0.0){
+            let chapterTitle = episode.getChapterForSeconds(Double(currentplaytime))?.chapterTitle
+            chapterTitleLabel.text = chapterTitle
+            chapterTitleLabel.textColor = getColorFromPodcastSettings("secondarytextcolor")
+            chapterTitleLabel.enabled = true
+        }
+        
+        
+        
+        
             let description = episode.episodeDescription.stringByReplacingOccurrencesOfString("\n", withString: "</br>")
             
            episodeShowNotesWebView.loadHTMLString(description, baseURL: nil)
@@ -423,6 +438,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     func checksleeptimer(){
             if (readSleepTimer().remaining <= 0.0){
                 pause()
+                NSLog("good night")
                 cancelleeptimer()
             }
         
@@ -704,6 +720,10 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
             episode.saveplayed(progress)
             
+          //  NSLog("now Playing Chapter: \(episode.getChapterForSeconds(progress)?.chapterTitle)")
+            
+            
+
             
             
             updateSliderProgress(progress)

@@ -15,8 +15,6 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     
-    
-    
     var feedParser: NSXMLParser = NSXMLParser()
     // var feeddate: NSDate = NSDate()// this element contains currently the lastBuildDate from the feed, should be managed smarter one day to reduce the full feed loading to check if the feed is new
     
