@@ -878,7 +878,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             
             // update the cell to update it that it has the file locally and only if it's a media file and not the feed
             if let episodeIndex = episodeIndexForDownloadTask(downloadTask), let episodeCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episodeIndex, inSection: 0)) as? EpisodeCell {
-                NSLog("should update cell of \(episodeCell.episode.episodeTitle)")
+                
                 dispatch_async(dispatch_get_main_queue(), {
                 if (episodeCell.episode.episodeUrl == url){
                 episodeCell.EpisodeDownloadProgressbar.hidden = false

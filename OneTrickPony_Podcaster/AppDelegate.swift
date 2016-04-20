@@ -11,11 +11,19 @@ import UIKit
 import Foundation
 import AVFoundation
 
+protocol EpisodesTableViewControllerDelegate{
+    func checkFeedDateIsNew(completion:(result: Bool) -> Void)
+    func refreshfeed()
+    func downloadurl(urlstring: String)
+}
+
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var backgroundSessionCompletionHandler: (() -> Void)?
+    var EpisodesTableViewController: EpisodesTableViewControllerDelegate?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -40,12 +48,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         
-        if let EpisodesTableViewController = window?.rootViewController as? EpisodesTableViewController
-        {
-            EpisodesTableViewController.refreshfeed()
+
+            EpisodesTableViewController?.refreshfeed()
             NSLog("Background refresh started")
-            
-        }
+            let url = getObjectForKeyFromPodcastSettings("feedurl")  as! String
+            EpisodesTableViewController?.checkFeedDateIsNew{
+                (result: Bool) in
+                if result {
+                    // the file on the server has been update, start downloading a new feed file
+                    self.EpisodesTableViewController?.downloadurl(url)
+                    completionHandler(UIBackgroundFetchResult.NewData)
+                }else{
+                    NSLog("server feed same date or older")
+                    completionHandler(UIBackgroundFetchResult.NoData)
+                }
+            } 
+        
         
     }
     
