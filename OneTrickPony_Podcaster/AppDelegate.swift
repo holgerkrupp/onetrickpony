@@ -46,6 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSLog("Background refresh started")
             
         }
+        
     }
     
     

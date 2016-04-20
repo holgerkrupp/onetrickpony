@@ -433,13 +433,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             
         }else if elementName == "itunes:image"{
             episodeImage = attributeDict["href"]!
-            NSLog("EpImage: \(episodeImage)")
-            if episodeImage != "" {
-                let existence = existsLocally(episodeImage)
-                if !(existence.existlocal){
-                    downloadurl(episodeImage)
-                }
-            }
+
         } else if elementName == "psc:chapter"{
             
             // Podlove Simple Chapters parsing
@@ -825,7 +819,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             download.progress = Float(totalBytesWritten)/Float(totalBytesExpectedToWrite)
             
             if let episodeIndex = episodeIndexForDownloadTask(downloadTask), let episodeCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episodeIndex, inSection: 0)) as? EpisodeCell {
-                
+                if (episodeCell.episode.episodeUrl == downloadUrl){
                     dispatch_async(dispatch_get_main_queue(), {
                     episodeCell.EpisodeDownloadProgressbar.hidden = false
                     episodeCell.EpisodeDownloadProgressbar.progress = download.progress
@@ -833,6 +827,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                     episodeCell.EpisodePauseButton.setImage(createCircleWithPause(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true), forState: .Normal)
                     //     episodeCell.EpisodeprogressLabel.text =  String(format: "%.1f%% of %@",  download.progress * 100, totalSize)
                 })
+                }
                 
             }
         }
@@ -883,9 +878,12 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             
             // update the cell to update it that it has the file locally and only if it's a media file and not the feed
             if let episodeIndex = episodeIndexForDownloadTask(downloadTask), let episodeCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episodeIndex, inSection: 0)) as? EpisodeCell {
-                episodeCell.EpisodeDownloadProgressbar.hidden = false
-                
+                NSLog("should update cell of \(episodeCell.episode.episodeTitle)")
                 dispatch_async(dispatch_get_main_queue(), {
+                if (episodeCell.episode.episodeUrl == url){
+                episodeCell.EpisodeDownloadProgressbar.hidden = false
+                }
+                
                     self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: episodeIndex, inSection: 0)], withRowAnimation: .None)
                 })
             }
@@ -921,7 +919,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         if let url = downloadTask.originalRequest?.URL?.absoluteString {
             
             for (index, episode) in episodes.enumerate() {
-                if url == episode.episodeUrl {
+                if (url == episode.episodeUrl) || (url == episode.episodeImage) {
                     return index
                 }
             }
