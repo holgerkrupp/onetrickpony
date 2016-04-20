@@ -122,14 +122,32 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
 
         if SingletonClass.sharedInstance.playerinitialized {
             self.tableView.reloadData()
-       //     SingletonClass.sharedInstance.audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target:self, selector:#selector(EpisodesTableViewController.updatecell),userInfo: nil,repeats: true)
+            
+            SingletonClass.sharedInstance.audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target:self, selector:#selector(EpisodesTableViewController.updatecell),userInfo: nil,repeats: true)
         }
     }
 
     
     func updatecell(){
-        updateCellForEpisode(SingletonClass.sharedInstance.episodePlaying)
+        updateCellProgressForEpisode(SingletonClass.sharedInstance.episodePlaying)
     }
+    
+    
+    
+    func updateCellProgressForEpisode(episode: Episode){
+        let cellRowToBeUpdated = episode.episodeIndex
+        let indexPath = NSIndexPath(forRow: cellRowToBeUpdated, inSection: 0)
+        if self.tableView.cellForRowAtIndexPath(indexPath) != nil {
+             let currentCell = tableView.cellForRowAtIndexPath(indexPath) as! EpisodeCell
+             currentCell.updateProgress(episode)
+        }
+        
+    }
+    
+    
+    
+    
+    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "viewEpisode" {
@@ -309,7 +327,23 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     func checkFeedDateIsNew(completion:(result: Bool) -> Void){
         var result:Bool
-        let savedfeeddate = getObjectForKeyFromPersistentStorrage("lastfeedday")
+        var savedfeeddate = getObjectForKeyFromPersistentStorrage("lastfeedday")
+        
+        if savedfeeddate == nil {
+        let urlpath = NSBundle.mainBundle().pathForResource("feed", ofType: "xml")
+
+
+        do {
+            let attr : NSDictionary? = try NSFileManager.defaultManager().attributesOfItemAtPath(urlpath!)
+            if let _attr = attr {
+                savedfeeddate = _attr.fileModificationDate();
+                
+            }
+        } catch {
+            print("Error: \(error)")
+        }
+        }
+        
         NSLog("oldfeed: \(savedfeeddate) (from Persistent Storrage)")
         
         

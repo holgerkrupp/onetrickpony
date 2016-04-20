@@ -542,6 +542,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
 
     func playPausefromRemoteCenter(){
+        
+        episode = SingletonClass.sharedInstance.episodePlaying
+        NSLog("playPausefromRemote: \(episode.episodeTitle)")
         if SingletonClass.sharedInstance.player.rate != 0{
             pause()
         }else{
@@ -587,20 +590,19 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     func play(){
         
-        var starttime = episode.readplayed()
+        
         if (SingletonClass.sharedInstance.playerinitialized == false) {
             initplayer(episode)
         }
         
+
+        var starttime = episode.readplayed()
         if starttime >= episode.getDurationinCMTime() && episode.getDurationInSeconds() != 0.0 {
             episode.saveplayed(0.0)
             NSLog("read after save \(episode.getDurationinCMTime())")
             starttime = episode.readplayed()
         }
-        
-
-
-        
+ 
         starttimer()
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(EpisodeViewController.playerDidFinishPlaying), name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
 
@@ -719,9 +721,11 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
 
     
     func back30(){
+        episode = SingletonClass.sharedInstance.episodePlaying
         moveplayer(-30)
     }
     func forward30(){
+        episode = SingletonClass.sharedInstance.episodePlaying
         moveplayer(30)
     }
     
@@ -770,7 +774,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         playcenter.nowPlayingInfo = [
             MPMediaItemPropertyArtwork: mediaArtwort,
             
-            MPMediaItemPropertyTitle : episode.episodeTitle,
+            MPMediaItemPropertyTitle : SingletonClass.sharedInstance.episodePlaying.episodeTitle,
             MPMediaItemPropertyPlaybackDuration: Double(CMTimeGetSeconds(episode.getDurationinCMTime())),
             MPNowPlayingInfoPropertyElapsedPlaybackTime: Double(CMTimeGetSeconds(SingletonClass.sharedInstance.player.currentTime())),
             MPNowPlayingInfoPropertyPlaybackRate: SingletonClass.sharedInstance.player.rate]

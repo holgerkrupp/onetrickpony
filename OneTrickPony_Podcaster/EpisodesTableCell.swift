@@ -84,6 +84,25 @@ class EpisodeCell: UITableViewCell {
        // NSLog(fileOffset)
     }
     
+    func updateProgress(episode: Episode){
+        if episode.getDurationInSeconds() != 0.0{
+            var remain = Float(CMTimeGetSeconds(episode.remaining()))
+            if remain <= 0{
+                remain = 0
+                EpisodeDurationLabel!.text = NSLocalizedString("episode.finished",value: "Done playing", comment: "shown in TableView")
+            }else{
+                EpisodeDurationLabel!.text = String.localizedStringWithFormat(
+                    NSLocalizedString("string.for.time.remaining", value:"%@ remaining",
+                        comment: "shown in TableView"),
+                    secondsToHoursMinutesSeconds(Double(remain)))
+            }
+            EpisodeTimeProgressbar.progress = 1-remain/Float(CMTimeGetSeconds(episode.getDurationinCMTime()))
+        }else{
+            EpisodeDurationLabel!.text = NSLocalizedString("episode.noduration",value: "Duration unknown", comment: "shown in TableView")
+            EpisodeTimeProgressbar.progress = 0
+        }
+    }
+    
     func filltableviewcell(episode: Episode){
         
   

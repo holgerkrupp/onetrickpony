@@ -148,7 +148,7 @@ func getEpisodeImage(episode: Episode, size:CGSize?=nil) -> UIImage{
     }
     
     if (size != nil){
-        NSLog("resize EpisodePicture")
+      //  NSLog("resize EpisodePicture")
         let hasAlpha = false
         let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
         
@@ -159,7 +159,7 @@ func getEpisodeImage(episode: Episode, size:CGSize?=nil) -> UIImage{
         UIGraphicsEndImageContext()
         episodePicture = scaledImage
     }
-    NSLog("EpisodePicture size: \(episodePicture.size) (\(episode.episodeTitle))")
+   // NSLog("EpisodePicture size: \(episodePicture.size) (\(episode.episodeTitle))")
     return episodePicture
 }
 
