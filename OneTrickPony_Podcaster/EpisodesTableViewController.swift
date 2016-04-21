@@ -90,7 +90,15 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         self.tableView.separatorInset = UIEdgeInsetsZero
         self.tableView.layoutMargins = UIEdgeInsetsZero
         
-        autoFeedRefresh()
+        switch status {
+        case .Unknown, .Offline:
+            print("Not connected")
+        case .Online(.WWAN):
+            print("Connected via WWAN")
+        case .Online(.WiFi):
+            print("Connected via WiFi")
+            self.refreshfeed()
+        }
         
         
         self.refreshControl?.addTarget(self, action:#selector(EpisodesTableViewController.refreshfeed), forControlEvents: UIControlEvents.ValueChanged)
@@ -100,24 +108,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         
     }
     
-    func autoFeedRefresh(){
-        let now = NSDate()
-        if let lastfeedrefresh = getObjectForKeyFromPersistentStorrage("last feed refresh"){
-            let interval = now.timeIntervalSinceDate(lastfeedrefresh as! NSDate)
-            NSLog("Time Interval between \(lastfeedrefresh) and \(now) is \(interval) seconds")
-            if interval > 60*60*12 {
-                switch status {
-                case .Unknown, .Offline:
-                    print("Not connected")
-                case .Online(.WWAN):
-                    print("Connected via WWAN")
-                case .Online(.WiFi):
-                    print("Connected via WiFi")
-                    self.refreshfeed()
-                }
-            }
-        }
-    }
+    
     
     
     override func viewWillAppear(animated: Bool) {
@@ -316,8 +307,6 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     func refreshfeed()
     {
-        let now = NSDate()
-        setObjectForKeyToPersistentStorrage("last feed refresh", object: now)
         let url = getObjectForKeyFromPodcastSettings("feedurl")  as! String
         NSLog("pullto \(url)")
         checkFeedDateIsNew {
@@ -532,6 +521,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             if result == true{
                 setObjectForKeyToPersistentStorrage("latestepisode", object: self.episodes[0].episodePubDate)
                 if NotificationFired == false {
+                    NSLog("checking if episode new should be done")
                     if existsLocally(self.episodes[0].episodeUrl).existlocal == false {
                         
                         self.createLocalNotification(self.episodes[0])
@@ -866,15 +856,13 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             //  setObjectForKeyToPersistentStorrage("lastfeedday" as String, value: NSDate())
             
             if (destinationURL.pathExtension!.lowercaseString == "xml"){
-                dispatch_async(dispatch_get_main_queue(), {
-                self.loadfeedandparse {
-                    
+                loadfeedandparse {
+                    dispatch_async(dispatch_get_main_queue(), {
                         self.tableView.reloadData()
-                   
+                    })
                     
-                    self.refreshControl?.endRefreshing()}
-                     })
-                
+                    self.refreshControl?.endRefreshing()
+                }
             }
             
             
