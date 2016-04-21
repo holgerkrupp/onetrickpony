@@ -90,6 +90,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         self.tableView.separatorInset = UIEdgeInsetsZero
         self.tableView.layoutMargins = UIEdgeInsetsZero
         
+        autoFeedRefresh()
+        /*
         switch status {
         case .Unknown, .Offline:
             print("Not connected")
@@ -99,7 +101,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             print("Connected via WiFi")
             self.refreshfeed()
         }
-        
+        */
         
         self.refreshControl?.addTarget(self, action:#selector(EpisodesTableViewController.refreshfeed), forControlEvents: UIControlEvents.ValueChanged)
         //   self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -107,6 +109,29 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         
         
     }
+    
+    
+    
+    
+    func autoFeedRefresh(){
+            let now = NSDate()
+            if let lastfeedrefresh = getObjectForKeyFromPersistentStorrage("last feed refresh"){
+                let interval = now.timeIntervalSinceDate(lastfeedrefresh as! NSDate)
+                NSLog("Time Interval between \(lastfeedrefresh) and \(now) is \(interval) seconds")
+                if interval > 60*60*12 {
+                    switch status {
+                    case .Unknown, .Offline:
+                        print("Not connected")
+                    case .Online(.WWAN):
+                        print("Connected via WWAN")
+                    case .Online(.WiFi):
+                        print("Connected via WiFi")
+                        self.refreshfeed()
+                    }
+                }
+            }
+        }
+    
     
     
     
@@ -307,6 +332,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     func refreshfeed()
     {
+        let now = NSDate()
+        setObjectForKeyToPersistentStorrage("last feed refresh", object: now)
         let url = getObjectForKeyFromPodcastSettings("feedurl")  as! String
         NSLog("pullto \(url)")
         checkFeedDateIsNew {
