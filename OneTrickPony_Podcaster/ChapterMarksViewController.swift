@@ -44,11 +44,11 @@ var EpisodeViewController: ChapterMarksViewControllerDelegate?
         let episode = EpisodeViewController?.episode
         
         let currentplaytime = Float(CMTimeGetSeconds(episode!.readplayed()))
-        
-            if chapter.chapterTitle == (episode!.getChapterForSeconds(Double(currentplaytime))!.chapterTitle){
+        if let playingChapter = episode!.getChapterForSeconds(Double(currentplaytime)){
+            if chapter.chapterTitle == playingChapter.chapterTitle{
                 cell.accessoryType = UITableViewCellAccessoryType.Checkmark
             }
-          
+        }
         
         
         // prepare the future: Links for Chapters can be implemented here, but I just don't want to work on the WebView and stuff at the moment.

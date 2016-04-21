@@ -164,6 +164,33 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     
+    func updateProgress(episode: Episode){
+        let starttime = episode.readplayed
+        let duration = stringtodouble(episode.getDurationFromEpisode())
+        
+        progressSlider.maximumValue = Float(duration)
+        let currentplaytime = Float(CMTimeGetSeconds(starttime()))
+        
+        
+        progressSlider.setValue(currentplaytime, animated: false)
+        
+        
+        playedtime.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(starttime()))
+        playedtime.textColor = getColorFromPodcastSettings("secondarytextcolor")
+        
+        remainingTimeLabel.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(episode.remaining()))
+        remainingTimeLabel.textColor = getColorFromPodcastSettings("secondarytextcolor")
+        
+        if let chapter = episode.getChapterForSeconds(Double(currentplaytime)){
+            chapterTitleLabel.text = chapter.chapterTitle
+            chapterTitleLabel.textColor = getColorFromPodcastSettings("secondarytextcolor")
+            chapterTitleLabel.enabled = true
+            chapterTitleLabel.hidden = false
+        }else{
+            chapterTitleLabel.hidden = true
+        }
+    }
+    
     func fillPlayerView(episode: Episode){
         
             // Text
@@ -176,36 +203,13 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
             // Time & Slider
             
-            let starttime = episode.readplayed
-            let duration = stringtodouble(episode.getDurationFromEpisode())
-            
-           progressSlider.maximumValue = Float(duration)
-            let currentplaytime = Float(CMTimeGetSeconds(starttime()))
-            
-           progressSlider.setValue(currentplaytime, animated: false)
-           progressSlider.minimumTrackTintColor = getColorFromPodcastSettings("highlightColor")
-           progressSlider.maximumTrackTintColor = getColorFromPodcastSettings("progressBackgroundColor")
-           progressSlider.setMaximumTrackImage(getImageWithColor(getColorFromPodcastSettings("progressBackgroundColor"),size: CGSizeMake(2, 20)), forState: .Normal)
-           progressSlider.setMinimumTrackImage(getImageWithColor(getColorFromPodcastSettings("highlightColor"),size: CGSizeMake(2, 20)), forState: .Normal)
-           progressSlider.setThumbImage(getImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(2, 30)), forState: .Normal)
-            
-            
-           playedtime.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(starttime()))
-           playedtime.textColor = getColorFromPodcastSettings("secondarytextcolor")
-            
-           remainingTimeLabel.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(episode.remaining()))
-           remainingTimeLabel.textColor = getColorFromPodcastSettings("secondarytextcolor")
+        updateProgress(episode)
         
-        
-        if (episode.episodeChapter.count != 0 && currentplaytime > 0.0){
-            let chapterTitle = episode.getChapterForSeconds(Double(currentplaytime))?.chapterTitle
-            chapterTitleLabel.text = chapterTitle
-            chapterTitleLabel.textColor = getColorFromPodcastSettings("secondarytextcolor")
-            chapterTitleLabel.enabled = true
-        }
-        
-        
-        
+        progressSlider.minimumTrackTintColor = getColorFromPodcastSettings("highlightColor")
+        progressSlider.maximumTrackTintColor = getColorFromPodcastSettings("progressBackgroundColor")
+        progressSlider.setMaximumTrackImage(getImageWithColor(getColorFromPodcastSettings("progressBackgroundColor"),size: CGSizeMake(2, 20)), forState: .Normal)
+        progressSlider.setMinimumTrackImage(getImageWithColor(getColorFromPodcastSettings("highlightColor"),size: CGSizeMake(2, 20)), forState: .Normal)
+        progressSlider.setThumbImage(getImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(2, 30)), forState: .Normal)
         
             let description = episode.episodeDescription.stringByReplacingOccurrencesOfString("\n", withString: "</br>")
             
@@ -481,7 +485,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     func popoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        NSLog("should dismiss")
         return true
     }
     
@@ -752,7 +755,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     func updateSliderProgress(progress: Double){
         if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
-                fillPlayerView(episode)
+                updateProgress(episode)
             }
     }
 
