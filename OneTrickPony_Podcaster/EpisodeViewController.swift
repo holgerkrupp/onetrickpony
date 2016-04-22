@@ -156,6 +156,12 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         enableOrDisableControllsIfNoInFocus()
         allowremotebuttons()
+        
+        if (SingletonClass.sharedInstance.playerinitialized == false){
+            initplayer(episode)
+        }
+        
+        
         if existsLocally(episode.episodeUrl).existlocal && (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle) {
             autoplay()
         }
@@ -796,7 +802,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             let mediaArtwort = MPMediaItemArtwork(image: getEpisodeImage(episode))
         playcenter.nowPlayingInfo = [
             MPMediaItemPropertyArtwork: mediaArtwort,
-            
+            MPMediaItemPropertyReleaseDate: SingletonClass.sharedInstance.episodePlaying.episodePubDate,
+           // MPMediaItemPropertyAlbumTitle: (SingletonClass.sharedInstance.episodePlaying.getChapterForSeconds(CMTimeGetSeconds(SingletonClass.sharedInstance.player.currentTime()))?.chapterTitle)!,
             MPMediaItemPropertyTitle : SingletonClass.sharedInstance.episodePlaying.episodeTitle,
             MPMediaItemPropertyPlaybackDuration: Double(CMTimeGetSeconds(episode.getDurationinCMTime())),
             MPNowPlayingInfoPropertyElapsedPlaybackTime: Double(CMTimeGetSeconds(SingletonClass.sharedInstance.player.currentTime())),
