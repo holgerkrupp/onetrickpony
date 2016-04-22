@@ -25,7 +25,7 @@ class EpisodeCell: UITableViewCell {
     
     
     var delegate: EpisodeCellDelegate?
-
+    let status = Reach().connectionStatus()
     
     @IBOutlet weak var EpisodeNameLabel: UILabel!
     @IBOutlet weak var EpisodeDateLabel: UILabel!
@@ -103,9 +103,19 @@ class EpisodeCell: UITableViewCell {
         }
     }
     
+    func updateDownloadProgress(progress: Float){
+        EpisodeDownloadProgressbar.progress = progress
+        if progress > 0.0 && progress < 1{
+            EpisodeDownloadProgressbar.hidden = false
+        }else{
+            EpisodeDownloadProgressbar.hidden = true
+        }
+    }
+    
+
+    
+    
     func filltableviewcell(episode: Episode){
-        
-  
 
         if episode.getDurationInSeconds() != 0.0{
         var remain = Float(CMTimeGetSeconds(episode.remaining()))
@@ -119,7 +129,8 @@ class EpisodeCell: UITableViewCell {
                     comment: "shown in TableView"),
                 secondsToHoursMinutesSeconds(Double(remain)))
         }
-        EpisodeTimeProgressbar.progress = 1-remain/Float(CMTimeGetSeconds(episode.getDurationinCMTime()))
+            let duration = episode.getDurationinCMTime()
+         EpisodeTimeProgressbar.progress = 1-remain/Float(CMTimeGetSeconds(duration))
         }else{
             EpisodeDurationLabel!.text = NSLocalizedString("episode.noduration",value: "Duration unknown", comment: "shown in TableView")
             EpisodeTimeProgressbar.progress = 0

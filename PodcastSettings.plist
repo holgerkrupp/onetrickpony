@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>feedurl</key>
-	<string>http://einschlafen-podcast.de/feed/aac</string>
+	<string>http://einschlafen-podcast.de/feed/aac/</string>
 	<key>UserAgent</key>
 	<string>Einschlafen Podcast iOS App</string>
 	<key>backgroundColor</key>

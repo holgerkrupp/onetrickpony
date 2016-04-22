@@ -90,18 +90,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         self.tableView.separatorInset = UIEdgeInsetsZero
         self.tableView.layoutMargins = UIEdgeInsetsZero
         
-        autoFeedRefresh()
-        /*
-        switch status {
-        case .Unknown, .Offline:
-            print("Not connected")
-        case .Online(.WWAN):
-            print("Connected via WWAN")
-        case .Online(.WiFi):
-            print("Connected via WiFi")
-            self.refreshfeed()
-        }
-        */
+        dispatch_async(dispatch_get_main_queue(), {
+        self.autoFeedRefresh()
+            })
         
         self.refreshControl?.addTarget(self, action:#selector(EpisodesTableViewController.refreshfeed), forControlEvents: UIControlEvents.ValueChanged)
         //   self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -118,7 +109,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             if let lastfeedrefresh = getObjectForKeyFromPersistentStorrage("last feed refresh"){
                 let interval = now.timeIntervalSinceDate(lastfeedrefresh as! NSDate)
                 NSLog("Time Interval between \(lastfeedrefresh) and \(now) is \(interval) seconds")
-                if interval > 60*60*12 {
+                if interval > 60*60*6 {
                     switch status {
                     case .Unknown, .Offline:
                         print("Not connected")
@@ -608,6 +599,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier("EpisodeCell", forIndexPath: indexPath) as! EpisodeCell
         
         let episode: Episode = episodes[indexPath.row]
+        cell.episode = episode
         cell.layoutMargins = UIEdgeInsetsZero
         
         cell.backgroundColor = getColorFromPodcastSettings("backgroundColor")
@@ -840,17 +832,12 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         if let downloadUrl = downloadTask.originalRequest?.URL?.absoluteString,
             download = activeDownloads[downloadUrl] {
             // 2
-            
             download.progress = Float(totalBytesWritten)/Float(totalBytesExpectedToWrite)
             
             if let episodeIndex = episodeIndexForDownloadTask(downloadTask), let episodeCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: episodeIndex, inSection: 0)) as? EpisodeCell {
                 if (episodeCell.episode.episodeUrl == downloadUrl){
                     dispatch_async(dispatch_get_main_queue(), {
-                        episodeCell.EpisodeDownloadProgressbar.hidden = false
-                        episodeCell.EpisodeDownloadProgressbar.progress = download.progress
-                        //episodeCell.EpisodeDownloadButton!.setTitle("Pause", forState: UIControlState.Normal)
-                        episodeCell.EpisodePauseButton.setImage(createCircleWithPause(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true), forState: .Normal)
-                        //     episodeCell.EpisodeprogressLabel.text =  String(format: "%.1f%% of %@",  download.progress * 100, totalSize)
+                        episodeCell.updateDownloadProgress(download.progress)
                     })
                 }
                 
@@ -906,10 +893,10 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     if (episodeCell.episode.episodeUrl == url){
-                        episodeCell.EpisodeDownloadProgressbar.hidden = false
+                        episodeCell.EpisodeDownloadProgressbar.hidden = true
                     }
                     
-                    self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: episodeIndex, inSection: 0)], withRowAnimation: .None)
+                    self.updateCellForEpisode(episodeCell.episode)
                 })
             }
         }
