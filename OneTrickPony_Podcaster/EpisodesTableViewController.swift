@@ -135,8 +135,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         self.tableView.backgroundColor = getColorFromPodcastSettings("backgroundColor")
         
         if SingletonClass.sharedInstance.playerinitialized {
-            self.tableView.reloadData()
-            
+           // self.tableView.reloadData()
+            self.updateCellForEpisode(SingletonClass.sharedInstance.episodePlaying)
             SingletonClass.sharedInstance.audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target:self, selector:#selector(EpisodesTableViewController.updatecell),userInfo: nil,repeats: true)
         }
     }
@@ -668,7 +668,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             cell.EpisodeDownloadButton!.setTitle("", forState: UIControlState.Normal)
             cell.EpisodeDownloadButton!.hidden = true
             cell.EpisodeDownloadButton!.enabled = false
-            
+            cell.EpisodeCancelButton!.hidden = true
+            cell.EpisodePauseButton!.hidden = true
             
         }else{
             var showDownloadControls = false
@@ -713,10 +714,18 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        /*
+        let cell = tableView.dequeueReusableCellWithIdentifier("EpisodeCell", forIndexPath: indexPath) as! EpisodeCell
+
+        let existence = existsLocally(cell.episode.episodeUrl)
         
-        // WHAT WOULD BE COOL IS to return only true if the episode is locally or partly locally
+        if (existence.existlocal){
         
-        
+            return true
+        }else{
+            return false
+        }
+ */
         return true
     }
     
@@ -755,6 +764,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     func startDownloadepisode(episode: Episode) {
         if let url = activeDownloads[episode.episodeUrl] {
             print("\(url) already downloading")
+            
+        }else if existsLocally(episode.episodeUrl).existlocal{
+            print("\(episode.episodeUrl) is already locally available")
         }else{
             if let url =  NSURL(string: episode.episodeUrl) {
                 let download = Download(url: episode.episodeUrl)
@@ -812,6 +824,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     func downloadurl(urlstring: String) {
         if let url = activeDownloads[urlstring] {
             print("\(url) already downloading")
+        }else if existsLocally(urlstring).existlocal{
+            print("\(urlstring) is already locally available")
         }else{
             if let url =  NSURL(string: urlstring) {
                 let download = Download(url: urlstring)

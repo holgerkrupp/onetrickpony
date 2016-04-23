@@ -19,6 +19,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="einschlafen_farbe" translatesAutoresizingMaskIntoConstraints="NO" id="tCU-hx-AKb">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StandardCover" translatesAutoresizingMaskIntoConstraints="NO" id="TAD-xl-G4m">
                                 <rect key="frame" x="50" y="120" width="500" height="500"/>
                                 <constraints>
@@ -26,10 +29,13 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.99215686270000003" green="0.56470588239999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="TAD-xl-G4m" firstAttribute="top" secondItem="u95-rD-8DZ" secondAttribute="bottom" constant="100" id="7Hs-up-YsY"/>
+                            <constraint firstAttribute="trailing" secondItem="tCU-hx-AKb" secondAttribute="trailing" id="Jep-Qb-D9b"/>
                             <constraint firstItem="TAD-xl-G4m" firstAttribute="leading" secondItem="UXt-UR-f8w" secondAttribute="leadingMargin" constant="30" id="Qmi-51-JRX"/>
+                            <constraint firstAttribute="bottom" secondItem="tCU-hx-AKb" secondAttribute="bottom" id="UM5-jJ-UJq"/>
+                            <constraint firstItem="tCU-hx-AKb" firstAttribute="top" secondItem="UXt-UR-f8w" secondAttribute="top" id="cGC-Ks-h0a"/>
+                            <constraint firstItem="tCU-hx-AKb" firstAttribute="leading" secondItem="UXt-UR-f8w" secondAttribute="leading" id="eBy-BB-w0L"/>
                             <constraint firstItem="TAD-xl-G4m" firstAttribute="centerX" secondItem="UXt-UR-f8w" secondAttribute="centerX" id="fQN-OV-DrL"/>
                         </constraints>
                     </view>
@@ -44,5 +50,6 @@
     </scenes>
     <resources>
         <image name="StandardCover" width="1400" height="1400"/>
+        <image name="einschlafen_farbe" width="1" height="1"/>
     </resources>
 </document>

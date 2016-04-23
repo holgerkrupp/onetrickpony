@@ -182,10 +182,10 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         
         playedtime.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(starttime()))
-        playedtime.textColor = getColorFromPodcastSettings("secondarytextcolor")
+        playedtime.textColor = getColorFromPodcastSettings("textcolor")
         
         remainingTimeLabel.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(episode.remaining()))
-        remainingTimeLabel.textColor = getColorFromPodcastSettings("secondarytextcolor")
+        remainingTimeLabel.textColor = getColorFromPodcastSettings("textcolor")
         
         if let chapter = episode.getChapterForSeconds(Double(currentplaytime)){
             chapterTitleLabel.text = chapter.chapterTitle
@@ -213,9 +213,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         progressSlider.minimumTrackTintColor = getColorFromPodcastSettings("highlightColor")
         progressSlider.maximumTrackTintColor = getColorFromPodcastSettings("progressBackgroundColor")
-        progressSlider.setMaximumTrackImage(getImageWithColor(getColorFromPodcastSettings("progressBackgroundColor"),size: CGSizeMake(2, 20)), forState: .Normal)
-        progressSlider.setMinimumTrackImage(getImageWithColor(getColorFromPodcastSettings("highlightColor"),size: CGSizeMake(2, 20)), forState: .Normal)
-        progressSlider.setThumbImage(getImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(2, 30)), forState: .Normal)
+        progressSlider.setMaximumTrackImage(getImageWithColor(getColorFromPodcastSettings("progressBackgroundColor"),size: CGSizeMake(2, 30)), forState: .Normal)
+        progressSlider.setMinimumTrackImage(getImageWithColor(getColorFromPodcastSettings("highlightColor"),size: CGSizeMake(2, 30)), forState: .Normal)
+        progressSlider.setThumbImage(getImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(2, 40)), forState: .Normal)
         
             let description = episode.episodeDescription.stringByReplacingOccurrencesOfString("\n", withString: "</br>")
             
