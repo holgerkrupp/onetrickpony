@@ -81,13 +81,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
          print("last Episode: \(getObjectForKeyFromPersistentStorrage("latestepisode"))")
          print("last FeedDay: \(getObjectForKeyFromPersistentStorrage("lastfeedday"))")
          */
-<<<<<<< HEAD
-        
-=======
         loadfeedandparse {
             
         }
->>>>>>> EinschlafenPodcast
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.tableView.separatorColor = getColorFromPodcastSettings("highlightColor")
@@ -95,8 +91,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         self.tableView.layoutMargins = UIEdgeInsetsZero
         
         dispatch_async(dispatch_get_main_queue(), {
-        self.autoFeedRefresh()
-            })
+            self.autoFeedRefresh()
+        })
         
         self.refreshControl?.addTarget(self, action:#selector(EpisodesTableViewController.refreshfeed), forControlEvents: UIControlEvents.ValueChanged)
         //   self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -109,23 +105,23 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     func autoFeedRefresh(){
-            let now = NSDate()
-            if let lastfeedrefresh = getObjectForKeyFromPersistentStorrage("last feed refresh"){
-                let interval = now.timeIntervalSinceDate(lastfeedrefresh as! NSDate)
-                NSLog("Time Interval between \(lastfeedrefresh) and \(now) is \(interval) seconds")
-                if interval > 60*60*6 {
-                    switch status {
-                    case .Unknown, .Offline:
-                        print("Not connected")
-                    case .Online(.WWAN):
-                        print("Connected via WWAN")
-                    case .Online(.WiFi):
-                        print("Connected via WiFi")
-                        self.refreshfeed()
-                    }
+        let now = NSDate()
+        if let lastfeedrefresh = getObjectForKeyFromPersistentStorrage("last feed refresh"){
+            let interval = now.timeIntervalSinceDate(lastfeedrefresh as! NSDate)
+            NSLog("Time Interval between \(lastfeedrefresh) and \(now) is \(interval) seconds")
+            if interval > 60*60*6 {
+                switch status {
+                case .Unknown, .Offline:
+                    print("Not connected")
+                case .Online(.WWAN):
+                    print("Connected via WWAN")
+                case .Online(.WiFi):
+                    print("Connected via WiFi")
+                    self.refreshfeed()
                 }
             }
         }
+    }
     
     
     
@@ -139,7 +135,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         self.tableView.backgroundColor = getColorFromPodcastSettings("backgroundColor")
         
         if SingletonClass.sharedInstance.playerinitialized {
-           // self.tableView.reloadData()
+            // self.tableView.reloadData()
             self.updateCellForEpisode(SingletonClass.sharedInstance.episodePlaying)
             SingletonClass.sharedInstance.audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target:self, selector:#selector(EpisodesTableViewController.updatecell),userInfo: nil,repeats: true)
         }
@@ -477,11 +473,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     func parser(parser: NSXMLParser, foundCharacters string: String) {
         
         let data = string.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-<<<<<<< HEAD
-        // NSLog("foundCharacters \(eName) data: \(data) string: \(string)")
-=======
         
->>>>>>> EinschlafenPodcast
         if (!data.isEmpty) {
             if eName == "title" {
                 episodeTitle += data
@@ -567,14 +559,6 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         if episode.getDurationInSeconds() != 0.0{
             let remain = Float(CMTimeGetSeconds(episode.remaining()))
             if remain > 0{
-<<<<<<< HEAD
-                
-                
-                
-                
-                let status = Reach().connectionStatus()
-=======
->>>>>>> EinschlafenPodcast
                 switch status {
                 case .Unknown, .Offline:
                     print("Not connected")
@@ -731,17 +715,17 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         /*
-        let cell = tableView.dequeueReusableCellWithIdentifier("EpisodeCell", forIndexPath: indexPath) as! EpisodeCell
-
-        let existence = existsLocally(cell.episode.episodeUrl)
-        
-        if (existence.existlocal){
-        
-            return true
-        }else{
-            return false
-        }
- */
+         let cell = tableView.dequeueReusableCellWithIdentifier("EpisodeCell", forIndexPath: indexPath) as! EpisodeCell
+         
+         let existence = existsLocally(cell.episode.episodeUrl)
+         
+         if (existence.existlocal){
+         
+         return true
+         }else{
+         return false
+         }
+         */
         return true
     }
     
