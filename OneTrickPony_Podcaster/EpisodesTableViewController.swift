@@ -880,9 +880,14 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         }
         do {
             try fileManager.copyItemAtURL(location, toURL: destinationURL)
-            print("wrote new file")
+            NSLog("wrote new file")
             //  setObjectForKeyToPersistentStorrage("lastfeedday" as String, value: NSDate())
-            
+            do {
+                try destinationURL.setResourceValue(true, forKey: NSURLIsExcludedFromBackupKey)
+                NSLog("\(destinationURL) excluded from backup")
+            } catch _{
+                NSLog("Failed to exclude from backup")
+            }
             if (destinationURL.pathExtension!.lowercaseString == "xml"){
                 loadfeedandparse {
                     dispatch_async(dispatch_get_main_queue(), {
