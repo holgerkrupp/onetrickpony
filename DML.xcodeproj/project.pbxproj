@@ -24,12 +24,12 @@
 		4861C8E31CB4CB1A00AD4D3F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4861C8E51CB4CB1A00AD4D3F /* InfoPlist.strings */; };
 		489B44F51C6BB1B900CC5326 /* License in Resources */ = {isa = PBXBuildFile; fileRef = 489B44F41C6BB1B900CC5326 /* License */; };
 		48A767501C7A07D100E6B485 /* ChapterMarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A7674F1C7A07D100E6B485 /* ChapterMarksViewController.swift */; };
-		48A767561C7A2F8800E6B485 /* pushSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 48A767551C7A2F8800E6B485 /* pushSound.m4a */; };
 		48D2205D1CA485B7005BA209 /* InterfaceGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D2205C1CA485B7005BA209 /* InterfaceGenerator.swift */; };
 		48D677171CC0009B0053D64E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D677161CC0009B0053D64E /* Reachability.swift */; };
 		48DB59841C5D51B60041F4AC /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48DB59831C5D51B60041F4AC /* Singleton.swift */; };
 		48DB59871C61C6700041F4AC /* PodcastSettings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48DB59861C61C6700041F4AC /* PodcastSettings.plist */; };
 		48E5B3AC1C69062800D06BAC /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E5B3AB1C69062800D06BAC /* Download.swift */; };
+		48E8AC1B1CC4257100865834 /* PlayerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E8AC1A1CC4257100865834 /* PlayerClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		480FEDAE1C54B3DF005594F1 /* DML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DML.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		480FEDAE1C54B3DF005594F1 /* Einschlafen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Einschlafen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		480FEDB11C54B3DF005594F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		480FEDB61C54B3DF005594F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		480FEDBB1C54B3DF005594F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -67,6 +67,7 @@
 		480FEDEA1C5540B7005594F1 /* EpisodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpisodeViewController.swift; sourceTree = "<group>"; };
 		480FEDEC1C580CCA005594F1 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		480FEDF21C5A7E8A005594F1 /* EpisodesTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpisodesTableCell.swift; sourceTree = "<group>"; };
+		4817B7281CCBAEBA00B3F723 /* pushSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = pushSound.m4a; sourceTree = "<group>"; };
 		4821D4CC1C764D920004DF4A /* supportfunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = supportfunctions.swift; sourceTree = "<group>"; };
 		482F186C1CC3726900A20512 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = OneTrickPony_Podcaster/de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		484F93DE1C8361FD009DC869 /* feed.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = feed.xml; sourceTree = "<group>"; };
@@ -74,12 +75,12 @@
 		4861C8E41CB4CB1A00AD4D3F /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		489B44F41C6BB1B900CC5326 /* License */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License; sourceTree = "<group>"; };
 		48A7674F1C7A07D100E6B485 /* ChapterMarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterMarksViewController.swift; sourceTree = "<group>"; };
-		48A767551C7A2F8800E6B485 /* pushSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = pushSound.m4a; sourceTree = "<group>"; };
 		48D2205C1CA485B7005BA209 /* InterfaceGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceGenerator.swift; sourceTree = "<group>"; };
 		48D677161CC0009B0053D64E /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		48DB59831C5D51B60041F4AC /* Singleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		48DB59861C61C6700041F4AC /* PodcastSettings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PodcastSettings.plist; path = ../PodcastSettings.plist; sourceTree = "<group>"; };
 		48E5B3AB1C69062800D06BAC /* Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
+		48E8AC1A1CC4257100865834 /* PlayerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +121,7 @@
 		480FEDAF1C54B3DF005594F1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				480FEDAE1C54B3DF005594F1 /* DML.app */,
+				480FEDAE1C54B3DF005594F1 /* Einschlafen.app */,
 				480FEDC51C54B3DF005594F1 /* OneTrickPony_PodcasterTests.xctest */,
 				480FEDD01C54B3DF005594F1 /* OneTrickPony_PodcasterUITests.xctest */,
 			);
@@ -139,14 +140,15 @@
 				480FEDF21C5A7E8A005594F1 /* EpisodesTableCell.swift */,
 				48E5B3AB1C69062800D06BAC /* Download.swift */,
 				480FEDE81C5518A4005594F1 /* EpisodesClass.swift */,
-				480FEDEA1C5540B7005594F1 /* EpisodeViewController.swift */,
 				48A7674F1C7A07D100E6B485 /* ChapterMarksViewController.swift */,
+				480FEDEA1C5540B7005594F1 /* EpisodeViewController.swift */,
 				48DB59831C5D51B60041F4AC /* Singleton.swift */,
 				480FEDEC1C580CCA005594F1 /* SettingsTableViewController.swift */,
 				489B44F41C6BB1B900CC5326 /* License */,
 				4821D4CC1C764D920004DF4A /* supportfunctions.swift */,
 				48D2205C1CA485B7005BA209 /* InterfaceGenerator.swift */,
 				480FEDC01C54B3DF005594F1 /* Info.plist */,
+				48E8AC1A1CC4257100865834 /* PlayerClass.swift */,
 			);
 			path = OneTrickPony_Podcaster;
 			sourceTree = "<group>";
@@ -176,7 +178,7 @@
 				48DB59861C61C6700041F4AC /* PodcastSettings.plist */,
 				480FEDBB1C54B3DF005594F1 /* Assets.xcassets */,
 				480FEDBD1C54B3DF005594F1 /* LaunchScreen.storyboard */,
-				48A767551C7A2F8800E6B485 /* pushSound.m4a */,
+				4817B7281CCBAEBA00B3F723 /* pushSound.m4a */,
 				484F93DE1C8361FD009DC869 /* feed.xml */,
 			);
 			name = Customization_Per_Podcast;
@@ -200,7 +202,7 @@
 			);
 			name = OneTrickPony_Podcaster;
 			productName = OneTrickPony_Podcaster;
-			productReference = 480FEDAE1C54B3DF005594F1 /* DML.app */;
+			productReference = 480FEDAE1C54B3DF005594F1 /* Einschlafen.app */;
 			productType = "com.apple.product-type.application";
 		};
 		480FEDC41C54B3DF005594F1 /* OneTrickPony_PodcasterTests */ = {
@@ -303,7 +305,6 @@
 				48DB59871C61C6700041F4AC /* PodcastSettings.plist in Resources */,
 				484F93DF1C8361FD009DC869 /* feed.xml in Resources */,
 				480FEDBF1C54B3DF005594F1 /* LaunchScreen.storyboard in Resources */,
-				48A767561C7A2F8800E6B485 /* pushSound.m4a in Resources */,
 				482F186D1CC3726900A20512 /* Localizable.strings in Resources */,
 				480FEDBC1C54B3DF005594F1 /* Assets.xcassets in Resources */,
 				480FEDB71C54B3DF005594F1 /* Main.storyboard in Resources */,
@@ -340,7 +341,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\nCUSTOMVERPLIST=\"${PROJECT_DIR}/PodcastSettings.plist\"\nfeedurl=$(/usr/libexec/PlistBuddy -c \"Print feedurl\" ${CUSTOMVERPLIST})\necho $feedurl\necho ${TARGET_NAME}\ncurl -s $feedurl > ${PROJECT_DIR}/${TARGET_NAME}/feed.xml\nfi";
+			shellScript = "\n#CUSTOMVERPLIST=\"${PROJECT_DIR}/PodcastSettings.plist\"\n#feedurl=$(/usr/libexec/PlistBuddy -c \"Print feedurl\" ${CUSTOMVERPLIST})\n#echo $feedurl\n#echo ${TARGET_NAME}\n#curl -s $feedurl > ${PROJECT_DIR}/${TARGET_NAME}/feed.xml\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -351,6 +352,7 @@
 			files = (
 				48E5B3AC1C69062800D06BAC /* Download.swift in Sources */,
 				480FEDE91C5518A4005594F1 /* EpisodesClass.swift in Sources */,
+				48E8AC1B1CC4257100865834 /* PlayerClass.swift in Sources */,
 				48D677171CC0009B0053D64E /* Reachability.swift in Sources */,
 				48DB59841C5D51B60041F4AC /* Singleton.swift in Sources */,
 				48D2205D1CA485B7005BA209 /* InterfaceGenerator.swift in Sources */,
@@ -527,8 +529,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = de.holgerkrupp.DML;
-				PRODUCT_NAME = DML;
+				PRODUCT_BUNDLE_IDENTIFIER = de.holgerkrupp.Einschlafen;
+				PRODUCT_NAME = Einschlafen;
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = debugging;
@@ -546,8 +548,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = de.holgerkrupp.DML;
-				PRODUCT_NAME = DML;
+				PRODUCT_BUNDLE_IDENTIFIER = de.holgerkrupp.Einschlafen;
+				PRODUCT_NAME = Einschlafen;
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = debugging;

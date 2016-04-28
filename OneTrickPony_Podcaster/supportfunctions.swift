@@ -80,13 +80,15 @@ func getHeaderFromUrl(inputurl:String,headerfield:String) -> String {
     return header
 }
 
-func dateStringToNSDate(date:String,format:String="EEE, dd MMM yyyy HH:mm:ss z") -> NSDate{
+func dateStringToNSDate(date:String,format:String="EEE, dd MMM yyyy HH:mm:ss z") -> NSDate?{
     let locale = NSLocale(localeIdentifier: "en_US_POSIX")
     let dateFormatter = NSDateFormatter()
     dateFormatter.locale = locale
     dateFormatter.dateFormat = format
-    let formatedDate = (dateFormatter.dateFromString(date) as NSDate?)!
-    return formatedDate
+    if let formatedDate = dateFormatter.dateFromString(date) {
+        return formatedDate
+    }
+    return nil
 }
 
 /*func getHeaderFromUrl(inputurl:String,headerfield:String) -> String {

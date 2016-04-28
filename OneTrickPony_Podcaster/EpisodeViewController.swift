@@ -31,6 +31,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     @IBOutlet var titleLabel:UILabel!
+    @IBOutlet var chapterTitleLabel:UILabel!
     @IBOutlet var progressSlider: UISlider!
     @IBOutlet var playButton:UIButton!
     @IBOutlet var pauseButton:UIButton!
@@ -136,7 +137,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     /**************************************************************************
      
                     ALL THE BASIC VIEW FUNCTIONS FOLLOWING
-                (loading and confuring the view controller)
+                (loading and the view controller)
      
      **************************************************************************/
     
@@ -145,17 +146,23 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     //    disableswipeback()
+    
 
-        
-        //fill the view with content
         fillPlayerView(episode)
         adjustColors()
         episodeShowNotesWebView.hidden = true
         
         enableOrDisableControllsIfNoInFocus()
         allowremotebuttons()
-        if existsLocally(episode.episodeUrl).existlocal{
+        
+        if (SingletonClass.sharedInstance.playerinitialized == false){
+            initplayer(episode)
+        }
+        
+        
+        if existsLocally(episode.episodeUrl).existlocal && (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle) {
             autoplay()
         }
         setplaypausebutton()
@@ -163,41 +170,58 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     
+    func updateProgress(episode: Episode){
+        let starttime = episode.readplayed
+        let duration = stringtodouble(episode.getDurationFromEpisode())
+        
+        progressSlider.maximumValue = Float(duration)
+        let currentplaytime = Float(CMTimeGetSeconds(starttime()))
+        
+        
+        progressSlider.setValue(currentplaytime, animated: false)
+        
+        
+        playedtime.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(starttime()))
+        playedtime.textColor = getColorFromPodcastSettings("textcolor")
+        
+        remainingTimeLabel.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(episode.remaining()))
+        remainingTimeLabel.textColor = getColorFromPodcastSettings("textcolor")
+        
+        if let chapter = episode.getChapterForSeconds(Double(currentplaytime)){
+            chapterTitleLabel.text = chapter.chapterTitle
+            chapterTitleLabel.textColor = getColorFromPodcastSettings("secondarytextcolor")
+            chapterTitleLabel.enabled = true
+            chapterTitleLabel.hidden = false
+        }else{
+            chapterTitleLabel.hidden = true
+        }
+    }
+    
     func fillPlayerView(episode: Episode){
         
             // Text
            titleLabel.text = episode.episodeTitle
            titleLabel.textColor = getColorFromPodcastSettings("textcolor")
-            
-            
+        
+        
+
+        
+        
             // Time & Slider
             
-            let starttime = episode.readplayed
-            let duration = stringtodouble(episode.getDurationFromEpisode())
-            
-           progressSlider.maximumValue = Float(duration)
-            let currentplaytime = Float(CMTimeGetSeconds(starttime()))
-            
-           progressSlider.setValue(currentplaytime, animated: false)
-            // progressSlider.backgroundColor = getColorFromPodcastSettings("progressBackgroundColor")
-           progressSlider.minimumTrackTintColor = getColorFromPodcastSettings("highlightColor")
-           progressSlider.maximumTrackTintColor = getColorFromPodcastSettings("progressBackgroundColor")
-           progressSlider.setMaximumTrackImage(getImageWithColor(getColorFromPodcastSettings("progressBackgroundColor"),size: CGSizeMake(2, 10)), forState: .Normal)
-           progressSlider.setMinimumTrackImage(getImageWithColor(getColorFromPodcastSettings("highlightColor"),size: CGSizeMake(2, 10)), forState: .Normal)
-           progressSlider.setThumbImage(getImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(2, 30)), forState: .Normal)
-            
-            
-           playedtime.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(starttime()))
-           playedtime.textColor = getColorFromPodcastSettings("secondarytextcolor")
-            
-           remainingTimeLabel.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(episode.remaining()))
-           remainingTimeLabel.textColor = getColorFromPodcastSettings("secondarytextcolor")
-            
+        updateProgress(episode)
+        
+        progressSlider.minimumTrackTintColor = getColorFromPodcastSettings("highlightColor")
+        progressSlider.maximumTrackTintColor = getColorFromPodcastSettings("progressBackgroundColor")
+        progressSlider.setMaximumTrackImage(getImageWithColor(getColorFromPodcastSettings("progressBackgroundColor"),size: CGSizeMake(2, 30)), forState: .Normal)
+        progressSlider.setMinimumTrackImage(getImageWithColor(getColorFromPodcastSettings("highlightColor"),size: CGSizeMake(2, 30)), forState: .Normal)
+        progressSlider.setThumbImage(getImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(2, 40)), forState: .Normal)
+        
             let description = episode.episodeDescription.stringByReplacingOccurrencesOfString("\n", withString: "</br>")
             
            episodeShowNotesWebView.loadHTMLString(description, baseURL: nil)
-            
-           episodeImage.image = getEpisodeImage(episode)
+        
+           episodeImage.image = getEpisodeImage(episode, size: CGSizeMake(episodeImage.frame.size.height, episodeImage.frame.size.width))
             // rate Button
             if (SingletonClass.sharedInstance.playerinitialized == true) {
                 let currentspeed = SingletonClass.sharedInstance.player.rate
@@ -211,7 +235,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
            back30Button.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
            playButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
            pauseButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
-            
+        
             
             
            forward30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true, forward: true, label: "30"), forState: .Normal)
@@ -230,7 +254,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         self.navigationController?.navigationBarHidden = true
         self.navigationController?.toolbarHidden = false
         
-
+        listButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
         
 
         playButton.tintColor = getColorFromPodcastSettings("playControlColor")
@@ -249,7 +273,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         shareBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
         chapterBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
         infoButton.tintColor = getColorFromPodcastSettings("playControlColor")
-        
+        playerRateButton.tintColor = getColorFromPodcastSettings("playControlColor")
+        playerRateButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
+
         if episode.episodeChapter.count == 0
         {
             chapterBarButton.enabled = false
@@ -283,7 +309,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
-        //do som stuff from the popover
+        //do some stuff from the popover
     }
     
     func disableswipeback(){
@@ -346,11 +372,21 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     **************************************************************************/
     
     func showsleeptimer(){
-        // self.performSegueWithIdentifier("SleepTimerSegue", sender: self)
+        
+        var description = NSLocalizedString("sleep.timer.description", value: "The sleep timer will automatically pause the episode after the selcted time", comment: "shown in Episode Player")
+        
+        if let remainingTime = readSleepTimer().remaining {
+            if readSleepTimer().set == true {
+                let timeInfo = String.localizedStringWithFormat(
+                    NSLocalizedString("string.for.time.remaining", value:"%@ remaining",
+                        comment: "shown in TableView"),
+                    secondsToHoursMinutesSeconds(Double(remainingTime)))
+                description = description + "\n\n" + timeInfo
+            }
+        }
         
         
-        
-        let alert = UIAlertController(title: NSLocalizedString("sleep.timer.title", value: "Sleep timer", comment: "shown in Episode Player"), message: NSLocalizedString("sleep.timer.description", value: "The sleep timer will automatically pause the episode after the selcted time", comment: "shown in Episode Player"), preferredStyle: .ActionSheet)
+        let alert = UIAlertController(title: NSLocalizedString("sleep.timer.title", value: "Sleep timer", comment: "shown in Episode Player"), message: description , preferredStyle: .ActionSheet)
         
         let disableAction = UIAlertAction(title: NSLocalizedString("sleep.timer.deactivate", value: "Disable", comment: "shown in Episode Player"), style: .Default) { (alert: UIAlertAction!) -> Void in
             self.cancelleeptimer()
@@ -369,6 +405,10 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             self.setsleeptimer(5)
         }
         
+        let debugAction = UIAlertAction(title: NSLocalizedString("sleep.timer.debug", value: "0.1 Minutes", comment: "shown in Episode Player"), style: .Default) { (alert: UIAlertAction!) -> Void in
+            self.setsleeptimer(0.1)
+        }
+        
         let cancelAction = UIAlertAction(title: NSLocalizedString("sleep.timer.cancel", value: "cancel", comment: "shown in Episode Player"), style: .Cancel) { (alert: UIAlertAction!) -> Void in
             
         }
@@ -376,8 +416,17 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         alert.addAction(firstAction)
         alert.addAction(secondAction)
         alert.addAction(thirdAction)
+        
+        
+        #if (arch(i386) || arch(x86_64)) && os(iOS)
+            alert.addAction(debugAction)
+        #endif
+        
+        
         alert.addAction(cancelAction)
+        alert.view.tintColor = getColorFromPodcastSettings("playControlColor")
         presentViewController(alert, animated: true, completion:nil) // 6
+        NSLog("\(readSleepTimer())")
     }
     
 
@@ -392,22 +441,24 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         SingletonClass.sharedInstance.sleeptimerset = false
     }
     
+    func readSleepTimer() -> (set : Bool, remaining : Double?) {
+     return (SingletonClass.sharedInstance.sleeptimerset, SingletonClass.sharedInstance.sleeptimer)
+    }
+    
     func checksleeptimer(){
-        if (SingletonClass.sharedInstance.sleeptimerset == true){
-            if (SingletonClass.sharedInstance.sleeptimer <= 0.0){
+            if (readSleepTimer().remaining <= 0.0){
                 pause()
+                NSLog("good night")
                 cancelleeptimer()
             }
-        //    NSLog(SingletonClass.sharedInstance.sleeptimer)
-        }
+        
         
     }
     
     func updateSleepTimer(){
         // if a Sleeptimer is set, reduce the time of the sleeptimer by the Interval of the playtimer
-        if (SingletonClass.sharedInstance.sleeptimerset == true){
             SingletonClass.sharedInstance.sleeptimer -= SingletonClass.sharedInstance.audioTimer.timeInterval
-        }
+        
     }
     
     
@@ -440,7 +491,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     func popoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        NSLog("should dismiss")
         return true
     }
     
@@ -499,8 +549,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
             let secondsToAdd = CMTimeMakeWithSeconds(seconds,1)
             let jumpToTime = CMTimeAdd(SingletonClass.sharedInstance.player.currentTime(), secondsToAdd)
-            
-            //maybe i have to check here if the jumpToTime is smaller 0 or bigger thant the complete duration
             SingletonClass.sharedInstance.player.seekToTime(jumpToTime)
             updatePlayPosition()
             
@@ -519,6 +567,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
 
     func playPausefromRemoteCenter(){
+        
+        episode = SingletonClass.sharedInstance.episodePlaying
+        NSLog("playPausefromRemote: \(episode.episodeTitle)")
         if SingletonClass.sharedInstance.player.rate != 0{
             pause()
         }else{
@@ -537,8 +588,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             play()
         }else{
             if SingletonClass.sharedInstance.episodePlaying.episodeTitle != episode.episodeTitle {
-                // a new episode is loaded
-                let oldEpisode = SingletonClass.sharedInstance.episodePlaying
                 SingletonClass.sharedInstance.episodePlaying = episode
                 url = loadNSURL(episode)
                 SingletonClass.sharedInstance.player.replaceCurrentItemWithPlayerItem(AVPlayerItem(URL: url))
@@ -566,21 +615,19 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     func play(){
         
-        var starttime = episode.readplayed()
+        
         if (SingletonClass.sharedInstance.playerinitialized == false) {
             initplayer(episode)
         }
         
+
+        var starttime = episode.readplayed()
         if starttime >= episode.getDurationinCMTime() && episode.getDurationInSeconds() != 0.0 {
-            // the item has been played to the end,I'll reset the starttime to start playing from the beginning
             episode.saveplayed(0.0)
             NSLog("read after save \(episode.getDurationinCMTime())")
             starttime = episode.readplayed()
         }
-        
-
-
-        
+ 
         starttimer()
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(EpisodeViewController.playerDidFinishPlaying), name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
 
@@ -663,41 +710,38 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
                 newindex = 0
             }
             updateRate(newindex)
-            /*
-            SingletonClass.sharedInstance.player.rate = speeds[newindex]
-            playerRateButton.setTitle(speedtext[newindex], forState: .Normal)
-            playerRateButton.tintColor = getColorFromPodcastSettings("playControlColor")
-
-            setObjectForKeyToPersistentStorrage("player.rate", object: newindex)
-             */
         }
     }
     
     func updateRate(rateindex: Int){
-        
+        playerRateButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
         playerRateButton.setTitle(speedtext[rateindex], forState: .Normal)
-        playerRateButton.tintColor = getColorFromPodcastSettings("playControlColor")
+
         setObjectForKeyToPersistentStorrage("player.rate", object: rateindex)
         SingletonClass.sharedInstance.player.rate = speeds[rateindex]
     }
     
     func updateplayprogress(){
         if (SingletonClass.sharedInstance.playerinitialized == true){
-            // get time from player (Double)
             let progress = Double(CMTimeGetSeconds(SingletonClass.sharedInstance.player.currentTime()))
             let episode = SingletonClass.sharedInstance.episodePlaying
             
         
             episode.saveplayed(progress)
             
+          //  NSLog("now Playing Chapter: \(episode.getChapterForSeconds(progress)?.chapterTitle)")
+            
+            
+
             
             
             updateSliderProgress(progress)
             updateMPMediaPlayer()
             setplaypausebutton()
-            updateSleepTimer()
-            checksleeptimer()
-            
+            if (readSleepTimer().set == true){
+                updateSleepTimer()
+                checksleeptimer()
+            }
             
         }
     }
@@ -706,16 +750,18 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
 
     
     func back30(){
+        episode = SingletonClass.sharedInstance.episodePlaying
         moveplayer(-30)
     }
     func forward30(){
+        episode = SingletonClass.sharedInstance.episodePlaying
         moveplayer(30)
     }
     
     
     func updateSliderProgress(progress: Double){
         if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
-                fillPlayerView(episode)
+                updateProgress(episode)
             }
     }
 
@@ -756,8 +802,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             let mediaArtwort = MPMediaItemArtwork(image: getEpisodeImage(episode))
         playcenter.nowPlayingInfo = [
             MPMediaItemPropertyArtwork: mediaArtwort,
-            
-            MPMediaItemPropertyTitle : episode.episodeTitle,
+            MPMediaItemPropertyReleaseDate: SingletonClass.sharedInstance.episodePlaying.episodePubDate,
+           // MPMediaItemPropertyAlbumTitle: (SingletonClass.sharedInstance.episodePlaying.getChapterForSeconds(CMTimeGetSeconds(SingletonClass.sharedInstance.player.currentTime()))?.chapterTitle)!,
+            MPMediaItemPropertyTitle : SingletonClass.sharedInstance.episodePlaying.episodeTitle,
             MPMediaItemPropertyPlaybackDuration: Double(CMTimeGetSeconds(episode.getDurationinCMTime())),
             MPNowPlayingInfoPropertyElapsedPlaybackTime: Double(CMTimeGetSeconds(SingletonClass.sharedInstance.player.currentTime())),
             MPNowPlayingInfoPropertyPlaybackRate: SingletonClass.sharedInstance.player.rate]
@@ -774,11 +821,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
 
     
     func displayShareSheet() {
-        
         let shareContent:String = String.localizedStringWithFormat(NSLocalizedString("share.sheet", value:"I'm listening to %@ - %@",comment: "used for tweets and stuff"), episode.episodeTitle, episode.episodeLink)
-        
-     //   let shareContent:String = "I'm listening to \(episode.episodeTitle) - \(episode.episodeLink)"
-        NSLog(shareContent)
         let activityViewController = UIActivityViewController(activityItems: [shareContent as NSString], applicationActivities: nil)
         presentViewController(activityViewController, animated: true, completion: {})
     }

@@ -20,21 +20,28 @@ class Episode {
     var episodeFilename:    String = String()
     var episodeFilesize:    Int = Int()
     var episodeImage:       String = String()
+    var episodePicture:     UIImage?
     var episodeChapter      = [Chapter]()
     var episodeDescription: String = String()
     
     
-    var episodeLocal:       Bool = false
+    //var episodeLocal:       Bool = false
     var episodeIndex:       Int = Int()
     
-    /*
+    
      
-     Further implementation to be done: To mark the current chapter playing and showing the chapter title within the player
+    
      
-     
-     func getChapterForSeconds(progress: Double) -> Chapter {
+     func getChapterForSeconds(progress: Double) -> Chapter? {
+  
         
-    }*/
+     for (chapter) in episodeChapter.reverse() {
+        if (stringtodouble(chapter.chapterStart) < progress) {
+            return chapter
+        }
+     }
+        return nil
+    }
     
     
     func getprogressinCMTime(progress: Double) -> CMTime {
@@ -63,11 +70,11 @@ class Episode {
     }
     
     func setDuration(duration: CMTime) {
-    let seconds = CMTimeGetSeconds(duration)
+        let seconds = CMTimeGetSeconds(duration)
         episodeDuration = secondsToHoursMinutesSeconds(seconds)
     }
     
-
+    
     
     func remaining() -> CMTime{
         let played = readplayed()
@@ -105,7 +112,6 @@ class Episode {
             do {
                 try manager.removeItemAtPath(localFeedFile)
                 NSLog("deleted")
-                episodeLocal = false
             }catch{
                 NSLog("no file to delete")
                 
@@ -125,13 +131,42 @@ func DoubleToCMTime(seconds: Double) -> CMTime{
 
 
 
-func getEpisodeImage(episode: Episode) -> UIImage{
-    let existence = existsLocally(episode.episodeImage)
-    if (existence.existlocal){
-        return UIImage(named: existence.localURL)!
-    }else{
-        return UIImage(named: "StandardCover")!
+func getEpisodeImage(episode: Episode, size:CGSize?=nil) -> UIImage{
+    
+    var episodePicture : UIImage
+    episodePicture = UIImage(named: "StandardCover")!
+    if (episode.episodeImage != ""){
+        let existence = existsLocally(episode.episodeImage)
+        if (existence.existlocal){
+            do {
+                let attr : NSDictionary? = try NSFileManager.defaultManager().attributesOfItemAtPath(existence.localURL)
+                if let _attr = attr {
+                    let fileSize = _attr.fileSize();
+                    if fileSize > 10 {
+                        episodePicture = UIImage(contentsOfFile: existence.localURL)!
+                    }
+                }
+            }catch{
+            }
+        }else{
+            EpisodesTableViewController().downloadurl(episode.episodeImage)
+        }
     }
+    
+    if (size != nil){
+      //  NSLog("resize EpisodePicture")
+        let hasAlpha = false
+        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+        
+        UIGraphicsBeginImageContextWithOptions(size!, !hasAlpha, scale)
+        episodePicture.drawInRect(CGRect(origin: CGPointZero, size: size!))
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        episodePicture = scaledImage
+    }
+   // NSLog("EpisodePicture size: \(episodePicture.size) (\(episode.episodeTitle))")
+    return episodePicture
 }
 
 
@@ -148,9 +183,6 @@ func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
 func stringtodouble(input :String) -> Double{
     let timeArray = input.componentsSeparatedByString(":")
     var seconds = 0.0
-    // I'm going through the array (which should have max 3 elements) to add up hours, minutes and seconds.
-    // to do that I'll add the smaller element to the existing one and multiply by 60
-    // because I'm also doing that for the seconds, I have to devide by 60 again. Not nice but it works.
     
     for element in timeArray{
         seconds = (seconds + Double(element)!) * 60
@@ -166,7 +198,13 @@ func secondsToHoursMinutesSeconds (seconds : Double) -> (String) {
     let rm = min
     let rs = 60 * secf
     
-    let returnstring = NSString(format: "%02.0f:%02.0f:%02.0f", rh,rm,rs) as String
+    
+    var returnstring = String()
+    if rh != 0 {
+        returnstring = NSString(format: "%02.0f:%02.0f:%02.0f", rh,rm,rs) as String
+    }else {
+        returnstring = NSString(format: "%02.0f:%02.0f", rm,rs) as String
+    }
     return returnstring
 }
 

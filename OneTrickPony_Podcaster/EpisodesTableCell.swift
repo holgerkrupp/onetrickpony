@@ -25,7 +25,7 @@ class EpisodeCell: UITableViewCell {
     
     
     var delegate: EpisodeCellDelegate?
-
+    let status = Reach().connectionStatus()
     
     @IBOutlet weak var EpisodeNameLabel: UILabel!
     @IBOutlet weak var EpisodeDateLabel: UILabel!
@@ -84,9 +84,38 @@ class EpisodeCell: UITableViewCell {
        // NSLog(fileOffset)
     }
     
+    func updateProgress(episode: Episode){
+        if episode.getDurationInSeconds() != 0.0{
+            var remain = Float(CMTimeGetSeconds(episode.remaining()))
+            if remain <= 0{
+                remain = 0
+                EpisodeDurationLabel!.text = NSLocalizedString("episode.finished",value: "Done playing", comment: "shown in TableView")
+            }else{
+                EpisodeDurationLabel!.text = String.localizedStringWithFormat(
+                    NSLocalizedString("string.for.time.remaining", value:"%@ remaining",
+                        comment: "shown in TableView"),
+                    secondsToHoursMinutesSeconds(Double(remain)))
+            }
+            EpisodeTimeProgressbar.progress = 1-remain/Float(CMTimeGetSeconds(episode.getDurationinCMTime()))
+        }else{
+            EpisodeDurationLabel!.text = NSLocalizedString("episode.noduration",value: "Duration unknown", comment: "shown in TableView")
+            EpisodeTimeProgressbar.progress = 0
+        }
+    }
+    
+    func updateDownloadProgress(progress: Float){
+        EpisodeDownloadProgressbar.progress = progress
+        if progress > 0.0 && progress < 1{
+            EpisodeDownloadProgressbar.hidden = false
+        }else{
+            EpisodeDownloadProgressbar.hidden = true
+        }
+    }
+    
+
+    
+    
     func filltableviewcell(episode: Episode){
-        
-  
 
         if episode.getDurationInSeconds() != 0.0{
         var remain = Float(CMTimeGetSeconds(episode.remaining()))
@@ -95,13 +124,13 @@ class EpisodeCell: UITableViewCell {
             remain = 0
             EpisodeDurationLabel!.text = NSLocalizedString("episode.finished",value: "Done playing", comment: "shown in TableView")
         }else{
-          //  EpisodeDurationLabel!.text = "\(secondsToHoursMinutesSeconds(Double(remain))) remaining"
             EpisodeDurationLabel!.text = String.localizedStringWithFormat(
                 NSLocalizedString("string.for.time.remaining", value:"%@ remaining",
                     comment: "shown in TableView"),
                 secondsToHoursMinutesSeconds(Double(remain)))
         }
-        EpisodeTimeProgressbar.progress = 1-remain/Float(CMTimeGetSeconds(episode.getDurationinCMTime()))
+            let duration = episode.getDurationinCMTime()
+         EpisodeTimeProgressbar.progress = 1-remain/Float(CMTimeGetSeconds(duration))
         }else{
             EpisodeDurationLabel!.text = NSLocalizedString("episode.noduration",value: "Duration unknown", comment: "shown in TableView")
             EpisodeTimeProgressbar.progress = 0
@@ -118,7 +147,6 @@ class EpisodeCell: UITableViewCell {
         
         date = episode.episodePubDate
      
-        //dateFormatter.dateFormat = "dd.MM.yy"
         dateFormatter.dateStyle = .ShortStyle
         dateFormatter.timeStyle = .NoStyle
         
@@ -129,57 +157,17 @@ class EpisodeCell: UITableViewCell {
         
         
         let filesize: Double = Double(episode.episodeFilesize)/1024/1024
-       // EpisodeFileSizeLabel!.text = String(format:"%.1f", filesize) + " MB"
         EpisodeFileSizeLabel!.text = String.localizedStringWithFormat(
             NSLocalizedString("string.for.file.size", value:"%.1f MB",
                 comment: "shown in TableView"),
             filesize)
         EpisodeFileSizeLabel!.textColor = getColorFromPodcastSettings("secondarytextcolor")
-
-        //NSLog(EpisodeTimeProgressbar.progress)
-        
-
-        
         EpisodeDownloadProgressbar.backgroundColor = getColorFromPodcastSettings("progressBackgroundColor")
         EpisodeDownloadProgressbar.progressTintColor = getColorFromPodcastSettings("highlightColor")
         EpisodeDownloadButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
         EpisodePauseButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
         EpisodeCancelButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
-        var existence = existsLocally(episode.episodeUrl)
-        // modify Download button to show either 'download' or 'play'
-        if (existence.existlocal){
-            episode.episodeLocal = true
-            EpisodeDownloadProgressbar.progress = 1
-            EpisodeDownloadProgressbar.hidden = true
-         //   EpisodeprogressLabel.hidden = true
-            EpisodeDownloadButton!.setTitle("Play", forState: UIControlState.Normal)
-            EpisodeDownloadButton.hidden = true
-           // EpisodeDownloadButton!.setImage(UIImage(named: "iPhone"), forState: UIControlState.Normal)
-            EpisodeDownloadButton!.enabled = false
-        }else{
-            // just in case - should never been used - but acctually is used and I don't know why
-            EpisodeDownloadProgressbar.progress = 0
-            EpisodeDownloadProgressbar.hidden = true
-       //     EpisodeprogressLabel.hidden = true
-            EpisodeDownloadButton!.setTitle("", forState: UIControlState.Normal)
-            EpisodeDownloadButton!.setImage(createCircleWithArrow(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true), forState: .Normal)
-            //EpisodeDownloadButton!.setImage(UIImage(named: "Download from the Cloud"), forState: UIControlState.Normal)
-            EpisodeDownloadButton!.enabled = true
-            episode.episodeLocal = false
-        }
-        // set Episode image if existing
-        existence = existsLocally(episode.episodeImage)
-        if (existence.existlocal){
-            EpisodeImage.image = UIImage(named: existence.localURL)
-        }
-        
-        
-        
-        //check if the episode has been played and how far
-     //   let playposition = readplayed(episode)
-        //NSLog("Episode \(episode.episodeTitle) played at position \(playposition) max duration is \(episode.episodeDuration)")
-        
-
+   
         
         
     }
