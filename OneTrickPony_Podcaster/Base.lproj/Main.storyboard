@@ -561,6 +561,7 @@
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                 <connections>
+                                    <outlet property="delegate" destination="uPX-Rw-QbC" id="A6X-Yd-p2s"/>
                                     <outletCollection property="gestureRecognizers" destination="dTH-Xb-JIi" appends="YES" id="eU2-ZL-NjV"/>
                                 </connections>
                             </webView>

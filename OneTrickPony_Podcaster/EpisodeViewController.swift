@@ -9,9 +9,10 @@
 import UIKit
 import AVFoundation
 import MediaPlayer
+import SafariServices
 
 
-class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDelegate, ChapterMarksViewControllerDelegate {
+class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDelegate, UIWebViewDelegate, SFSafariViewControllerDelegate, ChapterMarksViewControllerDelegate {
 
     var episode = Episode()
 
@@ -825,7 +826,39 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         let activityViewController = UIActivityViewController(activityItems: [shareContent as NSString], applicationActivities: nil)
         presentViewController(activityViewController, animated: true, completion: {})
     }
-
+    /**************************************************************************
+     
+     ALL THE WebView FUNCTIONS FOLLOWING
+     (Shownotes and their links)
+     
+     **************************************************************************/
+    
+    func webView(webView: UIWebView, shouldStartLoadWithRequest r: NSURLRequest, navigationType nt: UIWebViewNavigationType) -> Bool{
+        if (nt == UIWebViewNavigationType.LinkClicked ) {
+            openWithSafariVC(r.URL!)
+            return false;
+        }
+        return true;
+        
+    }
+    
+    func openWithSafariVC(url: NSURL)
+    {
+        if #available(iOS 9.0, *) {
+            let svc = SFSafariViewController(URL: url)
+            svc.delegate = self
+            self.presentViewController(svc, animated: true, completion: nil)
+        } else {
+            UIApplication.sharedApplication().openURL(url)
+        }
+        
+    }
+    
+    @available(iOS 9.0, *)
+    func safariViewControllerDidFinish(controller: SFSafariViewController)
+    {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
     
 }
 
