@@ -37,7 +37,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     @IBOutlet var playButton:UIButton!
     @IBOutlet var pauseButton:UIButton!
     @IBOutlet var episodeImage:UIImageView!
-    @IBOutlet var episodeShowNotesWebView: UIWebView!
     @IBOutlet var infoButton:UIButton!
     
     @IBOutlet weak var playedtime: UILabel!
@@ -53,6 +52,27 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     @IBOutlet weak var sleeptimerBarButton: UIBarButtonItem!
     @IBOutlet weak var chapterBarButton: UIBarButtonItem!
     @IBOutlet weak var shareBarButton: UIBarButtonItem!
+    
+    
+    @IBOutlet weak var ShowNotesContainer: UIView!
+    @IBOutlet weak var ShowNotesDismissButton: UIButton!
+    @IBOutlet var episodeShowNotesWebView: UIWebView!
+
+    @IBAction func ShowNotesDismissButtonPressed(sender: UIButton) {
+        
+        if ShowNotesContainer.hidden == true {
+            ShowNotesContainer.hidden = false
+            infoButton.selected = true
+
+        }else{
+            ShowNotesContainer.hidden = true
+            infoButton.selected = false
+
+        }
+    }
+    
+    
+    
     
     
     
@@ -75,21 +95,21 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     @IBAction func infoButtonPressed(sender: UIButton){
-        if episodeShowNotesWebView.hidden == true {
-            episodeShowNotesWebView.hidden = false
+        if ShowNotesContainer.hidden == true {
+            ShowNotesContainer.hidden = false
             infoButton.selected = true
         }else{
-            episodeShowNotesWebView.hidden = true
+            ShowNotesContainer.hidden = true
             infoButton.selected = false
         }
     }
     
     @IBAction func tapImage(recognizer:UITapGestureRecognizer) {
         
-        if episodeShowNotesWebView.hidden == true {
-            episodeShowNotesWebView.hidden = false
+        if ShowNotesContainer.hidden == true {
+            ShowNotesContainer.hidden = false
         }else{
-            episodeShowNotesWebView.hidden = true
+            ShowNotesContainer.hidden = true
         }
     }
     
@@ -153,7 +173,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         fillPlayerView(episode)
         adjustColors()
-        episodeShowNotesWebView.hidden = true
+        episodeShowNotesWebView.hidden = false
+        ShowNotesContainer.hidden = true
+    ShowNotesDismissButton.setImage(createCircleWithCross(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: false), forState: .Normal)
         
         enableOrDisableControllsIfNoInFocus()
         allowremotebuttons()
