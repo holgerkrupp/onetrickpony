@@ -485,7 +485,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                 episodePubDate = data
             }else if eName == "lastBuildDate"{
                 lastfeeddate += data
-            }else if eName == "description"{
+            }else if eName == "content:encoded"{ //might be different in different feeds
                 episodeDescription += string // here I don't want the new line characters to be delted
             }
         }
@@ -714,19 +714,18 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        /*
-         let cell = tableView.dequeueReusableCellWithIdentifier("EpisodeCell", forIndexPath: indexPath) as! EpisodeCell
-         
-         let existence = existsLocally(cell.episode.episodeUrl)
+        
+        
+         let episode: Episode = episodes[indexPath.row]
+       // NSLog(episode.episodeTitle)
+         let existence = existsLocally(episode.episodeUrl)
          
          if (existence.existlocal){
          
          return true
-         }else{
-         return false
          }
-         */
-        return true
+         return false
+        
     }
     
     
@@ -740,6 +739,14 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             self.tableView.reloadRowsAtIndexPaths([indexPath2], withRowAnimation: UITableViewRowAnimation.None)
         }
     }
+    
+    /*
+    override func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.dequeueReusableCellWithIdentifier("EpisodeCell", forIndexPath: indexPath) as! EpisodeCell
+        cell.backgroundColor = getColorFromPodcastSettings("backgroundColor")
+        
+    }
+    */
     
     func updateCellForEpisode(episode: Episode){
         let cellRowToBeUpdated = episode.episodeIndex

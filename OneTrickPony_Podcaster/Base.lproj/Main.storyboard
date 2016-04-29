@@ -22,7 +22,7 @@
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EpisodeCell" rowHeight="107" id="1tu-3b-spL" customClass="EpisodeCell" customModule="DML" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="107"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000000000000004" contentMode="center" tableViewCell="1tu-3b-spL" id="Q62-8E-a8R">
+                                <tableViewCellContentView key="contentView" clipsSubviews="YES" alpha="0.80000000000000004" contentMode="center" tableViewCell="1tu-3b-spL" id="Q62-8E-a8R">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="106"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
