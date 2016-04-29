@@ -182,10 +182,10 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         
         playedtime.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(starttime()))
-        playedtime.textColor = getColorFromPodcastSettings("textcolor")
+        playedtime.textColor = getColorFromPodcastSettings("secondarytextcolor")
         
         remainingTimeLabel.text = secondsToHoursMinutesSeconds(CMTimeGetSeconds(episode.remaining()))
-        remainingTimeLabel.textColor = getColorFromPodcastSettings("textcolor")
+        remainingTimeLabel.textColor = getColorFromPodcastSettings("secondarytextcolor")
         
         if let chapter = episode.getChapterForSeconds(Double(currentplaytime)){
             chapterTitleLabel.text = chapter.chapterTitle

@@ -720,7 +720,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="StandardCover" width="1400" height="1400"/>
+        <image name="StandardCover" width="1024" height="1024"/>
         <image name="moon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
