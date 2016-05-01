@@ -259,20 +259,38 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         if let date1 = getObjectForKeyFromPersistentStorrage("latestepisode"){
             let Date1 = date1 as! NSDate
             let Date2 = episodes[0].episodePubDate
-            if Date1.earlierDate(Date2).isEqualToDate(Date1){
+            NSLog("Last episode from storrage: \(Date1) - date from Episode[0]: \(Date2) ")
+            
+            if Date1.compare(Date2) == NSComparisonResult.OrderedDescending
+            {
+                NSLog("date1 after date2");
+                result = false
+            } else if Date1.compare(Date2) == NSComparisonResult.OrderedAscending
+            {
+                NSLog("date1 before date2");
                 result = true
-                //  setObjectForKeyToPersistentStorrage("latestepisode", value: episodes[0].episodePubDate)
+                setObjectForKeyToPersistentStorrage("latestepisode", object: episodes[0].episodePubDate)
                 NSLog("set new Episode to persistent storrage")
-                
-            }else{
-                NSLog("no new episode found")
-                //   dummyNotificationforDebugging()
+            } else
+            {
+                NSLog("Dates are equal");
+                result = false
             }
+            /*
+             if Date1.earlierDate(Date2).isEqualToDate(Date1){
+             result = true
+             setObjectForKeyToPersistentStorrage("latestepisode", object: episodes[0].episodePubDate)
+             NSLog("set new Episode to persistent storrage")
+             
+             }else{
+             NSLog("no new episode found")
+             //   dummyNotificationforDebugging()
+             }*/
         }else{
             NSLog("no episode downloaded yet")
             result = true
             
-            //  setObjectForKeyToPersistentStorrage("latestepisode", value: episodes[0].episodePubDate)
+            setObjectForKeyToPersistentStorrage("latestepisode", object: episodes[0].episodePubDate)
         }
         NSLog("episode check done")
         completion(result: result)
@@ -283,12 +301,10 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     func createLocalNotification(episode: Episode){
         let localNotification =  UILocalNotification()
         
-        // localNotification.alertBody = "\(episode.episodeTitle) is available"
         localNotification.alertBody = String.localizedStringWithFormat(
             NSLocalizedString("notification.alert", value: "%@ is available", comment: "for local notification"),
             episode.episodeTitle)
         
-        // localNotification.alertAction = "Details"
         localNotification.alertAction = NSLocalizedString("notification.action", value: "Details", comment: "for local notification")
         
         
@@ -716,15 +732,15 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         
         
-         let episode: Episode = episodes[indexPath.row]
-       // NSLog(episode.episodeTitle)
-         let existence = existsLocally(episode.episodeUrl)
-         
-         if (existence.existlocal){
-         
-         return true
-         }
-         return false
+        let episode: Episode = episodes[indexPath.row]
+        // NSLog(episode.episodeTitle)
+        let existence = existsLocally(episode.episodeUrl)
+        
+        if (existence.existlocal){
+            
+            return true
+        }
+        return false
         
     }
     
@@ -741,12 +757,12 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     }
     
     /*
-    override func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.dequeueReusableCellWithIdentifier("EpisodeCell", forIndexPath: indexPath) as! EpisodeCell
-        cell.backgroundColor = getColorFromPodcastSettings("backgroundColor")
-        
-    }
-    */
+     override func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
+     let cell = tableView.dequeueReusableCellWithIdentifier("EpisodeCell", forIndexPath: indexPath) as! EpisodeCell
+     cell.backgroundColor = getColorFromPodcastSettings("backgroundColor")
+     
+     }
+     */
     
     func updateCellForEpisode(episode: Episode){
         let cellRowToBeUpdated = episode.episodeIndex
