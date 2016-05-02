@@ -17,9 +17,13 @@ DerivedData/
 !default.perspectivev3
 xcuserdata/
 
+## Icons and stuff
+OneTrickPony_Podcaster/Assets.xcassets/
+
 ## Other
 *.moved-aside
 *.xcuserstate
+UserInterfaceState.xcuserstate
 
 ## Obj-C/Swift specific
 *.hmap
