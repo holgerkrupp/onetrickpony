@@ -97,7 +97,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         self.refreshControl?.addTarget(self, action:#selector(EpisodesTableViewController.refreshfeed), forControlEvents: UIControlEvents.ValueChanged)
         //   self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
         
-        
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(EpisodesTableViewController.longPress(_:)))
+        //self.view.addGestureRecognizer(longPressRecognizer)
+        self.view.removeGestureRecognizer(longPressRecognizer)
         
     }
     
@@ -763,6 +765,22 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         }
         
     }
+    
+    
+    
+    func longPress(longPressGestureRecognizer: UILongPressGestureRecognizer) {
+        
+        if longPressGestureRecognizer.state == UIGestureRecognizerState.Began {
+            
+            let touchPoint = longPressGestureRecognizer.locationInView(self.view)
+            if let indexPath = tableView.indexPathForRowAtPoint(touchPoint) {
+                
+                NSLog("long press on \(indexPath)")
+                // your code here, get the row for the indexPath or do whatever you want
+            }
+        }
+    }
+    
     
     /**************************************************************************
      
