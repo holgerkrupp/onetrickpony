@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneTrickPony_Podcaster/supportfunctions.swift"
-            timestampString = "482594640.33297"
+            timestampString = "484157773.474139"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "dateStringToNSDate(_:format:)"
             landmarkType = "7">
          </BreakpointContent>

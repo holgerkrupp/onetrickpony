@@ -39,12 +39,20 @@ func getObjectForKeyFromPodcastSettings(key:String) -> AnyObject{
 
 
 func getColorFromPodcastSettings(key: String) -> UIColor {
-    let colorComponents = getObjectForKeyFromPodcastSettings(key) as! NSDictionary
-    let color = UIColor(
+    var color:UIColor
+    let PodcastColor = getObjectForKeyFromPodcastSettings(key)
+    if let colorComponents = PodcastColor as? NSDictionary{
+        color = UIColor(
         red: colorComponents.objectForKey("red") as! CGFloat,
         green: colorComponents.objectForKey("green") as! CGFloat,
         blue: colorComponents.objectForKey("blue") as! CGFloat,
         alpha: colorComponents.objectForKey("alpha") as! CGFloat)
+       // return color
+    }else{
+        let colorcode = UInt32(PodcastColor as! String, radix: 16)
+        color = UIColor(hex6: colorcode!)
+
+    }
     return color
 }
 
