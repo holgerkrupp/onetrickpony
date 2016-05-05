@@ -19,7 +19,6 @@
 		480FEDED1C580CCA005594F1 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480FEDEC1C580CCA005594F1 /* SettingsTableViewController.swift */; };
 		480FEDF31C5A7E8A005594F1 /* EpisodesTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480FEDF21C5A7E8A005594F1 /* EpisodesTableCell.swift */; };
 		4821D4CD1C764D920004DF4A /* supportfunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4821D4CC1C764D920004DF4A /* supportfunctions.swift */; };
-		482CFB331CD2A8A800FB4F0B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 482CFB321CD2A8A800FB4F0B /* .gitignore */; };
 		482CFB351CD2AEDE00FB4F0B /* pushSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 482CFB341CD2AEDE00FB4F0B /* pushSound.m4a */; };
 		482CFB3B1CD3B9AA00FB4F0B /* shownotes.css in Resources */ = {isa = PBXBuildFile; fileRef = 482CFB3A1CD3B9AA00FB4F0B /* shownotes.css */; };
 		482F186D1CC3726900A20512 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 482F186B1CC3726900A20512 /* Localizable.strings */; };
@@ -308,7 +307,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				482CFB331CD2A8A800FB4F0B /* .gitignore in Resources */,
 				489B44F51C6BB1B900CC5326 /* License in Resources */,
 				48DB59871C61C6700041F4AC /* PodcastSettings.plist in Resources */,
 				482CFB351CD2AEDE00FB4F0B /* pushSound.m4a in Resources */,

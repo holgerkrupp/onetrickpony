@@ -128,8 +128,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     
     override func viewWillAppear(animated: Bool) {
-        self.navigationController?.navigationBarHidden = true
-        self.navigationController?.toolbarHidden = true
+        //self.navigationController?.navigationBarHidden = true
+        //self.navigationController?.toolbarHidden = true
         
         
         self.tableView.backgroundColor = getColorFromPodcastSettings("backgroundColor")
@@ -276,16 +276,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                 NSLog("Dates are equal");
                 result = false
             }
-            /*
-             if Date1.earlierDate(Date2).isEqualToDate(Date1){
-             result = true
-             setObjectForKeyToPersistentStorrage("latestepisode", object: episodes[0].episodePubDate)
-             NSLog("set new Episode to persistent storrage")
-             
-             }else{
-             NSLog("no new episode found")
-             //   dummyNotificationforDebugging()
-             }*/
+
         }else{
             NSLog("no episode downloaded yet")
             result = true

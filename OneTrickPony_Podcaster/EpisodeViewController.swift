@@ -170,7 +170,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         //    disableswipeback()
         
-        
         fillPlayerView(episode)
         adjustColors()
         episodeShowNotesWebView.hidden = false
@@ -287,7 +286,6 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     func adjustColors(){
-        self.navigationController?.navigationBarHidden = true
         self.navigationController?.toolbarHidden = false
         
         listButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
@@ -333,14 +331,17 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.navigationController?.navigationBarHidden = true
+      //  self.navigationController?.navigationBarHidden = true
+        self.navigationController?.toolbarHidden = false
+
         fixTheDuration()
         updateplayprogress()
     }
     
     override func viewWillDisappear(animated: Bool) {
         
-        self.navigationController?.navigationBarHidden = false
+      //  self.navigationController?.navigationBarHidden = false
+        self.navigationController?.toolbarHidden = true
     }
     
     
