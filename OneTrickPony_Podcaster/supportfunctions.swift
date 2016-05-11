@@ -99,22 +99,22 @@ func dateStringToNSDate(date:String,format:String="EEE, dd MMM yyyy HH:mm:ss z")
     return nil
 }
 
-/*func getHeaderFromUrl(inputurl:String,headerfield:String) -> String {
-    let url = NSURL(string: inputurl)!
-    var responseHeader = ""
-    let task = NSURLSession.sharedSession().dataTaskWithURL(url) {
-        data, response, error in
-        
-        if let httpResponse = response as? NSHTTPURLResponse {
-            if let headerfieldresponse = httpResponse.allHeaderFields[headerfield] as? String {
-                NSLog(headerfieldresponse)
-               responseHeader = headerfieldresponse
-            }
-        }
+func dateOfFile(checkurl:String) -> NSDate? {
+    let manager = NSFileManager.defaultManager()
+    let url: NSURL = NSURL(string: checkurl)!
+    let documentsDirectoryUrl =  NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+    let fileName = url.lastPathComponent! as String
+    let localFeedFile = documentsDirectoryUrl + "/" + fileName
+    
+    do {
+        let fileAttributes = try manager.attributesOfItemAtPath(localFeedFile)
+        let date = fileAttributes[NSFileModificationDate] as! NSDate
+        return date
+    } catch {
+        print("Error: \(error)")
+        return nil
     }
-    task.resume()
-    return responseHeader
-}*/
+}
 
 func existsLocally(checkurl: String) -> (existlocal : Bool, localURL : String) {
     let manager = NSFileManager.defaultManager()
@@ -124,10 +124,8 @@ func existsLocally(checkurl: String) -> (existlocal : Bool, localURL : String) {
     let localFeedFile = documentsDirectoryUrl + "/" + fileName
     
     if manager.fileExistsAtPath(localFeedFile){
-        //NSLog("\(localFeedFile) is available")
         return (true, localFeedFile)
     } else {
-        //NSLog("\(localFeedFile) is not available")
         return (false, localFeedFile)
     }
 }

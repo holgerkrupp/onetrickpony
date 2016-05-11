@@ -27,7 +27,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     let speeds: [Float] = [0.5,1,1.5,2]
     let speedtext: [String] = ["1/2x","1x","1,5x","2x"]
     
-    
+    var DynamicView = UIView()
     
     
     
@@ -178,11 +178,11 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         enableOrDisableControllsIfNoInFocus()
         allowremotebuttons()
-        
+        /*
         if (SingletonClass.sharedInstance.playerinitialized == false){
             initplayer(episode)
         }
-        
+        */
         
         if existsLocally(episode.episodeUrl).existlocal && (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle) {
             autoplay()
@@ -224,7 +224,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         // Text
         titleLabel.text = episode.episodeTitle
         titleLabel.textColor = getColorFromPodcastSettings("textcolor")
-        
+        self.title = episode.episodeTitle
         
         
         
@@ -461,7 +461,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         
         alert.addAction(cancelAction)
-        alert.view.tintColor = getColorFromPodcastSettings("playControlColor")
+        alert.view.tintColor = getColorFromPodcastSettings("backgroundColor")
+       // alert.view.backgroundColor = getColorFromPodcastSettings("backgroundColor")
         presentViewController(alert, animated: true, completion:nil) // 6
         NSLog("\(readSleepTimer())")
     }
@@ -561,16 +562,41 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
      **************************************************************************/
     
     func initplayer(episode: Episode){
-        url = loadNSURL(episode)
-        SingletonClass.sharedInstance.player = AVPlayer(URL: url)
-        SingletonClass.sharedInstance.episodePlaying = episode
-        SingletonClass.sharedInstance.playerinitialized = true
         
         
-        SingletonClass.sharedInstance.setaudioSession()
-        fixTheDuration()
-        updateMPMediaPlayer()
+       // createLoadingMessage()
         
+            url = loadNSURL(episode)
+            SingletonClass.sharedInstance.player = AVPlayer(URL: url)
+            SingletonClass.sharedInstance.episodePlaying = episode
+            SingletonClass.sharedInstance.playerinitialized = true
+        
+        
+            SingletonClass.sharedInstance.setaudioSession()
+            fixTheDuration()
+            updateMPMediaPlayer()
+        
+        
+    }
+    
+    
+    func createLoadingMessage(){
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        let Width = screenWidth*0.75
+        let Height = screenHeight*0.75
+        let x = (screenWidth-Width)/2
+        let y = (screenHeight-Height)/2
+        DynamicView=UIView(frame: CGRectMake(x, y, Width, Height))
+        DynamicView.backgroundColor=UIColor.blackColor().colorWithAlphaComponent(0.75)
+        DynamicView.layer.cornerRadius=25
+        DynamicView.layer.borderWidth=2
+        self.view.addSubview(DynamicView)
+    }
+    
+    func removeLoadingMessage(){
+            DynamicView.removeFromSuperview()
     }
     
     

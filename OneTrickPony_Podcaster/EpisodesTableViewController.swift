@@ -73,7 +73,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         super.viewDidLoad()
         
         _ = self.downloadsSession
-        
+        self.title = NSLocalizedString("episodelist.title", value: "Episodes", comment: "Header of the Episodelist")
         //  removePersistentStorrage()
         
         
@@ -89,7 +89,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         self.tableView.separatorColor = getColorFromPodcastSettings("highlightColor")
         self.tableView.separatorInset = UIEdgeInsetsZero
         self.tableView.layoutMargins = UIEdgeInsetsZero
-        
+        self.navigationController?.navigationBar.barTintColor = getColorFromPodcastSettings("backgroundColor")
+        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : getColorFromPodcastSettings("textcolor")]
+        self.navigationController?.navigationBar.tintColor = getColorFromPodcastSettings("textcolor")
         dispatch_async(dispatch_get_main_queue(), {
             self.autoFeedRefresh()
         })
@@ -494,7 +496,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                 episodePubDate = data
             }else if eName == "lastBuildDate"{
                 lastfeeddate += data
-            }else if eName == "content:encoded"{ //might be different in different feeds
+            }else if eName == "description"{ //might be different in different feeds
                 episodeDescription += string // here I don't want the new line characters to be delted
             }
         }

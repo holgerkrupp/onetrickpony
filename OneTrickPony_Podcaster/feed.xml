@@ -6,14 +6,14 @@
 	<title>Dirty Minutes Left (DML) (AAC)</title>
 	<link>http://compendion.net/dirtyminutesleft</link>
 	<description>Arne und Holger unterhalten sich über alles</description>
-	<lastBuildDate>Tue, 03 May 2016 17:03:02 +0000</lastBuildDate>
+	<lastBuildDate>Mon, 09 May 2016 12:37:56 +0000</lastBuildDate>
 	
 <image><url>http://compendion.net/dirtyminutesleft/wp-content/cache/podlove/eb/6ecd55baa3be599b21b7f937e26a67/dirty-minutes-left-dml_original.png</url><title>Dirty Minutes Left (DML)</title><link>http://compendion.net/dirtyminutesleft</link></image>
 <atom:link rel="self" type="application/rss+xml" title="Dirty Minutes Left (DML) (AAC)" href="http://compendion.net/dirtyminutesleft/feed/m4a" />
 	<atom:link rel="alternate" type="application/rss+xml" title="Dirty Minutes Left (DML) (MP3)" href="http://compendion.net/dirtyminutesleft/feed/mp3" />
 	<atom:link rel="first" href="http://compendion.net/dirtyminutesleft/feed/m4a" />
 	<language>de-DE</language>	<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=codenaga&amp;popout=1&amp;url=http%3A%2F%2Fcompendion.net%2Fdirtyminutesleft%2F&amp;language=de_DE&amp;category=audio&amp;title=Dirty+Minutes+Left&amp;description=Der+w%C3%B6chentliche+Nerd-Talk+mit+Holger+und+Arne&amp;tags=blog" type="text/html" />
-<generator>Podlove Podcast Publisher v2.3.11</generator>
+<generator>Podlove Podcast Publisher v2.3.12</generator>
 	<itunes:author>Arne Ruddat</itunes:author>
 	<itunes:summary>Themen dieses Podcasts sind u.a., aber nicht ausschließlich: Apple, Politik, TV-Serien, Technik, Politik, Games, Brettspiele, Erfahrungsberichte, Nintendo, Filme, uvm!</itunes:summary>
 <itunes:category text="Games &amp; Hobbies"></itunes:category><itunes:category text="Technology"></itunes:category><itunes:category text="TV &amp; Film"></itunes:category>
@@ -29,6 +29,90 @@
 	<itunes:explicit>no</itunes:explicit>
 
 <atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=&amp;language=de_DE&amp;url=http%3A%2F%2Fcompendion.net%2Fdirtyminutesleft&amp;title=Dirty+Minutes+Left+%28DML%29&amp;description=Arne+und+Holger+unterhalten+sich+%C3%BCber+alles" type="text/html" />		<item>
+		<title>160 Dr. Pepper Erzähl Mal Amiibo Urlaub</title>
+		<link>http://compendion.net/dirtyminutesleft/160</link>
+		<pubDate>Sun, 08 May 2016 19:07:31 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2016-05-08t18:54:51+00:00-de2904921cca171</guid>
+		<description><![CDATA[Dr. Pepper Cherry Vanilla
+Vorsatzkontrolle
+Verkostung: Up to the Sky
+Folgen-URL: compendion.net/dirtyminutesleft/xxx
+Holgers Apps
+Arne war im Urlaub
+Kartenspiel: Erzähl Mal Familienquiz
+Sommer!
+Sealife Timmendorfer Strand
+Erlebnisschwimmbad Ostseetherme
+Zelda Phantom Hourglass
+Weitere Zeldas
+Wii U Pro Controller
+Mini Mario & Friends: Amiibo Challenge
+Amiibo Touch & Play: Nintendo Classics Highlights
+Holger war Fußball gucken
+Verabschiedung]]></description><atom:link rel="http://podlove.org/deep-link" href="http://compendion.net/dirtyminutesleft/160#" />
+<enclosure url="http://dml.compendion.net/podcast/160.m4a" length="30475269" type="audio/mp4" bitlove:guid="http://compendion.net/dirtyminutesleft/podlove/file/1307"/>
+<itunes:duration>00:47:13</itunes:duration><itunes:author>Arne Ruddat</itunes:author><itunes:subtitle>Heute geht's um Urlaub am Strand in Timmendorfer Strand, Zelda-Spiele, Amiibo-Spiele, Fußballspiele und Coding.</itunes:subtitle><itunes:summary>Dr. Pepper Cherry Vanilla
+Vorsatzkontrolle
+Verkostung: Up to the Sky
+Folgen-URL: compendion.net/dirtyminutesleft/xxx
+Holgers Apps
+Arne war im Urlaub
+Kartenspiel: Erzähl Mal Familienquiz
+Sommer!
+Sealife Timmendorfer Strand
+Erlebnisschwimmbad Ostseetherme
+Zelda Phantom Hourglass
+Weitere Zeldas
+Wii U Pro Controller
+Mini Mario &amp; Friends: Amiibo Challenge
+Amiibo Touch &amp; Play: Nintendo Classics Highlights
+Holger war Fußball gucken
+Verabschiedung</itunes:summary><content:encoded><![CDATA[<div class="podlove-player-wrapper"><audio controls="controls" preload="none" data-podlove-web-player-source="http://compendion.net/dirtyminutesleft/160?podloveEmbed=1">
+  <source src="http://dml.compendion.net/podcast/160.m4a" type="audio/mp4"/>
+  <source src="http://dml.compendion.net/podcast/160.mp3" type="audio/mpeg"/>
+  <object type="application/x-shockwave-flash" data="http://compendion.net/dirtyminutesleft/wp-content/plugins/podlove-podcasting-plugin-for-wordpress/lib/modules/podlove_web_player/player_v3/bin/flashmediaelement.swf">
+    <param name="movie" value="http://compendion.net/dirtyminutesleft/wp-content/plugins/podlove-podcasting-plugin-for-wordpress/lib/modules/podlove_web_player/player_v3/bin/flashmediaelement.swf"/>
+    <param name="flashvars" value="controls=true&amp;file=http://dml.compendion.net/podcast/160.mp3"/>
+  </object>
+</audio></div><ul>
+<li><a href="http://www.drpepper.com/en/products/cherryvanilladrpepper"><span style="font-weight: 400;">Dr. Pepper Cherry Vanilla</span></a></li>
+<li><span style="font-weight: 400;">Vorsatzkontrolle</span></li>
+<li><span style="font-weight: 400;">Verkostung: </span><a href="http://www.uptothesky.de"><span style="font-weight: 400;">Up to the Sky</span></a></li>
+<li><span style="font-weight: 400;">Folgen-URL: </span><a href="http://compendion.net/dirtyminutesleft/"><span style="font-weight: 400;">compendion.net/dirtyminutesleft/xxx</span></a></li>
+<li><a href="https://itunes.apple.com/de/developer/holger-krupp/id362806171?l=en"><span style="font-weight: 400;">Holgers Apps</span></a></li>
+<li><span style="font-weight: 400;">Arne war im Urlaub</span></li>
+<li><span style="font-weight: 400;">Kartenspiel: </span><a href="http://www.amazon.de/gp/product/B00L3RWW5A/ref=as_li_tl?ie=UTF8&amp;camp=1638&amp;creative=19454&amp;creativeASIN=B00L3RWW5A&amp;linkCode=as2&amp;tag=wwwcodenagade-21"><span style="font-weight: 400;">Erzähl Mal Familienquiz</span></a><span style="font-weight: 400;">*</span></li>
+<li><span style="font-weight: 400;">Sommer!</span></li>
+<li><a href="https://www.visitsealife.com/timmendorfer-strand/en/"><span style="font-weight: 400;">Sealife Timmendorfer Strand</span></a></li>
+<li><span style="font-weight: 400;">Erlebnisschwimmbad Ostseetherme</span></li>
+<li><a href="http://www.nintendo.com/games/detail/0nKucR8rpyfV9ktby3s-Kv1_UlMI5P5a"><span style="font-weight: 400;">Zelda Phantom Hourglass</span></a></li>
+<li><span style="font-weight: 400;">Weitere Zeldas</span></li>
+<li><span style="font-weight: 400;">Wii U Pro Controller</span></li>
+<li><a href="http://www.nintendo.com/games/detail/mini-mario-and-friends-amiibo-challenge-wii-u"><span style="font-weight: 400;">Mini Mario &amp; Friends: Amiibo Challenge</span></a></li>
+<li><a href="https://www.nintendo.co.uk/Games/Wii-U-download-software/amiibo-Touch-Play-Nintendo-Classics-Highlights-986009.html"><span style="font-weight: 400;">Amiibo Touch &amp; Play: Nintendo Classics Highlights</span></a></li>
+<li><span style="font-weight: 400;">Holger war Fußball gucken</span></li>
+<li><span style="font-weight: 400;">Verabschiedung</span></li>
+</ul>
+]]></content:encoded><psc:chapters xmlns:psc="http://podlove.org/simple-chapters" version="1.2">
+  <psc:chapter start="00:00:17.761" title="Dr. Pepper Cherry Vanilla"/>
+  <psc:chapter start="00:01:57.844" title="Vorsatzkontrolle"/>
+  <psc:chapter start="00:05:04.021" title="Verkostung: Up to the Sky"/>
+  <psc:chapter start="00:09:08.034" title="Folgen-URL: compendion.net/dirtyminutesleft/xxx"/>
+  <psc:chapter start="00:10:31.606" title="Holgers Apps"/>
+  <psc:chapter start="00:17:44.749" title="Arne war im Urlaub"/>
+  <psc:chapter start="00:18:38.142" title="Kartenspiel: Erz&#xE4;hl Mal Familienquiz"/>
+  <psc:chapter start="00:21:02.694" title="Sommer!"/>
+  <psc:chapter start="00:21:53.288" title="Sealife Timmendorfer Strand"/>
+  <psc:chapter start="00:23:07.891" title="Erlebnisschwimmbad Ostseetherme"/>
+  <psc:chapter start="00:23:43.003" title="Zelda Phantom Hourglass"/>
+  <psc:chapter start="00:29:41.664" title="Weitere Zeldas"/>
+  <psc:chapter start="00:31:03.620" title="Wii U Pro Controller"/>
+  <psc:chapter start="00:35:53.236" title="Mini Mario &amp; Friends: Amiibo Challenge"/>
+  <psc:chapter start="00:38:42.004" title="Amiibo Touch &amp; Play: Nintendo Classics Highlights"/>
+  <psc:chapter start="00:41:22.266" title="Holger war Fu&#xDF;ball gucken"/>
+  <psc:chapter start="00:46:15.468" title="Verabschiedung"/>
+</psc:chapters><atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=&amp;language=de_DE&amp;url=http%3A%2F%2Fcompendion.net%2Fdirtyminutesleft%2F160&amp;title=160+Dr.+Pepper+Erz%C3%A4hl+Mal+Amiibo+Urlaub&amp;description=Dr.+Pepper+Cherry+Vanilla%0D%0AVorsatzkontrolle%0D%0AVerkostung%3A+Up+to+the+Sky%0D%0AFolgen-URL%3A+compendion.net%2Fdirtyminutesleft%2Fxxx%0D%0AHolgers+Apps%0D%0AArne+war+im+Urlaub%0D%0AKartenspiel%3A+Erz%C3%A4hl+Mal+Familienquiz%0D%0ASommer%21%0D%0ASealife+Timmendorfer+Strand%0D%0AErlebnisschwimmbad+Ostseetherme%0D%0AZelda+Phantom+Hourglass%0D%0AWeitere+Zeldas%0D%0AWii+U+Pro+Controller%0D%0AMini+Mario+%26amp%3B+Friends%3A+Amiibo+Challenge%0D%0AAmiibo+Touch+%26amp%3B+Play%3A+Nintendo+Classics+Highlights%0D%0AHolger+war+Fu%C3%9Fball+gucken%0D%0AVerabschiedung" type="text/html" />	</item>
+		<item>
 		<title>159 Prokrastinationsprävention</title>
 		<link>http://compendion.net/dirtyminutesleft/159</link>
 		<pubDate>Sun, 01 May 2016 20:17:18 +0000</pubDate>
