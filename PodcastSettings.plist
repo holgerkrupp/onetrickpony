@@ -2,12 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>bigprogressbar</key>
-	<false/>
 	<key>feedurl</key>
 	<string>http://compendion.net/dirtyminutesleft/feed/m4a</string>
+	<key>cacheSize (MB)</key>
+	<integer>20</integer>
 	<key>UserAgent</key>
 	<string>Dirty Minutes Left App</string>
+	<key>bigprogressbar</key>
+	<false/>
 	<key>backgroundColor</key>
 	<string>FFFFFF</string>
 	<key>textcolor</key>

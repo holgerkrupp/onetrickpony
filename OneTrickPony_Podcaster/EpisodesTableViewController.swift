@@ -100,12 +100,11 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         //   self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
         
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(EpisodesTableViewController.longPress(_:)))
-        //self.view.addGestureRecognizer(longPressRecognizer)
         self.view.removeGestureRecognizer(longPressRecognizer)
         
     }
     
-    
+
     
     
     func autoFeedRefresh(){
@@ -348,6 +347,8 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                 NSLog("server feed same date or older")
             }
         }
+        NSLog("clean up")
+        cleanUpSpace()
     }
     
     
@@ -428,8 +429,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         completion(result: result)
     }
     
-    
-    
+   
     
     
     var data: NSMutableData = NSMutableData()
@@ -496,7 +496,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                 episodePubDate = data
             }else if eName == "lastBuildDate"{
                 lastfeeddate += data
-            }else if eName == "description"{ //might be different in different feeds
+            }else if eName == "content:encoded"{ //might be different in different feeds
                 episodeDescription += string // here I don't want the new line characters to be delted
             }
         }
@@ -751,13 +751,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         }
     }
     
-    /*
-     override func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
-     let cell = tableView.dequeueReusableCellWithIdentifier("EpisodeCell", forIndexPath: indexPath) as! EpisodeCell
-     cell.backgroundColor = getColorFromPodcastSettings("backgroundColor")
-     
-     }
-     */
+
     
     func updateCellForEpisode(episode: Episode){
         let cellRowToBeUpdated = episode.episodeIndex

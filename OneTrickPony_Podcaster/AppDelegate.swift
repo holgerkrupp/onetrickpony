@@ -24,9 +24,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var backgroundSessionCompletionHandler: (() -> Void)?
     var EpisodesTableViewController: EpisodesTableViewControllerDelegate?
+    var crashedLastTime : Bool! = true
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        if let crashed = getObjectForKeyFromPersistentStorrage("crash")  {
+            crashedLastTime = crashed as! Bool
+                if crashedLastTime == true {
+                    // clean up
+                    NSLog("We had a crash last time")
+                }
+        }
+        // save true to crash, it will be overwritten when the app will be terminated the correct way
+        crashedLastTime = true
+        setObjectForKeyToPersistentStorrage("crash", object: crashedLastTime)
+        
         
         // the Custom-Agent is set to identify the App within the Statistics of the podcast
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -49,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         
 
-            EpisodesTableViewController?.refreshfeed()
+          //  EpisodesTableViewController?.refreshfeed() // have to check if this is usefull
             NSLog("Background refresh started")
             let url = getObjectForKeyFromPodcastSettings("feedurl")  as! String
             EpisodesTableViewController?.checkFeedDateIsNew{
@@ -62,7 +75,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     NSLog("server feed same date or older")
                     completionHandler(UIBackgroundFetchResult.NoData)
                 }
-            } 
+            }
+        completionHandler(UIBackgroundFetchResult.NewData)
         
         
     }
@@ -109,7 +123,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        
+        crashedLastTime = false
+        setObjectForKeyToPersistentStorrage("crash", object: crashedLastTime)
     }
     
     override func remoteControlReceivedWithEvent(event: UIEvent?) {

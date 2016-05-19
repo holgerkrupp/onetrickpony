@@ -95,13 +95,16 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     @IBAction func infoButtonPressed(sender: UIButton){
-        if ShowNotesContainer.hidden == true {
+        let url = NSURL(string: episode.episodeLink)
+        openWithSafariVC(url!)
+        
+        /*if ShowNotesContainer.hidden == true {
             ShowNotesContainer.hidden = false
             infoButton.selected = true
         }else{
             ShowNotesContainer.hidden = true
             infoButton.selected = false
-        }
+        }*/
     }
     
     @IBAction func tapImage(recognizer:UITapGestureRecognizer) {

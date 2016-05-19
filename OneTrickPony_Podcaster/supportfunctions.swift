@@ -116,6 +116,72 @@ func dateOfFile(checkurl:String) -> NSDate? {
     }
 }
 
+
+func checkUsedDiskSpace() -> Int? {
+    let manager = NSFileManager.defaultManager()
+    let documentsDirectoryURL =  try! NSFileManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
+    
+    var bool: ObjCBool = false
+    if manager.fileExistsAtPath(documentsDirectoryURL.path!, isDirectory: &bool) {
+        if bool.boolValue {
+            print("url of files is \(documentsDirectoryURL)")
+            // lets get the folder files
+            let fileManager =  NSFileManager.defaultManager()
+            let files = try! fileManager.contentsOfDirectoryAtURL(documentsDirectoryURL, includingPropertiesForKeys: nil, options: [])
+            var folderFileSizeInBytes = 0
+            for file in files {
+                folderFileSizeInBytes +=  try! (fileManager.attributesOfItemAtPath(file.path!) as NSDictionary).fileSize().hashValue
+            }
+
+            return folderFileSizeInBytes
+        }
+    }
+    return nil
+}
+
+
+func getListOfFiles() -> [String]? {
+    let directory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+    let properties = [NSURLLocalizedNameKey, NSURLCreationDateKey, NSURLContentModificationDateKey, NSURLLocalizedTypeDescriptionKey]
+    if let urlArray = try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(directory,
+        includingPropertiesForKeys: properties, options:.SkipsHiddenFiles) {
+        
+        return urlArray.map { url -> (String, NSTimeInterval, NSURL) in
+            var lastModified : AnyObject?
+            _ = try? url.getResourceValue(&lastModified, forKey: NSURLContentModificationDateKey)
+                return (url.lastPathComponent!, lastModified?.timeIntervalSinceReferenceDate ?? 0, url)
+            }
+            .sort({ $0.1 < $1.1 }) // sort descending modification dates
+            .map { $0.0 } // extract file names
+        
+        
+    } else {
+        return nil
+    }
+}
+
+func cleanUpSpace(){
+    let UsedSpace = checkUsedDiskSpace()
+    let cacheSize = getObjectForKeyFromPodcastSettings("cacheSize (MB)") as! Int * 1024 * 1024 // convert from MB to Byte
+    
+    if (UsedSpace != nil){
+        // format it using NSByteCountFormatter to display it properly
+        let  byteCountFormatter =  NSByteCountFormatter()
+        byteCountFormatter.allowedUnits = .UseMB
+        byteCountFormatter.countStyle = .File
+        let folderSizeToDisplay = byteCountFormatter.stringFromByteCount(Int64(UsedSpace!))
+        let cacheSizeToDisplay = byteCountFormatter.stringFromByteCount(Int64(cacheSize))
+        NSLog("used space: \(folderSizeToDisplay) cache Size: \(cacheSizeToDisplay)")
+        
+        if UsedSpace > cacheSize {
+            NSLog("Need to delete files")
+            let files = getListOfFiles()
+            NSLog("Files in Folder: \(files)")
+        }
+        
+    }
+}
+
 func existsLocally(checkurl: String) -> (existlocal : Bool, localURL : String) {
     let manager = NSFileManager.defaultManager()
     let url: NSURL = NSURL(string: checkurl)!
