@@ -183,16 +183,16 @@ func cleanUpSpace(){
         let folderSizeToDisplay = byteCountFormatter.stringFromByteCount(Int64(UsedSpace!))
         let cacheSizeToDisplay = byteCountFormatter.stringFromByteCount(Int64(cacheSize))
         NSLog("used space: \(folderSizeToDisplay) cache Size: \(cacheSizeToDisplay)")
-        
+        let filter = ["jpg","png","xml"] // elements to be filtered out / not included
+        var files = filterFiles(getListOfFiles()!,filterList: filter)
+
+        if files?.count > 1 {  // delete only if there are more than one file in the filtered list
+
         while UsedSpace > cacheSize {
             NSLog("Need to delete files")
-            let filter = ["jpg","png","xml"] // elements to be filtered out / not included
-            var files = filterFiles(getListOfFiles()!,filterList: filter)
           //  NSLog("Files in Folder: \(files)")
             
-            
-            // delete first element in list
-            if files?.count > 1 { // delete only if there are more than one file in the filtered list
+            //files = filterFiles(getListOfFiles()!,filterList: filter)
                 let manager = NSFileManager.defaultManager()
                 do {
                     let filename = files![0].lastPathComponent
@@ -209,8 +209,10 @@ func cleanUpSpace(){
                     NSLog("no file to delete")
                     
                 }
-            }
             UsedSpace = checkUsedDiskSpace()
+            NSLog("new used space: \(byteCountFormatter.stringFromByteCount(Int64(UsedSpace!)))")
+            }
+            
             
         }
         
