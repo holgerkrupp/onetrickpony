@@ -333,10 +333,11 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
     
     func refreshfeed()
     {
+        NSLog("Feed refresh started")
         let now = NSDate()
         setObjectForKeyToPersistentStorrage("last feed refresh", object: now)
         let url = getObjectForKeyFromPodcastSettings("feedurl")  as! String
-        NSLog("pullto \(url)")
+        
         checkFeedDateIsNew {
             (result: Bool) in
             if result {
@@ -349,6 +350,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         }
         NSLog("clean up")
         cleanUpSpace()
+        self.tableView.reloadData()
     }
     
     

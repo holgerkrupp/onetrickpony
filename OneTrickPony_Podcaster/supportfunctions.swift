@@ -124,7 +124,6 @@ func checkUsedDiskSpace() -> Int? {
     var bool: ObjCBool = false
     if manager.fileExistsAtPath(documentsDirectoryURL.path!, isDirectory: &bool) {
         if bool.boolValue {
-            print("url of files is \(documentsDirectoryURL)")
             // lets get the folder files
             let fileManager =  NSFileManager.defaultManager()
             let files = try! fileManager.contentsOfDirectoryAtURL(documentsDirectoryURL, includingPropertiesForKeys: nil, options: [])
@@ -140,19 +139,19 @@ func checkUsedDiskSpace() -> Int? {
 }
 
 
-func getListOfFiles() -> [String]? {
+func getListOfFiles() -> [NSURL]? {
     let directory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
     let properties = [NSURLLocalizedNameKey, NSURLCreationDateKey, NSURLContentModificationDateKey, NSURLLocalizedTypeDescriptionKey]
     if let urlArray = try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(directory,
         includingPropertiesForKeys: properties, options:.SkipsHiddenFiles) {
         
-        return urlArray.map { url -> (String, NSTimeInterval, NSURL) in
+        return urlArray.map { url -> (NSURL, NSTimeInterval) in
             var lastModified : AnyObject?
             _ = try? url.getResourceValue(&lastModified, forKey: NSURLContentModificationDateKey)
-                return (url.lastPathComponent!, lastModified?.timeIntervalSinceReferenceDate ?? 0, url)
+                return (url, lastModified?.timeIntervalSinceReferenceDate ?? 0)
             }
-            .sort({ $0.1 < $1.1 }) // sort descending modification dates
-            .map { $0.0 } // extract file names
+            .sort({ $0.1 < $1.1 }) // sort modification dates
+            .map { $0.0 } // extract files
         
         
     } else {
@@ -160,8 +159,20 @@ func getListOfFiles() -> [String]? {
     }
 }
 
+
+func filterFiles(fileList: [NSURL], filterList: [String]) -> [NSURL]?{
+    var outputList = [NSURL]()
+    for item in fileList {
+        let fileextension = item.pathExtension! as String
+        if !filterList.contains(fileextension) {
+            outputList.append(item)
+        }
+    }
+    return outputList
+}
+
 func cleanUpSpace(){
-    let UsedSpace = checkUsedDiskSpace()
+    var UsedSpace = checkUsedDiskSpace()
     let cacheSize = getObjectForKeyFromPodcastSettings("cacheSize (MB)") as! Int * 1024 * 1024 // convert from MB to Byte
     
     if (UsedSpace != nil){
@@ -173,10 +184,34 @@ func cleanUpSpace(){
         let cacheSizeToDisplay = byteCountFormatter.stringFromByteCount(Int64(cacheSize))
         NSLog("used space: \(folderSizeToDisplay) cache Size: \(cacheSizeToDisplay)")
         
-        if UsedSpace > cacheSize {
+        while UsedSpace > cacheSize {
             NSLog("Need to delete files")
-            let files = getListOfFiles()
-            NSLog("Files in Folder: \(files)")
+            let filter = ["jpg","png","xml"] // elements to be filtered out / not included
+            var files = filterFiles(getListOfFiles()!,filterList: filter)
+          //  NSLog("Files in Folder: \(files)")
+            
+            
+            // delete first element in list
+            if files?.count > 1 { // delete only if there are more than one file in the filtered list
+                let manager = NSFileManager.defaultManager()
+                do {
+                    let filename = files![0].lastPathComponent
+                    
+                    let documentsDirectoryUrl =  NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+                    let localFeedFile = documentsDirectoryUrl + "/" + filename!
+                    
+                    
+                    NSLog("filename to be deleted: \(filename)")
+                    try manager.removeItemAtPath(localFeedFile)
+                    files?.removeFirst()
+                    NSLog("deleted")
+                }catch{
+                    NSLog("no file to delete")
+                    
+                }
+            }
+            UsedSpace = checkUsedDiskSpace()
+            
         }
         
     }

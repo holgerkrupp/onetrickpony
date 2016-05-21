@@ -105,13 +105,13 @@ class Episode {
     }
     
     func deleteEpisodeFromDocumentsFolder(){
-        let manager = NSFileManager.defaultManager()
         let existence = existsLocally(episodeFilename)
         if (existence.existlocal){
             let localFeedFile = existence.localURL
+            let manager = NSFileManager.defaultManager()
             do {
                 try manager.removeItemAtPath(localFeedFile)
-                NSLog("deleted")
+                NSLog("deleted \(localFeedFile)")
             }catch{
                 NSLog("no file to delete")
                 
