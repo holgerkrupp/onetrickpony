@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     var backgroundSessionCompletionHandler: (() -> Void)?
-    var EpisodesTableViewController: EpisodesTableViewControllerDelegate?
+   // var EpisodesTableViewController: EpisodesTableViewControllerDelegate?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -52,20 +52,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
             NSLog("Background refresh started")
-            EpisodesTableViewController?.refreshfeed()
+            EpisodesTableViewController().refreshfeed()
             let url = getObjectForKeyFromPodcastSettings("feedurl")  as! String
-            EpisodesTableViewController?.checkFeedDateIsNew{
+            EpisodesTableViewController().checkFeedDateIsNew{
                 (result: Bool) in
                 if result {
                     // the file on the server has been update, start downloading a new feed file
-                    self.EpisodesTableViewController?.downloadurl(url)
+                    EpisodesTableViewController().downloadurl(url)
                     completionHandler(UIBackgroundFetchResult.NewData)
                 }else{
                     NSLog("server feed same date or older")
                     completionHandler(UIBackgroundFetchResult.NoData)
                 }
             }
-        completionHandler(UIBackgroundFetchResult.Failed)
+       // completionHandler(UIBackgroundFetchResult.Failed)
         NSLog("Background refresh finished")
     }
     

@@ -89,10 +89,12 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
         self.tableView.separatorColor = getColorFromPodcastSettings("highlightColor")
         self.tableView.separatorInset = UIEdgeInsetsZero
         self.tableView.layoutMargins = UIEdgeInsetsZero
+        if (navigationController != nil){
         self.navigationController?.navigationBar.barTintColor = getColorFromPodcastSettings("backgroundColor")
         self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : getColorFromPodcastSettings("textcolor")]
         self.navigationController?.navigationBar.tintColor = getColorFromPodcastSettings("textcolor")
-        dispatch_async(dispatch_get_main_queue(), {
+        }
+            dispatch_async(dispatch_get_main_queue(), {
             self.autoFeedRefresh()
         })
         
@@ -403,7 +405,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                     // usually the date on the server should never be younger than the date saved
                     result = false
                     NSLog("\(savedfeeddate) (saved date) is younger than \(newfeeddate) - nothing to do but strange")
+                    if (self.refreshControl != nil){
                     self.refreshControl!.endRefreshing()
+                    }
                 }else if compareResult == NSComparisonResult.OrderedAscending{
                     // this is the normal behaviour when the feed has been updated
                     result = true
@@ -412,7 +416,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                     // this is the part when there has been no change on the feed since last check
                     result = false
                     print("same date")
+                    if (self.refreshControl != nil){
                     self.refreshControl!.endRefreshing()
+                    }
                 }
             }else{
                 result = true
@@ -424,7 +430,9 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
             showErrorMessage(NSLocalizedString("title.server.not.reachable", value:"Error",
                 comment: "shown when refreshing feed"), message: NSLocalizedString("message.server.not.reachable", value:"Server not reachable",
                     comment: "shown when refreshing feed"), viewController: self)
+            if (self.refreshControl != nil){
             self.refreshControl!.endRefreshing()
+            }
         }
         
         
@@ -923,7 +931,7 @@ class EpisodesTableViewController: UITableViewController, NSXMLParserDelegate {
                     dispatch_async(dispatch_get_main_queue(), {
                         self.tableView.reloadData()
                     })
-                    
+                    cleanUpSpace()
                     self.refreshControl?.endRefreshing()
                 }
             }
