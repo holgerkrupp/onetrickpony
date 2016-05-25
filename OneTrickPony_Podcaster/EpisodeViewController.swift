@@ -464,7 +464,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         
         alert.addAction(cancelAction)
-        alert.view.tintColor = getColorFromPodcastSettings("backgroundColor")
+        alert.view.tintColor = getColorFromPodcastSettings("playControlColor")
        // alert.view.backgroundColor = getColorFromPodcastSettings("backgroundColor")
         presentViewController(alert, animated: true, completion:nil) // 6
         NSLog("\(readSleepTimer())")
