@@ -16,7 +16,7 @@ class Episode {
     var episodeLink:        String = String()
     var episodeUrl:         String = String()
     var episodeDuration:    String? = String()
-    var episodePubDate:     NSDate = NSDate()
+    var episodePubDate:     Date = Date()
     var episodeFilename:    String = String()
     var episodeFilesize:    Int = Int()
     var episodeImage:       String = String()
@@ -32,10 +32,10 @@ class Episode {
      
     
      
-     func getChapterForSeconds(progress: Double) -> Chapter? {
+     func getChapterForSeconds(_ progress: Double) -> Chapter? {
   
         
-     for (chapter) in episodeChapter.reverse() {
+     for (chapter) in episodeChapter.reversed() {
         if (stringtodouble(chapter.chapterStart) < progress) {
             return chapter
         }
@@ -44,7 +44,7 @@ class Episode {
     }
     
     
-    func getprogressinCMTime(progress: Double) -> CMTime {
+    func getprogressinCMTime(_ progress: Double) -> CMTime {
         let seconds = progress //* stringtodouble(episodeDuration)
         let time = CMTimeMake(Int64(seconds), 1)
         return time
@@ -69,7 +69,7 @@ class Episode {
         return CMTimeGetSeconds(getDurationinCMTime())
     }
     
-    func setDuration(duration: CMTime) {
+    func setDuration(_ duration: CMTime) {
         let seconds = CMTimeGetSeconds(duration)
         episodeDuration = secondsToHoursMinutesSeconds(seconds)
     }
@@ -83,20 +83,20 @@ class Episode {
         return remainingtime
     }
     
-    func saveplayed(playtime: Double){
+    func saveplayed(_ playtime: Double){
         //in seconds
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(episodeTitle, forKey: "LastEpisodePlayed")
+        let defaults = UserDefaults.standard
+        defaults.set(episodeTitle, forKey: "LastEpisodePlayed")
         defaults.setValue(playtime, forKey: episodeTitle)
         defaults.synchronize()
     }
     
     func readplayed() -> CMTime{
         
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard
         var playedtime:CMTime = CMTimeMakeWithSeconds(0,Int32(0))
         
-        if  let episodeplayedtime = defaults.valueForKey(episodeTitle){
+        if  let episodeplayedtime = defaults.value(forKey: episodeTitle){
             playedtime = DoubleToCMTime(episodeplayedtime as! Double)
         } else{
             playedtime = CMTimeMake(0, 1)
@@ -108,9 +108,9 @@ class Episode {
         let existence = existsLocally(episodeFilename)
         if (existence.existlocal){
             let localFeedFile = existence.localURL
-            let manager = NSFileManager.defaultManager()
+            let manager = FileManager.default
             do {
-                try manager.removeItemAtPath(localFeedFile)
+                try manager.removeItem(atPath: localFeedFile)
                 NSLog("deleted \(localFeedFile)")
             }catch{
                 NSLog("no file to delete")
@@ -122,7 +122,7 @@ class Episode {
     
 }
 
-func DoubleToCMTime(seconds: Double) -> CMTime{
+func DoubleToCMTime(_ seconds: Double) -> CMTime{
     let secondsInt = Int64(seconds)
     return CMTimeMake(secondsInt ,1)
 }
@@ -131,7 +131,7 @@ func DoubleToCMTime(seconds: Double) -> CMTime{
 
 
 
-func getEpisodeImage(episode: Episode, size:CGSize?=nil) -> UIImage{
+func getEpisodeImage(_ episode: Episode, size:CGSize?=nil) -> UIImage{
     
     var episodePicture : UIImage
     episodePicture = UIImage(named: "StandardCover")!
@@ -139,7 +139,7 @@ func getEpisodeImage(episode: Episode, size:CGSize?=nil) -> UIImage{
         let existence = existsLocally(episode.episodeImage)
         if (existence.existlocal){
             do {
-                let attr : NSDictionary? = try NSFileManager.defaultManager().attributesOfItemAtPath(existence.localURL)
+                let attr : NSDictionary? = try FileManager.default.attributesOfItem(atPath: existence.localURL) as NSDictionary?
                 if let _attr = attr {
                     let fileSize = _attr.fileSize();
                     if fileSize > 10 {
@@ -159,29 +159,29 @@ func getEpisodeImage(episode: Episode, size:CGSize?=nil) -> UIImage{
         let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
         
         UIGraphicsBeginImageContextWithOptions(size!, !hasAlpha, scale)
-        episodePicture.drawInRect(CGRect(origin: CGPointZero, size: size!))
+        episodePicture.draw(in: CGRect(origin: CGPoint.zero, size: size!))
         
         let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        episodePicture = scaledImage
+        episodePicture = scaledImage!
     }
    // NSLog("EpisodePicture size: \(episodePicture.size) (\(episode.episodeTitle))")
     return episodePicture
 }
 
 
-func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
-    let rect = CGRectMake(0, 0, size.width, size.height)
+func getImageWithColor(_ color: UIColor, size: CGSize) -> UIImage {
+    let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
     UIGraphicsBeginImageContextWithOptions(size, false, 0)
     color.setFill()
     UIRectFill(rect)
-    let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+    let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
     UIGraphicsEndImageContext()
     return image
 }
 
-func stringtodouble(input :String) -> Double{
-    let timeArray = input.componentsSeparatedByString(":")
+func stringtodouble(_ input :String) -> Double{
+    let timeArray = input.components(separatedBy: ":")
     var seconds = 0.0
     
     for element in timeArray{
@@ -191,7 +191,7 @@ func stringtodouble(input :String) -> Double{
     return seconds
 }
 
-func secondsToHoursMinutesSeconds (seconds : Double) -> (String) {
+func secondsToHoursMinutesSeconds (_ seconds : Double) -> (String) {
     let (hr,  minf) = modf (seconds / 3600)
     let (min, secf) = modf (60 * minf)
     let rh = hr

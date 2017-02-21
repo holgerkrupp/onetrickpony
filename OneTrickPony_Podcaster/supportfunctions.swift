@@ -8,45 +8,69 @@
 
 import Foundation
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
 
-func getObjectForKeyFromPersistentStorrage(key:String) -> AnyObject?{
-    if let object = NSUserDefaults.standardUserDefaults().objectForKey(key){
-        return object
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
+
+func getObjectForKeyFromPersistentStorrage(_ key:String) -> Any?{
+    if let object = UserDefaults.standard.object(forKey: key){
+        return object as AnyObject?
     }else{
         return nil
     }
 }
 
-func setObjectForKeyToPersistentStorrage(key:String, object:AnyObject){
-    NSUserDefaults.standardUserDefaults().setObject(object, forKey: key)
+func setObjectForKeyToPersistentStorrage(_ key:String, object:Any){
+    UserDefaults.standard.set(object, forKey: key)
 }
 
 func removePersistentStorrage(){
-    let appdomain = NSBundle.mainBundle().bundleIdentifier
-    NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appdomain!)
+    let appdomain = Bundle.main.bundleIdentifier
+    UserDefaults.standard.removePersistentDomain(forName: appdomain!)
 }
 
-func getObjectForKeyFromPodcastSettings(key:String) -> AnyObject{
-    if let path = NSBundle.mainBundle().pathForResource("PodcastSettings", ofType: "plist") {
+func getObjectForKeyFromPodcastSettings(_ key:String) -> Any{
+    if let path = Bundle.main.path(forResource: "PodcastSettings", ofType: "plist") {
         let myDict = NSDictionary(contentsOfFile: path)
 
-        return myDict!.objectForKey(key)!
+        return myDict!.object(forKey: key)! as AnyObject
     }else{
 
-        return "plist error"
+        return "plist error" as AnyObject
     }
 }
 
 
-func getColorFromPodcastSettings(key: String) -> UIColor {
+func getColorFromPodcastSettings(_ key: String) -> UIColor {
     var color:UIColor
     let PodcastColor = getObjectForKeyFromPodcastSettings(key)
     if let colorComponents = PodcastColor as? NSDictionary{
         color = UIColor(
-        red: colorComponents.objectForKey("red") as! CGFloat,
-        green: colorComponents.objectForKey("green") as! CGFloat,
-        blue: colorComponents.objectForKey("blue") as! CGFloat,
-        alpha: colorComponents.objectForKey("alpha") as! CGFloat)
+        red: colorComponents.object(forKey: "red") as! CGFloat,
+        green: colorComponents.object(forKey: "green") as! CGFloat,
+        blue: colorComponents.object(forKey: "blue") as! CGFloat,
+        alpha: colorComponents.object(forKey: "alpha") as! CGFloat)
        // return color
     }else{
         let colorcode = UInt32(PodcastColor as! String, radix: 16)
@@ -57,26 +81,26 @@ func getColorFromPodcastSettings(key: String) -> UIColor {
 }
 
 
-func showErrorMessage(title: String, message: String, viewController : UIViewController){
-    let refreshAlert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+func showErrorMessage(_ title: String, message: String, viewController : UIViewController){
+    let refreshAlert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
     
-    refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction!) in
+    refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
        // NSLog("Handle Ok logic here")
     }))
-    viewController.presentViewController(refreshAlert, animated: true, completion: nil)
+    viewController.present(refreshAlert, animated: true, completion: nil)
 }
 
 
 
-func getHeaderFromUrl(inputurl:String,headerfield:String) -> String {
-    let url = NSURL(string: inputurl)!
-    let request = NSMutableURLRequest(URL: url)
-    request.HTTPMethod = "HEAD"
+func getHeaderFromUrl(_ inputurl:String,headerfield:String) -> String {
+    let url = URL(string: inputurl)!
+    let request = NSMutableURLRequest(url: url)
+    request.httpMethod = "HEAD"
     var header = String()
-    var response : NSURLResponse?
+    var response : URLResponse?
     do{
-        try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
-        if let httpResp: NSHTTPURLResponse = response as? NSHTTPURLResponse {
+        try NSURLConnection.sendSynchronousRequest(request as URLRequest, returning: &response)
+        if let httpResp: HTTPURLResponse = response as? HTTPURLResponse {
             if let headercontent = httpResp.allHeaderFields[headerfield]{
                 
                 header = headercontent as! String
@@ -88,27 +112,27 @@ func getHeaderFromUrl(inputurl:String,headerfield:String) -> String {
     return header
 }
 
-func dateStringToNSDate(date:String,format:String="EEE, dd MMM yyyy HH:mm:ss z") -> NSDate?{
-    let locale = NSLocale(localeIdentifier: "en_US_POSIX")
-    let dateFormatter = NSDateFormatter()
+func dateStringToNSDate(_ date:String,format:String="EEE, dd MMM yyyy HH:mm:ss z") -> Date?{
+    let locale = Locale(identifier: "en_US_POSIX")
+    let dateFormatter = DateFormatter()
     dateFormatter.locale = locale
     dateFormatter.dateFormat = format
-    if let formatedDate = dateFormatter.dateFromString(date) {
+    if let formatedDate = dateFormatter.date(from: date) {
         return formatedDate
     }
     return nil
 }
 
-func dateOfFile(checkurl:String) -> NSDate? {
-    let manager = NSFileManager.defaultManager()
-    let url: NSURL = NSURL(string: checkurl)!
-    let documentsDirectoryUrl =  NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-    let fileName = url.lastPathComponent! as String
+func dateOfFile(_ checkurl:String) -> Date? {
+    let manager = FileManager.default
+    let url: URL = URL(string: checkurl)!
+    let documentsDirectoryUrl =  NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+    let fileName = url.lastPathComponent as String
     let localFeedFile = documentsDirectoryUrl + "/" + fileName
     
     do {
-        let fileAttributes = try manager.attributesOfItemAtPath(localFeedFile)
-        let date = fileAttributes[NSFileModificationDate] as! NSDate
+        let fileAttributes = try manager.attributesOfItem(atPath: localFeedFile)
+        let date = fileAttributes[FileAttributeKey.modificationDate] as! Date
         return date
     } catch {
         print("Error: \(error)")
@@ -118,18 +142,18 @@ func dateOfFile(checkurl:String) -> NSDate? {
 
 
 func checkUsedDiskSpace() -> Int? {
-    let manager = NSFileManager.defaultManager()
-    let documentsDirectoryURL =  try! NSFileManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
+    let manager = FileManager.default
+    let documentsDirectoryURL =  try! FileManager().url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
     
     var bool: ObjCBool = false
-    if manager.fileExistsAtPath(documentsDirectoryURL.path!, isDirectory: &bool) {
+    if manager.fileExists(atPath: documentsDirectoryURL.path, isDirectory: &bool) {
         if bool.boolValue {
             // lets get the folder files
-            let fileManager =  NSFileManager.defaultManager()
-            let files = try! fileManager.contentsOfDirectoryAtURL(documentsDirectoryURL, includingPropertiesForKeys: nil, options: [])
+            let fileManager =  FileManager.default
+            let files = try! fileManager.contentsOfDirectory(at: documentsDirectoryURL, includingPropertiesForKeys: nil, options: [])
             var folderFileSizeInBytes = 0
             for file in files {
-                folderFileSizeInBytes +=  try! (fileManager.attributesOfItemAtPath(file.path!) as NSDictionary).fileSize().hashValue
+                folderFileSizeInBytes +=  try! (fileManager.attributesOfItem(atPath: file.path) as NSDictionary).fileSize().hashValue
             }
 
             return folderFileSizeInBytes
@@ -139,18 +163,18 @@ func checkUsedDiskSpace() -> Int? {
 }
 
 
-func getListOfFiles() -> [NSURL]? {
-    let directory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
-    let properties = [NSURLLocalizedNameKey, NSURLCreationDateKey, NSURLContentModificationDateKey, NSURLLocalizedTypeDescriptionKey]
-    if let urlArray = try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(directory,
-        includingPropertiesForKeys: properties, options:.SkipsHiddenFiles) {
+func getListOfFiles() -> [URL]? {
+    let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    let properties = [URLResourceKey.localizedNameKey, URLResourceKey.creationDateKey, URLResourceKey.contentModificationDateKey, URLResourceKey.localizedTypeDescriptionKey]
+    if let urlArray = try? FileManager.default.contentsOfDirectory(at: directory,
+        includingPropertiesForKeys: properties, options:.skipsHiddenFiles) {
         
-        return urlArray.map { url -> (NSURL, NSTimeInterval) in
+        return urlArray.map { url -> (URL, TimeInterval) in
             var lastModified : AnyObject?
-            _ = try? url.getResourceValue(&lastModified, forKey: NSURLContentModificationDateKey)
+            _ = try? (url as NSURL).getResourceValue(&lastModified, forKey: URLResourceKey.contentModificationDateKey)
                 return (url, lastModified?.timeIntervalSinceReferenceDate ?? 0)
             }
-            .sort({ $0.1 < $1.1 }) // sort modification dates
+            .sorted(by: { $0.1 < $1.1 }) // sort modification dates
             .map { $0.0 } // extract files
         
         
@@ -160,10 +184,10 @@ func getListOfFiles() -> [NSURL]? {
 }
 
 
-func filterFiles(fileList: [NSURL], filterList: [String]) -> [NSURL]?{
-    var outputList = [NSURL]()
+func filterFiles(_ fileList: [URL], filterList: [String]) -> [URL]?{
+    var outputList = [URL]()
     for item in fileList {
-        let fileextension = item.pathExtension! as String
+        let fileextension = item.pathExtension as String
         if !filterList.contains(fileextension) {
             outputList.append(item)
         }
@@ -177,11 +201,11 @@ func cleanUpSpace(){
     
     if (UsedSpace != nil){
         // format it using NSByteCountFormatter to display it properly
-        let  byteCountFormatter =  NSByteCountFormatter()
-        byteCountFormatter.allowedUnits = .UseMB
-        byteCountFormatter.countStyle = .File
-        let folderSizeToDisplay = byteCountFormatter.stringFromByteCount(Int64(UsedSpace!))
-        let cacheSizeToDisplay = byteCountFormatter.stringFromByteCount(Int64(cacheSize))
+        let  byteCountFormatter =  ByteCountFormatter()
+        byteCountFormatter.allowedUnits = .useMB
+        byteCountFormatter.countStyle = .file
+        let folderSizeToDisplay = byteCountFormatter.string(fromByteCount: Int64(UsedSpace!))
+        let cacheSizeToDisplay = byteCountFormatter.string(fromByteCount: Int64(cacheSize))
         NSLog("used space: \(folderSizeToDisplay) cache Size: \(cacheSizeToDisplay)")
         let filter = ["jpg","png","xml"] // elements to be filtered out / not included
         var files = filterFiles(getListOfFiles()!,filterList: filter)
@@ -193,16 +217,16 @@ func cleanUpSpace(){
           //  NSLog("Files in Folder: \(files)")
             
             //files = filterFiles(getListOfFiles()!,filterList: filter)
-                let manager = NSFileManager.defaultManager()
+                let manager = FileManager.default
                 do {
                     let filename = files![0].lastPathComponent
                     
-                    let documentsDirectoryUrl =  NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-                    let localFeedFile = documentsDirectoryUrl + "/" + filename!
+                    let documentsDirectoryUrl =  NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+                    let localFeedFile = documentsDirectoryUrl + "/" + filename
                     
                     
                     NSLog("filename to be deleted: \(filename)")
-                    try manager.removeItemAtPath(localFeedFile)
+                    try manager.removeItem(atPath: localFeedFile)
                     files?.removeFirst()
                     NSLog("deleted")
                 }catch{
@@ -210,7 +234,7 @@ func cleanUpSpace(){
                     
                 }
             UsedSpace = checkUsedDiskSpace()
-            NSLog("new used space: \(byteCountFormatter.stringFromByteCount(Int64(UsedSpace!)))")
+            NSLog("new used space: \(byteCountFormatter.string(fromByteCount: Int64(UsedSpace!)))")
             }
             
             
@@ -219,14 +243,14 @@ func cleanUpSpace(){
     }
 }
 
-func existsLocally(checkurl: String) -> (existlocal : Bool, localURL : String) {
-    let manager = NSFileManager.defaultManager()
-    let url: NSURL = NSURL(string: checkurl)!
-    let documentsDirectoryUrl =  NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-    let fileName = url.lastPathComponent! as String
+func existsLocally(_ checkurl: String) -> (existlocal : Bool, localURL : String) {
+    let manager = FileManager.default
+    let url: URL = URL(string: checkurl)!
+    let documentsDirectoryUrl =  NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+    let fileName = url.lastPathComponent as String
     let localFeedFile = documentsDirectoryUrl + "/" + fileName
     
-    if manager.fileExistsAtPath(localFeedFile){
+    if manager.fileExists(atPath: localFeedFile){
         return (true, localFeedFile)
     } else {
         return (false, localFeedFile)

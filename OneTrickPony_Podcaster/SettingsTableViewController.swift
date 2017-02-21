@@ -15,7 +15,7 @@ class SettingsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      //   NSLog(settings.count)
-        self.navigationController!.navigationBarHidden = false;
+        self.navigationController!.isNavigationBarHidden = false;
     }
     
     

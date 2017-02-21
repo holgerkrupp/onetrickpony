@@ -18,7 +18,7 @@ extension Int {
 
 
 
-    func createPlayImageWithColor(color: UIColor, size: CGSize, filled: Bool) -> UIImage {
+    func createPlayImageWithColor(_ color: UIColor, size: CGSize, filled: Bool) -> UIImage {
         // Setup our context
         let bounds = CGRect(origin: CGPoint.zero, size: size)
         let opaque = false
@@ -27,30 +27,30 @@ extension Int {
         let context = UIGraphicsGetCurrentContext()
         
         // Setup complete, do drawing here
-        CGContextSetLineWidth(context, 2.0)
-        CGContextSetStrokeColorWithColor(context, color.CGColor)
-        CGContextSetFillColorWithColor(context, color.CGColor)
+        context?.setLineWidth(2.0)
+        context?.setStrokeColor(color.cgColor)
+        context?.setFillColor(color.cgColor)
         
         
         // draw the triangle for the play button
-        CGContextBeginPath(context)
-        CGContextMoveToPoint(context, CGRectGetMinX(bounds), CGRectGetMinY(bounds))
-        CGContextAddLineToPoint(context, CGRectGetMaxX(bounds), bounds.height/2)
-        CGContextAddLineToPoint(context, CGRectGetMinX(bounds), CGRectGetMaxY(bounds))
-        CGContextAddLineToPoint(context, CGRectGetMinX(bounds), CGRectGetMinY(bounds))
-        CGContextClosePath(context)
+        context?.beginPath()
+        context?.move(to: CGPoint(x: bounds.minX, y: bounds.minY))
+        context?.addLine(to: CGPoint(x: bounds.maxX, y: bounds.height/2))
+        context?.addLine(to: CGPoint(x: bounds.minX, y: bounds.maxY))
+        context?.addLine(to: CGPoint(x: bounds.minX, y: bounds.minY))
+        context?.closePath()
         
         if filled {
-            CGContextFillPath(context)
+            context?.fillPath()
         }
-        CGContextStrokePath(context)
+        context?.strokePath()
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return image
+        return image!
     }
 
-func createPauseImageWithColor(color: UIColor, size: CGSize, filled: Bool) -> UIImage {
+func createPauseImageWithColor(_ color: UIColor, size: CGSize, filled: Bool) -> UIImage {
     // Setup our context
     let bounds = CGRect(origin: CGPoint.zero, size: size)
     let opaque = false
@@ -59,43 +59,43 @@ func createPauseImageWithColor(color: UIColor, size: CGSize, filled: Bool) -> UI
     let context = UIGraphicsGetCurrentContext()
     
     // Setup complete, do drawing here
-    CGContextSetLineWidth(context, 2.0)
-    CGContextSetStrokeColorWithColor(context, color.CGColor)
-    CGContextSetFillColorWithColor(context, color.CGColor)
+    context?.setLineWidth(2.0)
+    context?.setStrokeColor(color.cgColor)
+    context?.setFillColor(color.cgColor)
     
     
     // draw the left bar for the pause button
-    CGContextBeginPath(context)
-    CGContextMoveToPoint(context,    CGRectGetMinX(bounds), CGRectGetMinY(bounds))
-    CGContextAddLineToPoint(context, CGRectGetMinX(bounds), CGRectGetMaxY(bounds))
-    CGContextAddLineToPoint(context, bounds.width/3, CGRectGetMaxY(bounds))
-    CGContextAddLineToPoint(context, bounds.width/3, CGRectGetMinY(bounds))
-    CGContextAddLineToPoint(context, CGRectGetMinX(bounds), CGRectGetMinY(bounds))
+    context?.beginPath()
+    context?.move(to: CGPoint(x: bounds.minX, y: bounds.minY))
+    context?.addLine(to: CGPoint(x: bounds.minX, y: bounds.maxY))
+    context?.addLine(to: CGPoint(x: bounds.width/3, y: bounds.maxY))
+    context?.addLine(to: CGPoint(x: bounds.width/3, y: bounds.minY))
+    context?.addLine(to: CGPoint(x: bounds.minX, y: bounds.minY))
     
     
     // draw the right bar for the pause button
-    CGContextMoveToPoint(context,    bounds.width/3*2, CGRectGetMinY(bounds))
-    CGContextAddLineToPoint(context, bounds.width/3*2, CGRectGetMaxY(bounds))
-    CGContextAddLineToPoint(context,  CGRectGetMaxX(bounds), CGRectGetMaxY(bounds))
-    CGContextAddLineToPoint(context, CGRectGetMaxX(bounds), CGRectGetMinY(bounds))
-    CGContextAddLineToPoint(context, bounds.width/3*2, CGRectGetMinY(bounds))
-    CGContextClosePath(context)
+    context?.move(to: CGPoint(x: bounds.width/3*2, y: bounds.minY))
+    context?.addLine(to: CGPoint(x: bounds.width/3*2, y: bounds.maxY))
+    context?.addLine(to: CGPoint(x: bounds.maxX, y: bounds.maxY))
+    context?.addLine(to: CGPoint(x: bounds.maxX, y: bounds.minY))
+    context?.addLine(to: CGPoint(x: bounds.width/3*2, y: bounds.minY))
+    context?.closePath()
     
     if filled {
-        CGContextFillPath(context)
+        context?.fillPath()
     }
-    CGContextStrokePath(context)
+    context?.strokePath()
     
     let image = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
-    return image
+    return image!
 }
 
 
 
 
 
-func createSkipWithColor(color: UIColor, width:CGFloat, size: CGSize, filled: Bool, forward: Bool, label: String) -> UIImage {
+func createSkipWithColor(_ color: UIColor, width:CGFloat, size: CGSize, filled: Bool, forward: Bool, label: String) -> UIImage {
     // Setup our context
     let bounds = CGRect(origin: CGPoint.zero, size: size)
     let opaque = false
@@ -132,67 +132,67 @@ func createSkipWithColor(color: UIColor, width:CGFloat, size: CGSize, filled: Bo
     
     
     // Setup complete, do drawing here
-    CGContextSetLineWidth(context, width)
-    CGContextSetStrokeColorWithColor(context, color.CGColor)
-    CGContextSetFillColorWithColor(context, color.CGColor)
+    context?.setLineWidth(width)
+    context?.setStrokeColor(color.cgColor)
+    context?.setFillColor(color.cgColor)
     
     
-    CGContextBeginPath(context)
+    context?.beginPath()
     
     // north - arrows
     
-    CGContextMoveToPoint(context,       circleCenterX, CGRectGetMinY(bounds))
-    CGContextAddLineToPoint(context,    circleCenterX, CGRectGetMinY(bounds)+arrowHeight)
-    CGContextAddLineToPoint(context,    circleCenterX-arrowHeight/2*arrowRotator, CGRectGetMinY(bounds)+arrowHeight/2)
-    CGContextAddLineToPoint(context,    circleCenterX, CGRectGetMinY(bounds))
+    context?.move(to: CGPoint(x: circleCenterX, y: bounds.minY))
+    context?.addLine(to: CGPoint(x: circleCenterX, y: bounds.minY+arrowHeight))
+    context?.addLine(to: CGPoint(x: circleCenterX-arrowHeight/2*arrowRotator, y: bounds.minY+arrowHeight/2))
+    context?.addLine(to: CGPoint(x: circleCenterX, y: bounds.minY))
     
-    CGContextMoveToPoint(context,       circleCenterX-arrowHeight/2*arrowRotator-1*arrowRotator, CGRectGetMinY(bounds))
-    CGContextAddLineToPoint(context,    circleCenterX-arrowHeight/2*arrowRotator-1*arrowRotator, CGRectGetMinY(bounds)+arrowHeight)
-    CGContextAddLineToPoint(context,    circleCenterX-arrowHeight/2*arrowRotator-1*arrowRotator-arrowHeight/2*arrowRotator, CGRectGetMinY(bounds)+arrowHeight/2)
-    CGContextAddLineToPoint(context,    circleCenterX-arrowHeight/2*arrowRotator-1*arrowRotator, CGRectGetMinY(bounds))
+    context?.move(to: CGPoint(x: circleCenterX-arrowHeight/2*arrowRotator-1*arrowRotator, y: bounds.minY))
+    context?.addLine(to: CGPoint(x: circleCenterX-arrowHeight/2*arrowRotator-1*arrowRotator, y: bounds.minY+arrowHeight))
+    context?.addLine(to: CGPoint(x: circleCenterX-arrowHeight/2*arrowRotator-1*arrowRotator-arrowHeight/2*arrowRotator, y: bounds.minY+arrowHeight/2))
+    context?.addLine(to: CGPoint(x: circleCenterX-arrowHeight/2*arrowRotator-1*arrowRotator, y: bounds.minY))
     if filled {
-        CGContextFillPath(context)
+        context?.fillPath()
     }
     
     CGContextAddArc(context, circleCenterX, circleCenterY, radius, angleStart.degreesToRadians, angleStop.degreesToRadians, clockwise)
     
     // west
-    CGContextMoveToPoint(context,    circleCenterX-radius-width/2, circleCenterY)
-    CGContextAddLineToPoint(context,    circleCenterX-radius+clockIndexSize, circleCenterY)
+    context?.move(to: CGPoint(x: circleCenterX-radius-width/2, y: circleCenterY))
+    context?.addLine(to: CGPoint(x: circleCenterX-radius+clockIndexSize, y: circleCenterY))
     // east
-    CGContextMoveToPoint(context,    circleCenterX+radius+width/2, circleCenterY)
-    CGContextAddLineToPoint(context,    circleCenterX+radius-clockIndexSize, circleCenterY)
+    context?.move(to: CGPoint(x: circleCenterX+radius+width/2, y: circleCenterY))
+    context?.addLine(to: CGPoint(x: circleCenterX+radius-clockIndexSize, y: circleCenterY))
     // south
-    CGContextMoveToPoint(context,    circleCenterX, circleCenterY+radius+width/2)
-    CGContextAddLineToPoint(context,    circleCenterX, circleCenterY+radius-clockIndexSize)
+    context?.move(to: CGPoint(x: circleCenterX, y: circleCenterY+radius+width/2))
+    context?.addLine(to: CGPoint(x: circleCenterX, y: circleCenterY+radius-clockIndexSize))
     
-    CGContextStrokePath(context)
+    context?.strokePath()
     
     // flip coordinate system for text
-    CGContextTranslateCTM(context, 0, bounds.size.height);
-    CGContextScaleCTM(context, 1.0, -1.0);
+    context?.translateBy(x: 0, y: bounds.size.height);
+    context?.scaleBy(x: 1.0, y: -1.0);
     
     // add the text
     let aFont = UIFont(name: "Helvetica Neue", size: radius)
-    let attr:CFDictionaryRef = [NSFontAttributeName:aFont!,NSForegroundColorAttributeName:color]
-    let text = CFAttributedStringCreate(nil, label, attr)
-    let line = CTLineCreateWithAttributedString(text)
-    let Linebounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.UseOpticalBounds)
+    let attr:CFDictionary = [NSFontAttributeName:aFont!,NSForegroundColorAttributeName:color]
+    let text = CFAttributedStringCreate(nil, label as CFString!, attr)
+    let line = CTLineCreateWithAttributedString(text!)
+    let Linebounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.useOpticalBounds)
     
     let xn = circleCenterX - Linebounds.width/2
     let yn = circleCenterY - Linebounds.height/2+width
     CGContextSetTextPosition(context, xn, yn)
     
     
-    CGContextSetTextDrawingMode(context, CGTextDrawingMode.Fill)
+    context?.setTextDrawingMode(CGTextDrawingMode.fill)
     CTLineDraw(line, context!)
     
     let image = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
-    return image
+    return image!
 }
 
-func createCircleWithCross(color: UIColor, width:CGFloat, size: CGSize, filled: Bool) -> UIImage {
+func createCircleWithCross(_ color: UIColor, width:CGFloat, size: CGSize, filled: Bool) -> UIImage {
     // Setup our context
     let bounds = CGRect(origin: CGPoint.zero, size: size)
     let opaque = false
@@ -216,34 +216,34 @@ func createCircleWithCross(color: UIColor, width:CGFloat, size: CGSize, filled: 
     let crossY = (pictureHeight - Xheight)/2
     let crossX = (pictureWidth - Xwidth)/2
     
-    CGContextSetLineWidth(context, width)
-    CGContextSetStrokeColorWithColor(context, color.CGColor)
-    CGContextSetFillColorWithColor(context, color.CGColor)
+    context?.setLineWidth(width)
+    context?.setStrokeColor(color.cgColor)
+    context?.setFillColor(color.cgColor)
     
     
-    CGContextBeginPath(context)
+    context?.beginPath()
     CGContextAddArc(context, circleCenterX, circleCenterY, radius, 0.degreesToRadians, 360.degreesToRadians, 1)
     
-    CGContextMoveToPoint(context, crossX, crossY)
-    CGContextAddLineToPoint(context, crossX+Xwidth, crossY+Xheight)
+    context?.move(to: CGPoint(x: crossX, y: crossY))
+    context?.addLine(to: CGPoint(x: crossX+Xwidth, y: crossY+Xheight))
     
-    CGContextMoveToPoint(context, crossX+Xwidth, crossY)
-    CGContextAddLineToPoint(context, crossX, crossY+Xheight)
+    context?.move(to: CGPoint(x: crossX+Xwidth, y: crossY))
+    context?.addLine(to: CGPoint(x: crossX, y: crossY+Xheight))
     
     
     if filled {
-        CGContextFillPath(context)
+        context?.fillPath()
     }
-    CGContextStrokePath(context)
+    context?.strokePath()
     
     
     let image = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
-    return image
+    return image!
     
 }
 
-func createCircleWithPause(color: UIColor, width:CGFloat, size: CGSize, filled: Bool) -> UIImage {
+func createCircleWithPause(_ color: UIColor, width:CGFloat, size: CGSize, filled: Bool) -> UIImage {
     // Setup our context
     let bounds = CGRect(origin: CGPoint.zero, size: size)
     let opaque = false
@@ -262,33 +262,33 @@ func createCircleWithPause(color: UIColor, width:CGFloat, size: CGSize, filled: 
     
     let x = sqrt(2*radius) + width //+radius
     
-    CGContextSetLineWidth(context, width)
-    CGContextSetStrokeColorWithColor(context, color.CGColor)
-    CGContextSetFillColorWithColor(context, color.CGColor)
+    context?.setLineWidth(width)
+    context?.setStrokeColor(color.cgColor)
+    context?.setFillColor(color.cgColor)
     
     
-    CGContextBeginPath(context)
+    context?.beginPath()
     CGContextAddArc(context, circleCenterX, circleCenterY, radius, 0.degreesToRadians, 360.degreesToRadians, 1)
     
-    let pause = createPauseImageWithColor(color, size: size, filled: filled).CGImage
+    let pause = createPauseImageWithColor(color, size: size, filled: filled).cgImage
     let pauseWidth = pictureWidth - 2*x - pictureWidth/4
     let pauseHeight = pictureHeight - 2*x - pictureHeight/4
     let pauseX = (pictureHeight - pauseHeight)/2
     let pauseY = (pictureWidth - pauseWidth)/2
     
-    CGContextDrawImage(context, CGRect(origin: CGPoint(x: pauseX, y: pauseY), size: CGSizeMake(pauseWidth, pauseHeight)), pause)
+    context?.draw(pause!, in: CGRect(origin: CGPoint(x: pauseX, y: pauseY), size: CGSize(width: pauseWidth, height: pauseHeight)))
     
     
-    CGContextStrokePath(context)
+    context?.strokePath()
     
     
     let image = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
-    return image
+    return image!
     
 }
 
-func createCircleWithArrow(color: UIColor, width:CGFloat, size: CGSize, filled: Bool) -> UIImage {
+func createCircleWithArrow(_ color: UIColor, width:CGFloat, size: CGSize, filled: Bool) -> UIImage {
     // Setup our context
     let bounds = CGRect(origin: CGPoint.zero, size: size)
     let opaque = false
@@ -307,12 +307,12 @@ func createCircleWithArrow(color: UIColor, width:CGFloat, size: CGSize, filled: 
     
     let x = sqrt(2*radius) + width //+radius
     
-    CGContextSetLineWidth(context, width)
-    CGContextSetStrokeColorWithColor(context, color.CGColor)
-    CGContextSetFillColorWithColor(context, color.CGColor)
+    context?.setLineWidth(width)
+    context?.setStrokeColor(color.cgColor)
+    context?.setFillColor(color.cgColor)
     
     
-    CGContextBeginPath(context)
+    context?.beginPath()
     CGContextAddArc(context, circleCenterX, circleCenterY, radius, 0.degreesToRadians, 360.degreesToRadians, 1)
     
     let arrowHeight = pictureHeight - 2*x - pictureHeight/4
@@ -320,17 +320,17 @@ func createCircleWithArrow(color: UIColor, width:CGFloat, size: CGSize, filled: 
     let arrowX = pictureWidth/2
     let arrowY = (pictureHeight - arrowHeight)/2
     
-    CGContextMoveToPoint(context, arrowX, arrowY)
-    CGContextAddLineToPoint(context, arrowX, arrowY+arrowHeight)
-    CGContextAddLineToPoint(context, arrowX-arrowWidth, arrowY+arrowHeight-arrowWidth)
-    CGContextMoveToPoint(context, arrowX, arrowY+arrowHeight)
-    CGContextAddLineToPoint(context, arrowX+arrowWidth, arrowY+arrowHeight-arrowWidth)
+    context?.move(to: CGPoint(x: arrowX, y: arrowY))
+    context?.addLine(to: CGPoint(x: arrowX, y: arrowY+arrowHeight))
+    context?.addLine(to: CGPoint(x: arrowX-arrowWidth, y: arrowY+arrowHeight-arrowWidth))
+    context?.move(to: CGPoint(x: arrowX, y: arrowY+arrowHeight))
+    context?.addLine(to: CGPoint(x: arrowX+arrowWidth, y: arrowY+arrowHeight-arrowWidth))
     
-    CGContextStrokePath(context)
+    context?.strokePath()
     
     
     let image = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
-    return image
+    return image!
     
 }

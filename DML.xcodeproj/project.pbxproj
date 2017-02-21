@@ -262,6 +262,7 @@
 					480FEDAD1C54B3DF005594F1 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 46D3VYP253;
+						LastSwiftMigration = 0820;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -274,11 +275,13 @@
 					480FEDC41C54B3DF005594F1 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 46D3VYP253;
+						LastSwiftMigration = 0820;
 						TestTargetID = 480FEDAD1C54B3DF005594F1;
 					};
 					480FEDCF1C54B3DF005594F1 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 46D3VYP253;
+						LastSwiftMigration = 0820;
 						TestTargetID = 480FEDAD1C54B3DF005594F1;
 					};
 				};
@@ -536,6 +539,7 @@
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = debugging;
+				SWIFT_VERSION = 3.0;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -555,6 +559,7 @@
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = debugging;
+				SWIFT_VERSION = 3.0;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
@@ -567,7 +572,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.holgerkrupp.OneTrickPony-PodcasterTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OneTrickPony_Podcaster.app/OneTrickPony_Podcaster";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DML.app/DML";
 			};
 			name = Debug;
 		};
@@ -579,7 +585,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.holgerkrupp.OneTrickPony-PodcasterTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OneTrickPony_Podcaster.app/OneTrickPony_Podcaster";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DML.app/DML";
 			};
 			name = Release;
 		};
@@ -590,6 +597,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.holgerkrupp.OneTrickPony-PodcasterUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = OneTrickPony_Podcaster;
 				USES_XCTRUNNER = YES;
 			};
@@ -602,6 +610,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.holgerkrupp.OneTrickPony-PodcasterUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = OneTrickPony_Podcaster;
 				USES_XCTRUNNER = YES;
 			};

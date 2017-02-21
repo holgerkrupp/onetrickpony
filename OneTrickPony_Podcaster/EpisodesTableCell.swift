@@ -13,11 +13,11 @@ import CoreMedia
 
 
 protocol EpisodeCellDelegate {
-    func pauseepisode(cell: EpisodeCell)
-    func resumeepisode(cell: EpisodeCell)
-    func cancelepisode(cell: EpisodeCell)
-    func downloadepisode(cell: EpisodeCell)
-    func isdownloading(cell: EpisodeCell) -> Bool
+    func pauseepisode(_ cell: EpisodeCell)
+    func resumeepisode(_ cell: EpisodeCell)
+    func cancelepisode(_ cell: EpisodeCell)
+    func downloadepisode(_ cell: EpisodeCell)
+    func isdownloading(_ cell: EpisodeCell) -> Bool
 }
 
 
@@ -44,13 +44,13 @@ class EpisodeCell: UITableViewCell {
     @IBAction func playButtonPressed(){
         if SingletonClass.sharedInstance.player.rate == 0 {
             SingletonClass.sharedInstance.player.play()
-            EpisodePlayButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(30, 30), filled: true), forState: .Normal)
-            EpisodePlayButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
+            EpisodePlayButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSize(width: 30, height: 30), filled: true), for: UIControlState())
+            EpisodePlayButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControlState())
 
         }else{
             SingletonClass.sharedInstance.player.pause()
-            EpisodePlayButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(30, 30), filled: true), forState: .Normal)
-            EpisodePlayButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
+            EpisodePlayButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSize(width: 30, height: 30), filled: true), for: UIControlState())
+            EpisodePlayButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControlState())
 
     }
     }
@@ -74,17 +74,17 @@ class EpisodeCell: UITableViewCell {
         // Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
     }
     
-    func updateprogressbar(fileOffset: Int64){
+    func updateprogressbar(_ fileOffset: Int64){
        // NSLog(fileOffset)
     }
     
-    func updateProgress(episode: Episode){
+    func updateProgress(_ episode: Episode){
         if episode.getDurationInSeconds() != 0.0{
             var remain = Float(CMTimeGetSeconds(episode.remaining()))
             if remain <= 0{
@@ -103,19 +103,19 @@ class EpisodeCell: UITableViewCell {
         }
     }
     
-    func updateDownloadProgress(progress: Float){
+    func updateDownloadProgress(_ progress: Float){
         EpisodeDownloadProgressbar.progress = progress
         if progress > 0.0 && progress < 1{
-            EpisodeDownloadProgressbar.hidden = false
+            EpisodeDownloadProgressbar.isHidden = false
         }else{
-            EpisodeDownloadProgressbar.hidden = true
+            EpisodeDownloadProgressbar.isHidden = true
         }
     }
     
 
     
     
-    func filltableviewcell(episode: Episode){
+    func filltableviewcell(_ episode: Episode){
 
         if episode.getDurationInSeconds() != 0.0{
         var remain = Float(CMTimeGetSeconds(episode.remaining()))
@@ -141,16 +141,16 @@ class EpisodeCell: UITableViewCell {
         EpisodeDurationLabel!.textColor = getColorFromPodcastSettings("secondarytextcolor")
         
         
-        var date: NSDate = NSDate()
-        let dateFormatter: NSDateFormatter = NSDateFormatter()
+        var date: Date = Date()
+        let dateFormatter: DateFormatter = DateFormatter()
         var dateString: String = String()
         
-        date = episode.episodePubDate
+        date = episode.episodePubDate as Date
      
-        dateFormatter.dateStyle = .ShortStyle
-        dateFormatter.timeStyle = .NoStyle
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .none
         
-        dateString = dateFormatter.stringFromDate(date)
+        dateString = dateFormatter.string(from: date)
         EpisodeDateLabel!.text = dateString
         
         EpisodeDateLabel!.textColor = getColorFromPodcastSettings("secondarytextcolor")
@@ -164,9 +164,9 @@ class EpisodeCell: UITableViewCell {
         EpisodeFileSizeLabel!.textColor = getColorFromPodcastSettings("secondarytextcolor")
         EpisodeDownloadProgressbar.backgroundColor = getColorFromPodcastSettings("progressBackgroundColor")
         EpisodeDownloadProgressbar.progressTintColor = getColorFromPodcastSettings("highlightColor")
-        EpisodeDownloadButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
-        EpisodePauseButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
-        EpisodeCancelButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
+        EpisodeDownloadButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControlState())
+        EpisodePauseButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControlState())
+        EpisodeCancelButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControlState())
    
         
         

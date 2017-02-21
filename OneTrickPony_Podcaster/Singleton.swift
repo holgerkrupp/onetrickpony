@@ -17,7 +17,7 @@ class SingletonClass {
     
     var playerinitialized: Bool     = false
     var episodePlaying:Episode      = Episode()
-    var audioTimer:NSTimer          = NSTimer()
+    var audioTimer:Timer          = Timer()
     
     var sleeptimerset:Bool          = false
     var sleeptimer:Double           = 0.0

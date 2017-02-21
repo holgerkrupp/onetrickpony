@@ -10,6 +10,30 @@ import UIKit
 import AVFoundation
 import MediaPlayer
 import SafariServices
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 
 class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDelegate, UIWebViewDelegate, SFSafariViewControllerDelegate, ChapterMarksViewControllerDelegate {
@@ -20,7 +44,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     var somethingplayscurrently = false
     var thisisplaying = false
     
-    var url:NSURL = NSURL()
+    //var url:URL = URL()
     
     var updater : CADisplayLink! = nil
     
@@ -58,15 +82,15 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     @IBOutlet weak var ShowNotesDismissButton: UIButton!
     @IBOutlet var episodeShowNotesWebView: UIWebView!
 
-    @IBAction func ShowNotesDismissButtonPressed(sender: UIButton) {
+    @IBAction func ShowNotesDismissButtonPressed(_ sender: UIButton) {
         
-        if ShowNotesContainer.hidden == true {
-            ShowNotesContainer.hidden = false
-            infoButton.selected = true
+        if ShowNotesContainer.isHidden == true {
+            ShowNotesContainer.isHidden = false
+            infoButton.isSelected = true
 
         }else{
-            ShowNotesContainer.hidden = true
-            infoButton.selected = false
+            ShowNotesContainer.isHidden = true
+            infoButton.isSelected = false
 
         }
     }
@@ -76,26 +100,26 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     
-    @IBAction func sharebuttonpressed(sender: UIBarButtonItem){
+    @IBAction func sharebuttonpressed(_ sender: UIBarButtonItem){
         displayShareSheet()
     }
     
     @IBOutlet weak var listButton: UIButton!
-    @IBAction func listButtonpressed(sender: UIButton){
+    @IBAction func listButtonpressed(_ sender: UIButton){
         back()
     }
     
     func back(){
-        navigationController?.popViewControllerAnimated(true)
+        navigationController?.popViewController(animated: true)
     }
     
     
-    @IBAction func SleepTimerButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func SleepTimerButtonPressed(_ sender: UIBarButtonItem) {
         showsleeptimer()
     }
     
-    @IBAction func infoButtonPressed(sender: UIButton){
-        let url = NSURL(string: episode.episodeLink)
+    @IBAction func infoButtonPressed(_ sender: UIButton){
+        let url = URL(string: episode.episodeLink)
         openWithSafariVC(url!)
         
         /*if ShowNotesContainer.hidden == true {
@@ -107,51 +131,51 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         }*/
     }
     
-    @IBAction func tapImage(recognizer:UITapGestureRecognizer) {
+    @IBAction func tapImage(_ recognizer:UITapGestureRecognizer) {
         
-        if ShowNotesContainer.hidden == true {
-            ShowNotesContainer.hidden = false
+        if ShowNotesContainer.isHidden == true {
+            ShowNotesContainer.isHidden = false
         }else{
-            ShowNotesContainer.hidden = true
+            ShowNotesContainer.isHidden = true
         }
     }
     
     
-    @IBAction func playButtonPressed(sender: UIButton){
+    @IBAction func playButtonPressed(_ sender: UIButton){
         switchPlayPause()
         
     }
-    @IBAction func pauseButtonPressed(sender: UIButton){
+    @IBAction func pauseButtonPressed(_ sender: UIButton){
         pause()
         
     }
     
-    @IBAction func pressspeedbutton(sender: UIButton){
+    @IBAction func pressspeedbutton(_ sender: UIButton){
         changespeed()
     }
     
     
-    @IBAction func slidermoving(sender:UISlider){
+    @IBAction func slidermoving(_ sender:UISlider){
         stoptimer()
     }
     
-    @IBAction func sliderchange(sender:UISlider){
+    @IBAction func sliderchange(_ sender:UISlider){
         //  NSLog(progressSlider.value)
         if (episode.episodeTitle == SingletonClass.sharedInstance.episodePlaying.episodeTitle){
-            SingletonClass.sharedInstance.player.seekToTime(SingletonClass.sharedInstance.episodePlaying.getprogressinCMTime(Double(progressSlider.value)))
+            SingletonClass.sharedInstance.player.seek(to: SingletonClass.sharedInstance.episodePlaying.getprogressinCMTime(Double(progressSlider.value)))
             
         }
     }
     
-    @IBAction func restarttimer(sender:UISlider){
+    @IBAction func restarttimer(_ sender:UISlider){
         starttimer()
     }
     
-    @IBAction func plus30(sender:UIButton){
+    @IBAction func plus30(_ sender:UIButton){
         moveplayer(30)
     }
     
-    @IBAction func minus30(sender:UIButton){
+    @IBAction func minus30(_ sender:UIButton){
         moveplayer(-30)
     }
     
@@ -175,9 +199,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         fillPlayerView(episode)
         adjustColors()
-        episodeShowNotesWebView.hidden = false
-        ShowNotesContainer.hidden = true
-    ShowNotesDismissButton.setImage(createCircleWithCross(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: false), forState: .Normal)
+        episodeShowNotesWebView.isHidden = false
+        ShowNotesContainer.isHidden = true
+    ShowNotesDismissButton.setImage(createCircleWithCross(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSize(width: 30, height: 30), filled: false), for: UIControlState())
         
         enableOrDisableControllsIfNoInFocus()
         allowremotebuttons()
@@ -195,7 +219,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     
-    func updateProgress(episode: Episode){
+    func updateProgress(_ episode: Episode){
         let starttime = episode.readplayed
         let duration = stringtodouble(episode.getDurationFromEpisode())
         
@@ -215,14 +239,14 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         if let chapter = episode.getChapterForSeconds(Double(currentplaytime)){
             chapterTitleLabel.text = chapter.chapterTitle
             chapterTitleLabel.textColor = getColorFromPodcastSettings("secondarytextcolor")
-            chapterTitleLabel.enabled = true
-            chapterTitleLabel.hidden = false
+            chapterTitleLabel.isEnabled = true
+            chapterTitleLabel.isHidden = false
         }else{
-            chapterTitleLabel.hidden = true
+            chapterTitleLabel.isHidden = true
         }
     }
     
-    func fillPlayerView(episode: Episode){
+    func fillPlayerView(_ episode: Episode){
         
         // Text
         titleLabel.text = episode.episodeTitle
@@ -246,26 +270,26 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             progressslidersize = 5
         }
         
-        progressSlider.setMaximumTrackImage(getImageWithColor(getColorFromPodcastSettings("progressBackgroundColor"),size: CGSizeMake(2, progressslidersize)), forState: .Normal)
-        progressSlider.setMinimumTrackImage(getImageWithColor(getColorFromPodcastSettings("highlightColor"),size: CGSizeMake(2, progressslidersize)), forState: .Normal)
-        progressSlider.setThumbImage(getImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(2, 40)), forState: .Normal)
+        progressSlider.setMaximumTrackImage(getImageWithColor(getColorFromPodcastSettings("progressBackgroundColor"),size: CGSize(width: 2, height: progressslidersize)), for: UIControlState())
+        progressSlider.setMinimumTrackImage(getImageWithColor(getColorFromPodcastSettings("highlightColor"),size: CGSize(width: 2, height: progressslidersize)), for: UIControlState())
+        progressSlider.setThumbImage(getImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSize(width: 2, height: 40)), for: UIControlState())
         
         var description = episode.episodeDescription //.stringByReplacingOccurrencesOfString("\n", withString: "</br>")
         
         
         
-        let urlpath = NSBundle.mainBundle().bundleURL
+        let urlpath = Bundle.main.bundleURL
         let cssloader = "<link href=\"shownotes.css\" type=\"text/css\" rel=\"stylesheet\" /><body>"
         description = cssloader + description + "</body>"
         episodeShowNotesWebView.loadHTMLString(description, baseURL: urlpath)
         
-        episodeImage.image = getEpisodeImage(episode, size: CGSizeMake(episodeImage.frame.size.height, episodeImage.frame.size.width))
+        episodeImage.image = getEpisodeImage(episode, size: CGSize(width: episodeImage.frame.size.height, height: episodeImage.frame.size.width))
         // rate Button
         if (SingletonClass.sharedInstance.playerinitialized == true) {
             let currentspeed = SingletonClass.sharedInstance.player.rate
             if currentspeed != 0 {
-                let indexofspeed:Int = speeds.indexOf(currentspeed)!
-                playerRateButton.setTitle(speedtext[indexofspeed], forState: .Normal)
+                let indexofspeed:Int = speeds.index(of: currentspeed)!
+                playerRateButton.setTitle(speedtext[indexofspeed], for: UIControlState())
             }
         }
         playerRateButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
@@ -276,11 +300,11 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         
         
-        forward30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true, forward: true, label: "30"), forState: .Normal)
-        forward30Button.setTitle(nil, forState: .Normal)
+        forward30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSize(width: 30, height: 30), filled: true, forward: true, label: "30"), for: UIControlState())
+        forward30Button.setTitle(nil, for: UIControlState())
         
-        back30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSizeMake(30, 30), filled: true, forward: false, label: "30"), forState: .Normal)
-        back30Button.setTitle(nil, forState: .Normal)
+        back30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSize(width: 30, height: 30), filled: true, forward: false, label: "30"), for: UIControlState())
+        back30Button.setTitle(nil, for: UIControlState())
         
         
         
@@ -289,9 +313,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     func adjustColors(){
-        self.navigationController?.toolbarHidden = false
+        self.navigationController?.isToolbarHidden = false
         
-        listButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
+        listButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControlState())
         
         
         playButton.tintColor = getColorFromPodcastSettings("playControlColor")
@@ -300,7 +324,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         forward30Button.tintColor = getColorFromPodcastSettings("playControlColor")
         
         self.navigationController?.toolbar.barTintColor = getColorFromPodcastSettings("backgroundColor")
-        self.navigationController?.toolbar.translucent = false
+        self.navigationController?.toolbar.isTranslucent = false
         self.navigationController?.toolbar.clipsToBounds = true
         
         
@@ -311,11 +335,11 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         chapterBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
         infoButton.tintColor = getColorFromPodcastSettings("playControlColor")
         playerRateButton.tintColor = getColorFromPodcastSettings("playControlColor")
-        playerRateButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), forState: .Normal)
+        playerRateButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControlState())
         
         if episode.episodeChapter.count == 0
         {
-            chapterBarButton.enabled = false
+            chapterBarButton.isEnabled = false
             chapterBarButton.tintColor = getColorFromPodcastSettings("backgroundColor")
             
         }
@@ -323,7 +347,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
         if SingletonClass.sharedInstance.player.rate != 0 {
@@ -333,27 +357,27 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
       //  self.navigationController?.navigationBarHidden = true
-        self.navigationController?.toolbarHidden = false
+        self.navigationController?.isToolbarHidden = false
 
         fixTheDuration()
         updateplayprogress()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         
       //  self.navigationController?.navigationBarHidden = false
-        self.navigationController?.toolbarHidden = true
+        self.navigationController?.isToolbarHidden = true
     }
     
     
-    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
         //do some stuff from the popover
     }
     
     func disableswipeback(){
-        if navigationController!.respondsToSelector(Selector("interactivePopGestureRecognizer")) {
+        if navigationController!.responds(to: #selector(getter: UINavigationController.interactivePopGestureRecognizer)) {
             navigationController!.view.removeGestureRecognizer(navigationController!.interactivePopGestureRecognizer!)
         }
     }
@@ -365,19 +389,19 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             episode = SingletonClass.sharedInstance.episodePlaying
         }
         if (SingletonClass.sharedInstance.episodePlaying.episodeTitle != episode.episodeTitle){
-            forward30Button.enabled = false
-            forward30Button.hidden = true
-            back30Button.enabled = false
-            back30Button.hidden = true
-            playerRateButton.enabled = false
-            playerRateButton.hidden = true
+            forward30Button.isEnabled = false
+            forward30Button.isHidden = true
+            back30Button.isEnabled = false
+            back30Button.isHidden = true
+            playerRateButton.isEnabled = false
+            playerRateButton.isHidden = true
         }else{
-            forward30Button.enabled = true
-            forward30Button.hidden = false
-            back30Button.enabled = true
-            back30Button.hidden = false
-            playerRateButton.enabled = true
-            playerRateButton.hidden = false
+            forward30Button.isEnabled = true
+            forward30Button.isHidden = false
+            back30Button.isEnabled = true
+            back30Button.isHidden = false
+            playerRateButton.isEnabled = true
+            playerRateButton.isHidden = false
         }
     }
     
@@ -391,7 +415,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     func starttimer(){
         SingletonClass.sharedInstance.audioTimer.invalidate()
-        SingletonClass.sharedInstance.audioTimer = NSTimer.scheduledTimerWithTimeInterval(0.2, target:self, selector: #selector(EpisodeViewController.updateplayprogress),userInfo: nil,repeats: true)
+        SingletonClass.sharedInstance.audioTimer = Timer.scheduledTimer(timeInterval: 0.2, target:self, selector: #selector(EpisodeViewController.updateplayprogress),userInfo: nil,repeats: true)
     }
     
     func stoptimer(){
@@ -426,30 +450,30 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         }
         
         
-        let alert = UIAlertController(title: NSLocalizedString("sleep.timer.title", value: "Sleep timer", comment: "shown in Episode Player"), message: description , preferredStyle: .ActionSheet)
+        let alert = UIAlertController(title: NSLocalizedString("sleep.timer.title", value: "Sleep timer", comment: "shown in Episode Player"), message: description , preferredStyle: .actionSheet)
         
-        let disableAction = UIAlertAction(title: NSLocalizedString("sleep.timer.deactivate", value: "Disable", comment: "shown in Episode Player"), style: .Default) { (alert: UIAlertAction!) -> Void in
+        let disableAction = UIAlertAction(title: NSLocalizedString("sleep.timer.deactivate", value: "Disable", comment: "shown in Episode Player"), style: .default) { (alert: UIAlertAction!) -> Void in
             self.cancelleeptimer()
         }
         
-        let firstAction = UIAlertAction(title: NSLocalizedString("sleep.timer.30", value: "30 Minutes", comment: "shown in Episode Player"), style: .Default) { (alert: UIAlertAction!) -> Void in
+        let firstAction = UIAlertAction(title: NSLocalizedString("sleep.timer.30", value: "30 Minutes", comment: "shown in Episode Player"), style: .default) { (alert: UIAlertAction!) -> Void in
             self.setsleeptimer(30)
         }
         
-        let secondAction = UIAlertAction(title: NSLocalizedString("sleep.timer.15", value: "15 Minutes", comment: "shown in Episode Player"), style: .Default) { (alert: UIAlertAction!) -> Void in
+        let secondAction = UIAlertAction(title: NSLocalizedString("sleep.timer.15", value: "15 Minutes", comment: "shown in Episode Player"), style: .default) { (alert: UIAlertAction!) -> Void in
             self.setsleeptimer(15)
         }
         
         
-        let thirdAction = UIAlertAction(title: NSLocalizedString("sleep.timer.5", value: "5 Minutes", comment: "shown in Episode Player"), style: .Default) { (alert: UIAlertAction!) -> Void in
+        let thirdAction = UIAlertAction(title: NSLocalizedString("sleep.timer.5", value: "5 Minutes", comment: "shown in Episode Player"), style: .default) { (alert: UIAlertAction!) -> Void in
             self.setsleeptimer(5)
         }
         
-        let debugAction = UIAlertAction(title: NSLocalizedString("sleep.timer.debug", value: "0.1 Minutes", comment: "shown in Episode Player"), style: .Default) { (alert: UIAlertAction!) -> Void in
+        let debugAction = UIAlertAction(title: NSLocalizedString("sleep.timer.debug", value: "0.1 Minutes", comment: "shown in Episode Player"), style: .default) { (alert: UIAlertAction!) -> Void in
             self.setsleeptimer(0.1)
         }
         
-        let cancelAction = UIAlertAction(title: NSLocalizedString("sleep.timer.cancel", value: "cancel", comment: "shown in Episode Player"), style: .Cancel) { (alert: UIAlertAction!) -> Void in
+        let cancelAction = UIAlertAction(title: NSLocalizedString("sleep.timer.cancel", value: "cancel", comment: "shown in Episode Player"), style: .cancel) { (alert: UIAlertAction!) -> Void in
             
         }
         alert.addAction(disableAction)
@@ -466,12 +490,12 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         alert.addAction(cancelAction)
         alert.view.tintColor = getColorFromPodcastSettings("playControlColor")
        // alert.view.backgroundColor = getColorFromPodcastSettings("backgroundColor")
-        presentViewController(alert, animated: true, completion:nil) // 6
+        present(alert, animated: true, completion:nil) // 6
         NSLog("\(readSleepTimer())")
     }
     
     
-    func setsleeptimer(minutes: Double){
+    func setsleeptimer(_ minutes: Double){
         let seconds = minutes * 60
         SingletonClass.sharedInstance.sleeptimer = seconds
         SingletonClass.sharedInstance.sleeptimerset = true
@@ -512,10 +536,10 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //segue for the popover configuration window
         if segue.identifier == "showChapterMarks" {
-            let vc = segue.destinationViewController as! ChapterMarksViewController
+            let vc = segue.destination as! ChapterMarksViewController
             vc.EpisodeViewController = self
             let controller = vc.popoverPresentationController
             vc.Chapters = episode.episodeChapter
@@ -525,13 +549,13 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             }
         }
     }
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
     
     
     
-    func popoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
         return true
     }
     
@@ -546,14 +570,13 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     
-    func loadNSURL(episode : Episode) -> NSURL{
+    func loadNSURL(_ episode : Episode) -> URL{
         let locally = existsLocally(episode.episodeFilename)
         if  locally.existlocal{
-            url = NSURL(fileURLWithPath: locally.localURL)
+            return URL(fileURLWithPath: locally.localURL)
         }else{
-            url = NSURL(string: episode.episodeUrl)!
+            return URL(string: episode.episodeUrl)!
         }
-        return url
     }
     
     
@@ -564,13 +587,13 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
      
      **************************************************************************/
     
-    func initplayer(episode: Episode){
+    func initplayer(_ episode: Episode){
         
         
        // createLoadingMessage()
         
-            url = loadNSURL(episode)
-            SingletonClass.sharedInstance.player = AVPlayer(URL: url)
+            var url = loadNSURL(episode)
+            SingletonClass.sharedInstance.player = AVPlayer(url: url)
             SingletonClass.sharedInstance.episodePlaying = episode
             SingletonClass.sharedInstance.playerinitialized = true
         
@@ -584,15 +607,15 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     func createLoadingMessage(){
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenSize: CGRect = UIScreen.main.bounds
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
         let Width = screenWidth*0.75
         let Height = screenHeight*0.75
         let x = (screenWidth-Width)/2
         let y = (screenHeight-Height)/2
-        DynamicView=UIView(frame: CGRectMake(x, y, Width, Height))
-        DynamicView.backgroundColor=UIColor.blackColor().colorWithAlphaComponent(0.75)
+        DynamicView=UIView(frame: CGRect(x: x, y: y, width: Width, height: Height))
+        DynamicView.backgroundColor=UIColor.black.withAlphaComponent(0.75)
         DynamicView.layer.cornerRadius=25
         DynamicView.layer.borderWidth=2
         self.view.addSubview(DynamicView)
@@ -611,21 +634,21 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     
-    func moveplayer(seconds:Double){
+    func moveplayer(_ seconds:Double){
         if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
             let secondsToAdd = CMTimeMakeWithSeconds(seconds,1)
             let jumpToTime = CMTimeAdd(SingletonClass.sharedInstance.player.currentTime(), secondsToAdd)
-            SingletonClass.sharedInstance.player.seekToTime(jumpToTime)
+            SingletonClass.sharedInstance.player.seek(to: jumpToTime)
             updatePlayPosition()
             
             
         }
     }
     
-    func jumpToTimeInPlayer(seconds:Double){
+    func jumpToTimeInPlayer(_ seconds:Double){
         let targetTime = CMTimeMakeWithSeconds(seconds,1)
         print("targettime \(targetTime)")
-        SingletonClass.sharedInstance.player.seekToTime(targetTime)
+        SingletonClass.sharedInstance.player.seek(to: targetTime)
         updatePlayPosition()
         
     }
@@ -655,11 +678,11 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         }else{
             if SingletonClass.sharedInstance.episodePlaying.episodeTitle != episode.episodeTitle {
                 SingletonClass.sharedInstance.episodePlaying = episode
-                url = loadNSURL(episode)
-                SingletonClass.sharedInstance.player.replaceCurrentItemWithPlayerItem(AVPlayerItem(URL: url))
+                var url = loadNSURL(episode)
+                SingletonClass.sharedInstance.player.replaceCurrentItem(with: AVPlayerItem(url: url))
                 fixTheDuration()
                 let starttime = episode.readplayed()
-                SingletonClass.sharedInstance.player.seekToTime(starttime)
+                SingletonClass.sharedInstance.player.seek(to: starttime)
                 
                 play()
             }else{
@@ -695,9 +718,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         }
         
         starttimer()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(EpisodeViewController.playerDidFinishPlaying), name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(EpisodeViewController.playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         
-        SingletonClass.sharedInstance.player.seekToTime(starttime)
+        SingletonClass.sharedInstance.player.seek(to: starttime)
         SingletonClass.sharedInstance.player.play()
         if let newindex = getObjectForKeyFromPersistentStorrage("player.rate"){
             NSLog("rateindex: \(newindex)")
@@ -721,7 +744,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     func pause(){
         stoptimer()
         SingletonClass.sharedInstance.player.pause()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
         let played = SingletonClass.sharedInstance.player.currentTime()
         let episode = SingletonClass.sharedInstance.episodePlaying
         episode.saveplayed(Double(CMTimeGetSeconds(played)))
@@ -736,7 +759,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         let episode = SingletonClass.sharedInstance.episodePlaying
         NSLog("Did finish Playing \(episode.episodeTitle)")
         episode.deleteEpisodeFromDocumentsFolder()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     
@@ -744,20 +767,20 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     func setplaypausebutton(){
         enableOrDisableControllsIfNoInFocus()
         
-        playButton.setTitle(nil, forState: .Normal)
-        playButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(30, 30), filled: true), forState: .Normal)
+        playButton.setTitle(nil, for: UIControlState())
+        playButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSize(width: 30, height: 30), filled: true), for: UIControlState())
         
         
         
-        pauseButton.hidden = true
-        playButton.hidden = false
+        pauseButton.isHidden = true
+        playButton.isHidden = false
         if (SingletonClass.sharedInstance.playerinitialized == true) {
             if (SingletonClass.sharedInstance.player.rate != 0 && SingletonClass.sharedInstance.player.error == nil) {
                 if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
-                    pauseButton.setTitle(nil, forState: .Normal)
-                    pauseButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSizeMake(30,30), filled: true), forState: .Normal)
-                    playButton.hidden = true
-                    pauseButton.hidden = false
+                    pauseButton.setTitle(nil, for: UIControlState())
+                    pauseButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSize(width: 30,height: 30), filled: true), for: UIControlState())
+                    playButton.isHidden = true
+                    pauseButton.isHidden = false
                 }
             }
         }
@@ -768,7 +791,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         let currentspeed = SingletonClass.sharedInstance.player.rate
         if currentspeed != 0 { // stupid quick fix to avoid a crash when the player is paused
-            let indexofspeed:Int = speeds.indexOf(currentspeed)!
+            let indexofspeed:Int = speeds.index(of: currentspeed)!
             var newindex:Int
             if (indexofspeed+1 < speeds.count){
                 newindex = indexofspeed+1
@@ -779,9 +802,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         }
     }
     
-    func updateRate(rateindex: Int){
+    func updateRate(_ rateindex: Int){
         playerRateButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
-        playerRateButton.setTitle(speedtext[rateindex], forState: .Normal)
+        playerRateButton.setTitle(speedtext[rateindex], for: UIControlState())
         
         setObjectForKeyToPersistentStorrage("player.rate", object: rateindex)
         SingletonClass.sharedInstance.player.rate = speeds[rateindex]
@@ -825,7 +848,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     
-    func updateSliderProgress(progress: Double){
+    func updateSliderProgress(_ progress: Double){
         if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
             updateProgress(episode)
         }
@@ -842,12 +865,12 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     func allowremotebuttons(){
-        UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
-        let commandCenter = MPRemoteCommandCenter.sharedCommandCenter()
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        let commandCenter = MPRemoteCommandCenter.shared()
         
-        commandCenter.togglePlayPauseCommand.enabled = true
-        commandCenter.playCommand.enabled = true
-        commandCenter.pauseCommand.enabled = true
+        commandCenter.togglePlayPauseCommand.isEnabled = true
+        commandCenter.playCommand.isEnabled = true
+        commandCenter.pauseCommand.isEnabled = true
         
         commandCenter.skipBackwardCommand.addTarget(self, action: #selector(EpisodeViewController.back30))
         commandCenter.skipForwardCommand.addTarget(self, action: #selector(EpisodeViewController.forward30))
@@ -864,7 +887,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     func updateMPMediaPlayer(){
         
-        let playcenter = MPNowPlayingInfoCenter.defaultCenter()
+        let playcenter = MPNowPlayingInfoCenter.default()
         let mediaArtwort = MPMediaItemArtwork(image: getEpisodeImage(episode))
         playcenter.nowPlayingInfo = [
             MPMediaItemPropertyArtwork: mediaArtwort,
@@ -889,7 +912,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     func displayShareSheet() {
         let shareContent:String = String.localizedStringWithFormat(NSLocalizedString("share.sheet", value:"I'm listening to %@ - %@",comment: "used for tweets and stuff"), episode.episodeTitle, episode.episodeLink)
         let activityViewController = UIActivityViewController(activityItems: [shareContent as NSString], applicationActivities: nil)
-        presentViewController(activityViewController, animated: true, completion: {})
+        present(activityViewController, animated: true, completion: {})
     }
     /**************************************************************************
      
@@ -898,31 +921,31 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
      
      **************************************************************************/
     
-    func webView(webView: UIWebView, shouldStartLoadWithRequest r: NSURLRequest, navigationType nt: UIWebViewNavigationType) -> Bool{
-        if (nt == UIWebViewNavigationType.LinkClicked ) {
-            openWithSafariVC(r.URL!)
+    func webView(_ webView: UIWebView, shouldStartLoadWith r: URLRequest, navigationType nt: UIWebViewNavigationType) -> Bool{
+        if (nt == UIWebViewNavigationType.linkClicked ) {
+            openWithSafariVC(r.url!)
             return false;
         }
         return true;
         
     }
     
-    func openWithSafariVC(url: NSURL)
+    func openWithSafariVC(_ url: URL)
     {
         if #available(iOS 9.0, *) {
-            let svc = SFSafariViewController(URL: url)
+            let svc = SFSafariViewController(url: url)
             svc.delegate = self
-            self.presentViewController(svc, animated: true, completion: nil)
+            self.present(svc, animated: true, completion: nil)
         } else {
-            UIApplication.sharedApplication().openURL(url)
+            UIApplication.shared.openURL(url)
         }
         
     }
     
     @available(iOS 9.0, *)
-    func safariViewControllerDidFinish(controller: SFSafariViewController)
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController)
     {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        controller.dismiss(animated: true, completion: nil)
     }
 }
 

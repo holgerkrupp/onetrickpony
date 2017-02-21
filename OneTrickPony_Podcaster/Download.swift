@@ -15,8 +15,8 @@ class Download: NSObject {
     var progress: Float = 0.0
     var isEpisode = false
     
-    var downloadTask: NSURLSessionDownloadTask?
-    var resumeData: NSData?
+    var downloadTask: URLSessionDownloadTask?
+    var resumeData: Data?
     
     init(url: String) {
         self.url = url
