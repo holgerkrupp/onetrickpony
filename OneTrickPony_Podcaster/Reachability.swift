@@ -53,15 +53,17 @@ enum ReachabilityStatus: CustomStringConvertible  {
     }
 }
 
-open class Reach {
+public class Reach {
     
     func connectionStatus() -> ReachabilityStatus {
         var zeroAddress = sockaddr_in()
-        zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
+        zeroAddress.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
         zeroAddress.sin_family = sa_family_t(AF_INET)
         
         guard let defaultRouteReachability = withUnsafePointer(to: &zeroAddress, {
-            SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
+                SCNetworkReachabilityCreateWithAddress(nil, $0)
+            }
         }) else {
             return .unknown
         }
@@ -84,18 +86,18 @@ open class Reach {
             let status = ReachabilityStatus(reachabilityFlags: flags)
             
             NotificationCenter.default.post(name: Notification.Name(rawValue: ReachabilityStatusChangedNotification),
-                object: nil,
-                userInfo: ["Status": status.description])
+                                            object: nil,
+                                            userInfo: ["Status": status.description])
             
-            }, &context)
+        }, &context)
         
-        SCNetworkReachabilityScheduleWithRunLoop(reachability, CFRunLoopGetMain(), CFRunLoopMode.commonModes)
+        SCNetworkReachabilityScheduleWithRunLoop(reachability, CFRunLoopGetMain(), RunLoopMode.commonModes as CFString)
     }
     
 }
 
 extension ReachabilityStatus {
-    fileprivate init(reachabilityFlags flags: SCNetworkReachabilityFlags) {
+    init(reachabilityFlags flags: SCNetworkReachabilityFlags) {
         let connectionRequired = flags.contains(.connectionRequired)
         let isReachable = flags.contains(.reachable)
         let isWWAN = flags.contains(.isWWAN)

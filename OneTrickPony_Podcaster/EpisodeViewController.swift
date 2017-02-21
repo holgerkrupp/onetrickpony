@@ -592,7 +592,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
        // createLoadingMessage()
         
-            var url = loadNSURL(episode)
+            let url = loadNSURL(episode)
             SingletonClass.sharedInstance.player = AVPlayer(url: url)
             SingletonClass.sharedInstance.episodePlaying = episode
             SingletonClass.sharedInstance.playerinitialized = true
@@ -678,7 +678,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         }else{
             if SingletonClass.sharedInstance.episodePlaying.episodeTitle != episode.episodeTitle {
                 SingletonClass.sharedInstance.episodePlaying = episode
-                var url = loadNSURL(episode)
+                let url = loadNSURL(episode)
                 SingletonClass.sharedInstance.player.replaceCurrentItem(with: AVPlayerItem(url: url))
                 fixTheDuration()
                 let starttime = episode.readplayed()
