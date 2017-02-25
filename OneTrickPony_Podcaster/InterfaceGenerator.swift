@@ -116,17 +116,17 @@ func createSkipWithColor(_ color: UIColor, width:CGFloat, size: CGSize, filled: 
     
     var angleStart = 90
     var angleStop  = 180
-    var clockwise:Int32  = 1
+    var clockwise:Bool  = true
     var arrowRotator:CGFloat = 0
     if forward {
         angleStart = 270
         angleStop  = 000
-        clockwise  = 1
+        clockwise  = true
         arrowRotator = -1
     }else{
         angleStart = 270
         angleStop  = 180
-        clockwise  = 0
+        clockwise  = false
         arrowRotator = 1
     }
     
@@ -154,7 +154,8 @@ func createSkipWithColor(_ color: UIColor, width:CGFloat, size: CGSize, filled: 
         context?.fillPath()
     }
     
-    CGContextAddArc(context, circleCenterX, circleCenterY, radius, angleStart.degreesToRadians, angleStop.degreesToRadians, clockwise)
+    context?.addArc(center: CGPoint(x: circleCenterX, y: circleCenterY), radius: radius, startAngle: angleStart.degreesToRadians, endAngle: angleStop.degreesToRadians, clockwise: clockwise)
+    
     
     // west
     context?.move(to: CGPoint(x: circleCenterX-radius-width/2, y: circleCenterY))
@@ -174,14 +175,20 @@ func createSkipWithColor(_ color: UIColor, width:CGFloat, size: CGSize, filled: 
     
     // add the text
     let aFont = UIFont(name: "Helvetica Neue", size: radius)
-    let attr:CFDictionary = [NSFontAttributeName:aFont!,NSForegroundColorAttributeName:color]
-    let text = CFAttributedStringCreate(nil, label as CFString!, attr)
+    //let attr:CFDictionary = [NSFontAttributeName:aFont!,NSForegroundColorAttributeName:color]
+  //  let attr = CFAttributedStringCreate(nil,  [NSFontAttributeName:aFont! as AnyObject,NSForegroundColorAttributeName:color as AnyObject], nil)
+    //let attr = [NSFontAttributeName:aFont]
+
+    
+    let text = CFAttributedStringCreate(nil, label as CFString!, nil)
     let line = CTLineCreateWithAttributedString(text!)
     let Linebounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.useOpticalBounds)
     
     let xn = circleCenterX - Linebounds.width/2
     let yn = circleCenterY - Linebounds.height/2+width
-    CGContextSetTextPosition(context, xn, yn)
+    context?.textPosition = CGPoint(x:xn, y: yn)
+    
+    
     
     
     context?.setTextDrawingMode(CGTextDrawingMode.fill)
@@ -222,7 +229,8 @@ func createCircleWithCross(_ color: UIColor, width:CGFloat, size: CGSize, filled
     
     
     context?.beginPath()
-    CGContextAddArc(context, circleCenterX, circleCenterY, radius, 0.degreesToRadians, 360.degreesToRadians, 1)
+    context?.addArc(center: CGPoint(x: circleCenterX, y: circleCenterY), radius: radius, startAngle: 0.degreesToRadians, endAngle: 360.degreesToRadians, clockwise: true)
+    
     
     context?.move(to: CGPoint(x: crossX, y: crossY))
     context?.addLine(to: CGPoint(x: crossX+Xwidth, y: crossY+Xheight))
@@ -268,7 +276,7 @@ func createCircleWithPause(_ color: UIColor, width:CGFloat, size: CGSize, filled
     
     
     context?.beginPath()
-    CGContextAddArc(context, circleCenterX, circleCenterY, radius, 0.degreesToRadians, 360.degreesToRadians, 1)
+        context?.addArc(center: CGPoint(x: circleCenterX, y: circleCenterY), radius: radius, startAngle: 0.degreesToRadians, endAngle: 360.degreesToRadians, clockwise: true)
     
     let pause = createPauseImageWithColor(color, size: size, filled: filled).cgImage
     let pauseWidth = pictureWidth - 2*x - pictureWidth/4
@@ -313,7 +321,7 @@ func createCircleWithArrow(_ color: UIColor, width:CGFloat, size: CGSize, filled
     
     
     context?.beginPath()
-    CGContextAddArc(context, circleCenterX, circleCenterY, radius, 0.degreesToRadians, 360.degreesToRadians, 1)
+        context?.addArc(center: CGPoint(x: circleCenterX, y: circleCenterY), radius: radius, startAngle: 0.degreesToRadians, endAngle: 360.degreesToRadians, clockwise: true)
     
     let arrowHeight = pictureHeight - 2*x - pictureHeight/4
     let arrowWidth:CGFloat = 1/3*arrowHeight

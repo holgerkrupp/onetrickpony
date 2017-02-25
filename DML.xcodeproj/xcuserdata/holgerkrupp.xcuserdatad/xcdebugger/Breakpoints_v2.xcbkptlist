@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneTrickPony_Podcaster/supportfunctions.swift"
-            timestampString = "484157773.474139"
+            timestampString = "509720229.407974"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97">
+            startingLineNumber = "11"
+            endingLineNumber = "11">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -56,11 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneTrickPony_Podcaster/EpisodesTableViewController.swift"
-            timestampString = "485723459.267659"
+            timestampString = "509720229.407974"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "879"
-            endingLineNumber = "879"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
             landmarkName = "EpisodesTableViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -88,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneTrickPony_Podcaster/EpisodesTableViewController.swift"
-            timestampString = "485723459.267659"
+            timestampString = "509720229.407974"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "623"
-            endingLineNumber = "623"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
             landmarkName = "EpisodesTableViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -104,11 +104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneTrickPony_Podcaster/supportfunctions.swift"
-            timestampString = "484679876.808529"
+            timestampString = "509720229.407974"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111">
+            startingLineNumber = "11"
+            endingLineNumber = "11">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -118,11 +118,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OneTrickPony_Podcaster/supportfunctions.swift"
-            timestampString = "485547250.621485"
+            timestampString = "509720229.407974"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147">
+            startingLineNumber = "11"
+            endingLineNumber = "11">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OneTrickPony_Podcaster/InterfaceGenerator.swift"
+            timestampString = "509720855.752825"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "createSkipWithColor(_:width:size:filled:forward:label:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
