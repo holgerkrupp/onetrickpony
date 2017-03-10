@@ -97,7 +97,7 @@ class Episode {
         var playedtime:CMTime = CMTimeMakeWithSeconds(0,Int32(0))
         
         if  let episodeplayedtime = defaults.value(forKey: episodeTitle){
-            NSLog("Title: \(episodeTitle) - Played: \(episodeplayedtime)")
+           // NSLog("Title: \(episodeTitle) - Played: \(episodeplayedtime)")
             playedtime = DoubleToCMTime(episodeplayedtime as! Double)
         } else{
             NSLog("Title: \(episodeTitle) - Not played yet")
@@ -125,8 +125,12 @@ class Episode {
 }
 
 func DoubleToCMTime(_ seconds: Double) -> CMTime{
-    let secondsInt = Int64(seconds)
-    return CMTimeMake(secondsInt ,1)
+    if seconds > 0 {
+        let secondsInt = Int64(seconds)
+        return CMTimeMake(secondsInt ,1)
+    }else{
+        return CMTimeMake(0,1)
+    }
 }
 
 
