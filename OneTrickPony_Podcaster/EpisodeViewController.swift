@@ -110,7 +110,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     func back(){
-        navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
     
     

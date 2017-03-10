@@ -178,9 +178,22 @@ func createSkipWithColor(_ color: UIColor, width:CGFloat, size: CGSize, filled: 
     //let attr:CFDictionary = [NSFontAttributeName:aFont!,NSForegroundColorAttributeName:color]
   //  let attr = CFAttributedStringCreate(nil,  [NSFontAttributeName:aFont! as AnyObject,NSForegroundColorAttributeName:color as AnyObject], nil)
     //let attr = [NSFontAttributeName:aFont]
+    
+    
+    let attributes: [String: AnyObject] = [
+        NSForegroundColorAttributeName : color,
+        NSFontAttributeName : aFont!
+    ]
+    
+    
+    
 
     
-    let text = CFAttributedStringCreate(nil, label as CFString!, nil)
+    let text = CFAttributedStringCreate(nil, label as CFString!, attributes as CFDictionary!)
+    
+    
+    
+    
     let line = CTLineCreateWithAttributedString(text!)
     let Linebounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.useOpticalBounds)
     

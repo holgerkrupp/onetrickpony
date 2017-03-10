@@ -668,7 +668,7 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
         
         // moving the image creating to another thread to make the scolling more smooth
         
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async(execute: {
             
             let episodePicture: UIImage? = getEpisodeImage(episode, size: CGSize(width: cell.EpisodeImage.frame.size.height, height: cell.EpisodeImage.frame.size.width))
             if (episodePicture) != nil {
