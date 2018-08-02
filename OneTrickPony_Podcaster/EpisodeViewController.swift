@@ -443,7 +443,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             if readSleepTimer().set == true {
                 let timeInfo = String.localizedStringWithFormat(
                     NSLocalizedString("string.for.time.remaining", value:"%@ remaining",
-                        comment: "shown in TableView"),
+                                      comment: "shown in TableView"),
                     secondsToHoursMinutesSeconds(Double(remainingTime)))
                 description = description + "\n\n" + timeInfo
             }
@@ -483,16 +483,17 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         
         #if targetEnvironment(simulator)
-            alert.addAction(debugAction)
+        alert.addAction(debugAction)
         #endif
         
         
         alert.addAction(cancelAction)
         alert.view.tintColor = getColorFromPodcastSettings("playControlColor")
-       // alert.view.backgroundColor = getColorFromPodcastSettings("backgroundColor")
+        // alert.view.backgroundColor = getColorFromPodcastSettings("backgroundColor")
         present(alert, animated: true, completion:nil) // 6
         NSLog("\(readSleepTimer())")
     }
+    
     
     
     func setsleeptimer(_ minutes: Double){
