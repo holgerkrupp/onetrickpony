@@ -12,7 +12,7 @@ import UIKit
 
 extension Int {
     var degreesToRadians : CGFloat {
-        return CGFloat(self) * CGFloat(M_PI) / 180.0
+        return CGFloat(self) * CGFloat(Double.pi) / 180.0
     }
 }
 
@@ -181,15 +181,15 @@ func createSkipWithColor(_ color: UIColor, width:CGFloat, size: CGSize, filled: 
     
     
     let attributes: [String: AnyObject] = [
-        NSForegroundColorAttributeName : color,
-        NSFontAttributeName : aFont!
+        NSAttributedStringKey.foregroundColor.rawValue : color,
+        NSAttributedStringKey.font.rawValue : aFont!
     ]
     
     
     
 
     
-    let text = CFAttributedStringCreate(nil, label as CFString!, attributes as CFDictionary!)
+    let text = CFAttributedStringCreate(nil, label as CFString?, attributes as CFDictionary?)
     
     
     

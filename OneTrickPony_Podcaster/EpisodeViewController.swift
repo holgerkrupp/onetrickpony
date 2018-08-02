@@ -482,7 +482,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         alert.addAction(thirdAction)
         
         
-        #if (arch(i386) || arch(x86_64)) && os(iOS)
+        #if targetEnvironment(simulator)
             alert.addAction(debugAction)
         #endif
         
@@ -655,7 +655,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     
-    func playPausefromRemoteCenter(){
+    @objc func playPausefromRemoteCenter(){
         
         episode = SingletonClass.sharedInstance.episodePlaying
         NSLog("playPausefromRemote: \(episode.episodeTitle)")
@@ -755,7 +755,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     
-    func playerDidFinishPlaying(){
+    @objc func playerDidFinishPlaying(){
         let episode = SingletonClass.sharedInstance.episodePlaying
         NSLog("Did finish Playing \(episode.episodeTitle)")
         episode.deleteEpisodeFromDocumentsFolder()
@@ -810,7 +810,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         SingletonClass.sharedInstance.player.rate = speeds[rateindex]
     }
     
-    func updateplayprogress(){
+    @objc func updateplayprogress(){
         if (SingletonClass.sharedInstance.playerinitialized == true){
             let progress = Double(CMTimeGetSeconds(SingletonClass.sharedInstance.player.currentTime()))
             let episode = SingletonClass.sharedInstance.episodePlaying
@@ -838,11 +838,11 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     
     
-    func back30(){
+    @objc func back30(){
         episode = SingletonClass.sharedInstance.episodePlaying
         moveplayer(-30)
     }
-    func forward30(){
+    @objc func forward30(){
         episode = SingletonClass.sharedInstance.episodePlaying
         moveplayer(30)
     }

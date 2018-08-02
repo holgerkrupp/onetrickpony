@@ -146,11 +146,13 @@ func getEpisodeImage(_ episode: Episode, size:CGSize?=nil) -> UIImage{
         if (existence.existlocal){
             do {
                 let attr : NSDictionary? = try FileManager.default.attributesOfItem(atPath: existence.localURL) as NSDictionary?
-                if let _attr = attr {
-                    let fileSize = _attr.fileSize();
-                    if fileSize > 10 {
-                        episodePicture = UIImage(contentsOfFile: existence.localURL)!
+                if attr != nil {
+                    
+                    
+                    if let image = UIImage(contentsOfFile: existence.localURL){
+                        episodePicture = image
                     }
+                    
                 }
             }catch{
             }

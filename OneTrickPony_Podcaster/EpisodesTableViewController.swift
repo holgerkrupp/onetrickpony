@@ -15,7 +15,7 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
     
     
     
-    var feedParser: XMLParser = XMLParser()
+  //  var feedParser: XMLParser = XMLParser()
     // var feeddate: NSDate = NSDate()// this element contains currently the lastBuildDate from the feed, should be managed smarter one day to reduce the full feed loading to check if the feed is new
     
     var lastfeeddate: String = String()
@@ -91,7 +91,7 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
         self.tableView.layoutMargins = UIEdgeInsets.zero
         if (navigationController != nil){
         self.navigationController?.navigationBar.barTintColor = getColorFromPodcastSettings("backgroundColor")
-        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : getColorFromPodcastSettings("textcolor")]
+        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : getColorFromPodcastSettings("textcolor")]
         self.navigationController?.navigationBar.tintColor = getColorFromPodcastSettings("textcolor")
         }
             DispatchQueue.main.async(execute: {
@@ -147,7 +147,7 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
     }
     
     
-    func updatecell(){
+    @objc func updatecell(){
         updateCellProgressForEpisode(SingletonClass.sharedInstance.episodePlaying)
     }
     
@@ -247,10 +247,10 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
         
         //parse the file (either the one in the documents folder or if that's not there the feed.xml from the base
         NSLog("loading feed from \(fileURLtoLoad)")
-        feedParser = XMLParser(contentsOf: fileURLtoLoad)!
-        feedParser.delegate = self
-        feedParser.parse()
-        
+        if let feedParser: XMLParser = XMLParser(contentsOf: fileURLtoLoad){
+            feedParser.delegate = self
+            feedParser.parse()
+        }
         completion()
     }
     
@@ -308,9 +308,11 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
         
         
         
-        
-        UIApplication.shared.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
-        UIApplication.shared.presentLocalNotificationNow(localNotification)
+        DispatchQueue.main.async {
+            UIApplication.shared.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
+            UIApplication.shared.presentLocalNotificationNow(localNotification)
+        }
+
     }
     
     
@@ -333,7 +335,7 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
     }
     
     
-    func refreshfeed()
+    @objc func refreshfeed()
     {
         NSLog("Feed refresh started")
         let now = Date()
@@ -376,7 +378,7 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
             }
         }
         
-        NSLog("oldfeed: \(savedfeeddate) (from Persistent Storrage)")
+        NSLog("oldfeed: \(String(describing: savedfeeddate)) (from Persistent Storrage)")
         
         
         
@@ -392,10 +394,14 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
         
         if date != "" {
             let newfeeddate = dateStringToNSDate(date)
-            NSLog("newfeed: \(newfeeddate) (Header from Server)")
+            NSLog("newfeed: \(String(describing: newfeeddate)) (Header from Server)")
             
             
             // compare it with the last saved date
+            //ASYNC
+            
+            
+             
             if savedfeeddate != nil {
                 let compareResult = (savedfeeddate! as AnyObject).compare(newfeeddate!)
                 
@@ -404,20 +410,24 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
                 if compareResult == ComparisonResult.orderedDescending {
                     // usually the date on the server should never be younger than the date saved
                     result = false
-                    NSLog("\(savedfeeddate) (saved date) is younger than \(newfeeddate) - nothing to do but strange")
+                    NSLog("\(String(describing: savedfeeddate)) (saved date) is younger than \(String(describing: newfeeddate)) - nothing to do but strange")
                     if (self.refreshControl != nil){
-                    self.refreshControl!.endRefreshing()
+                        DispatchQueue.main.async {
+                            self.refreshControl!.endRefreshing()
+                        }
                     }
                 }else if compareResult == ComparisonResult.orderedAscending{
                     // this is the normal behaviour when the feed has been updated
                     result = true
-                    NSLog("\(savedfeeddate) (saved date) is older than \(newfeeddate) - to refresh feed")
+                    NSLog("\(String(describing: savedfeeddate)) (saved date) is older than \(String(describing: newfeeddate)) - to refresh feed")
                 }else{
                     // this is the part when there has been no change on the feed since last check
                     result = false
                     print("same date")
                     if (self.refreshControl != nil){
-                    self.refreshControl!.endRefreshing()
+                        DispatchQueue.main.async {
+                            self.refreshControl!.endRefreshing()
+                        }
                     }
                 }
             }else{
@@ -431,9 +441,12 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
                 comment: "shown when refreshing feed"), message: NSLocalizedString("message.server.not.reachable", value:"Server not reachable",
                     comment: "shown when refreshing feed"), viewController: self)
             if (self.refreshControl != nil){
-            self.refreshControl!.endRefreshing()
+                DispatchQueue.main.async {
+                    self.refreshControl!.endRefreshing()
+                }
             }
         }
+            
         
         
         completion(result)
@@ -530,8 +543,11 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
             // BUG BUG BUG
             episode.episodeDuration = episodeDuration
             //here I should take care that the duration within the feed is sometimes not correct and the duration within the feed can be 0 or even not existing at all
-            
-            episode.episodePubDate = dateStringToNSDate(episodePubDate)!
+            if let publicationdate = dateStringToNSDate(episodePubDate){
+                episode.episodePubDate = publicationdate
+            }else{
+                episode.episodePubDate = Date()
+            }
             let url: URL = URL(string: episodeUrl)!
             episode.episodeFilename = url.lastPathComponent
             episode.episodeFilesize = episodeFilesize
@@ -617,7 +633,10 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodeCell", for: indexPath) as! EpisodeCell
+         let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodeCell", for: indexPath) as! EpisodeCell
+            
+        
+        
         
         let episode: Episode = episodes[indexPath.row]
         cell.episode = episode
@@ -668,7 +687,7 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
         
         // moving the image creating to another thread to make the scolling more smooth
         
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async(execute: {
+        //DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async(execute: {
             
             let episodePicture: UIImage? = getEpisodeImage(episode, size: CGSize(width: cell.EpisodeImage.frame.size.height, height: cell.EpisodeImage.frame.size.width))
             if (episodePicture) != nil {
@@ -677,7 +696,7 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
                     
                 })
             }
-        })
+       // })
         
         
         // hide and show the Download controlls
@@ -727,13 +746,17 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
         
         
         return cell
+        
     }
-    
+    /*
     override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodeCell", for: indexPath) as! EpisodeCell
-        cell.EpisodeImage.image = nil
+       
+        if let thecell = tableView.dequeueReusableCell(withIdentifier: "EpisodeCell", for: indexPath) as? EpisodeCell
+        {
+            thecell.EpisodeImage.image = nil
+        }
     }
-    
+    */
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
         
@@ -774,7 +797,7 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
     
     
     
-    func longPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
+    @objc func longPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
         
         if longPressGestureRecognizer.state == UIGestureRecognizerState.began {
             
@@ -885,15 +908,16 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
             let download = activeDownloads[downloadUrl] {
             // 2
             download.progress = Float(totalBytesWritten)/Float(totalBytesExpectedToWrite)
-            
-            if let episodeIndex = episodeIndexForDownloadTask(downloadTask), let episodeCell = tableView.cellForRow(at: IndexPath(row: episodeIndex, section: 0)) as? EpisodeCell {
+            DispatchQueue.main.async(execute: {
+                if let episodeIndex = self.episodeIndexForDownloadTask(downloadTask), let episodeCell = self.tableView.cellForRow(at: IndexPath(row: episodeIndex, section: 0)) as? EpisodeCell {
                 if (episodeCell.episode.episodeUrl == downloadUrl){
-                    DispatchQueue.main.async(execute: {
+                    
                         episodeCell.updateDownloadProgress(download.progress)
-                    })
+                   
                 }
                 
             }
+                 })
         }
     }
     
@@ -932,7 +956,9 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
                         self.tableView.reloadData()
                     })
                     cleanUpSpace()
-                    self.refreshControl?.endRefreshing()
+                    DispatchQueue.main.async {
+                        self.refreshControl!.endRefreshing()
+                    }
                 }
             }
             
@@ -944,7 +970,9 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
         // clear the download list
         if let url = downloadTask.originalRequest?.url?.absoluteString {
             activeDownloads[url] = nil
-            
+            DispatchQueue.main.sync {
+           
+           
             // update the cell to update it that it has the file locally and only if it's a media file and not the feed
             if let episodeIndex = episodeIndexForDownloadTask(downloadTask), let episodeCell = tableView.cellForRow(at: IndexPath(row: episodeIndex, section: 0)) as? EpisodeCell {
                 
@@ -956,6 +984,7 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
                     self.updateCellForEpisode(episodeCell.episode)
                 })
             }
+                 }
         }
     }
     

@@ -19,34 +19,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="NnN-tM-z9T">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="einschlafen_farbe" translatesAutoresizingMaskIntoConstraints="NO" id="tCU-hx-AKb">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="TAD-xl-G4m">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="StandardCover" translatesAutoresizingMaskIntoConstraints="NO" id="TAD-xl-G4m">
                                 <rect key="frame" x="50" y="120" width="500" height="500"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="TAD-xl-G4m" secondAttribute="height" multiplier="1:1" id="x8X-Uq-bu8"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dirty Minutes Left" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="MXq-iE-SJM">
-                                <rect key="frame" x="50" y="426" width="500" height="74"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="62"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="TAD-xl-G4m" firstAttribute="top" secondItem="u95-rD-8DZ" secondAttribute="bottom" constant="100" id="7Hs-up-YsY"/>
-                            <constraint firstItem="MXq-iE-SJM" firstAttribute="leading" secondItem="UXt-UR-f8w" secondAttribute="leadingMargin" constant="30" id="EhG-Ek-4xf"/>
-                            <constraint firstAttribute="bottom" secondItem="NnN-tM-z9T" secondAttribute="bottom" id="NEj-Dk-gak"/>
-                            <constraint firstItem="NnN-tM-z9T" firstAttribute="leading" secondItem="UXt-UR-f8w" secondAttribute="leading" id="PtJ-D3-hi5"/>
+                            <constraint firstAttribute="trailing" secondItem="tCU-hx-AKb" secondAttribute="trailing" id="Jep-Qb-D9b"/>
                             <constraint firstItem="TAD-xl-G4m" firstAttribute="leading" secondItem="UXt-UR-f8w" secondAttribute="leadingMargin" constant="30" id="Qmi-51-JRX"/>
+                            <constraint firstAttribute="bottom" secondItem="tCU-hx-AKb" secondAttribute="bottom" id="UM5-jJ-UJq"/>
+                            <constraint firstItem="tCU-hx-AKb" firstAttribute="top" secondItem="UXt-UR-f8w" secondAttribute="top" id="cGC-Ks-h0a"/>
+                            <constraint firstItem="tCU-hx-AKb" firstAttribute="leading" secondItem="UXt-UR-f8w" secondAttribute="leading" id="eBy-BB-w0L"/>
                             <constraint firstItem="TAD-xl-G4m" firstAttribute="centerX" secondItem="UXt-UR-f8w" secondAttribute="centerX" id="fQN-OV-DrL"/>
-                            <constraint firstItem="MXq-iE-SJM" firstAttribute="centerX" secondItem="UXt-UR-f8w" secondAttribute="centerX" id="l0v-7T-uAc"/>
-                            <constraint firstItem="ZTY-t9-lwz" firstAttribute="top" secondItem="MXq-iE-SJM" secondAttribute="bottom" constant="100" id="rbV-rw-d7j"/>
-                            <constraint firstAttribute="trailing" secondItem="NnN-tM-z9T" secondAttribute="trailing" id="uIX-Kk-RJH"/>
-                            <constraint firstItem="NnN-tM-z9T" firstAttribute="top" secondItem="UXt-UR-f8w" secondAttribute="top" id="uLQ-hn-JfT"/>
                         </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -59,7 +49,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background" width="1" height="2208"/>
-        <image name="logo" width="1045" height="1051"/>
+        <image name="StandardCover" width="1400" height="1400"/>
+        <image name="einschlafen_farbe" width="1" height="1"/>
     </resources>
 </document>

@@ -2,24 +2,33 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>feedurl</key>
-	<string>http://compendion.net/dirtyminutesleft/feed/m4a</string>
+	<key>bigprogressbar</key>
+	<true/>
 	<key>cacheSize (MB)</key>
 	<integer>150</integer>
+	<key>feedurl</key>
+	<string>http://einschlafen-podcast.de/feed/aac/</string>
 	<key>UserAgent</key>
-	<string>Dirty Minutes Left App</string>
-	<key>bigprogressbar</key>
-	<false/>
+	<string>Einschlafen Podcast iOS App</string>
 	<key>backgroundColor</key>
-	<string>FFFFFF</string>
+	<dict>
+		<key>red</key>
+		<integer>1</integer>
+		<key>green</key>
+		<integer>1</integer>
+		<key>blue</key>
+		<integer>1</integer>
+		<key>alpha</key>
+		<integer>1</integer>
+	</dict>
 	<key>textcolor</key>
 	<dict>
 		<key>red</key>
 		<integer>0</integer>
 		<key>green</key>
-		<real>0.55</real>
+		<integer>0</integer>
 		<key>blue</key>
-		<real>0.84</real>
+		<integer>0</integer>
 		<key>alpha</key>
 		<integer>1</integer>
 	</dict>
@@ -37,11 +46,11 @@
 	<key>highlightColor</key>
 	<dict>
 		<key>red</key>
-		<integer>0</integer>
+		<real>0.99</real>
 		<key>green</key>
-		<real>0.55</real>
+		<real>0.5600000000000001</real>
 		<key>blue</key>
-		<real>0.84</real>
+		<integer>0</integer>
 		<key>alpha</key>
 		<integer>1</integer>
 	</dict>
@@ -59,11 +68,11 @@
 	<key>playControlColor</key>
 	<dict>
 		<key>red</key>
-		<integer>0</integer>
+		<real>0.99</real>
 		<key>green</key>
-		<real>0.55</real>
+		<real>0.5600000000000001</real>
 		<key>blue</key>
-		<real>0.84</real>
+		<integer>0</integer>
 		<key>alpha</key>
 		<integer>1</integer>
 	</dict>
