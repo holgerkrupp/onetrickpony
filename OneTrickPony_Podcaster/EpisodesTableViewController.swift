@@ -759,14 +759,15 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
     */
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
-        
-        let episode: Episode = episodes[indexPath.row]
+        if episodes.count >= indexPath.row{
+            let episode: Episode = episodes[indexPath.row]
         // NSLog(episode.episodeTitle)
-        let existence = existsLocally(episode.episodeUrl)
+            let existence = existsLocally(episode.episodeUrl)
         
-        if (existence.existlocal){
+            if (existence.existlocal){
             
-            return true
+                return true
+            }
         }
         return false
         
@@ -883,18 +884,22 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
     
     
     func downloadurl(_ urlstring: String) {
+    
+        NSLog("download request: \(urlstring)")
         if let url = activeDownloads[urlstring] {
             print("\(url) already downloading")
         }else if existsLocally(urlstring).existlocal{
             print("\(urlstring) is already locally available")
         }else{
             if let url =  URL(string: urlstring) {
-                let download = Download(url: urlstring)
-                download.isEpisode = false
-                download.downloadTask = downloadsSession.downloadTask(with: url)
-                download.downloadTask!.resume()
-                download.isDownloading = true
-                activeDownloads[download.url] = download
+                if url.host != "auphonic.com"{ //Auphonic exception for Trick17
+                    let download = Download(url: urlstring)
+                    download.isEpisode = false
+                    download.downloadTask = downloadsSession.downloadTask(with: url)
+                    download.downloadTask!.resume()
+                    download.isDownloading = true
+                    activeDownloads[download.url] = download
+                }
             }
         }
     }
@@ -938,11 +943,12 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
         do {
             try fileManager.removeItem(at: destinationURL)
         } catch {
+            NSLog("couldn't delete old file")
             // Non-fatal: file probably doesn't exist
         }
         do {
             try fileManager.copyItem(at: location, to: destinationURL)
-            NSLog("wrote new file")
+            NSLog("moving feed from \(location) to \(destinationURL)")
             //  setObjectForKeyToPersistentStorrage("lastfeedday" as String, value: NSDate())
             do {
                 try (destinationURL as NSURL).setResourceValue(true, forKey: URLResourceKey.isExcludedFromBackupKey)
@@ -951,19 +957,24 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
                 NSLog("Failed to exclude from backup")
             }
             if (destinationURL.pathExtension.lowercased() == "xml"){
-                loadfeedandparse {
-                    DispatchQueue.main.async(execute: {
-                        self.tableView.reloadData()
-                    })
-                    cleanUpSpace()
-                    DispatchQueue.main.async {
-                        self.refreshControl!.endRefreshing()
+                let attr : NSDictionary? = try FileManager.default.attributesOfItem(atPath: destinationURL.absoluteString) as NSDictionary?
+                if let _attr = attr {
+                    let fileSize = _attr.fileSize();
+                    if fileSize > 1000 {
+                        loadfeedandparse {
+                            DispatchQueue.main.async(execute: {
+                                self.tableView.reloadData()
+                            })
+                            cleanUpSpace()
+                            DispatchQueue.main.async {
+                            self.refreshControl!.endRefreshing()
                     }
                 }
+                }
+                }
+                
             }
-            
-            
-        } catch let error as NSError {
+        }catch let error as NSError {
             print("Could not copy file to disk: \(error.localizedDescription)")
         }
         
@@ -976,13 +987,13 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
             // update the cell to update it that it has the file locally and only if it's a media file and not the feed
             if let episodeIndex = episodeIndexForDownloadTask(downloadTask), let episodeCell = tableView.cellForRow(at: IndexPath(row: episodeIndex, section: 0)) as? EpisodeCell {
                 
-                DispatchQueue.main.async(execute: {
+//                DispatchQueue.main.async(execute: {
                     if (episodeCell.episode.episodeUrl == url){
                         episodeCell.EpisodeDownloadProgressbar.isHidden = true
                     }
                     
                     self.updateCellForEpisode(episodeCell.episode)
-                })
+//                })
             }
                  }
         }
@@ -1088,6 +1099,7 @@ extension EpisodesTableViewController: EpisodeCellDelegate {
 extension EpisodesTableViewController: URLSessionDelegate {
     
     func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
+        DispatchQueue.main.async {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             if let completionHandler = appDelegate.backgroundSessionCompletionHandler {
                 appDelegate.backgroundSessionCompletionHandler = nil
@@ -1096,5 +1108,7 @@ extension EpisodesTableViewController: URLSessionDelegate {
                 })
             }
         }
+        }
+        
     }
 }
