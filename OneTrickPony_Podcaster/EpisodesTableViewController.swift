@@ -478,7 +478,10 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
             
         } else if elementName == "enclosure"{
             episodeUrl = attributeDict["url"]!
-            episodeFilesize = Int(attributeDict["length"]!)!
+            if let size = Int(attributeDict["length"]!){
+                episodeFilesize = size
+            }
+            
             
             
         }else if elementName == "itunes:image"{
@@ -548,8 +551,9 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
             }else{
                 episode.episodePubDate = Date()
             }
-            let url: URL = URL(string: episodeUrl)!
-            episode.episodeFilename = url.lastPathComponent
+            if let url: URL = URL(string: episodeUrl){
+                episode.episodeFilename = url.lastPathComponent
+            }
             episode.episodeFilesize = episodeFilesize
             
             episode.episodeChapter = episodeChapters
@@ -561,7 +565,7 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
             
             episode.episodeIndex = episodes.count
             episodes.append(episode)
-            
+//            dump(episode)
         }else if elementName == "channel"{
             print("end of feed")
             

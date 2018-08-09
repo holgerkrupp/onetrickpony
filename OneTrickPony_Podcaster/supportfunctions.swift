@@ -245,14 +245,17 @@ func cleanUpSpace(){
 
 func existsLocally(_ checkurl: String) -> (existlocal : Bool, localURL : String) {
     let manager = FileManager.default
-    let url: URL = URL(string: checkurl)!
-    let documentsDirectoryUrl =  NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-    let fileName = url.lastPathComponent as String
-    let localFeedFile = documentsDirectoryUrl + "/" + fileName
+    if let url: URL = URL(string: checkurl){
+        let documentsDirectoryUrl =  NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        let fileName = url.lastPathComponent as String
+        let localFeedFile = documentsDirectoryUrl + "/" + fileName
     
-    if manager.fileExists(atPath: localFeedFile){
-        return (true, localFeedFile)
-    } else {
-        return (false, localFeedFile)
+        if manager.fileExists(atPath: localFeedFile){
+            return (true, localFeedFile)
+        } else {
+            return (false, localFeedFile)
+        }
+    }else{
+        return (false, "")
     }
 }
