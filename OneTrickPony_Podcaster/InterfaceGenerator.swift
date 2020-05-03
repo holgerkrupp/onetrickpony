@@ -181,8 +181,8 @@ func createSkipWithColor(_ color: UIColor, width:CGFloat, size: CGSize, filled: 
     
     
     let attributes: [String: AnyObject] = [
-        NSAttributedStringKey.foregroundColor.rawValue : color,
-        NSAttributedStringKey.font.rawValue : aFont!
+        NSAttributedString.Key.foregroundColor.rawValue : color,
+        NSAttributedString.Key.font.rawValue : aFont!
     ]
     
     

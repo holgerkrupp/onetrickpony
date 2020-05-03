@@ -20,6 +20,9 @@
 "title.server.not.reachable" = "Fehler";
 "message.server.not.reachable" = "Server nicht erreichbar";
 
+"episodelist.title" = "Episoden";
+"episodelist.search" = "Suche";
+
 
 
 "sleep.timer.title" = "Einschlaffunktion";

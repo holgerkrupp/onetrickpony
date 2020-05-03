@@ -1,0 +1,922 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:bitlove="http://bitlove.org" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:psc="http://podlove.org/simple-chapters" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:fh="http://purl.org/syndication/history/1.0" >
+
+<channel>
+	<title>Schlaulicht</title>
+	<link>https://schlaulicht.info</link>
+	<description>Der Podcast für Neugierige</description>
+	<lastBuildDate>Tue, 02 Oct 2018 09:11:00 +0000</lastBuildDate>
+	
+<image><url>http://schlaulicht.info/wp-content/uploads/2016/02/Icon-1-300x300.png</url><title>Schlaulicht</title><link>https://schlaulicht.info</link></image>
+<atom:link rel="self" type="application/rss+xml" title="Schlaulicht (m4a)" href="https://schlaulicht.info/feed/m4a/" />
+	<atom:link rel="alternate" type="application/rss+xml" title="Schlaulicht (mp3)" href="https://schlaulicht.info/feed/mp3/" />
+	<atom:link rel="first" href="https://schlaulicht.info/feed/m4a/" />
+	<language>de-DE</language><generator>Podlove Podcast Publisher v2.7.14</generator>
+	<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+	<itunes:type>episodic</itunes:type>
+	<itunes:summary>Ein Podcast für Kinder von 7 - 99</itunes:summary>
+<itunes:category text="Kids &amp; Family"></itunes:category><itunes:category text="Education"></itunes:category><itunes:category text="Science &amp; Medicine"></itunes:category>
+	
+	<itunes:owner>
+		<itunes:name>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:name>
+		<itunes:email>info@schlaulicht.info</itunes:email>
+	</itunes:owner>
+	<itunes:image href="http://schlaulicht.info/wp-content/uploads/2016/02/Icon-1-300x300.png" />
+	<itunes:subtitle>Der Podcast für Neugierige</itunes:subtitle>
+	<itunes:block>no</itunes:block>
+	<itunes:explicit>no</itunes:explicit>
+
+<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info&amp;title=Schlaulicht&amp;description=Der+Podcast+f%C3%BCr+Neugierige" type="text/html" />	
+		
+	<item>
+		<title>047 &#8211; Rassismus</title>
+		<link>https://schlaulicht.info/047-rassismus/</link>
+		<pubDate>Mon, 01 Oct 2018 10:00:45 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2018-09-30t16:33:45+00:00-96b2ca3e44ab8c0</guid>
+		<description><![CDATA[Im Schlaulicht-Studio ist alles für die große Party vorbereitet, denn wir haben Grund zum Feiern. Emil ist zurück!
+Unser Professor stürzt sich am Buffet gleich auf die Süßigkeiten. Doch die Feierstimmung hält nicht lange, denn Prof. Dr. (soviel Zeit muss sein) Flugrost sagt das N-Wort! Für ihn heißen Schaumküsse immer noch so, wie man sie früher nannte.
+Emil, Jörg und André protestieren: Das darf man doch nicht sagen! Aber warum eigentlich nicht? Da ist klar: Wir müssen reden! 
+Eine interessante Episode über Rassismus und Political Correctness. Hört rein!]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/047-rassismus/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/220/s/feed/c/m4a/047-Rassismus.m4a" length="23016921" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/220"/>
+
+		<itunes:duration>00:24:25</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere 47. Episode über Rassismus und Political Correctness</itunes:subtitle>
+		<itunes:title>047 - Rassismus</itunes:title>
+		<itunes:episode>47</itunes:episode>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Im Schlaulicht-Studio ist alles für die große Party vorbereitet, denn wir haben Grund zum Feiern. Emil ist zurück!
+Unser Professor stürzt sich am Buffet gleich auf die Süßigkeiten. Doch die Feierstimmung hält nicht lange, denn Prof. Dr. (soviel Zeit muss sein) Flugrost sagt das N-Wort! Für ihn heißen Schaumküsse immer noch so, wie man sie früher nannte.
+Emil, Jörg und André protestieren: Das darf man doch nicht sagen! Aber warum eigentlich nicht? Da ist klar: Wir müssen reden! 
+Eine interessante Episode über Rassismus und Political Correctness. Hört rein!</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F047-rassismus%2F&amp;title=047+-+Rassismus&amp;description=Im+Schlaulicht-Studio+ist+alles+f%C3%BCr+die+gro%C3%9Fe+Party+vorbereitet%2C+denn+wir+haben+Grund+zum+Feiern.+Emil+ist+zur%C3%BCck%21%0D%0AUnser+Professor+st%C3%BCrzt+sich+am+Buffet+gleich+auf+die+S%C3%BC%C3%9Figkeiten.+Doch+die+Feierstimmung+h%C3%A4lt+nicht+lange%2C+denn+Prof.+Dr.+%28soviel+Zeit+muss+sein%29+Flugrost+sagt+das+N-Wort%21+F%C3%BCr+ihn+hei%C3%9Fen+Schaumk%C3%BCsse+immer+noch+so%2C+wie+man+sie+fr%C3%BCher+nannte.%0D%0AEmil%2C+J%C3%B6rg+und+Andr%C3%A9+protestieren%3A+Das+darf+man+doch+nicht+sagen%21+Aber+warum+eigentlich+nicht%3F+Da+ist+klar%3A+Wir+m%C3%BCssen+reden%21+%0D%0AEine+interessante+Episode+%C3%BCber+Rassismus+und+Political+Correctness.+H%C3%B6rt+rein%21" type="text/html" />	
+	</item>
+		
+	<item>
+		<title>046 -Tiefsee</title>
+		<link>https://schlaulicht.info/046-tiefsee/</link>
+		<pubDate>Mon, 10 Sep 2018 12:00:55 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2018-09-05t12:11:17+00:00-7310bf2eb018a31</guid>
+		<description><![CDATA[Der Einzug ist fast geschafft. Hunderte Kisten hat Prof. Dr. Flugrost schon ins Schlaulicht-Studio gebracht. Während die anderen Schlaulichter rätseln, was da alles drin sein könnte, fällt eine kleine Gummiente aus einem Karton. An der Ente hängt ein Schlüssel. Wozu mag der gehören? Zum selbst konstruierten U-Boot von Prof. Dr. Flugrost!
+Wir brechen sofort zum U-Boot-Schuppen am Hafen auf und nach einem kleinen Unfall mit einem roten Knopf, startet eine spannende Reise in die Tiefsee.
+Kommt mit!]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/046-tiefsee/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/214/s/feed/c/m4a/046-Tiefsee.m4a" length="20221110" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/214"/>
+
+		<itunes:duration>00:21:25</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere sechsundvierzigste Episode - Eine Reise in die Tiefsee</itunes:subtitle>
+		<itunes:episode>46</itunes:episode>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Der Einzug ist fast geschafft. Hunderte Kisten hat Prof. Dr. Flugrost schon ins Schlaulicht-Studio gebracht. Während die anderen Schlaulichter rätseln, was da alles drin sein könnte, fällt eine kleine Gummiente aus einem Karton. An der Ente hängt ein Schlüssel. Wozu mag der gehören? Zum selbst konstruierten U-Boot von Prof. Dr. Flugrost!
+Wir brechen sofort zum U-Boot-Schuppen am Hafen auf und nach einem kleinen Unfall mit einem roten Knopf, startet eine spannende Reise in die Tiefsee.
+Kommt mit!</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F046-tiefsee%2F&amp;title=046+-Tiefsee&amp;description=Der+Einzug+ist+fast+geschafft.+Hunderte+Kisten+hat+Prof.+Dr.+Flugrost+schon+ins+Schlaulicht-Studio+gebracht.+W%C3%A4hrend+die+anderen+Schlaulichter+r%C3%A4tseln%2C+was+da+alles+drin+sein+k%C3%B6nnte%2C+f%C3%A4llt+eine+kleine+Gummiente+aus+einem+Karton.+An+der+Ente+h%C3%A4ngt+ein+Schl%C3%BCssel.+Wozu+mag+der+geh%C3%B6ren%3F+Zum+selbst+konstruierten+U-Boot+von+Prof.+Dr.+Flugrost%21%0D%0AWir+brechen+sofort+zum+U-Boot-Schuppen+am+Hafen+auf+und+nach+einem+kleinen+Unfall+mit+einem+roten+Knopf%2C+startet+eine+spannende+Reise+in+die+Tiefsee.%0D%0AKommt+mit%21" type="text/html" />	
+	</item>
+		
+	<item>
+		<title>045 &#8211; Behinderungen</title>
+		<link>https://schlaulicht.info/045-behinderungen/</link>
+		<pubDate>Tue, 21 Aug 2018 06:43:17 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2018-08-20t20:27:50+00:00-22d2a1eb49ef519</guid>
+		<description><![CDATA[Professor Dr. Flugrost zieht ins Schlaulicht-Studio und hat schon fleißig Kisten vorbeigebracht. Während Jörg seinen Urlaub genießt, klingelt André beim Professor, um ein bisschen spazieren zu gehen und um auch ein wenig mit anzufassen. Der Professor tritt in ein Schlagloch und stürzt. Für die beiden ist das der Anlass, sich nach dem ersten Schreck über Behinderung und Barrierefreiheit zu unterhalten. Wir erklären, warum der Alltag für viele Menschen immer noch voller Barrieren ist, wie man ihn barrierefrei gestalten kann und was Kinder damit zu tun haben.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/045-behinderungen/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/205/s/feed/c/m4a/045-BehinderungBarrierefreiheit.m4a" length="62021043" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/205"/>
+
+		<itunes:duration>00:32:34</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere fünfundvierzigste Episode - Behinderungen</itunes:subtitle>
+		<itunes:title>Behinderungen</itunes:title>
+		<itunes:episode>45</itunes:episode>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Professor Dr. Flugrost zieht ins Schlaulicht-Studio und hat schon fleißig Kisten vorbeigebracht. Während Jörg seinen Urlaub genießt, klingelt André beim Professor, um ein bisschen spazieren zu gehen und um auch ein wenig mit anzufassen. Der Professor tritt in ein Schlagloch und stürzt. Für die beiden ist das der Anlass, sich nach dem ersten Schreck über Behinderung und Barrierefreiheit zu unterhalten. Wir erklären, warum der Alltag für viele Menschen immer noch voller Barrieren ist, wie man ihn barrierefrei gestalten kann und was Kinder damit zu tun haben.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F045-behinderungen%2F&amp;title=Behinderungen&amp;description=Professor+Dr.+Flugrost+zieht+ins+Schlaulicht-Studio+und+hat+schon+flei%C3%9Fig+Kisten+vorbeigebracht.+W%C3%A4hrend+J%C3%B6rg+seinen+Urlaub+genie%C3%9Ft%2C+klingelt+Andr%C3%A9+beim+Professor%2C+um+ein+bisschen+spazieren+zu+gehen+und+um+auch+ein+wenig+mit+anzufassen.+Der+Professor+tritt+in+ein+Schlagloch+und+st%C3%BCrzt.+F%C3%BCr+die+beiden+ist+das+der+Anlass%2C+sich+nach+dem+ersten+Schreck+%C3%BCber+Behinderung+und+Barrierefreiheit+zu+unterhalten.+Wir+erkl%C3%A4ren%2C+warum+der+Alltag+f%C3%BCr+viele+Menschen+immer+noch+voller+Barrieren+ist%2C+wie+man+ihn+barrierefrei+gestalten+kann+und+was+Kinder+damit+zu+tun+haben." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>044 &#8211; Toiletten</title>
+		<link>https://schlaulicht.info/044-toiletten/</link>
+		<pubDate>Mon, 23 Jul 2018 19:14:39 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2018-07-23t19:11:18+00:00-765a7b76ebfb0a5</guid>
+		<description><![CDATA[Hochbetrieb vor der Schlaulicht Toilette....und Prof. Dr. Flugrost kommt auch noch vorbei. Also Grund genug über das WC zu sprechen. Von Großen und Kleinen Geschäften...Und was Archäologen so interessant finden....da haben wir doch einen Experten am START. EIne neue spannende Sendung...die man auch auf dem Klo hören kann...]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/044-toiletten/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/202/s/feed/c/m4a/044-Toiletten.m4a" length="34036741" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/202"/>
+
+		<itunes:duration>00:35:03</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere vierundvierzigste Episode - Toiletten - Von Geschäften auf dem Örtchen</itunes:subtitle>
+		<itunes:episode>44</itunes:episode>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Hochbetrieb vor der Schlaulicht Toilette....und Prof. Dr. Flugrost kommt auch noch vorbei. Also Grund genug über das WC zu sprechen. Von Großen und Kleinen Geschäften...Und was Archäologen so interessant finden....da haben wir doch einen Experten am START. EIne neue spannende Sendung...die man auch auf dem Klo hören kann...</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F044-toiletten%2F&amp;title=044+%26%238211%3B+Toiletten&amp;description=Hochbetrieb+vor+der+Schlaulicht+Toilette....und+Prof.+Dr.+Flugrost+kommt+auch+noch+vorbei.+Also+Grund+genug+%C3%BCber+das+WC+zu+sprechen.+Von+Gro%C3%9Fen+und+Kleinen+Gesch%C3%A4ften...Und+was+Arch%C3%A4ologen+so+interessant+finden....da+haben+wir+doch+einen+Experten+am+START.+EIne+neue+spannende+Sendung...die+man+auch+auf+dem+Klo+h%C3%B6ren+kann..." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>043 &#8211; Wuermer</title>
+		<link>https://schlaulicht.info/043-wuermer/</link>
+		<pubDate>Fri, 06 Jul 2018 07:40:57 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2018-07-06t07:30:35+00:00-4e0e6d4bf5c7dcc</guid>
+		<description><![CDATA[Unsere dreiundvierzigste Episode - Wuermer - von Regenwuermern und besserem Boden]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/043-wuermer/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/197/s/feed/c/m4a/043-Wuermer.m4a" length="28171436" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/197"/>
+
+		<itunes:duration>00:28:59</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere dreiundvierzigste Episode - Wuermer - von Regenwuermern und besserem Boden</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary></itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F043-wuermer%2F&amp;title=043+%26%238211%3B+Wuermer&amp;description=Unsere+dreiundvierzigste+Episode+-+Wuermer+-+von+Regenwuermern+und+besserem+Boden" type="text/html" />	
+	</item>
+		
+	<item>
+		<title>042 &#8211; Mimikri</title>
+		<link>https://schlaulicht.info/042-mimikri/</link>
+		<pubDate>Mon, 30 Apr 2018 11:41:06 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2018-04-30t11:18:44+00:00-90b5bb218fb5738</guid>
+		<description><![CDATA[Die Schlaulichter spielen verstecken....na das funktioniert ja nur so La-La. Grund genug sich über Tarnung und Täuschung zu unterhalten. Faszinierendes aus dem Reich der Tiere und Geschichten von Meistern der Tarnung.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/042-mimikri/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/193/s/feed/c/m4a/042-Mimikri.m4a" length="27943992" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/193"/>
+
+		<itunes:duration>00:28:44</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere zweiundvierzigste Episode - Mimikri - Täuschen, Tarnen und Verstecken</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Die Schlaulichter spielen verstecken....na das funktioniert ja nur so La-La. Grund genug sich über Tarnung und Täuschung zu unterhalten. Faszinierendes aus dem Reich der Tiere und Geschichten von Meistern der Tarnung.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F042-mimikri%2F&amp;title=042+%26%238211%3B+Mimikri&amp;description=Die+Schlaulichter+spielen+verstecken....na+das+funktioniert+ja+nur+so+La-La.+Grund+genug+sich+%C3%BCber+Tarnung+und+T%C3%A4uschung+zu+unterhalten.+Faszinierendes+aus+dem+Reich+der+Tiere+und+Geschichten+von+Meistern+der+Tarnung." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>041 &#8211; Europa</title>
+		<link>https://schlaulicht.info/041-europa/</link>
+		<pubDate>Mon, 09 Apr 2018 12:17:49 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2018-04-09t12:15:38+00:00-f36797133742b49</guid>
+		<description><![CDATA[Die Vorbereitungen auf unserer Kurzurlaub werden unterbrochen. Was hat Emil denn da gelesen. Wir müssen dringend über das moderne Europa sprechen. Was hat sich verändert und warum wir es so gut finden, Gemeinsamkeiten zu unterstreichen.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/041-europa/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/190/s/feed/c/m4a/041-Europa.m4a" length="29527741" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/190"/>
+
+		<itunes:duration>00:30:22</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere einundvierzigste Episode - Europa - von einer Idee, die Frieden bringt.</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Die Vorbereitungen auf unserer Kurzurlaub werden unterbrochen. Was hat Emil denn da gelesen. Wir müssen dringend über das moderne Europa sprechen. Was hat sich verändert und warum wir es so gut finden, Gemeinsamkeiten zu unterstreichen.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F041-europa%2F&amp;title=041+%26%238211%3B+Europa&amp;description=Die+Vorbereitungen+auf+unserer+Kurzurlaub+werden+unterbrochen.+Was+hat+Emil+denn+da+gelesen.+Wir+m%C3%BCssen+dringend+%C3%BCber+das+moderne+Europa+sprechen.+Was+hat+sich+ver%C3%A4ndert+und+warum+wir+es+so+gut+finden%2C+Gemeinsamkeiten+zu+unterstreichen." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>040 &#8211; Gitarren</title>
+		<link>https://schlaulicht.info/040-gitarren/</link>
+		<pubDate>Mon, 19 Mar 2018 13:32:43 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2018-03-19t13:29:41+00:00-ad951b360e14155</guid>
+		<description><![CDATA[Die SchlauLichter am Lagerfeuer....was fehlt ist noch Musik. Emils Versuch ist bemüht...aber da muss genauer nachgeschaut werden. Zum Glück hat der alte Pfadfinder Jörg seine Wandergitarre mit. Wie funktioniert eine Gitarre? Wie hat sich das entwickelt?? Und können unsere SchlauLichter auch Rock'n'Roll?]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/040-gitarren/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/186/s/feed/c/m4a/040-Gitarren.m4a" length="25884734" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/186"/>
+
+		<itunes:duration>00:26:38</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere vierzigste Episode - Gitarren und andere Saiteninstrumente</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Die SchlauLichter am Lagerfeuer....was fehlt ist noch Musik. Emils Versuch ist bemüht...aber da muss genauer nachgeschaut werden. Zum Glück hat der alte Pfadfinder Jörg seine Wandergitarre mit. Wie funktioniert eine Gitarre? Wie hat sich das entwickelt?? Und können unsere SchlauLichter auch Rock'n'Roll?</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F040-gitarren%2F&amp;title=040+%26%238211%3B+Gitarren&amp;description=Die+SchlauLichter+am+Lagerfeuer....was+fehlt+ist+noch+Musik.+Emils+Versuch+ist+bem%C3%BCht...aber+da+muss+genauer+nachgeschaut+werden.+Zum+Gl%C3%BCck+hat+der+alte+Pfadfinder+J%C3%B6rg+seine+Wandergitarre+mit.+Wie+funktioniert+eine+Gitarre%3F+Wie+hat+sich+das+entwickelt%3F%3F+Und+k%C3%B6nnen+unsere+SchlauLichter+auch+Rock%27n%27Roll%3F" type="text/html" />	
+	</item>
+		
+	<item>
+		<title>039 &#8211; Raben</title>
+		<link>https://schlaulicht.info/039-raben/</link>
+		<pubDate>Mon, 26 Feb 2018 13:03:31 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2018-02-26t13:01:29+00:00-5ce83be7c211e8c</guid>
+		<description><![CDATA[Klaut doch ein schwarzer Vogel unserem Emil eine Schraube...was ist denn hier passiert. Grund genug für die SchlauLichter, sich einmal mit Raben, Krähen und Elstern zu beschäftigen. Warum fürchten und bewundern wir Menschen diese intelligenten und sehr sozialen Tiere?]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/039-raben/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/181/s/feed/c/m4a/039-Raben.m4a" length="25345108" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/181"/>
+
+		<itunes:duration>00:26:04</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere neununddreissigste Episode - Raben, Krähen und Elstern - Hör mal wer da krächzt</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Klaut doch ein schwarzer Vogel unserem Emil eine Schraube...was ist denn hier passiert. Grund genug für die SchlauLichter, sich einmal mit Raben, Krähen und Elstern zu beschäftigen. Warum fürchten und bewundern wir Menschen diese intelligenten und sehr sozialen Tiere?</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F039-raben%2F&amp;title=039+%26%238211%3B+Raben&amp;description=Klaut+doch+ein+schwarzer+Vogel+unserem+Emil+eine+Schraube...was+ist+denn+hier+passiert.+Grund+genug+f%C3%BCr+die+SchlauLichter%2C+sich+einmal+mit+Raben%2C+Kr%C3%A4hen+und+Elstern+zu+besch%C3%A4ftigen.+Warum+f%C3%BCrchten+und+bewundern+wir+Menschen+diese+intelligenten+und+sehr+sozialen+Tiere%3F" type="text/html" />	
+	</item>
+		
+	<item>
+		<title>038 &#8211; Schnee</title>
+		<link>https://schlaulicht.info/038-schnee/</link>
+		<pubDate>Mon, 05 Feb 2018 12:32:23 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2018-02-05t12:25:33+00:00-a8f2e02a3bb876a</guid>
+		<description><![CDATA[Enttäuschung bei den Rodel-Fans. Was tun, wenn kein Schnee fällt - ist Kunstschnee immer nötig? Die 3 SchlauLichter machen sich Gedanken. Und Emil hat noch eine tolle Idee, wenn das Wetter mitspielt.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/038-schnee/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/177/s/feed/c/m4a/038-Schnee.m4a" length="21577027" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/177"/>
+
+		<itunes:duration>00:22:12</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere achtunddreissigste Episode - Schnee - von der weissen Pracht und wo sie herkommt.</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Enttäuschung bei den Rodel-Fans. Was tun, wenn kein Schnee fällt - ist Kunstschnee immer nötig? Die 3 SchlauLichter machen sich Gedanken. Und Emil hat noch eine tolle Idee, wenn das Wetter mitspielt.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F038-schnee%2F&amp;title=038+%26%238211%3B+Schnee&amp;description=Entt%C3%A4uschung+bei+den+Rodel-Fans.+Was+tun%2C+wenn+kein+Schnee+f%C3%A4llt+-+ist+Kunstschnee+immer+n%C3%B6tig%3F+Die+3+SchlauLichter+machen+sich+Gedanken.+Und+Emil+hat+noch+eine+tolle+Idee%2C+wenn+das+Wetter+mitspielt." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>037 &#8211; Witze</title>
+		<link>https://schlaulicht.info/037-witze/</link>
+		<pubDate>Mon, 15 Jan 2018 13:00:24 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2018-01-15t12:58:04+00:00-2333b633ef78054</guid>
+		<description><![CDATA[Dicke Luft beim Spieleabend....Emil versteht keinen Spaß. Grund genug sich mal mit Witzen, Kalauern und dem Humor überhaupt zu beschäftigen. Was das auch noch mit Kultur und Gesellschaft zu tun hat erfahren wir im Interview.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/037-witze/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/173/s/feed/c/m4a/037-Witze.m4a" length="31992036" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/173"/>
+
+		<itunes:duration>00:32:56</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere siebenunddreissigste Episode - Witze - vom befreienden Lachen über Schadenfreude und Kalauern. Es wird witzig mit den SchlauLichtern.</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Dicke Luft beim Spieleabend....Emil versteht keinen Spaß. Grund genug sich mal mit Witzen, Kalauern und dem Humor überhaupt zu beschäftigen. Was das auch noch mit Kultur und Gesellschaft zu tun hat erfahren wir im Interview.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F037-witze%2F&amp;title=037+%26%238211%3B+Witze&amp;description=Dicke+Luft+beim+Spieleabend....Emil+versteht+keinen+Spa%C3%9F.+Grund+genug+sich+mal+mit+Witzen%2C+Kalauern+und+dem+Humor+%C3%BCberhaupt+zu+besch%C3%A4ftigen.+Was+das+auch+noch+mit+Kultur+und+Gesellschaft+zu+tun+hat+erfahren+wir+im+Interview." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>036 &#8211; Aliens</title>
+		<link>https://schlaulicht.info/036-aliens/</link>
+		<pubDate>Mon, 25 Dec 2017 11:28:56 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2017-12-25t11:25:33+00:00-441a061ce762759</guid>
+		<description><![CDATA[Bei der Vorbereitung des Weihnachtsfestes werden die 3 SchlauLichter gewaltig erschreckt. Emil bewahrt die Ruhe. Was ist passiert? War da ein UFO im Wald? Was hat es auf sich mit fliegenden Untertassen und kleinen, grünen Männchen?]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/036-aliens/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/170/s/feed/c/m4a/036-Aliens.m4a" length="33009883" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/170"/>
+
+		<itunes:duration>00:33:59</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere sechsunddreissigste Episode - Aliens - von fliegnden Untertassen und der Faszination nicht alleine im Universum zu sein.</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Bei der Vorbereitung des Weihnachtsfestes werden die 3 SchlauLichter gewaltig erschreckt. Emil bewahrt die Ruhe. Was ist passiert? War da ein UFO im Wald? Was hat es auf sich mit fliegenden Untertassen und kleinen, grünen Männchen?</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F036-aliens%2F&amp;title=036+%26%238211%3B+Aliens&amp;description=Bei+der+Vorbereitung+des+Weihnachtsfestes+werden+die+3+SchlauLichter+gewaltig+erschreckt.+Emil+bewahrt+die+Ruhe.+Was+ist+passiert%3F+War+da+ein+UFO+im+Wald%3F+Was+hat+es+auf+sich+mit+fliegenden+Untertassen+und+kleinen%2C+gr%C3%BCnen+M%C3%A4nnchen%3F" type="text/html" />	
+	</item>
+		
+	<item>
+		<title>035 &#8211; Wetter</title>
+		<link>https://schlaulicht.info/035-wetter/</link>
+		<pubDate>Mon, 04 Dec 2017 13:39:41 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2017-12-04t13:37:10+00:00-16c5da222a41bf3</guid>
+		<description><![CDATA[Wir planen unseren Ausflug für den nächsten Tag. Aber wie wird das Wetter. Emils elektronische Freundin gibt Auskunft. Aber was bedeutet das alles? Alle Wetter im SchlauLicht-Studi9o...und einen Profi haben wir auch noch im Interview.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/035-wetter/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/166/s/feed/c/m4a/035-Wetter.m4a" length="39732519" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/166"/>
+
+		<itunes:duration>00:40:53</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere fünfunddreissigste Episode - darüber reden ist doch nicht langweilig - Wetter</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Wir planen unseren Ausflug für den nächsten Tag. Aber wie wird das Wetter. Emils elektronische Freundin gibt Auskunft. Aber was bedeutet das alles? Alle Wetter im SchlauLicht-Studi9o...und einen Profi haben wir auch noch im Interview.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F035-wetter%2F&amp;title=035+%26%238211%3B+Wetter&amp;description=Wir+planen+unseren+Ausflug+f%C3%BCr+den+n%C3%A4chsten+Tag.+Aber+wie+wird+das+Wetter.+Emils+elektronische+Freundin+gibt+Auskunft.+Aber+was+bedeutet+das+alles%3F+Alle+Wetter+im+SchlauLicht-Studi9o...und+einen+Profi+haben+wir+auch+noch+im+Interview." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>034 &#8211; Baertierchen</title>
+		<link>https://schlaulicht.info/034-baertierchen/</link>
+		<pubDate>Mon, 13 Nov 2017 12:38:18 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2017-11-13t12:34:52+00:00-cc87d7baaec1c8f</guid>
+		<description><![CDATA[SchlauLicht Jörg hat ein neues Spielzeug...ein Mikroskop. Schon bei den ersten Beobachtungen entdeckt er eine neue, faszinierende Welt. Da wollen natürlcih alle rausfinden und recherchieren, was es mit den Bärtierchen auf sich hat.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/034-baertierchen/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/161/s/feed/c/m4a/034-Baertierchen.m4a" length="20422961" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/161"/>
+
+		<itunes:duration>00:21:01</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere vierunddreissigste Episode - Bärtierchen, eine neue Welt unter dem Mikroskop</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>SchlauLicht Jörg hat ein neues Spielzeug...ein Mikroskop. Schon bei den ersten Beobachtungen entdeckt er eine neue, faszinierende Welt. Da wollen natürlcih alle rausfinden und recherchieren, was es mit den Bärtierchen auf sich hat.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F034-baertierchen%2F&amp;title=034+%26%238211%3B+Baertierchen&amp;description=SchlauLicht+J%C3%B6rg+hat+ein+neues+Spielzeug...ein+Mikroskop.+Schon+bei+den+ersten+Beobachtungen+entdeckt+er+eine+neue%2C+faszinierende+Welt.+Da+wollen+nat%C3%BCrlcih+alle+rausfinden+und+recherchieren%2C+was+es+mit+den+B%C3%A4rtierchen+auf+sich+hat." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>033 &#8211; Besteck</title>
+		<link>https://schlaulicht.info/033-besteck/</link>
+		<pubDate>Tue, 24 Oct 2017 16:48:22 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2017-10-24t16:42:49+00:00-526d8fc53f4961e</guid>
+		<description><![CDATA[André und Jörg haben gekocht und nun soll gemeinsam gegessen werden...GEMEINSAM!
+Über Tischmanieren und welche Werkzeuge hier benutzt werden. Und was erlauben sich Olli und Emil??]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/033-besteck/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/158/s/feed/c/m4a/033-Besteck.m4a" length="32603109" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/158"/>
+
+		<itunes:duration>00:33:34</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere dreiunddreissigste Episode - Wir bitten zu Tisch...von Messern, Gabeln, Stäbchen und Löffeln</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>André und Jörg haben gekocht und nun soll gemeinsam gegessen werden...GEMEINSAM!
+Über Tischmanieren und welche Werkzeuge hier benutzt werden. Und was erlauben sich Olli und Emil??</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F033-besteck%2F&amp;title=033+%26%238211%3B+Besteck&amp;description=Andr%C3%A9+und+J%C3%B6rg+haben+gekocht+und+nun+soll+gemeinsam+gegessen+werden...GEMEINSAM%21%0D%0A%C3%9Cber+Tischmanieren+und+welche+Werkzeuge+hier+benutzt+werden.+Und+was+erlauben+sich+Olli+und+Emil%3F%3F" type="text/html" />	
+	</item>
+		
+	<item>
+		<title>032 &#8211; Wasser</title>
+		<link>https://schlaulicht.info/032-wasser/</link>
+		<pubDate>Mon, 02 Oct 2017 12:06:22 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2017-10-02t12:02:56+00:00-60595d4e298b248</guid>
+		<description><![CDATA[Kleines Malheur im SchlauLicht Studio. Ausnahmsweise ist Emil unschuldig. Wasser....etwas sehr besonderes. Warum es so wichtig ist und was wir oft vergessen. Trinkwasser, Regenwasser und Meerwasser. Was hat es mit dem Kreislauf des Wassers auf sich? Kein trockenes Thema!]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/032-wasser/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/153/s/feed/c/m4a/032-Wasser.m4a" length="31600762" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/153"/>
+
+		<itunes:duration>00:32:32</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere zweiunddreissigste Episode - Mit allen Wassern gewaschen, es wird nass!</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Kleines Malheur im SchlauLicht Studio. Ausnahmsweise ist Emil unschuldig. Wasser....etwas sehr besonderes. Warum es so wichtig ist und was wir oft vergessen. Trinkwasser, Regenwasser und Meerwasser. Was hat es mit dem Kreislauf des Wassers auf sich? Kein trockenes Thema!</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F032-wasser%2F&amp;title=032+%26%238211%3B+Wasser&amp;description=Kleines+Malheur+im+SchlauLicht+Studio.+Ausnahmsweise+ist+Emil+unschuldig.+Wasser....etwas+sehr+besonderes.+Warum+es+so+wichtig+ist+und+was+wir+oft+vergessen.+Trinkwasser%2C+Regenwasser+und+Meerwasser.+Was+hat+es+mit+dem+Kreislauf+des+Wassers+auf+sich%3F+Kein+trockenes+Thema%21" type="text/html" />	
+	</item>
+		
+	<item>
+		<title>031 &#8211; Raumfahrt</title>
+		<link>https://schlaulicht.info/031-raumfahrt/</link>
+		<pubDate>Mon, 11 Sep 2017 11:35:50 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2017-09-11t11:29:50+00:00-197d7f967841027</guid>
+		<description><![CDATA[Der Countdown läuft. Die SchlauLichter auf ihrer Mission ins All. Faszination Raumfahrt - warum greifen wir nach den Sternen. Waren die Amerikaner damals wirklich auf dem Mond? Beweise!! Faszinierende Geschichten und tragische Unfälle.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/031-raumfahrt/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/148/s/feed/c/m4a/031-Raumfahrt.m4a" length="46223758" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/148"/>
+
+		<itunes:duration>00:47:36</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere einunddreissigste Episode - Raumfahrt</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Der Countdown läuft. Die SchlauLichter auf ihrer Mission ins All. Faszination Raumfahrt - warum greifen wir nach den Sternen. Waren die Amerikaner damals wirklich auf dem Mond? Beweise!! Faszinierende Geschichten und tragische Unfälle.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F031-raumfahrt%2F&amp;title=031+%26%238211%3B+Raumfahrt&amp;description=Der+Countdown+l%C3%A4uft.+Die+SchlauLichter+auf+ihrer+Mission+ins+All.+Faszination+Raumfahrt+-+warum+greifen+wir+nach+den+Sternen.+Waren+die+Amerikaner+damals+wirklich+auf+dem+Mond%3F+Beweise%21%21+Faszinierende+Geschichten+und+tragische+Unf%C3%A4lle." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>030 &#8211; Muecken</title>
+		<link>https://schlaulicht.info/030-muecken/</link>
+		<pubDate>Mon, 21 Aug 2017 11:33:59 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2017-08-21t11:27:30+00:00-833819ca9ae6db2</guid>
+		<description><![CDATA[Die SchlauLichter André und Olli werden von einer Studiomücke genervt. Grund genug, sich mit Fliegen und Mücken zu befassen. Von unangenehm juckenden Pusteln bis zu lebensgefährlichen Krankheiten. Was kann man tun? Passend zum Thema meldet sich SchlauLicht Jörg aus den schottischen Highlands - auch dort leidet man...unter Midges.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/030-muecken/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/144/s/feed/c/m4a/030-Muecken.m4a" length="38574473" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/144"/>
+
+		<itunes:duration>00:39:41</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere dreissigste Episode - Mücken und Fliegen, gefährliche Plagegeister</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Die SchlauLichter André und Olli werden von einer Studiomücke genervt. Grund genug, sich mit Fliegen und Mücken zu befassen. Von unangenehm juckenden Pusteln bis zu lebensgefährlichen Krankheiten. Was kann man tun? Passend zum Thema meldet sich SchlauLicht Jörg aus den schottischen Highlands - auch dort leidet man...unter Midges.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F030-muecken%2F&amp;title=030+%26%238211%3B+Muecken&amp;description=Die+SchlauLichter+Andr%C3%A9+und+Olli+werden+von+einer+Studiom%C3%BCcke+genervt.+Grund+genug%2C+sich+mit+Fliegen+und+M%C3%BCcken+zu+befassen.+Von+unangenehm+juckenden+Pusteln+bis+zu+lebensgef%C3%A4hrlichen+Krankheiten.+Was+kann+man+tun%3F+Passend+zum+Thema+meldet+sich+SchlauLicht+J%C3%B6rg+aus+den+schottischen+Highlands+-+auch+dort+leidet+man...unter+Midges." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>029 &#8211; Pferde</title>
+		<link>https://schlaulicht.info/029-pferde/</link>
+		<pubDate>Mon, 31 Jul 2017 11:01:24 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2017-07-31t10:57:17+00:00-471f673376c50f9</guid>
+		<description><![CDATA[Witze erzählen gegen die Langeweile...die 3 SchlauLichter wiehern vor Lachen und müssen Emil etwas vom Pferd erzählen. Wissenswertes über elde Rösser, Pferdeäpfel und den wilden Westen.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/029-pferde/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/142/s/feed/c/m4a/029-Pferde.m4a" length="35447115" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/142"/>
+
+		<itunes:duration>00:36:28</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere neunundzwanzigste Episode - hier kommt die Audio-Kavallerie - Pferde</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Witze erzählen gegen die Langeweile...die 3 SchlauLichter wiehern vor Lachen und müssen Emil etwas vom Pferd erzählen. Wissenswertes über elde Rösser, Pferdeäpfel und den wilden Westen.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F029-pferde%2F&amp;title=029+%26%238211%3B+Pferde&amp;description=Witze+erz%C3%A4hlen+gegen+die+Langeweile...die+3+SchlauLichter+wiehern+vor+Lachen+und+m%C3%BCssen+Emil+etwas+vom+Pferd+erz%C3%A4hlen.+Wissenswertes+%C3%BCber+elde+R%C3%B6sser%2C+Pferde%C3%A4pfel+und+den+wilden+Westen." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>028 &#8211; Mobiltelefone</title>
+		<link>https://schlaulicht.info/028-mobiltelefone/</link>
+		<pubDate>Mon, 10 Jul 2017 12:11:20 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2017-07-10t12:07:42+00:00-4cef4cd2662283b</guid>
+		<description><![CDATA[SchlauLicht Jörg wird Opfer eines Telefonstreiches....aber noch war es nicht André, der sich aus dem Urlaub meldet. Mobiltelefone - was für eine rasante Technik. Wie funktioniert das, sind Smartphones wirklich clever und wie hat sich das alles eigentlich Entwickelt...]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/028-mobiltelefone/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/137/s/feed/c/m4a/028-Mobiltelefone.m4a" length="38408467" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/137"/>
+
+		<itunes:duration>00:39:31</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere achtundzwanzigste Episode - Telefonieren ohne Kabel und Wählscheibe - Mobiltelefone</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>SchlauLicht Jörg wird Opfer eines Telefonstreiches....aber noch war es nicht André, der sich aus dem Urlaub meldet. Mobiltelefone - was für eine rasante Technik. Wie funktioniert das, sind Smartphones wirklich clever und wie hat sich das alles eigentlich Entwickelt...</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F028-mobiltelefone%2F&amp;title=028+%26%238211%3B+Mobiltelefone&amp;description=SchlauLicht+J%C3%B6rg+wird+Opfer+eines+Telefonstreiches....aber+noch+war+es+nicht+Andr%C3%A9%2C+der+sich+aus+dem+Urlaub+meldet.+Mobiltelefone+-+was+f%C3%BCr+eine+rasante+Technik.+Wie+funktioniert+das%2C+sind+Smartphones+wirklich+clever+und+wie+hat+sich+das+alles+eigentlich+Entwickelt..." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>027 &#8211; Reptilien</title>
+		<link>https://schlaulicht.info/027-reptilien/</link>
+		<pubDate>Thu, 22 Jun 2017 16:30:15 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2017-06-22t16:28:11+00:00-b87521bb264c3c5</guid>
+		<description><![CDATA[Emil hat wieder einamal etwas entdeckt...und will es gleich mitnehmen. Aber ist eine Eidechse ein geeignetes Haustier...was sind Reptilien eigentlich und haben die SchlauLichter selbst schon Erfahrungen gemacht....hört selbst.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/027-reptilien/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/132/s/feed/c/m4a/027-Reptilien.m4a" length="41337898" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/132"/>
+
+		<itunes:duration>00:42:32</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere siebenundzwanzigste Episode - Von Echsen, Schlangen und Schildkröten - Reptilien</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Emil hat wieder einamal etwas entdeckt...und will es gleich mitnehmen. Aber ist eine Eidechse ein geeignetes Haustier...was sind Reptilien eigentlich und haben die SchlauLichter selbst schon Erfahrungen gemacht....hört selbst.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F027-reptilien%2F&amp;title=027+%26%238211%3B+Reptilien&amp;description=Emil+hat+wieder+einamal+etwas+entdeckt...und+will+es+gleich+mitnehmen.+Aber+ist+eine+Eidechse+ein+geeignetes+Haustier...was+sind+Reptilien+eigentlich+und+haben+die+SchlauLichter+selbst+schon+Erfahrungen+gemacht....h%C3%B6rt+selbst." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>026 &#8211; Mobilitaet</title>
+		<link>https://schlaulicht.info/026-mobilitaet/</link>
+		<pubDate>Mon, 29 May 2017 18:52:55 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2017-05-29t18:47:44+00:00-d82f741d9560a3f</guid>
+		<description><![CDATA[Olli ist auf Reisen und auch Emil ist nicht Studio - Da machen sich die beiden daheimgebliebenen Schlaulichter Gedanken übers Reisen und wie man so von A nach B kommt. Faszinierendes rund um Autos, Züge, Flugzeuge und Schiffe. Aber was ist das...die beiden schaffen es doch noch Kontakt nach Irland herzustellen.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/026-mobilitaet/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/127/s/feed/c/m4a/026-Mobilitaet.m4a" length="33069815" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/127"/>
+
+		<itunes:duration>00:33:57</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere sechsundzwanzigste Episode - Fahren, Fliegen, Schwimmen - Mobilität</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Olli ist auf Reisen und auch Emil ist nicht Studio - Da machen sich die beiden daheimgebliebenen Schlaulichter Gedanken übers Reisen und wie man so von A nach B kommt. Faszinierendes rund um Autos, Züge, Flugzeuge und Schiffe. Aber was ist das...die beiden schaffen es doch noch Kontakt nach Irland herzustellen.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F026-mobilitaet%2F&amp;title=026+%26%238211%3B+Mobilitaet&amp;description=Olli+ist+auf+Reisen+und+auch+Emil+ist+nicht+Studio+-+Da+machen+sich+die+beiden+daheimgebliebenen+Schlaulichter+Gedanken+%C3%BCbers+Reisen+und+wie+man+so+von+A+nach+B+kommt.+Faszinierendes+rund+um+Autos%2C+Z%C3%BCge%2C+Flugzeuge+und+Schiffe.+Aber+was+ist+das...die+beiden+schaffen+es+doch+noch+Kontakt+nach+Irland+herzustellen." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>025 &#8211; Geld</title>
+		<link>https://schlaulicht.info/025-geld/</link>
+		<pubDate>Mon, 08 May 2017 12:39:07 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2017-05-08t12:37:05+00:00-75e33e5a2c8e9f9</guid>
+		<description><![CDATA[Ausgerechnet beim Essen kommt Emil mit der Bitte um Taschengeld...aber weiss er eigentlich was Geld ist? Wir machen uns schlau. Was hat es auf sich mit dem Zahlungsmittel...und warum ist es so oft unsichtbar?]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/025-geld/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/124/s/feed/c/m4a/025-Geld.m4a" length="26758274" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/124"/>
+
+		<itunes:duration>00:27:32</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere fünfundzwanzigste Episode - Pinke Pinke, Kohle, Kies und Moos - Das liebe, liebe Geld</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Ausgerechnet beim Essen kommt Emil mit der Bitte um Taschengeld...aber weiss er eigentlich was Geld ist? Wir machen uns schlau. Was hat es auf sich mit dem Zahlungsmittel...und warum ist es so oft unsichtbar?</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F025-geld%2F&amp;title=025+%26%238211%3B+Geld&amp;description=Ausgerechnet+beim+Essen+kommt+Emil+mit+der+Bitte+um+Taschengeld...aber+weiss+er+eigentlich+was+Geld+ist%3F+Wir+machen+uns+schlau.+Was+hat+es+auf+sich+mit+dem+Zahlungsmittel...und+warum+ist+es+so+oft+unsichtbar%3F" type="text/html" />	
+	</item>
+		
+	<item>
+		<title>024 &#8211; Kinderrechte</title>
+		<link>https://schlaulicht.info/024-kinderrechte/</link>
+		<pubDate>Mon, 17 Apr 2017 17:31:53 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2017-04-17t17:28:48+00:00-6c58a1c329c2105</guid>
+		<description><![CDATA[Wir haben ein wenig Stress mit unserem Roboter...Rechte, Pflichten, Absprachen... Wmil benimmt sich ja nun wirklich wie ein Kind, und Kinder haben besondere Rechte. Grund genug, dass wir uns damit beschäftigen. Und eine waschechte Senatorin hilft uns dabei.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/024-kinderrechte/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/120/s/feed/c/m4a/024-Kinderrechte.m4a" length="44435669" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/120"/>
+
+		<itunes:duration>00:45:45</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere vierundzwanzigste Episode - Besonderer Schutz, besondere Rechte - Kinderrechte</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Wir haben ein wenig Stress mit unserem Roboter...Rechte, Pflichten, Absprachen... Wmil benimmt sich ja nun wirklich wie ein Kind, und Kinder haben besondere Rechte. Grund genug, dass wir uns damit beschäftigen. Und eine waschechte Senatorin hilft uns dabei.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F024-kinderrechte%2F&amp;title=024+%26%238211%3B+Kinderrechte&amp;description=Wir+haben+ein+wenig+Stress+mit+unserem+Roboter...Rechte%2C+Pflichten%2C+Absprachen...+Wmil+benimmt+sich+ja+nun+wirklich+wie+ein+Kind%2C+und+Kinder+haben+besondere+Rechte.+Grund+genug%2C+dass+wir+uns+damit+besch%C3%A4ftigen.+Und+eine+waschechte+Senatorin+hilft+uns+dabei." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>023 &#8211; Bienen</title>
+		<link>https://schlaulicht.info/023-bienen/</link>
+		<pubDate>Mon, 27 Mar 2017 11:25:11 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2017-03-27t11:16:10+00:00-271adfa7a2972d4</guid>
+		<description><![CDATA[Ein entspannter Nachmittag im SchlauLicht-Garten...doch Emil wird panisch. Eine Biene macht ihn verrückt...die 3 SchlauLichter können schlimmes verhindern und nutzen den Anlass um sich mit Bienen zu beschäftigen. Interessantes rund um Honig, Wachs und fleissiges Gesumme.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/023-bienen/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/116/s/feed/c/m4a/023-Bienen.m4a" length="41068423" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/116"/>
+
+		<itunes:duration>00:42:17</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere dreiundzwanzigste Episode - Von Drohnen und Königinnen - Die Honigbiene</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Ein entspannter Nachmittag im SchlauLicht-Garten...doch Emil wird panisch. Eine Biene macht ihn verrückt...die 3 SchlauLichter können schlimmes verhindern und nutzen den Anlass um sich mit Bienen zu beschäftigen. Interessantes rund um Honig, Wachs und fleissiges Gesumme.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F023-bienen%2F&amp;title=023+%26%238211%3B+Bienen&amp;description=Ein+entspannter+Nachmittag+im+SchlauLicht-Garten...doch+Emil+wird+panisch.+Eine+Biene+macht+ihn+verr%C3%BCckt...die+3+SchlauLichter+k%C3%B6nnen+schlimmes+verhindern+und+nutzen+den+Anlass+um+sich+mit+Bienen+zu+besch%C3%A4ftigen.+Interessantes+rund+um+Honig%2C+Wachs+und+fleissiges+Gesumme." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>022 &#8211; Masseinheiten</title>
+		<link>https://schlaulicht.info/022-masseinheiten/</link>
+		<pubDate>Tue, 14 Mar 2017 13:38:42 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2017-03-14t13:36:08+00:00-3c7b879b28b988b</guid>
+		<description><![CDATA[Wer viel misst, misst Mist....wie ist das eigentlich mit Maßen, Gewichten und Einheiten. Warum ist das so wichtig im täglichen Miteinander. Ganz klein und ganz groß...Nano und Mega. Und was fällt Emil dazu wieder ein....]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/022-masseinheiten/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/112/s/feed/c/m4a/022-Masseinheiten.m4a" length="37914919" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/112"/>
+
+		<itunes:duration>00:39:02</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere zweiundzwanzigste Episode - Masseinheiten</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Wer viel misst, misst Mist....wie ist das eigentlich mit Maßen, Gewichten und Einheiten. Warum ist das so wichtig im täglichen Miteinander. Ganz klein und ganz groß...Nano und Mega. Und was fällt Emil dazu wieder ein....</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F022-masseinheiten%2F&amp;title=022+%26%238211%3B+Masseinheiten&amp;description=Wer+viel+misst%2C+misst+Mist....wie+ist+das+eigentlich+mit+Ma%C3%9Fen%2C+Gewichten+und+Einheiten.+Warum+ist+das+so+wichtig+im+t%C3%A4glichen+Miteinander.+Ganz+klein+und+ganz+gro%C3%9F...Nano+und+Mega.+Und+was+f%C3%A4llt+Emil+dazu+wieder+ein...." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>021 &#8211; Vulkane</title>
+		<link>https://schlaulicht.info/021-vulkane/</link>
+		<pubDate>Mon, 27 Feb 2017 13:14:27 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2017-02-27t13:11:51+00:00-b469ae810454552</guid>
+		<description><![CDATA[Es brodelt und rumort unter der Erde - Vulkane, faszinierend und brandgefährlich. Was passiert da? Gibt oder gab es Vulkane in Deutschland? Lava, Magma, flüssiges Gestein und gewaltiger Druck. Wir gehen der Sache nach und auch Emil hat wieder ein paar Fakten parat.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/021-vulkane/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/108/s/feed/c/m4a/021-Vulkane.m4a" length="28252582" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/108"/>
+
+		<itunes:duration>00:29:04</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere einundzwanzigste Episode - Vulkane</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Es brodelt und rumort unter der Erde - Vulkane, faszinierend und brandgefährlich. Was passiert da? Gibt oder gab es Vulkane in Deutschland? Lava, Magma, flüssiges Gestein und gewaltiger Druck. Wir gehen der Sache nach und auch Emil hat wieder ein paar Fakten parat.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F021-vulkane%2F&amp;title=021+%26%238211%3B+Vulkane&amp;description=Es+brodelt+und+rumort+unter+der+Erde+-+Vulkane%2C+faszinierend+und+brandgef%C3%A4hrlich.+Was+passiert+da%3F+Gibt+oder+gab+es+Vulkane+in+Deutschland%3F+Lava%2C+Magma%2C+fl%C3%BCssiges+Gestein+und+gewaltiger+Druck.+Wir+gehen+der+Sache+nach+und+auch+Emil+hat+wieder+ein+paar+Fakten+parat." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>020 &#8211; Schlafen</title>
+		<link>https://schlaulicht.info/020-schlafen/</link>
+		<pubDate>Mon, 13 Feb 2017 14:07:19 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2017-02-13t14:05:17+00:00-1b8b8ede97f467f</guid>
+		<description><![CDATA[Wir dre Schlaulichter stecken ja schon immer unter einer Decke...das gibt Probleme beim Einschlafen! Was passiert im Schlaf? Müssen wir schlafen und wenn, wieviel? Was ist mit Tieren...schlafen die auch? Was sagt Emil dazu? Eine Gute-Nacht-Geschichte der neugierigen Art von Euren Schlaulichtern.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/020-schlafen/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/104/s/feed/c/m4a/020-Schlafen.m4a" length="30998085" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/104"/>
+
+		<itunes:duration>00:31:55</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere zwanzigste Episode - Schlafen</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Wir dre Schlaulichter stecken ja schon immer unter einer Decke...das gibt Probleme beim Einschlafen! Was passiert im Schlaf? Müssen wir schlafen und wenn, wieviel? Was ist mit Tieren...schlafen die auch? Was sagt Emil dazu? Eine Gute-Nacht-Geschichte der neugierigen Art von Euren Schlaulichtern.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F020-schlafen%2F&amp;title=020+%26%238211%3B+Schlafen&amp;description=Wir+dre+Schlaulichter+stecken+ja+schon+immer+unter+einer+Decke...das+gibt+Probleme+beim+Einschlafen%21+Was+passiert+im+Schlaf%3F+M%C3%BCssen+wir+schlafen+und+wenn%2C+wieviel%3F+Was+ist+mit+Tieren...schlafen+die+auch%3F+Was+sagt+Emil+dazu%3F+Eine+Gute-Nacht-Geschichte+der+neugierigen+Art+von+Euren+Schlaulichtern." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>019 &#8211; Inventur</title>
+		<link>https://schlaulicht.info/019-inventur/</link>
+		<pubDate>Mon, 30 Jan 2017 16:00:29 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2017-01-30t15:57:19+00:00-be16ad5e871eb73</guid>
+		<description><![CDATA[Wir haben uns ein Wochenende zur Klausur zurückgezogen und ziehen Bilanz. Eine kleine Inventur...was bewegt uns, was war, was kommt...eine Episode die sich eher an die Erwachsenen richtet.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/019-inventur/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/99/s/feed/c/m4a/019-Inventur.m4a" length="59156501" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/99"/>
+
+		<itunes:duration>01:00:55</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere neunzehnte Episode - Inventur</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Wir haben uns ein Wochenende zur Klausur zurückgezogen und ziehen Bilanz. Eine kleine Inventur...was bewegt uns, was war, was kommt...eine Episode die sich eher an die Erwachsenen richtet.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F019-inventur%2F&amp;title=019+%26%238211%3B+Inventur&amp;description=Wir+haben+uns+ein+Wochenende+zur+Klausur+zur%C3%BCckgezogen+und+ziehen+Bilanz.+Eine+kleine+Inventur...was+bewegt+uns%2C+was+war%2C+was+kommt...eine+Episode+die+sich+eher+an+die+Erwachsenen+richtet." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>018 &#8211; Roboter</title>
+		<link>https://schlaulicht.info/018-roboter/</link>
+		<pubDate>Mon, 16 Jan 2017 13:01:30 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2017-01-16t12:58:52+00:00-1ffbd9fac8aadbc</guid>
+		<description><![CDATA[Roboter...das hat sich unser treuer Fan Maxi aus Stuttgart gewünscht. Und Emil wäre wohl nicht zu bremsen, wen nicht der TÜV nach ihm schauen wollte. Wie fing das an, wo geht es hin mit den Blech-Arbeitern, warum werden sie gerne so menschlich konstruiert...das alles in unserer neuen Episode.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/018-roboter/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/96/s/feed/c/m4a/018-Roboter.m4a" length="29782235" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/96"/>
+
+		<itunes:duration>00:30:38</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere achtzehnte Episode - Roboter</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Roboter...das hat sich unser treuer Fan Maxi aus Stuttgart gewünscht. Und Emil wäre wohl nicht zu bremsen, wen nicht der TÜV nach ihm schauen wollte. Wie fing das an, wo geht es hin mit den Blech-Arbeitern, warum werden sie gerne so menschlich konstruiert...das alles in unserer neuen Episode.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F018-roboter%2F&amp;title=018+%26%238211%3B+Roboter&amp;description=Roboter...das+hat+sich+unser+treuer+Fan+Maxi+aus+Stuttgart+gew%C3%BCnscht.+Und+Emil+w%C3%A4re+wohl+nicht+zu+bremsen%2C+wen+nicht+der+T%C3%9CV+nach+ihm+schauen+wollte.+Wie+fing+das+an%2C+wo+geht+es+hin+mit+den+Blech-Arbeitern%2C+warum+werden+sie+gerne+so+menschlich+konstruiert...das+alles+in+unserer+neuen+Episode." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>017 &#8211; Versunkene Staedte</title>
+		<link>https://schlaulicht.info/017-versunkene-staedte/</link>
+		<pubDate>Mon, 19 Dec 2016 14:08:55 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2016-12-19t14:04:48+00:00-5faddf2d9ca9345</guid>
+		<description><![CDATA[Wassereinbruch im SchlauLicht-Keller...plötzlich sieht unsere Spielecke aus wie eine versunkene Stadt. Während die Tauchpumpe läuft unterhalten wir uns über verschollene Kontinente und Staedte...Atlantis der Mythos...und Rungholt, das "echte" Atlantis der Nordsee. Troja und Pompeji....spannend wie immer...]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/017-versunkene-staedte/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/92/s/feed/c/m4a/017-Versunkene-Staedte.m4a" length="32539511" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/92"/>
+
+		<itunes:duration>00:33:29</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere siebzehnte Episode - Versunkene Staedte</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Wassereinbruch im SchlauLicht-Keller...plötzlich sieht unsere Spielecke aus wie eine versunkene Stadt. Während die Tauchpumpe läuft unterhalten wir uns über verschollene Kontinente und Staedte...Atlantis der Mythos...und Rungholt, das &quot;echte&quot; Atlantis der Nordsee. Troja und Pompeji....spannend wie immer...</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F017-versunkene-staedte%2F&amp;title=017+%26%238211%3B+Versunkene+Staedte&amp;description=Wassereinbruch+im+SchlauLicht-Keller...pl%C3%B6tzlich+sieht+unsere+Spielecke+aus+wie+eine+versunkene+Stadt.+W%C3%A4hrend+die+Tauchpumpe+l%C3%A4uft+unterhalten+wir+uns+%C3%BCber+verschollene+Kontinente+und+Staedte...Atlantis+der+Mythos...und+Rungholt%2C+das+%26quot%3Bechte%26quot%3B+Atlantis+der+Nordsee.+Troja+und+Pompeji....spannend+wie+immer..." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>016 &#8211; Yeti-Bigfoot-Kryptozoologie</title>
+		<link>https://schlaulicht.info/016-yeti-bigfoot-kryptozoologie/</link>
+		<pubDate>Mon, 28 Nov 2016 11:25:22 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2016-11-28t11:19:06+00:00-edaef7e92558be7</guid>
+		<description><![CDATA[Unterwegs in Kathmandu...auf den Spuren des Yeti. Es ist saukalt, aber wir haben in einer Hütte Zuflucht gefunden und senden aus dem Himalaya. Haben wir da eben einen Yeti gesehen? Oder einen verirrten Bigfoot? Was ist dran an Nessi, Sasquatch, Chupacabra und Konsorten...und was sagt Emil dazu?]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/016-yeti-bigfoot-kryptozoologie/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/87/s/feed/c/m4a/016-Yeti-Bigfoot-Kryptozoologie.m4a" length="29131690" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/87"/>
+
+		<itunes:duration>00:29:58</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere sechzehnte Episode - Yeti-Bigfoot-Kryptozoologie</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Unterwegs in Kathmandu...auf den Spuren des Yeti. Es ist saukalt, aber wir haben in einer Hütte Zuflucht gefunden und senden aus dem Himalaya. Haben wir da eben einen Yeti gesehen? Oder einen verirrten Bigfoot? Was ist dran an Nessi, Sasquatch, Chupacabra und Konsorten...und was sagt Emil dazu?</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F016-yeti-bigfoot-kryptozoologie%2F&amp;title=016+%26%238211%3B+Yeti-Bigfoot-Kryptozoologie&amp;description=Unterwegs+in+Kathmandu...auf+den+Spuren+des+Yeti.+Es+ist+saukalt%2C+aber+wir+haben+in+einer+H%C3%BCtte+Zuflucht+gefunden+und+senden+aus+dem+Himalaya.+Haben+wir+da+eben+einen+Yeti+gesehen%3F+Oder+einen+verirrten+Bigfoot%3F+Was+ist+dran+an+Nessi%2C+Sasquatch%2C+Chupacabra+und+Konsorten...und+was+sagt+Emil+dazu%3F" type="text/html" />	
+	</item>
+		
+	<item>
+		<title>015 &#8211; Politik</title>
+		<link>https://schlaulicht.info/015-politik/</link>
+		<pubDate>Mon, 14 Nov 2016 11:46:07 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2016-11-14t11:42:58+00:00-22b8b21e59c5b80</guid>
+		<description><![CDATA[Politik ist unser Thema... lohnt es sich einzumischen? Wo fängt Politik eigentlich an? Regeln für die Gemeinschaft...wer bestimmt hier was? Wählen gehen - eine wichtige Sache. Ein Interview mit einem Philosophen aus der Politik und natürlich mit unserem Emil!]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/015-politik/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/84/s/feed/c/m4a/015-Politik.m4a" length="33022665" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/84"/>
+
+		<itunes:duration>00:34:00</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere fünfzehnte Episode - Politik</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Politik ist unser Thema... lohnt es sich einzumischen? Wo fängt Politik eigentlich an? Regeln für die Gemeinschaft...wer bestimmt hier was? Wählen gehen - eine wichtige Sache. Ein Interview mit einem Philosophen aus der Politik und natürlich mit unserem Emil!</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F015-politik%2F&amp;title=015+%26%238211%3B+Politik&amp;description=Politik+ist+unser+Thema...+lohnt+es+sich+einzumischen%3F+Wo+f%C3%A4ngt+Politik+eigentlich+an%3F+Regeln+f%C3%BCr+die+Gemeinschaft...wer+bestimmt+hier+was%3F+W%C3%A4hlen+gehen+-+eine+wichtige+Sache.+Ein+Interview+mit+einem+Philosophen+aus+der+Politik+und+nat%C3%BCrlich+mit+unserem+Emil%21" type="text/html" />	
+	</item>
+		
+	<item>
+		<title>014 &#8211; Pupsen</title>
+		<link>https://schlaulicht.info/014-pupsen/</link>
+		<pubDate>Mon, 31 Oct 2016 11:54:08 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2016-10-31t11:52:14+00:00-b77f8d71ba64629</guid>
+		<description><![CDATA[Heute könnte Ihr froh sein, dass es keine Geruchs-Übetragung im Podcast gibt. Es geht ums Pupsen. Was passiert da, und was ist daran so lustig oder peinlich? War das schon immer so? Auch der geschätzte "Buddler" lässt einen Furz dazu...]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/014-pupsen/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/79/s/feed/c/m4a/014-Pupsen.m4a" length="37753794" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/79"/>
+
+		<itunes:duration>00:38:53</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere vierzehnte Episode - Pupsen</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Heute könnte Ihr froh sein, dass es keine Geruchs-Übetragung im Podcast gibt. Es geht ums Pupsen. Was passiert da, und was ist daran so lustig oder peinlich? War das schon immer so? Auch der geschätzte &quot;Buddler&quot; lässt einen Furz dazu...</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F014-pupsen%2F&amp;title=014+%26%238211%3B+Pupsen&amp;description=Heute+k%C3%B6nnte+Ihr+froh+sein%2C+dass+es+keine+Geruchs-%C3%9Cbetragung+im+Podcast+gibt.+Es+geht+ums+Pupsen.+Was+passiert+da%2C+und+was+ist+daran+so+lustig+oder+peinlich%3F+War+das+schon+immer+so%3F+Auch+der+gesch%C3%A4tzte+%26quot%3BBuddler%26quot%3B+l%C3%A4sst+einen+Furz+dazu..." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>013 &#8211; Werkzeuge</title>
+		<link>https://schlaulicht.info/013-werkzeuge/</link>
+		<pubDate>Tue, 18 Oct 2016 10:56:05 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2016-10-18t10:52:42+00:00-17d73525e866751</guid>
+		<description><![CDATA[Hammerhart werden dünne Bretter gebohrt - Heute geht es um Werkzeuge. Wie wichtig sind Werkzeuge für uns und unsere Kultur? Wie haben sie sich entwickelt und benutzen auch Tiere Werkzeuge? Faszinierendes mit Hämmern, Schraubendrehern und Rädern...]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/013-werkzeuge/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/75/s/feed/c/m4a/013-Werkzeuge.m4a" length="34393385" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/75"/>
+
+		<itunes:duration>00:35:25</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere dreizehnte Episode - Werkzeuge</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Hammerhart werden dünne Bretter gebohrt - Heute geht es um Werkzeuge. Wie wichtig sind Werkzeuge für uns und unsere Kultur? Wie haben sie sich entwickelt und benutzen auch Tiere Werkzeuge? Faszinierendes mit Hämmern, Schraubendrehern und Rädern...</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F013-werkzeuge%2F&amp;title=013+%26%238211%3B+Werkzeuge&amp;description=Hammerhart+werden+d%C3%BCnne+Bretter+gebohrt+-+Heute+geht+es+um+Werkzeuge.+Wie+wichtig+sind+Werkzeuge+f%C3%BCr+uns+und+unsere+Kultur%3F+Wie+haben+sie+sich+entwickelt+und+benutzen+auch+Tiere+Werkzeuge%3F+Faszinierendes+mit+H%C3%A4mmern%2C+Schraubendrehern+und+R%C3%A4dern..." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>012 &#8211; Star Wars</title>
+		<link>https://schlaulicht.info/012-star-wars/</link>
+		<pubDate>Wed, 05 Oct 2016 16:26:29 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2016-10-05t16:23:32+00:00-58b9eb62933dc04</guid>
+		<description><![CDATA[Es war einmal vor langer Zeit in einer weit, weit entfernten Galaxis ... Heute nehmen wir Euch mit zu einer galaktisch-phantastischen Reise zu den Sternen. Die Welt von Star Wars...ein Märchen? Eine Abenteuer-Geschichte? Warum ist die Macht mit uns und was für phantastische Lebewesen und Roboter lernen wir kennen? Und warum ist Emil so aufgeregt...]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/012-star-wars/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/71/s/feed/c/m4a/012-Star_Wars.m4a" length="38504121" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/71"/>
+
+		<itunes:duration>00:39:39</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere zwölfte Episode - Star Wars</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Es war einmal vor langer Zeit in einer weit, weit entfernten Galaxis ... Heute nehmen wir Euch mit zu einer galaktisch-phantastischen Reise zu den Sternen. Die Welt von Star Wars...ein Märchen? Eine Abenteuer-Geschichte? Warum ist die Macht mit uns und was für phantastische Lebewesen und Roboter lernen wir kennen? Und warum ist Emil so aufgeregt...</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F012-star-wars%2F&amp;title=012+%26%238211%3B+Star+Wars&amp;description=Es+war+einmal+vor+langer+Zeit+in+einer+weit%2C+weit+entfernten+Galaxis+...+Heute+nehmen+wir+Euch+mit+zu+einer+galaktisch-phantastischen+Reise+zu+den+Sternen.+Die+Welt+von+Star+Wars...ein+M%C3%A4rchen%3F+Eine+Abenteuer-Geschichte%3F+Warum+ist+die+Macht+mit+uns+und+was+f%C3%BCr+phantastische+Lebewesen+und+Roboter+lernen+wir+kennen%3F+Und+warum+ist+Emil+so+aufgeregt..." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>011 &#8211; Haustiere</title>
+		<link>https://schlaulicht.info/011-haustiere/</link>
+		<pubDate>Mon, 19 Sep 2016 11:44:20 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2016-09-19t07:30:04+00:00-d994be56c081dd1</guid>
+		<description><![CDATA[Warum haben wir Haustiere? Wie haben wir Tiere an uns gewöhnt. Was versteht man unter Nutztieren. Kommunikation mit unseren Tieren und zwischen Tieren untereinander. Verantwortung und Arbeit, was muss man beachten.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/011-haustiere/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/68/s/feed/c/m4a/011-Haustiere.m4a" length="28094619" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/68"/>
+
+		<itunes:duration>00:28:55</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere elfte Episode - Haustiere, Hunde und Katzen</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Warum haben wir Haustiere? Wie haben wir Tiere an uns gewöhnt. Was versteht man unter Nutztieren. Kommunikation mit unseren Tieren und zwischen Tieren untereinander. Verantwortung und Arbeit, was muss man beachten.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F011-haustiere%2F&amp;title=011+%26%238211%3B+Haustiere&amp;description=Warum+haben+wir+Haustiere%3F+Wie+haben+wir+Tiere+an+uns+gew%C3%B6hnt.+Was+versteht+man+unter+Nutztieren.+Kommunikation+mit+unseren+Tieren+und+zwischen+Tieren+untereinander.+Verantwortung+und+Arbeit%2C+was+muss+man+beachten." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>010 &#8211; Horoskope</title>
+		<link>https://schlaulicht.info/010-horoskope/</link>
+		<pubDate>Mon, 05 Sep 2016 12:14:12 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2016-09-05t12:11:33+00:00-d02fde4750694b9</guid>
+		<description><![CDATA[Was steht in den Sternen? Dieses Mal beschäftigen wir uns mit Horoskopen. Was sagen unsere Sternzeichen über uns aus, wieso treffen Horoskope so oft zu und tun sie das wirklich? Was hat es mit den Sternbildern auf sich? Astrologie und Astronomie - was ist der Unterschied? Und natürlich muss Emil auch wieder seinen Senf dazugeben.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/010-horoskope/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/64/s/feed/c/m4a/010-Horoskope.m4a" length="36225027" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/64"/>
+
+		<itunes:duration>00:37:16</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere zehnte Episode - Horoskope</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Was steht in den Sternen? Dieses Mal beschäftigen wir uns mit Horoskopen. Was sagen unsere Sternzeichen über uns aus, wieso treffen Horoskope so oft zu und tun sie das wirklich? Was hat es mit den Sternbildern auf sich? Astrologie und Astronomie - was ist der Unterschied? Und natürlich muss Emil auch wieder seinen Senf dazugeben.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F010-horoskope%2F&amp;title=010+%26%238211%3B+Horoskope&amp;description=Was+steht+in+den+Sternen%3F+Dieses+Mal+besch%C3%A4ftigen+wir+uns+mit+Horoskopen.+Was+sagen+unsere+Sternzeichen+%C3%BCber+uns+aus%2C+wieso+treffen+Horoskope+so+oft+zu+und+tun+sie+das+wirklich%3F+Was+hat+es+mit+den+Sternbildern+auf+sich%3F+Astrologie+und+Astronomie+-+was+ist+der+Unterschied%3F+Und+nat%C3%BCrlich+muss+Emil+auch+wieder+seinen+Senf+dazugeben." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>009 &#8211; Brücken und Tunnel</title>
+		<link>https://schlaulicht.info/009-bruecken-und-tunnel/</link>
+		<pubDate>Mon, 22 Aug 2016 10:24:54 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2016-08-22t10:21:18+00:00-a6392ad1506bebf</guid>
+		<description><![CDATA[Dieses Mal geht es drunter und drüber. Brücken und Tunnel - was ist spannender oder abenteuerlicher? Was machen Ingenieure und wo kann man was besser nutzen? Wir buddeln uns tief ins Thema ein und zeigen überirdische Dinge. Und Emil hat auch wieder was zu Melden.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/009-bruecken-und-tunnel/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/59/s/feed/c/m4a/009-Bruecken_und_Tunnel.m4a" length="38783026" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/59"/>
+
+		<itunes:duration>00:39:56</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere neunte Episode - Brücken und Tunnel</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Dieses Mal geht es drunter und drüber. Brücken und Tunnel - was ist spannender oder abenteuerlicher? Was machen Ingenieure und wo kann man was besser nutzen? Wir buddeln uns tief ins Thema ein und zeigen überirdische Dinge. Und Emil hat auch wieder was zu Melden.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F009-bruecken-und-tunnel%2F&amp;title=009+%26%238211%3B+Br%C3%BCcken+und+Tunnel&amp;description=Dieses+Mal+geht+es+drunter+und+dr%C3%BCber.+Br%C3%BCcken+und+Tunnel+-+was+ist+spannender+oder+abenteuerlicher%3F+Was+machen+Ingenieure+und+wo+kann+man+was+besser+nutzen%3F+Wir+buddeln+uns+tief+ins+Thema+ein+und+zeigen+%C3%BCberirdische+Dinge.+Und+Emil+hat+auch+wieder+was+zu+Melden." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>008 &#8211; Wahrnehmung</title>
+		<link>https://schlaulicht.info/008-wahrnehmung/</link>
+		<pubDate>Mon, 08 Aug 2016 12:24:49 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2016-08-08t12:19:16+00:00-39963b71257d814</guid>
+		<description><![CDATA[Unsere achte Episode - Wahrnehmung
+
+Was nehmen wir war und was sind unsere Sinne. Gibt es noch weitere Sinne? Wie werden wir getäuscht? Worauf sollten wir uns (nicht) verlassen? Willkommen zu einer neuen spannenden Episode vom Schlaulicht...mit einigen Beispielen, der SchlaulichtGestalt Rainer Rosenzweig, einem neuen Geräusche-Quiz und natürlich wieder mit Emil.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/008-wahrnehmung/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/56/s/feed/c/m4a/008-Wahrnehmung.m4a" length="44969103" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/56"/>
+
+		<itunes:duration>00:46:19</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere achte Episode - Wahrnehmung, Sinne und Täuschungen</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Unsere achte Episode - Wahrnehmung
+
+Was nehmen wir war und was sind unsere Sinne. Gibt es noch weitere Sinne? Wie werden wir getäuscht? Worauf sollten wir uns (nicht) verlassen? Willkommen zu einer neuen spannenden Episode vom Schlaulicht...mit einigen Beispielen, der SchlaulichtGestalt Rainer Rosenzweig, einem neuen Geräusche-Quiz und natürlich wieder mit Emil.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F008-wahrnehmung%2F&amp;title=008+%26%238211%3B+Wahrnehmung&amp;description=Unsere+achte+Episode+-+Wahrnehmung%0D%0A%0D%0AWas+nehmen+wir+war+und+was+sind+unsere+Sinne.+Gibt+es+noch+weitere+Sinne%3F+Wie+werden+wir+get%C3%A4uscht%3F+Worauf+sollten+wir+uns+%28nicht%29+verlassen%3F+Willkommen+zu+einer+neuen+spannenden+Episode+vom+Schlaulicht...mit+einigen+Beispielen%2C+der+SchlaulichtGestalt+Rainer+Rosenzweig%2C+einem+neuen+Ger%C3%A4usche-Quiz+und+nat%C3%BCrlich+wieder+mit+Emil." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>007 &#8211; Elektrisch</title>
+		<link>https://schlaulicht.info/007-elektrisch/</link>
+		<pubDate>Mon, 25 Jul 2016 12:13:39 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2016-07-25t12:10:49+00:00-284852804b99f5d</guid>
+		<description><![CDATA[Unsere siebte Episode - Elektrisch
+
+Heute beschäftigen wir uns mit Elektrizität. Strom, Spannung, Widerstand und Verbraucher. Was ist das praktische an dieser Art von Energie? Was ist um uns herum denn alles elektrisch? Was sind die Gefahren und wo begenet uns Elektrizität in der Natur? Was sagt unser elektrischer Kamerad Emil dazu? Ausserdem gibt's ein kleines Audio-Quiz zum miträtseln. Seid gespannt auf die elektrische Episode mit Euren SchlauLichtern.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/007-elektrisch/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/52/s/feed/c/m4a/007-Elektrisch.m4a" length="33032021" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/52"/>
+
+		<itunes:duration>00:34:01</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere &quot;elektrische&quot;, siebte Episode</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Unsere siebte Episode - Elektrisch
+
+Heute beschäftigen wir uns mit Elektrizität. Strom, Spannung, Widerstand und Verbraucher. Was ist das praktische an dieser Art von Energie? Was ist um uns herum denn alles elektrisch? Was sind die Gefahren und wo begenet uns Elektrizität in der Natur? Was sagt unser elektrischer Kamerad Emil dazu? Ausserdem gibt's ein kleines Audio-Quiz zum miträtseln. Seid gespannt auf die elektrische Episode mit Euren SchlauLichtern.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F007-elektrisch%2F&amp;title=007+%26%238211%3B+Elektrisch&amp;description=Unsere+siebte+Episode+-+Elektrisch%0D%0A%0D%0AHeute+besch%C3%A4ftigen+wir+uns+mit+Elektrizit%C3%A4t.+Strom%2C+Spannung%2C+Widerstand+und+Verbraucher.+Was+ist+das+praktische+an+dieser+Art+von+Energie%3F+Was+ist+um+uns+herum+denn+alles+elektrisch%3F+Was+sind+die+Gefahren+und+wo+begenet+uns+Elektrizit%C3%A4t+in+der+Natur%3F+Was+sagt+unser+elektrischer+Kamerad+Emil+dazu%3F+Ausserdem+gibt%27s+ein+kleines+Audio-Quiz+zum+mitr%C3%A4tseln.+Seid+gespannt+auf+die+elektrische+Episode+mit+Euren+SchlauLichtern." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>006 &#8211; Superhelden</title>
+		<link>https://schlaulicht.info/006-superhelden/</link>
+		<pubDate>Sun, 26 Jun 2016 22:12:00 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2016-06-26t22:05:24+00:00-03a419e862e85d4</guid>
+		<description><![CDATA[Diesmal geht es um Superhelden und Superheldinnen. Warum sind wir so fasziniert von ihnen. Was wäre, wenn es Superkräfte wirklich gäbe.Die Forschung ist da sehr interessiert. Es gab auch schon antike Helden...und es gibt auch Helden im Alltag.Freut Euch auf eine neue, heldenhafte Episode von und mit Euren SuperSchlauLichtern.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/006-superhelden/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/47/s/feed/c/m4a/006-Superhelden.m4a" length="34264967" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/47"/>
+
+		<itunes:duration>00:35:16</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere sechste Episode - Superhelden</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Diesmal geht es um Superhelden und Superheldinnen. Warum sind wir so fasziniert von ihnen. Was wäre, wenn es Superkräfte wirklich gäbe.Die Forschung ist da sehr interessiert. Es gab auch schon antike Helden...und es gibt auch Helden im Alltag.Freut Euch auf eine neue, heldenhafte Episode von und mit Euren SuperSchlauLichtern.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F006-superhelden%2F&amp;title=006+%26%238211%3B+Superhelden&amp;description=Diesmal+geht+es+um+Superhelden+und+Superheldinnen.+Warum+sind+wir+so+fasziniert+von+ihnen.+Was+w%C3%A4re%2C+wenn+es+Superkr%C3%A4fte+wirklich+g%C3%A4be.Die+Forschung+ist+da+sehr+interessiert.+Es+gab+auch+schon+antike+Helden...und+es+gibt+auch+Helden+im+Alltag.Freut+Euch+auf+eine+neue%2C+heldenhafte+Episode+von+und+mit+Euren+SuperSchlauLichtern." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>005 &#8211; Kohle</title>
+		<link>https://schlaulicht.info/005-kohle/</link>
+		<pubDate>Mon, 13 Jun 2016 13:51:34 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2016-06-09t10:15:34+00:00-74453e64aadfe8c</guid>
+		<description><![CDATA[Wir beschäftigen uns mit dem schwarzen Gold. Kohle ist eine wichtige Energiequelle - wo kommt sie her, wie entstand sie? Wie wird Kohle abgebaut und was machen wir daraus? Das ganze ist auch nicht ganz ungefährlich. Schicht im Schacht? Aber nein...Helmlampe an und ab geht's mit dem SchlauLicht ran an den Flöz.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/005-kohle/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/44/s/feed/c/m4a/005-Kohle.m4a" length="22474450" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/44"/>
+
+		<itunes:duration>00:23:07</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere fünfte Episode - Kohle / Glück auf, das SchlauLicht kommt!</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Wir beschäftigen uns mit dem schwarzen Gold. Kohle ist eine wichtige Energiequelle - wo kommt sie her, wie entstand sie? Wie wird Kohle abgebaut und was machen wir daraus? Das ganze ist auch nicht ganz ungefährlich. Schicht im Schacht? Aber nein...Helmlampe an und ab geht's mit dem SchlauLicht ran an den Flöz.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F005-kohle%2F&amp;title=005+%26%238211%3B+Kohle&amp;description=Wir+besch%C3%A4ftigen+uns+mit+dem+schwarzen+Gold.+Kohle+ist+eine+wichtige+Energiequelle+-+wo+kommt+sie+her%2C+wie+entstand+sie%3F+Wie+wird+Kohle+abgebaut+und+was+machen+wir+daraus%3F+Das+ganze+ist+auch+nicht+ganz+ungef%C3%A4hrlich.+Schicht+im+Schacht%3F+Aber+nein...Helmlampe+an+und+ab+geht%27s+mit+dem+SchlauLicht+ran+an+den+Fl%C3%B6z." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>004 &#8211; Gruseln</title>
+		<link>https://schlaulicht.info/004-gruseln/</link>
+		<pubDate>Mon, 30 May 2016 12:38:39 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2016-05-30t12:27:03+00:00-b0abe3c40d48690</guid>
+		<description><![CDATA[Eine gruselige Episode. Wie ist das mit dem Gruseln und der Angst? Warum mögen wir dieses Gefühl manchmal? Gibt es verschiedene Ängste und wie gehen wir damit um? Interessantes, geschichtliches und praktische Tips rund um das Thema. Und denkt Blechkamerad Emil darüber...das Alles in dieser Folge vom SchlauLicht.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/004-gruseln/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/42/s/feed/c/m4a/004-Gruseln.m4a" length="25332931" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/42"/>
+
+		<itunes:duration>00:25:47</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere vierte - Gruseln / Angst und Nervenkitzel</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Eine gruselige Episode. Wie ist das mit dem Gruseln und der Angst? Warum mögen wir dieses Gefühl manchmal? Gibt es verschiedene Ängste und wie gehen wir damit um? Interessantes, geschichtliches und praktische Tips rund um das Thema. Und denkt Blechkamerad Emil darüber...das Alles in dieser Folge vom SchlauLicht.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F004-gruseln%2F&amp;title=004+%26%238211%3B+Gruseln&amp;description=Eine+gruselige+Episode.+Wie+ist+das+mit+dem+Gruseln+und+der+Angst%3F+Warum+m%C3%B6gen+wir+dieses+Gef%C3%BChl+manchmal%3F+Gibt+es+verschiedene+%C3%84ngste+und+wie+gehen+wir+damit+um%3F+Interessantes%2C+geschichtliches+und+praktische+Tips+rund+um+das+Thema.+Und+denkt+Blechkamerad+Emil+dar%C3%BCber...das+Alles+in+dieser+Folge+vom+SchlauLicht." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>003 &#8211; Varusschlacht</title>
+		<link>https://schlaulicht.info/003-varusschlacht/</link>
+		<pubDate>Sun, 15 May 2016 23:53:56 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2016-05-15t22:02:56+00:00-4607f5442d7a21f</guid>
+		<description><![CDATA[Heute wird es historisch. Die Varusschlacht, oder die "Schlacht im Teutoburger Wald". War ganz Germanien von den Römern besetzt? Wer war dieser Arminius / Hermann der Cherusker? Und was sagt Emil dazu? Jetzt anhören!]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/003-varusschlacht/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/38/s/feed/c/m4a/003-Varusschlacht.m4a" length="31208663" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/38"/>
+
+		<itunes:duration>00:32:08</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere dritte Episode - Varusschlacht / Römer und Germanen</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Heute wird es historisch. Die Varusschlacht, oder die &quot;Schlacht im Teutoburger Wald&quot;. War ganz Germanien von den Römern besetzt? Wer war dieser Arminius / Hermann der Cherusker? Und was sagt Emil dazu? Jetzt anhören!</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F003-varusschlacht%2F&amp;title=003+%26%238211%3B+Varusschlacht&amp;description=Heute+wird+es+historisch.+Die+Varusschlacht%2C+oder+die+%26quot%3BSchlacht+im+Teutoburger+Wald%26quot%3B.+War+ganz+Germanien+von+den+R%C3%B6mern+besetzt%3F+Wer+war+dieser+Arminius+%2F+Hermann+der+Cherusker%3F+Und+was+sagt+Emil+dazu%3F+Jetzt+anh%C3%B6ren%21" type="text/html" />	
+	</item>
+		
+	<item>
+		<title>002 &#8211; Evolution</title>
+		<link>https://schlaulicht.info/002-evolution/</link>
+		<pubDate>Mon, 02 May 2016 12:26:25 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2016-05-02t12:19:33+00:00-bd2ca325305573a</guid>
+		<description><![CDATA[Heute beschäftigen wir uns mit der Evolution. Stammen wir vom Affen ab? Was hat dieser Charles Darwin eigentlich gemacht. Giraffen und lange Hälse, Finken und ihre Schnäbel und natürlich gibt Emil van RAM auch wieder seinen Senf dazu.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/002-evolution/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/33/s/feed/c/m4a/002-Evolution.m4a" length="31021099" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/33"/>
+
+		<itunes:duration>00:31:56</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere zweite Episode - Evolution / Das Wunder des Lebens</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Heute beschäftigen wir uns mit der Evolution. Stammen wir vom Affen ab? Was hat dieser Charles Darwin eigentlich gemacht. Giraffen und lange Hälse, Finken und ihre Schnäbel und natürlich gibt Emil van RAM auch wieder seinen Senf dazu.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F002-evolution%2F&amp;title=002+%26%238211%3B+Evolution&amp;description=Heute+besch%C3%A4ftigen+wir+uns+mit+der+Evolution.+Stammen+wir+vom+Affen+ab%3F+Was+hat+dieser+Charles+Darwin+eigentlich+gemacht.+Giraffen+und+lange+H%C3%A4lse%2C+Finken+und+ihre+Schn%C3%A4bel+und+nat%C3%BCrlich+gibt+Emil+van+RAM+auch+wieder+seinen+Senf+dazu." type="text/html" />	
+	</item>
+		
+	<item>
+		<title>001 &#8211; Sprachen</title>
+		<link>https://schlaulicht.info/001-sprachen/</link>
+		<pubDate>Mon, 18 Apr 2016 14:14:32 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2016-04-18t14:02:04+00:00-626125c33502bc3</guid>
+		<description><![CDATA[In unserer ersten Episode betrachten wir Sprachen. Wie entsteht Sprache, was ist daran so wichtig? Welche Vorteile hat es, sich zu verstehen. Warum gibt es verschiedene Sprachen? Entwickeln sich Sprachen immer noch? Gibt es auch aussterbende Sprachen?]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/001-sprachen/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/30/s/feed/c/m4a/001-Sprachen.m4a" length="37734655" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/30"/>
+
+		<itunes:duration>00:38:50</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Unsere erste Episode: Sprachen</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>In unserer ersten Episode betrachten wir Sprachen. Wie entsteht Sprache, was ist daran so wichtig? Welche Vorteile hat es, sich zu verstehen. Warum gibt es verschiedene Sprachen? Entwickeln sich Sprachen immer noch? Gibt es auch aussterbende Sprachen?</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F001-sprachen%2F&amp;title=001+%26%238211%3B+Sprachen&amp;description=In+unserer+ersten+Episode+betrachten+wir+Sprachen.+Wie+entsteht+Sprache%2C+was+ist+daran+so+wichtig%3F+Welche+Vorteile+hat+es%2C+sich+zu+verstehen.+Warum+gibt+es+verschiedene+Sprachen%3F+Entwickeln+sich+Sprachen+immer+noch%3F+Gibt+es+auch+aussterbende+Sprachen%3F" type="text/html" />	
+	</item>
+		
+	<item>
+		<title>000 &#8211; Die Nullnummer</title>
+		<link>https://schlaulicht.info/000-die-nullnummer/</link>
+		<pubDate>Sat, 16 Apr 2016 12:00:24 +0000</pubDate>
+		<guid isPermaLink="false">podlove-2016-04-16t11:54:11+00:00-eead07dbef9902b</guid>
+		<description><![CDATA[Wir stellen uns und unser Konzept vor.]]></description>
+		<atom:link rel="http://podlove.org/deep-link" href="https://schlaulicht.info/000-die-nullnummer/#" />
+		
+<enclosure url="https://schlaulicht.info/podlove/file/26/s/feed/c/m4a/000-Nullnummer.m4a" length="11365712" type="audio/mp4" bitlove:guid="http://schlaulicht.info/podlove/file/26"/>
+
+		<itunes:duration>00:11:38</itunes:duration>
+		<itunes:author>Schlaulicht (André Sebastiani, Jörg Sartorius, Knut Junker)</itunes:author>
+		<itunes:subtitle>Die lang erwartete Nullnummer</itunes:subtitle>
+		<itunes:episodeType>full</itunes:episodeType>
+		<itunes:summary>Wir stellen uns und unser Konzept vor.</itunes:summary>
+		<atom:link rel="payment" title="Flattr this!" href="https://flattr.com/submit/auto?user_id=SchlauLicht&amp;language=de_DE&amp;url=https%3A%2F%2Fschlaulicht.info%2F000-die-nullnummer%2F&amp;title=000+%26%238211%3B+Die+Nullnummer&amp;description=Wir+stellen+uns+und+unser+Konzept+vor." type="text/html" />	
+	</item>
+	</channel>
+</rss>

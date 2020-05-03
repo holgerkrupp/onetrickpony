@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="LyZ-kn-wbS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="LyZ-kn-wbS">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -41,7 +36,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="15j-Ug-0Ip">
-                                            <rect key="frame" x="115" y="11" width="25" height="16"/>
+                                            <rect key="frame" x="115" y="11.5" width="25" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="16" id="Fnu-aL-7un"/>
                                             </constraints>
@@ -50,7 +45,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="bvJ-Ys-U60">
-                                            <rect key="frame" x="115" y="35" width="239" height="29"/>
+                                            <rect key="frame" x="115" y="35.5" width="239" height="29"/>
                                             <accessibility key="accessibilityConfiguration" identifier="Title"/>
                                             <string key="text">Title
 - second line</string>
@@ -232,8 +227,8 @@
             <objects>
                 <viewController id="uPX-Rw-QbC" customClass="EpisodeViewController" customModule="Einschlafen" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="zA3-W1-knL"/>
-                        <viewControllerLayoutGuide type="bottom" id="Ykn-eh-pJB"/>
+                        <viewControllerLayoutGuide type="top" id="3Wd-eL-GjX"/>
+                        <viewControllerLayoutGuide type="bottom" id="mWz-85-d06"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="BRA-kf-Gb7">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="792"/>
@@ -273,7 +268,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M7H-0g-obe">
-                                        <rect key="frame" x="218" y="79" width="30" height="34"/>
+                                        <rect key="frame" x="217.5" y="79" width="30" height="34"/>
                                         <state key="normal" title="-30">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -282,7 +277,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jJp-32-8fw">
-                                        <rect key="frame" x="278" y="81" width="45" height="30"/>
+                                        <rect key="frame" x="277.5" y="81" width="45" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="0E4-jg-SNU"/>
                                             <constraint firstAttribute="width" constant="45" id="Icm-uT-pVk"/>
@@ -302,7 +297,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZb-Cy-Dkg">
-                                        <rect key="frame" x="278" y="81" width="45" height="30"/>
+                                        <rect key="frame" x="277.5" y="81" width="45" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="8o8-0K-3Px"/>
                                             <constraint firstAttribute="width" constant="45" id="OtC-6h-oZq"/>
@@ -343,7 +338,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ewp-Lq-RHf">
-                                        <rect key="frame" x="353" y="79" width="30" height="34"/>
+                                        <rect key="frame" x="352.5" y="79" width="30" height="34"/>
                                         <state key="normal" title="+30">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -482,7 +477,7 @@
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="xfz-5J-KYE" secondAttribute="trailing" id="3ow-QK-VWQ"/>
-                            <constraint firstItem="Vxd-62-DdV" firstAttribute="top" secondItem="zA3-W1-knL" secondAttribute="bottom" constant="14" id="8hW-j3-d5s"/>
+                            <constraint firstItem="Vxd-62-DdV" firstAttribute="top" secondItem="3Wd-eL-GjX" secondAttribute="bottom" constant="14" id="8hW-j3-d5s"/>
                             <constraint firstAttribute="trailing" secondItem="hiS-mU-g4Q" secondAttribute="trailing" id="DAh-Or-kYV"/>
                             <constraint firstItem="lX9-c5-gUO" firstAttribute="centerX" secondItem="BRA-kf-Gb7" secondAttribute="centerX" id="GAw-cw-gey"/>
                             <constraint firstItem="lX9-c5-gUO" firstAttribute="top" secondItem="xfz-5J-KYE" secondAttribute="bottom" id="IA9-S5-Ujo"/>
@@ -497,8 +492,8 @@
                             <constraint firstItem="hiS-mU-g4Q" firstAttribute="leading" secondItem="BRA-kf-Gb7" secondAttribute="leading" id="gt1-xl-Ybn"/>
                             <constraint firstItem="Vxd-62-DdV" firstAttribute="leading" secondItem="BRA-kf-Gb7" secondAttribute="leadingMargin" constant="10" id="ljX-30-Ba1"/>
                             <constraint firstItem="h4w-YC-dxp" firstAttribute="leading" secondItem="BRA-kf-Gb7" secondAttribute="leading" id="qq2-r5-4Cr"/>
-                            <constraint firstItem="Ykn-eh-pJB" firstAttribute="top" secondItem="lX9-c5-gUO" secondAttribute="bottom" id="u6Q-E8-pcv"/>
-                            <constraint firstItem="h4w-YC-dxp" firstAttribute="top" secondItem="zA3-W1-knL" secondAttribute="bottom" id="vAv-1W-3RZ"/>
+                            <constraint firstItem="mWz-85-d06" firstAttribute="top" secondItem="lX9-c5-gUO" secondAttribute="bottom" id="u6Q-E8-pcv"/>
+                            <constraint firstItem="h4w-YC-dxp" firstAttribute="top" secondItem="3Wd-eL-GjX" secondAttribute="bottom" id="vAv-1W-3RZ"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -631,8 +626,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="StandardCover" width="700" height="700"/>
-        <image name="moon" width="22" height="22"/>
+        <image name="StandardCover" width="1120" height="1120"/>
+        <image name="moon" width="44" height="44"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="UBt-ux-4gm"/>

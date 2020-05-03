@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bigprogressbar</key>
+	<true/>
+	<key>feedurl</key>
+	<string>https://compendion.net/dirtyminutesleft/feed/m4a</string>
+	<key>UserAgent</key>
+	<string>Dirty Minutes Left App</string>
+	<key>cacheSize (MB)</key>
+	<integer>150</integer>
+	<key>backgroundColor</key>
+	<string>C2C2C2</string>
+	<key>textcolor</key>
+	<string>A2008d</string>
+	<key>secondarytextcolor</key>
+	<string>470076</string>
+	<key>highlightColor</key>
+	<string>FFFFFF</string>
+	<key>progressBackgroundColor</key>
+	<string>8EA6D1</string>
+	<key>playControlColor</key>
+	<string>A2008d</string>
+</dict>
+</plist>

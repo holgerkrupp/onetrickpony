@@ -59,6 +59,14 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
     }()
     
     
+    // search relevant variables
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    var filtered = [Episode]()
+
+
+    
+    
     
     /**************************************************************************
      
@@ -91,18 +99,36 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
         self.tableView.layoutMargins = UIEdgeInsets.zero
         if (navigationController != nil){
         self.navigationController?.navigationBar.barTintColor = getColorFromPodcastSettings("backgroundColor")
-        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : getColorFromPodcastSettings("textcolor")]
+        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : getColorFromPodcastSettings("textcolor")]
         self.navigationController?.navigationBar.tintColor = getColorFromPodcastSettings("textcolor")
         }
             DispatchQueue.main.async(execute: {
             self.autoFeedRefresh()
         })
         
-        self.refreshControl?.addTarget(self, action:#selector(EpisodesTableViewController.refreshfeed), for: UIControlEvents.valueChanged)
+        self.refreshControl?.addTarget(self, action:#selector(EpisodesTableViewController.refreshfeed), for: UIControl.Event.valueChanged)
         //   self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
         
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(EpisodesTableViewController.longPress(_:)))
         self.view.removeGestureRecognizer(longPressRecognizer)
+        
+        
+        searchController.searchResultsUpdater = self
+
+/*
+        if #available(iOS 9.1, *) {
+            searchController.obscuresBackgroundDuringPresentation = false
+            UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = convertToNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: getColorFromPodcastSettings("textcolor")])
+        }
+ */
+        searchController.searchBar.placeholder = NSLocalizedString("episodelist.search",value: "Search", comment: "shown in searchbar")
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = searchController
+        } else {
+            // Fallback on earlier versions
+            tableView.tableHeaderView = searchController.searchBar
+        }
+        definesPresentationContext = true
         
     }
     
@@ -170,7 +196,11 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
         if segue.identifier == "viewEpisode" {
-            let episode: Episode = episodes[tableView.indexPathForSelectedRow!.row]
+            
+            var episode: Episode = episodes[tableView.indexPathForSelectedRow!.row]
+            if isFiltering() {
+                episode = filtered[tableView.indexPathForSelectedRow!.row]
+            }
             let viewController = segue.destination as! EpisodeViewController
             viewController.episode = episode
         }
@@ -631,7 +661,13 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
         return 1
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if isFiltering() {
+            return filtered.count
+        }
+        
         return episodes.count
+        
     }
     
     
@@ -639,10 +675,12 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodeCell", for: indexPath) as! EpisodeCell
             
+        var episode: Episode = episodes[indexPath.row]
+        if isFiltering() {
+            episode = filtered[indexPath.row]
+        }
         
         
-        
-        let episode: Episode = episodes[indexPath.row]
         cell.episode = episode
         cell.layoutMargins = UIEdgeInsets.zero
         
@@ -655,9 +693,9 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
         
         if SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle {
             if SingletonClass.sharedInstance.player.rate == 0{
-                cell.EpisodePlayButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSize(width: 44, height: 44), filled: true), for: UIControlState())
+                cell.EpisodePlayButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSize(width: 44, height: 44), filled: true), for: UIControl.State())
             }else{
-                cell.EpisodePlayButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSize(width: 44, height: 44), filled: true), for: UIControlState())
+                cell.EpisodePlayButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSize(width: 44, height: 44), filled: true), for: UIControl.State())
             }
             cell.EpisodePlayButton.isEnabled = true
             cell.EpisodePlayButton.isHidden = false
@@ -677,14 +715,14 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
             if (download.isDownloading) {
                 cell.EpisodePauseButton.titleLabel?.text = ""
                 
-                cell.EpisodePauseButton.setImage(downloadPause, for: UIControlState())
+                cell.EpisodePauseButton.setImage(downloadPause, for: UIControl.State())
                 
             }else{
-                cell.EpisodePauseButton.setImage(downloadImage, for: UIControlState())
+                cell.EpisodePauseButton.setImage(downloadImage, for: UIControl.State())
             }
         }
         
-        cell.EpisodeCancelButton.setImage(downloadCancel, for: UIControlState())
+        cell.EpisodeCancelButton.setImage(downloadCancel, for: UIControl.State())
         
         
         
@@ -709,7 +747,7 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
         if (existence.existlocal){
             cell.EpisodeDownloadProgressbar.progress = 1
             cell.EpisodeDownloadProgressbar.isHidden = true
-            cell.EpisodeDownloadButton!.setTitle("", for: UIControlState())
+            cell.EpisodeDownloadButton!.setTitle("", for: UIControl.State())
             cell.EpisodeDownloadButton!.isHidden = true
             cell.EpisodeDownloadButton!.isEnabled = false
             cell.EpisodeCancelButton!.isHidden = true
@@ -725,7 +763,7 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
             }
             
             cell.EpisodeDownloadProgressbar.isHidden = !showDownloadControls
-            cell.EpisodeDownloadButton!.setTitle("", for: UIControlState())
+            cell.EpisodeDownloadButton!.setTitle("", for: UIControl.State())
             
             switch status {
             case .offline:
@@ -734,7 +772,7 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
                 cell.EpisodeDownloadButton!.isEnabled = !showDownloadControls
             }
             
-            cell.EpisodeDownloadButton!.setImage(downloadImage, for: UIControlState())
+            cell.EpisodeDownloadButton!.setImage(downloadImage, for: UIControl.State())
             cell.EpisodeDownloadButton!.isHidden = showDownloadControls
             cell.EpisodePauseButton.isHidden = !showDownloadControls
             cell.EpisodeCancelButton.isHidden = !showDownloadControls
@@ -764,7 +802,10 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
         if episodes.count >= indexPath.row{
-            let episode: Episode = episodes[indexPath.row]
+            var episode: Episode = episodes[indexPath.row]
+            if isFiltering() {
+                episode = filtered[indexPath.row]
+            }
         // NSLog(episode.episodeTitle)
             let existence = existsLocally(episode.episodeUrl)
         
@@ -780,12 +821,15 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
     
     
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        let episode: Episode = episodes[indexPath.row]
-        if (editingStyle == UITableViewCellEditingStyle.delete){
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        var episode: Episode = episodes[indexPath.row]
+        if isFiltering() {
+            episode = filtered[indexPath.row]
+        }
+        if (editingStyle == UITableViewCell.EditingStyle.delete){
             episode.deleteEpisodeFromDocumentsFolder()
             let indexPath2 = IndexPath(row: indexPath.row, section: 0)
-            self.tableView.reloadRows(at: [indexPath2], with: UITableViewRowAnimation.none)
+            self.tableView.reloadRows(at: [indexPath2], with: UITableView.RowAnimation.none)
         }
     }
     
@@ -793,6 +837,7 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
     
     func updateCellForEpisode(_ episode: Episode){
         let cellRowToBeUpdated = episode.episodeIndex
+        
         let indexPath = IndexPath(row: cellRowToBeUpdated, section: 0)
         if self.tableView.cellForRow(at: indexPath) != nil {
             self.tableView.reloadRows(at: [indexPath], with: .none)
@@ -804,7 +849,7 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
     
     @objc func longPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
         
-        if longPressGestureRecognizer.state == UIGestureRecognizerState.began {
+        if longPressGestureRecognizer.state == UIGestureRecognizer.State.began {
             
             let touchPoint = longPressGestureRecognizer.location(in: self.view)
             if let indexPath = tableView.indexPathForRow(at: touchPoint) {
@@ -1098,6 +1143,24 @@ extension EpisodesTableViewController: EpisodeCellDelegate {
         }
     }
     
+    //Search Functions
+    
+    func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        filtered = episodes.filter({( episode : Episode) -> Bool in
+            return (episode.episodeTitle.lowercased().contains(searchText.lowercased())) || (episode.episodeDescription.lowercased().contains(searchText.lowercased()))
+        })
+        
+        tableView.reloadData()
+    }
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
+    
 }
 
 extension EpisodesTableViewController: URLSessionDelegate {
@@ -1115,4 +1178,22 @@ extension EpisodesTableViewController: URLSessionDelegate {
         }
         
     }
+}
+
+
+
+
+
+extension EpisodesTableViewController: UISearchResultsUpdating {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+    
+
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToNSAttributedStringKeyDictionary(_ input: [String: Any]) -> [NSAttributedString.Key: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }

@@ -91,7 +91,7 @@ public class Reach {
             
         }, &context)
         
-        SCNetworkReachabilityScheduleWithRunLoop(reachability, CFRunLoopGetMain(), RunLoopMode.commonModes as CFString)
+        SCNetworkReachabilityScheduleWithRunLoop(reachability, CFRunLoopGetMain(), RunLoop.Mode.commonModes as CFString)
     }
     
 }

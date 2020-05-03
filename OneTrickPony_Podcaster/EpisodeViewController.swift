@@ -201,7 +201,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         adjustColors()
         episodeShowNotesWebView.isHidden = false
         ShowNotesContainer.isHidden = true
-    ShowNotesDismissButton.setImage(createCircleWithCross(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSize(width: 30, height: 30), filled: false), for: UIControlState())
+    ShowNotesDismissButton.setImage(createCircleWithCross(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSize(width: 30, height: 30), filled: false), for: UIControl.State())
         
         enableOrDisableControllsIfNoInFocus()
         allowremotebuttons()
@@ -270,9 +270,9 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
             progressslidersize = 5
         }
         
-        progressSlider.setMaximumTrackImage(getImageWithColor(getColorFromPodcastSettings("progressBackgroundColor"),size: CGSize(width: 2, height: progressslidersize)), for: UIControlState())
-        progressSlider.setMinimumTrackImage(getImageWithColor(getColorFromPodcastSettings("highlightColor"),size: CGSize(width: 2, height: progressslidersize)), for: UIControlState())
-        progressSlider.setThumbImage(getImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSize(width: 2, height: 40)), for: UIControlState())
+        progressSlider.setMaximumTrackImage(getImageWithColor(getColorFromPodcastSettings("progressBackgroundColor"),size: CGSize(width: 2, height: progressslidersize)), for: UIControl.State())
+        progressSlider.setMinimumTrackImage(getImageWithColor(getColorFromPodcastSettings("highlightColor"),size: CGSize(width: 2, height: progressslidersize)), for: UIControl.State())
+        progressSlider.setThumbImage(getImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSize(width: 2, height: 40)), for: UIControl.State())
         
         var description = episode.episodeDescription //.stringByReplacingOccurrencesOfString("\n", withString: "</br>")
         
@@ -288,8 +288,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         if (SingletonClass.sharedInstance.playerinitialized == true) {
             let currentspeed = SingletonClass.sharedInstance.player.rate
             if currentspeed != 0 {
-                let indexofspeed:Int = speeds.index(of: currentspeed)!
-                playerRateButton.setTitle(speedtext[indexofspeed], for: UIControlState())
+                let indexofspeed:Int = speeds.firstIndex(of: currentspeed)!
+                playerRateButton.setTitle(speedtext[indexofspeed], for: UIControl.State())
             }
         }
         playerRateButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
@@ -300,11 +300,11 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         
         
-        forward30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSize(width: 30, height: 30), filled: true, forward: true, label: "30"), for: UIControlState())
-        forward30Button.setTitle(nil, for: UIControlState())
+        forward30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSize(width: 30, height: 30), filled: true, forward: true, label: "30"), for: UIControl.State())
+        forward30Button.setTitle(nil, for: UIControl.State())
         
-        back30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSize(width: 30, height: 30), filled: true, forward: false, label: "30"), for: UIControlState())
-        back30Button.setTitle(nil, for: UIControlState())
+        back30Button.setImage(createSkipWithColor(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSize(width: 30, height: 30), filled: true, forward: false, label: "30"), for: UIControl.State())
+        back30Button.setTitle(nil, for: UIControl.State())
         
         
         
@@ -315,7 +315,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     func adjustColors(){
         self.navigationController?.isToolbarHidden = false
         
-        listButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControlState())
+        listButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControl.State())
         
         
         playButton.tintColor = getColorFromPodcastSettings("playControlColor")
@@ -335,7 +335,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         chapterBarButton.tintColor = getColorFromPodcastSettings("playControlColor")
         infoButton.tintColor = getColorFromPodcastSettings("playControlColor")
         playerRateButton.tintColor = getColorFromPodcastSettings("playControlColor")
-        playerRateButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControlState())
+        playerRateButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControl.State())
         
         if episode.episodeChapter.count == 0
         {
@@ -768,8 +768,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     func setplaypausebutton(){
         enableOrDisableControllsIfNoInFocus()
         
-        playButton.setTitle(nil, for: UIControlState())
-        playButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSize(width: 30, height: 30), filled: true), for: UIControlState())
+        playButton.setTitle(nil, for: UIControl.State())
+        playButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSize(width: 30, height: 30), filled: true), for: UIControl.State())
         
         
         
@@ -778,8 +778,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         if (SingletonClass.sharedInstance.playerinitialized == true) {
             if (SingletonClass.sharedInstance.player.rate != 0 && SingletonClass.sharedInstance.player.error == nil) {
                 if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
-                    pauseButton.setTitle(nil, for: UIControlState())
-                    pauseButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSize(width: 30,height: 30), filled: true), for: UIControlState())
+                    pauseButton.setTitle(nil, for: UIControl.State())
+                    pauseButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSize(width: 30,height: 30), filled: true), for: UIControl.State())
                     playButton.isHidden = true
                     pauseButton.isHidden = false
                 }
@@ -792,7 +792,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         
         let currentspeed = SingletonClass.sharedInstance.player.rate
         if currentspeed != 0 { // stupid quick fix to avoid a crash when the player is paused
-            let indexofspeed:Int = speeds.index(of: currentspeed)!
+            let indexofspeed:Int = speeds.firstIndex(of: currentspeed)!
             var newindex:Int
             if (indexofspeed+1 < speeds.count){
                 newindex = indexofspeed+1
@@ -805,7 +805,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     func updateRate(_ rateindex: Int){
         playerRateButton.titleLabel?.textColor = getColorFromPodcastSettings("playControlColor")
-        playerRateButton.setTitle(speedtext[rateindex], for: UIControlState())
+        playerRateButton.setTitle(speedtext[rateindex], for: UIControl.State())
         
         setObjectForKeyToPersistentStorrage("player.rate", object: rateindex)
         SingletonClass.sharedInstance.player.rate = speeds[rateindex]
@@ -873,17 +873,22 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         commandCenter.playCommand.isEnabled = true
         commandCenter.pauseCommand.isEnabled = true
         
-        commandCenter.skipBackwardCommand.addTarget(self, action: #selector(EpisodeViewController.back30))
-        commandCenter.skipForwardCommand.addTarget(self, action: #selector(EpisodeViewController.forward30))
+
+        commandCenter.skipBackwardCommand.addTarget         { (commandEvent) -> MPRemoteCommandHandlerStatus in  self.back30();   return .success }
+
+        commandCenter.skipForwardCommand.addTarget         { (commandEvent) -> MPRemoteCommandHandlerStatus in  self.forward30();   return .success }
+
         
         commandCenter.skipBackwardCommand.preferredIntervals = [30]
         commandCenter.skipForwardCommand.preferredIntervals = [30]
         
         
-        commandCenter.playCommand.addTarget(self, action: #selector(EpisodeViewController.playPausefromRemoteCenter))
-        commandCenter.pauseCommand.addTarget(self, action: #selector(EpisodeViewController.playPausefromRemoteCenter))
-        commandCenter.togglePlayPauseCommand.addTarget(self, action: #selector(EpisodeViewController.playPausefromRemoteCenter))
-        
+        commandCenter.playCommand.addTarget         { (commandEvent) -> MPRemoteCommandHandlerStatus in  self.playPausefromRemoteCenter();   return .success }
+
+        commandCenter.pauseCommand.addTarget         { (commandEvent) -> MPRemoteCommandHandlerStatus in  self.playPausefromRemoteCenter();   return .success }
+
+        commandCenter.togglePlayPauseCommand.addTarget         { (commandEvent) -> MPRemoteCommandHandlerStatus in  self.playPausefromRemoteCenter();   return .success }
+
     }
     
     func updateMPMediaPlayer(){
@@ -922,8 +927,8 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
      
      **************************************************************************/
     
-    func webView(_ webView: UIWebView, shouldStartLoadWith r: URLRequest, navigationType nt: UIWebViewNavigationType) -> Bool{
-        if (nt == UIWebViewNavigationType.linkClicked ) {
+    func webView(_ webView: UIWebView, shouldStartLoadWith r: URLRequest, navigationType nt: UIWebView.NavigationType) -> Bool{
+        if (nt == UIWebView.NavigationType.linkClicked ) {
             openWithSafariVC(r.url!)
             return false;
         }

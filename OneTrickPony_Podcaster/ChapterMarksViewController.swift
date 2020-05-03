@@ -39,14 +39,14 @@ var EpisodeViewController: ChapterMarksViewControllerDelegate?
         let chapterStartSeconds = stringtodouble(chapter.chapterStart)
         let chapterStartText = secondsToHoursMinutesSeconds(chapterStartSeconds)
         cell.detailTextLabel!.text = chapterStartText
-        cell.accessoryType = UITableViewCellAccessoryType.none
+        cell.accessoryType = UITableViewCell.AccessoryType.none
         
         let episode = EpisodeViewController?.episode
         
         let currentplaytime = Float(CMTimeGetSeconds(episode!.readplayed()))
         if let playingChapter = episode!.getChapterForSeconds(Double(currentplaytime)){
             if chapter.chapterTitle == playingChapter.chapterTitle{
-                cell.accessoryType = UITableViewCellAccessoryType.checkmark
+                cell.accessoryType = UITableViewCell.AccessoryType.checkmark
             }
         }
         

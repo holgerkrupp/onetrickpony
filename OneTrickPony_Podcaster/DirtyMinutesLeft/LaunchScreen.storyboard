@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="pui-br-Xye">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="wOW-NY-tNY">
+            <objects>
+                <viewController id="pui-br-Xye" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="u95-rD-8DZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZTY-t9-lwz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UXt-UR-f8w">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back" translatesAutoresizingMaskIntoConstraints="NO" id="TAD-xl-G4m">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heads" translatesAutoresizingMaskIntoConstraints="NO" id="F6v-rf-aRj">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.47843137254901957" green="0.47843137254901957" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="TAD-xl-G4m" firstAttribute="top" secondItem="UXt-UR-f8w" secondAttribute="top" id="Ego-BP-cOh"/>
+                            <constraint firstItem="F6v-rf-aRj" firstAttribute="leading" secondItem="TAD-xl-G4m" secondAttribute="leading" id="K2Q-dT-o6k"/>
+                            <constraint firstItem="F6v-rf-aRj" firstAttribute="top" secondItem="TAD-xl-G4m" secondAttribute="top" id="KUE-q0-P5R"/>
+                            <constraint firstAttribute="bottom" secondItem="TAD-xl-G4m" secondAttribute="bottom" id="KXB-Xm-Qd7"/>
+                            <constraint firstItem="F6v-rf-aRj" firstAttribute="bottom" secondItem="TAD-xl-G4m" secondAttribute="bottom" id="VkJ-IM-GPM"/>
+                            <constraint firstItem="TAD-xl-G4m" firstAttribute="leading" secondItem="UXt-UR-f8w" secondAttribute="leading" id="Y6k-52-82C"/>
+                            <constraint firstAttribute="trailing" secondItem="TAD-xl-G4m" secondAttribute="trailing" id="iwF-oQ-fSn"/>
+                            <constraint firstItem="F6v-rf-aRj" firstAttribute="trailing" secondItem="TAD-xl-G4m" secondAttribute="trailing" id="trI-fk-3MM"/>
+                        </constraints>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fkF-ae-6Zz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1218.4000000000001" y="1153.6731634182909"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back" width="375" height="812"/>
+        <image name="heads" width="414" height="896"/>
+    </resources>
+</document>

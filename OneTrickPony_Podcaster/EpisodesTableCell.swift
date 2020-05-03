@@ -44,13 +44,13 @@ class EpisodeCell: UITableViewCell {
     @IBAction func playButtonPressed(){
         if SingletonClass.sharedInstance.player.rate == 0 {
             SingletonClass.sharedInstance.player.play()
-            EpisodePlayButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSize(width: 30, height: 30), filled: true), for: UIControlState())
-            EpisodePlayButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControlState())
+            EpisodePlayButton.setImage(createPauseImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSize(width: 30, height: 30), filled: true), for: UIControl.State())
+            EpisodePlayButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControl.State())
 
         }else{
             SingletonClass.sharedInstance.player.pause()
-            EpisodePlayButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSize(width: 30, height: 30), filled: true), for: UIControlState())
-            EpisodePlayButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControlState())
+            EpisodePlayButton.setImage(createPlayImageWithColor(getColorFromPodcastSettings("playControlColor"),size: CGSize(width: 30, height: 30), filled: true), for: UIControl.State())
+            EpisodePlayButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControl.State())
 
     }
     }
@@ -164,9 +164,9 @@ class EpisodeCell: UITableViewCell {
         EpisodeFileSizeLabel!.textColor = getColorFromPodcastSettings("secondarytextcolor")
         EpisodeDownloadProgressbar.backgroundColor = getColorFromPodcastSettings("progressBackgroundColor")
         EpisodeDownloadProgressbar.progressTintColor = getColorFromPodcastSettings("highlightColor")
-        EpisodeDownloadButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControlState())
-        EpisodePauseButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControlState())
-        EpisodeCancelButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControlState())
+        EpisodeDownloadButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControl.State())
+        EpisodePauseButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControl.State())
+        EpisodeCancelButton.setTitleColor(getColorFromPodcastSettings("playControlColor"), for: UIControl.State())
    
         
         

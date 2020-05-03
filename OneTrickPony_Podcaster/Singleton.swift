@@ -38,8 +38,13 @@ class SingletonClass {
    
     let audioSession = AVAudioSession.sharedInstance()
         
-        
-    try! audioSession.setCategory(AVAudioSessionCategoryPlayback)
+        do
+        {
+        try audioSession.setCategory("playback")
+        }
+        catch let error as NSError{
+             NSLog(error.description)
+        }
   
         do
         {
@@ -50,7 +55,13 @@ class SingletonClass {
             NSLog(error.description)
         }
     if #available(iOS 9.0, *) {
-        try! audioSession.setMode(AVAudioSessionModeSpokenAudio)
+        do
+        {
+        try audioSession.setMode("spokenAudio")
+        }
+        catch let error as NSError{
+             NSLog(error.description)
+        }
     } else {
         // Fallback on earlier versions
     }
@@ -65,3 +76,4 @@ class SingletonClass {
         }
     }
 }
+
