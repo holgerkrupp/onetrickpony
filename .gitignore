@@ -20,6 +20,23 @@ xcuserdata/
 ## Icons and stuff
 OneTrickPony_Podcaster/Assets.xcassets/
 
+## Different Targets
+OneTrickPony_Podcaster/Schlaulicht
+Products/Schlaulicht.app
+
+OneTrickPony_Podcaster/Hobbykoch
+Products/Hobbykoch.app
+
+OneTrickPony_Podcaster/Trick17
+Products/Trick17.app
+
+OneTrickPony_Podcaster/Geschichtenkapsel
+Products/Geschichtenkapsel.app
+
+OneTrickPony_Podcaster/Einschlafen
+Products/Einschlafen.app
+
+
 ## Other
 *.moved-aside
 *.xcuserstate

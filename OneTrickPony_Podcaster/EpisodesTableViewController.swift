@@ -115,12 +115,7 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
         
         searchController.searchResultsUpdater = self
 
-/*
-        if #available(iOS 9.1, *) {
-            searchController.obscuresBackgroundDuringPresentation = false
-            UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = convertToNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: getColorFromPodcastSettings("textcolor")])
-        }
- */
+
         searchController.searchBar.placeholder = NSLocalizedString("episodelist.search",value: "Search", comment: "shown in searchbar")
         if #available(iOS 11.0, *) {
             navigationItem.searchController = searchController
@@ -191,7 +186,24 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
     
     
     
+    func showLoading(){
+        let alert = UIAlertController(title: nil, message: NSLocalizedString("please.wait", value: "Please wait", comment: "shown while loading feed"), preferredStyle: .alert)
+
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating();
+
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
+    }
     
+    func hideLoading(){
+        DispatchQueue.main.sync {
+            dismiss(animated: false, completion: nil)
+
+        }
+    }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
@@ -228,59 +240,63 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
     
     func loadfeedandparse(_ completion: () -> Void){
         
-        //preload the file in the base directory named feed.xml
-        episodes.removeAll()
-        let urlpath = Bundle.main.path(forResource: "feed", ofType: "xml")
-        let localfileurl:URL = URL(fileURLWithPath: urlpath!)
-        var fileURLtoLoad = localfileurl
         
-        var url = URL(fileURLWithPath: getObjectForKeyFromPodcastSettings("feedurl") as! String)
-        // NSLog("url: \(url)")
-        if url.pathExtension == "" {
+        NSLog("loadfeedandparse")
+         
+         episodes.removeAll()
+       
+         var fileURLtoLoad : URL?
+         
+       //  generate URLs for feed files
+         
+     
+             var url = URL(fileURLWithPath: getObjectForKeyFromPodcastSettings("feedurl") as! String)
+             // NSLog("url: \(url)")
+             if url.pathExtension == "" {
+             url = url.appendingPathComponent("feed.xml")
+             }
+             let fileName = url.lastPathComponent
+             
+             //find out the path of the document directory for this app
+             let documentsDirectoryUrl = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+             //merge path and filename
+             let downloadedfeed = documentsDirectoryUrl + "/" + fileName
             
-            url = url.appendingPathComponent("feed.xml")
-        }
-        let fileName = url.lastPathComponent
-        
-        //find out the path of the document directory for this app
-        let documentsDirectoryUrl = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        //merge path and filename
-        let localFeedFile = documentsDirectoryUrl + "/" + fileName
-        
-        
-        //check if the file exists in the local documents directory
-        
-        if manager.fileExists(atPath: localFeedFile){
-            //change url to load to local file instead of the external one
-            
+         
+         let urlpath = Bundle.main.path(forResource: "feed", ofType: "xml")
+
+         
+         if manager.fileExists(atPath: downloadedfeed){
             do {
-                let attr : NSDictionary? = try FileManager.default.attributesOfItem(atPath: localFeedFile) as NSDictionary?
+                let attr : NSDictionary? = try FileManager.default.attributesOfItem(atPath: downloadedfeed) as NSDictionary?
                 if let _attr = attr {
                     let fileSize = _attr.fileSize();
                     if fileSize > 1000 {
-                        //the check for the fileSize is done in case a broken xml file has been downloaded (e.g. html file with 'error on database connection' message - should be one day removed by smarter way)
-                        fileURLtoLoad = URL(fileURLWithPath: localFeedFile)
+                            NSLog("loading downloaded File")
+                        fileURLtoLoad = URL(fileURLWithPath: downloadedfeed)
                     }
                 }
             } catch {
                 print("Error: \(error)")
             }
-            
-            
-            
-        }else{
-            //we might be able to download the feed here, but I'm not sure if it's reactive enough.
-            NSLog("no file in docs folder or file to small, I'll take the one in the base directory")
-        }
-        
-        
-        
-        //parse the file (either the one in the documents folder or if that's not there the feed.xml from the base
-        NSLog("loading feed from \(fileURLtoLoad)")
-        if let feedParser: XMLParser = XMLParser(contentsOf: fileURLtoLoad){
-            feedParser.delegate = self
-            feedParser.parse()
-        }
+         }else if let path = urlpath{
+             let basefeedURL:URL = URL(fileURLWithPath: path)
+             fileURLtoLoad = basefeedURL
+            NSLog("loading base file")
+         }
+         
+         if let fileURL = fileURLtoLoad {
+         if let feedParser: XMLParser = XMLParser(contentsOf: fileURL){
+               feedParser.delegate = self
+               feedParser.parse()
+           }else{
+            NSLog("File could not be loaded")
+         }
+         }else{
+         NSLog("No file existing to load")
+            refreshfeed()
+            showLoading()
+         }
         completion()
     }
     
@@ -384,7 +400,9 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
         }
         NSLog("clean up")
         cleanUpSpace()
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     
@@ -394,18 +412,22 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
         var savedfeeddate = getObjectForKeyFromPersistentStorrage("lastfeedday")
         
         if savedfeeddate == nil {
-            let urlpath = Bundle.main.path(forResource: "feed", ofType: "xml")
+            if let urlpath = Bundle.main.path(forResource: "feed", ofType: "xml"){
             
-            
-            do {
-                let attr : NSDictionary? = try FileManager.default.attributesOfItem(atPath: urlpath!) as NSDictionary?
+            if manager.fileExists(atPath: urlpath){
+                do {
+                let attr : NSDictionary? = try FileManager.default.attributesOfItem(atPath: urlpath) as NSDictionary?
                 if let _attr = attr {
                     savedfeeddate = _attr.fileModificationDate();
                     
                 }
             } catch {
                 print("Error: \(error)")
+                }
+            
             }
+            }
+            
         }
         
         NSLog("oldfeed: \(String(describing: savedfeeddate)) (from Persistent Storrage)")
@@ -982,6 +1004,7 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
     // the following functin is called when a download has been finished. It will write the date to the right folder (Documents Folder - hint hint) and the tableviewcell if needed.
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        NSLog("finished Downloading to \(location)")
         // move the file to the final destination
         let destinationURL = localFilePathForUrl((downloadTask.originalRequest?.url)!)
         
@@ -1006,17 +1029,21 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
                 NSLog("Failed to exclude from backup")
             }
             if (destinationURL.pathExtension.lowercased() == "xml"){
+                hideLoading()
                 let attr : NSDictionary? = try FileManager.default.attributesOfItem(atPath: destinationURL.absoluteString) as NSDictionary?
                 if let _attr = attr {
                     let fileSize = _attr.fileSize();
                     if fileSize > 1000 {
+                        NSLog("filesize OK")
                         loadfeedandparse {
-                            DispatchQueue.main.async(execute: {
+                            DispatchQueue.main.sync(execute: {
+                                hideLoading()
                                 self.tableView.reloadData()
                             })
                             cleanUpSpace()
-                            DispatchQueue.main.async {
+                            DispatchQueue.main.sync {
                             self.refreshControl!.endRefreshing()
+                            hideLoading()
                     }
                 }
                 }
@@ -1025,6 +1052,14 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
             }
         }catch let error as NSError {
             print("Could not copy file to disk: \(error.localizedDescription)")
+            loadfeedandparse {
+                DispatchQueue.main.sync(execute: {
+                    
+                    self.tableView.reloadData()
+                    self.refreshControl!.endRefreshing()
+                })
+                
+            }
         }
         
         // clear the download list

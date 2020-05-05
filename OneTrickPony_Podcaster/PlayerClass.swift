@@ -64,7 +64,7 @@ class Player {
     
     
     func moveplayer(_ seconds:Double){
-        let secondsToAdd = CMTimeMakeWithSeconds(seconds,1)
+        let secondsToAdd = CMTimeMakeWithSeconds(seconds,preferredTimescale: 1)
             let jumpToTime = CMTimeAdd(SingletonClass.sharedInstance.player.currentTime(), secondsToAdd)
             
             SingletonClass.sharedInstance.player.seek(to: jumpToTime)

@@ -40,7 +40,7 @@ class SingletonClass {
         
         do
         {
-        try audioSession.setCategory("playback")
+        try audioSession.setCategory(AVAudioSession.Category(rawValue: "playback"))
         }
         catch let error as NSError{
              NSLog(error.description)
@@ -57,7 +57,7 @@ class SingletonClass {
     if #available(iOS 9.0, *) {
         do
         {
-        try audioSession.setMode("spokenAudio")
+        try audioSession.setMode(convertToAVAudioSessionMode("spokenAudio"))
         }
         catch let error as NSError{
              NSLog(error.description)
@@ -77,3 +77,8 @@ class SingletonClass {
     }
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToAVAudioSessionMode(_ input: String) -> AVAudioSession.Mode {
+	return AVAudioSession.Mode(rawValue: input)
+}

@@ -153,7 +153,7 @@ func checkUsedDiskSpace() -> Int? {
             let files = try! fileManager.contentsOfDirectory(at: documentsDirectoryURL, includingPropertiesForKeys: nil, options: [])
             var folderFileSizeInBytes = 0
             for file in files {
-                folderFileSizeInBytes +=  try! (fileManager.attributesOfItem(atPath: file.path) as NSDictionary).fileSize().hashValue
+              //  folderFileSizeInBytes +=  try! (fileManager.attributesOfItem(atPath: file.path) as NSDictionary).fileSize().hashValue
             }
 
             return folderFileSizeInBytes

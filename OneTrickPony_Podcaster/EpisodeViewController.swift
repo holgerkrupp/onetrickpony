@@ -637,7 +637,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     
     func moveplayer(_ seconds:Double){
         if (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle){
-            let secondsToAdd = CMTimeMakeWithSeconds(seconds,1)
+            let secondsToAdd = CMTimeMakeWithSeconds(seconds,preferredTimescale: 1)
             let jumpToTime = CMTimeAdd(SingletonClass.sharedInstance.player.currentTime(), secondsToAdd)
             SingletonClass.sharedInstance.player.seek(to: jumpToTime)
             updatePlayPosition()
@@ -647,7 +647,7 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     func jumpToTimeInPlayer(_ seconds:Double){
-        let targetTime = CMTimeMakeWithSeconds(seconds,1)
+        let targetTime = CMTimeMakeWithSeconds(seconds,preferredTimescale: 1)
         print("targettime \(targetTime)")
         SingletonClass.sharedInstance.player.seek(to: targetTime)
         updatePlayPosition()

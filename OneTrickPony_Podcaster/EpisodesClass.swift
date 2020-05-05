@@ -46,7 +46,7 @@ class Episode {
     
     func getprogressinCMTime(_ progress: Double) -> CMTime {
         let seconds = progress //* stringtodouble(episodeDuration)
-        let time = CMTimeMake(Int64(seconds), 1)
+        let time = CMTimeMake(value: Int64(seconds), timescale: 1)
         return time
     }
     
@@ -60,7 +60,7 @@ class Episode {
     }
     
     func getDurationinCMTime() -> CMTime {
-        let time = CMTimeMake(Int64(stringtodouble(getDurationFromEpisode())), 1)
+        let time = CMTimeMake(value: Int64(stringtodouble(getDurationFromEpisode())), timescale: 1)
         return time
     }
     
@@ -94,14 +94,14 @@ class Episode {
     func readplayed() -> CMTime{
         
         let defaults = UserDefaults.standard
-        var playedtime:CMTime = CMTimeMakeWithSeconds(0,Int32(0))
+        var playedtime:CMTime = CMTimeMakeWithSeconds(0,preferredTimescale: Int32(0))
         
         if  let episodeplayedtime = defaults.value(forKey: episodeTitle){
            // NSLog("Title: \(episodeTitle) - Played: \(episodeplayedtime)")
             playedtime = DoubleToCMTime(episodeplayedtime as! Double)
         } else{
             NSLog("Title: \(episodeTitle) - Not played yet")
-            playedtime = CMTimeMake(0, 1)
+            playedtime = CMTimeMake(value: 0, timescale: 1)
         }
         return playedtime
     }
@@ -127,9 +127,9 @@ class Episode {
 func DoubleToCMTime(_ seconds: Double) -> CMTime{
     if seconds > 0 {
         let secondsInt = Int64(seconds)
-        return CMTimeMake(secondsInt ,1)
+        return CMTimeMake(value: secondsInt ,timescale: 1)
     }else{
-        return CMTimeMake(0,1)
+        return CMTimeMake(value: 0,timescale: 1)
     }
 }
 

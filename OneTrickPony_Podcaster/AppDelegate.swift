@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         // the time interval to regularly check for new content is set (UIApplicationBackgroundFetchIntervalMinimum is about every 10 minutes. Remember that this is a MINIMUM - not a Maximum)
-        UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+        UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
         
         //request for the right to send notifications
         let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
