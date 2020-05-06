@@ -119,8 +119,10 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
     }
     
     @IBAction func infoButtonPressed(_ sender: UIButton){
-        let url = URL(string: episode.episodeLink)
-        openWithSafariVC(url!)
+        if let url = URL(string: episode.episodeLink){
+                openWithSafariVC(url)
+        }
+        
         
         /*if ShowNotesContainer.hidden == true {
             ShowNotesContainer.hidden = false
@@ -201,15 +203,16 @@ class EpisodeViewController: UIViewController, UIPopoverPresentationControllerDe
         adjustColors()
         episodeShowNotesWebView.isHidden = false
         ShowNotesContainer.isHidden = true
-    ShowNotesDismissButton.setImage(createCircleWithCross(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSize(width: 30, height: 30), filled: false), for: UIControl.State())
+        ShowNotesDismissButton.setImage(createCircleWithCross(getColorFromPodcastSettings("playControlColor"),width:1, size: CGSize(width: 30, height: 30), filled: false), for: UIControl.State())
         
         enableOrDisableControllsIfNoInFocus()
         allowremotebuttons()
-        /*
-        if (SingletonClass.sharedInstance.playerinitialized == false){
-            initplayer(episode)
+        
+        if URL(string: episode.episodeLink) == nil{
+            infoButton.isHidden = true
+        }else{
+            infoButton.isHidden = false
         }
-        */
         
         if existsLocally(episode.episodeUrl).existlocal && (SingletonClass.sharedInstance.episodePlaying.episodeTitle == episode.episodeTitle) {
             autoplay()
