@@ -40,32 +40,20 @@ class SingletonClass {
         
         do
         {
-        try audioSession.setCategory(AVAudioSession.Category(rawValue: "playback"))
+            try audioSession.setCategory(.playback)
         }
         catch let error as NSError{
              NSLog(error.description)
         }
   
+
         do
         {
-            try audioSession.setActive(false)
-        }
-        catch let error as NSError
-        {
-            NSLog(error.description)
-        }
-    if #available(iOS 9.0, *) {
-        do
-        {
-        try audioSession.setMode(convertToAVAudioSessionMode("spokenAudio"))
+            try audioSession.setMode(.spokenAudio)
         }
         catch let error as NSError{
              NSLog(error.description)
         }
-    } else {
-        // Fallback on earlier versions
-    }
-        
         do
         {
             try audioSession.setActive(false)
