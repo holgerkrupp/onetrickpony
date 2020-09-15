@@ -1151,6 +1151,7 @@
 				INFOPLIST_FILE = OneTrickPony_Podcaster/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.2.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = de.holgerkrupp.Einschlafen;
 				PRODUCT_NAME = Einschlafen;
@@ -1174,6 +1175,7 @@
 				INFOPLIST_FILE = OneTrickPony_Podcaster/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.2.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = de.holgerkrupp.Einschlafen;
 				PRODUCT_NAME = Einschlafen;
@@ -1437,6 +1439,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/OneTrickPony_Podcaster/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.2.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = de.holgerkrupp.DML;
 				PRODUCT_NAME = "Dirty Minutes Left";
@@ -1460,6 +1463,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/OneTrickPony_Podcaster/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.2.1;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = de.holgerkrupp.DML;
 				PRODUCT_NAME = "Dirty Minutes Left";

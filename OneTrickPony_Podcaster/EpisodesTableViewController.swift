@@ -85,10 +85,6 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
         //  removePersistentStorrage()
         
         
-        /*
-         print("last Episode: \(getObjectForKeyFromPersistentStorrage("latestepisode"))")
-         print("last FeedDay: \(getObjectForKeyFromPersistentStorrage("lastfeedday"))")
-         */
         loadfeedandparse {
             
         }
@@ -156,6 +152,13 @@ class EpisodesTableViewController: UITableViewController, XMLParserDelegate {
     override func viewWillAppear(_ animated: Bool) {
         //self.navigationController?.navigationBarHidden = true
         //self.navigationController?.toolbarHidden = true
+        
+        searchController.hidesNavigationBarDuringPresentation = true
+        if #available(iOS 9.1, *) {
+            searchController.obscuresBackgroundDuringPresentation = false
+        } else {
+            // Fallback on earlier versions
+        }
         
         
         self.tableView.backgroundColor = getColorFromPodcastSettings("backgroundColor")
